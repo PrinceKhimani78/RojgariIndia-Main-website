@@ -17,23 +17,18 @@ const nextConfig: NextConfig = {
       { protocol: "http", hostname: "localhost", port: "4000" },
       { protocol: "http", hostname: "localhost", port: "3000" },
       { protocol: "http", hostname: "127.0.0.1" },
+      { protocol: "https", hostname: "**" },
     ],
-  },
-
-  eslint: {
-    ignoreDuringBuilds: true,
   },
 
   async rewrites() {
     return [
       {
         source: '/api/:path*',
-        destination: 'http://127.0.0.1:4000/api/:path*',
+        destination: 'https://api.rojgariindia.com/api/:path*',
       },
     ];
   },
-
-  swcMinify: true,
 };
 
 export default nextConfig;
