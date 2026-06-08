@@ -11,7 +11,7 @@ const RecruiterProfileHeader = () => {
     const photoSrc = user?.profile_photo
         ? (user.profile_photo.startsWith('http')
             ? user.profile_photo
-            : `${(BACKEND_URL || '').replace('/api', '')}/uploads/${user.profile_photo}`)
+            : `https://api.rojgariindia.com/uploads/${user.profile_photo}`)
         : "/images/profile1.webp";
 
     return (

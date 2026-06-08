@@ -467,7 +467,7 @@ const Dashboard = () => {
                   const photoSrc = candidate?.profile_photo
                       ? (candidate.profile_photo.startsWith('http')
                           ? candidate.profile_photo
-                          : `${(BACKEND_URL || '').replace('/api', '')}/uploads/${candidate.profile_photo}`)
+                          : `https://api.rojgariindia.com/uploads/${candidate.profile_photo}`)
                       : "/images/profile1.webp";
 
                   return (

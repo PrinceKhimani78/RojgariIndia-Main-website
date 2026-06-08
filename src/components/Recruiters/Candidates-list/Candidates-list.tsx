@@ -301,7 +301,7 @@ const Candidateslist = () => {
                   <div className="flex items-center gap-3 px-3 py-3">
                     {c.profile_photo ? (
                         <Image
-                            src={c.profile_photo.startsWith('http') ? c.profile_photo : `${BACKEND.replace('/api', '')}/uploads/${c.profile_photo}`}
+                            src={c.profile_photo.startsWith('http') ? c.profile_photo : `https://api.rojgariindia.com/uploads/${c.profile_photo}`}
                             alt={c.full_name}
                             width={40}
                             height={40}
@@ -342,7 +342,7 @@ const Candidateslist = () => {
                   <div className="flex items-center gap-3 px-3 py-3">
                     {c.profile_photo ? (
                         <Image
-                            src={c.profile_photo.startsWith('http') ? c.profile_photo : `${BACKEND.replace('/api', '')}/uploads/${c.profile_photo}`}
+                            src={c.profile_photo.startsWith('http') ? c.profile_photo : `https://api.rojgariindia.com/uploads/${c.profile_photo}`}
                             alt={c.full_name}
                             width={40}
                             height={40}

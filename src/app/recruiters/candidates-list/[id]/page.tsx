@@ -93,7 +93,7 @@ const CandidateProfilePage = () => {
                         <div className="relative w-32 h-32 flex-shrink-0">
                             {profile_photo ? (
                                 <Image
-                                    src={profile_photo.startsWith('http') ? profile_photo : `${BACKEND.replace('/api', '')}/uploads/${profile_photo}`}
+                                    src={profile_photo.startsWith('http') ? profile_photo : `https://api.rojgariindia.com/uploads/${profile_photo}`}
                                     alt={full_name}
                                     fill
                                     className="rounded-full object-cover border-4 border-white shadow-md"

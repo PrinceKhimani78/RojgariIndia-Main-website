@@ -178,7 +178,7 @@ const Applicants = ({ jobId }: ApplicantsProps) => {
                                             <div className="w-10 h-10 rounded-full bg-slate-200 flex items-center justify-center text-slate-600 font-bold overflow-hidden">
                                                 {app.Candidate?.profile_photo ? (
                                                      <Image 
-                                                        src={app.Candidate.profile_photo.startsWith('http') ? app.Candidate.profile_photo : `${BACKEND.replace('/api', '')}/uploads/${app.Candidate.profile_photo}`} 
+                                                        src={app.Candidate.profile_photo.startsWith('http') ? app.Candidate.profile_photo : `https://api.rojgariindia.com/uploads/${app.Candidate.profile_photo}`} 
                                                         alt={app.Candidate.full_name} 
                                                         width={40} 
                                                         height={40} 
@@ -212,7 +212,7 @@ const Applicants = ({ jobId }: ApplicantsProps) => {
                                             )}
                                             {app.resume && (
                                                 <a 
-                                                    href={`${BACKEND.replace('/api', '')}/uploads/resume/${app.candidate_id}/${app.resume}`} 
+                                                    href={`https://api.rojgariindia.com/uploads/resume/${app.candidate_id}/${app.resume}`} 
                                                     target="_blank" 
                                                     rel="noopener noreferrer" 
                                                     className="p-2 text-blue-600 hover:bg-blue-100 rounded-full transition-colors" 
