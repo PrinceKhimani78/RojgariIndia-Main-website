@@ -94,7 +94,7 @@ const Header: React.FC = () => {
       return;
     }
     setOtpLoading(true);
-    const backendUrl = process.env.NEXT_PUBLIC_BACKEND_API_URL || "https://api.rojgariindia.com/api";
+    const backendUrl = process.env.NEXT_PUBLIC_BACKEND_API_URL || "/api";
     console.log("DEBUG: backendUrl from env:", backendUrl);
     const res = await sendOtp(backendUrl, formData.email);
     setOtpLoading(false);
