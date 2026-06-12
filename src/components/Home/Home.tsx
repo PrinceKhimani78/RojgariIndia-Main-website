@@ -1606,7 +1606,7 @@ const Home = () => {
             </div>
           </div> */}
 
-          {/* Blogs */}
+          {/* Blogs — hidden for now, do not remove
           <div
             className="pt-5 pb-20 px-5 lg:px-[5%] 2xl:px-[15%]"
             ref={typewriter2Ref}
@@ -1643,11 +1643,11 @@ const Home = () => {
               )}
             </p>
 
-            {/* Blog cards */}
+            // Blog cards
             <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mt-10">
               {blogs.map((blog, index) => (
                 <article key={`${blog.link}-${index}`} className="relative">
-                  {/* Image container */}
+                  // Image container
                   <div className="relative overflow-hidden rounded-2xl aspect-[9/11]">
                     <Image
                       src="https://imgcdn.stablediffusionweb.com/2025/2/1/bd370b10-62c0-482b-a06b-63ca5d29ce38.jpg"
@@ -1658,9 +1658,9 @@ const Home = () => {
                     />
                   </div>
 
-                  {/* Blue content box */}
+                  // Blue content box
                   <div className="relative -mt-12 mx-4 rounded-2xl bg-[#023052] text-white p-5 shadow-xl">
-                    {/* Date pill */}
+                    // Date pill
                     <span className="absolute -top-5 left-1/4 -translate-x-1/2 rounded-full bg-white text-[#023052] px-4 py-1 shadow text-sm font-medium">
                       {blog.date}
                     </span>
@@ -1688,6 +1688,7 @@ const Home = () => {
               </Link>
             </div>
           </div>
+          */}
 
           {/* <Footer /> */}
         </div>

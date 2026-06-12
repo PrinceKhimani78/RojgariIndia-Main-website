@@ -389,6 +389,7 @@ const Header: React.FC = () => {
             </Link>
           </div>
 
+          {/* Blogs link — hidden for now
           <div>
             <Link
               href="/blogs"
@@ -403,6 +404,7 @@ const Header: React.FC = () => {
               />
             </Link>
           </div>
+          */}
 
           <div>
             <Link
@@ -560,6 +562,7 @@ const Header: React.FC = () => {
               />
             </Link>
 
+            {/* Blogs link — hidden for now
             <Link
               href="/blogs"
               className={`relative inline-block group font-semibold ${isBlogs ? "text-[#72B76A]" : "text-black hover:text-[#72B76A]"
@@ -571,6 +574,7 @@ const Header: React.FC = () => {
                   }`}
               />
             </Link>
+            */}
           </div>
 
           {/* Contact / Auth */}
