@@ -720,8 +720,15 @@ const Header: React.FC = () => {
                 {/* Title */}
                 <h2 className="fontAL font-semibold capitalize text-xl md:text-2xl lg:text-3xl my-5 text-center md:text-left">
                   {mode === "login" ? "Login" : "Sign Up"}
-                </h2>                 {/* Candidate / Recruiter buttons */}
-                 <div className="relative flex p-1 gap-2 mb-6 justify-center md:justify-start bg-gray-100 rounded-xl w-fit mx-auto md:mx-0">
+                </h2>
+                {/* Candidate / Recruiter toggle */}
+                 <div className="relative flex p-1 mb-6 bg-gray-100 rounded-xl w-[272px] mx-auto md:mx-0">
+                   {/* Sliding pill */}
+                   <div
+                     className={`absolute top-1 bottom-1 w-[128px] bg-[#72B76A] rounded-lg transition-transform duration-300 ease-in-out ${
+                       userType === "recruiter" ? "translate-x-[132px]" : "translate-x-0"
+                     }`}
+                   />
                    {/* Candidates Button */}
                    <button
                      type="button"
@@ -731,15 +738,7 @@ const Header: React.FC = () => {
                      }`}
                    >
                      Candidates
-                     {userType === "candidates" && (
-                       <motion.div
-                         layoutId="activeTabHeader"
-                         className="absolute inset-0 bg-[#72B76A] rounded-lg -z-10"
-                         transition={{ type: "spring", stiffness: 380, damping: 30 }}
-                       />
-                     )}
                    </button>
- 
                    {/* Recruiters Button */}
                    <button
                      type="button"
@@ -756,13 +755,6 @@ const Header: React.FC = () => {
                      }`}
                    >
                      Recruiters
-                     {userType === "recruiter" && (
-                       <motion.div
-                         layoutId="activeTabHeader"
-                         className="absolute inset-0 bg-[#72B76A] rounded-lg -z-10"
-                         transition={{ type: "spring", stiffness: 380, damping: 30 }}
-                       />
-                     )}
                    </button>
                  </div>
 

@@ -468,7 +468,7 @@ const Recruiters = () => {
           })}
         </div>
       </section>
-      {/* pricing section  */}
+      {/* pricing section — hidden for now, do not remove
       <section className="section-container px-5 lg:px-[5%] 2xl:px-[15%] pt-10 pb-5">
         <div className="">
           <p
@@ -519,12 +519,12 @@ const Recruiters = () => {
             </button>
           </div>
 
-          {/* PRICING CARDS */}
+          // PRICING CARDS
           <div className="mt-10" ref={gridRef}>
-            {/* monthly */}
+            // monthly
             {plan === "monthly" && (
               <div className="grid gap-8 md:grid-cols-3">
-                {/* Basic */}
+                // Basic
                 <div className="relative rounded-2xl bg-white p-6 shadow-[0_12px_40px_-18px_rgba(29,78,216,0.25)] ring-1 ring-slate-100 overflow-hidden flex flex-col">
                   <div className="absolute -top-25 right-5 h-55 w-100 bg-slate-100 rounded-[90%]" />
                   <h3 className="text-[#00c9ff] font-semibold pl-10 relative z-10">
@@ -563,7 +563,7 @@ const Recruiters = () => {
                   </div>
                 </div>
 
-                {/* Standard (Recommended) */}
+                // Standard (Recommended)
                 <div className="relative rounded-2xl bg-white p-6 shadow-[0_12px_40px_-18px_rgba(29,78,216,0.25)] ring-1 ring-slate-100 overflow-hidden flex flex-col">
                   <span className="absolute right-4 top-4 rounded-full bg-emerald-500 px-3 py-1 text-xs font-semibold text-white z-20">
                     Recommended
@@ -604,7 +604,7 @@ const Recruiters = () => {
                   </div>
                 </div>
 
-                {/* Extended */}
+                // Extended
                 <div className="relative rounded-2xl bg-white p-6 shadow-[0_12px_40px_-18px_rgba(29,78,216,0.25)] ring-1 ring-slate-100 overflow-hidden flex flex-col">
                   <div className="absolute -top-25 right-5 h-55 w-100 bg-violet-100 rounded-[90%]" />
                   <h3 className="text-[#00c9ff] font-semibold relative z-10 pl-10">
@@ -644,10 +644,10 @@ const Recruiters = () => {
               </div>
             )}
 
-            {/* annual */}
+            // annual
             {plan === "annual" && (
               <div className="grid gap-8 md:grid-cols-3">
-                {/* Basic */}
+                // Basic
                 <div className="relative rounded-2xl bg-white p-6 shadow-[0_12px_40px_-18px_rgba(29,78,216,0.25)] ring-1 ring-slate-100 overflow-hidden">
                   <div className="absolute -top-25 right-5 h-55 w-100 bg-slate-100 rounded-[90%]" />
                   <h3 className="text-[#00c9ff] font-semibold relative pl-10 z-10">
@@ -683,7 +683,7 @@ const Recruiters = () => {
                   </div>
                 </div>
 
-                {/* Standard */}
+                // Standard
                 <div className="relative rounded-2xl bg-white p-6 shadow-[0_12px_40px_-18px_rgba(29,78,216,0.25)] ring-1 ring-slate-100 overflow-hidden">
                   <span className="absolute right-4 top-4 rounded-full bg-[#72b76a] px-3 py-1 text-xs font-semibold text-white z-20">
                     Recommended
@@ -723,7 +723,7 @@ const Recruiters = () => {
                   </div>
                 </div>
 
-                {/* Extended */}
+                // Extended
                 <div className="relative rounded-2xl bg-white p-6 shadow-[0_12px_40px_-18px_rgba(29,78,216,0.25)] ring-1 ring-slate-100 overflow-hidden">
                   <div className="absolute -top-25 right-5 h-55 w-100 bg-violet-100 rounded-[90%]" />
                   <h3 className="text-[#00c9ff] font-semibold pl-10 relative z-10">
@@ -764,8 +764,8 @@ const Recruiters = () => {
         </div>
       </section>
 
-      {/* View More button */}
-      {/* <div className="flex justify-center ">
+      {/* View More button — hidden for now, do not remove
+      <div className="flex justify-center ">
         <a
           href="/pages/pricing"
           className="relative px-6 h-10 overflow-hidden group border border-[#00c9ff] bg-[#00c9ff] rounded-lg hover:bg-transparent text-white hover:text-[#00c9ff] active:scale-90 transition-all ease-out duration-700 cursor-pointer flex items-center justify-center"
@@ -775,22 +775,19 @@ const Recruiters = () => {
             View More
           </span>
         </a>
-      </div> */}
-      {/* View More button */}
+      </div>
       <div className="flex justify-center">
         <a
           href="/pages/pricing"
           className="relative px-6 h-10 overflow-hidden group border border-[#00c9ff] bg-transparent text-[#00c9ff] rounded-lg hover:bg-[#00c9ff] hover:text-white active:scale-90 transition-all ease-out duration-700 cursor-pointer flex items-center justify-center"
         >
-          {/* Sliding Overlay Effect */}
           <span className="absolute left-0 w-0 h-full top-0 bg-[#00c9ff] transition-all duration-700 ease-out group-hover:w-full"></span>
-
-          {/* Button Text */}
           <span className="relative flex gap-2 items-center text-sm font-semibold z-10">
             View More
           </span>
         </a>
       </div>
+      */}
       {/* call to action  */}
       <div className="px-5 lg:px-[5%] 2xl:px-[15%] my-20 sm:my-10">
         <div className="grid grid-cols-1 lg:grid-cols-[40%_55%] gap-10 items-center justify-between">
@@ -961,8 +958,14 @@ const Recruiters = () => {
                   {mode === "login" ? "Login" : "Sign Up"}
                 </h2>
 
-                {/* Candidate / Recruiter buttons */}
-                <div className="relative flex p-1 gap-2 mb-6 justify-center md:justify-start bg-gray-100 rounded-xl w-fit mx-auto md:mx-0">
+                {/* Candidate / Recruiter toggle */}
+                <div className="relative flex p-1 mb-6 bg-gray-100 rounded-xl w-[272px] mx-auto md:mx-0">
+                  {/* Sliding pill */}
+                  <div
+                    className={`absolute top-1 bottom-1 w-[128px] bg-[#72B76A] rounded-lg transition-transform duration-300 ease-in-out ${
+                      userType === "recruiter" ? "translate-x-[132px]" : "translate-x-0"
+                    }`}
+                  />
                   {/* Candidates Button */}
                   <button
                     type="button"
@@ -972,15 +975,7 @@ const Recruiters = () => {
                     }`}
                   >
                     Candidates
-                    {userType === "candidates" && (
-                      <motion.div
-                        layoutId="activeTabRecruiter"
-                        className="absolute inset-0 bg-[#72B76A] rounded-lg -z-10"
-                        transition={{ type: "spring", stiffness: 380, damping: 30 }}
-                      />
-                    )}
                   </button>
-
                   {/* Recruiters Button */}
                   <button
                     type="button"
@@ -997,13 +992,6 @@ const Recruiters = () => {
                     }`}
                   >
                     Recruiters
-                    {userType === "recruiter" && (
-                      <motion.div
-                        layoutId="activeTabRecruiter"
-                        className="absolute inset-0 bg-[#72B76A] rounded-lg -z-10"
-                        transition={{ type: "spring", stiffness: 380, damping: 30 }}
-                      />
-                    )}
                   </button>
                 </div>
 

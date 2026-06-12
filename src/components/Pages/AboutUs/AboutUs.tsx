@@ -12,21 +12,28 @@ import { useRouter } from "next/navigation";
 import { useAuth } from "@/context/AuthContext";
 import { sendOtp } from "@/services/otpService";
 
+const getInitials = (name: string) => {
+  const parts = name.trim().split(/\s+/);
+  const first = parts[0]?.[0] ?? "";
+  const last = parts[parts.length - 1]?.[0] ?? "";
+  return (first + (parts.length > 1 ? last : "")).toUpperCase();
+};
+
 const testimonials = [
-  { name: "Shashank Deep Singh", position: "Design Manager -- Indore", review: "Rojgari Placements is one of the best recruitment consultants in India. Their team is very supportive, professional, and helpful throughout the hiring process. They regularly provide job updates and guide candidates at every step.", rating: 5, image: "https://randomuser.me/api/portraits/men/1.jpg" },
-  { name: "Rishi Kumar", position: "Sr. Quality engineer -- Bangalore", review: "I had a very positive experience with Rojgari Placements. The recruiters understood my profile and shared relevant job openings. Their communication was timely and transparent. They kept me updated at every stage of the recruitment process.", rating: 5, image: "https://randomuser.me/api/portraits/men/2.jpg" },
-  { name: "Joshi hirji bhai shivram", position: "Warehouse sr. Supervisor -- Mundra", review: "Finding the right job became much easier with Rojgari Placements. The team is knowledgeable, supportive, and genuinely cares about candidates. They provided proper guidance before interviews and followed up regularly.", rating: 5, image: "https://randomuser.me/api/portraits/men/3.jpg" },
-  { name: "Amit ramesh bhavsar", position: "Senior electrician -- Silvassa", review: "One of the best placement consultants I have come across. The team is friendly, helpful, and quick to respond. They matched my skills with the right opportunity. Very satisfied with their service.", rating: 5, image: "https://randomuser.me/api/portraits/men/4.jpg" },
-  { name: "Shubham bhatt", position: "Instrument Engineer -- Bhavnagar", review: "I appreciate the efforts of the Rojgari Placements team in helping me find a suitable job. They were attentive, supportive, and professional throughout the process. The recruiters provided valuable guidance and interview preparation tips.", rating: 5, image: "https://randomuser.me/api/portraits/men/5.jpg" },
-  { name: "Kishan Kumar", position: "Sr. Engineer Technical Publication -- Bangalore", review: "What I liked most about Rojgari Placements was their quick response and genuine effort to help candidates. They understood my experience and connected me with suitable opportunities. A very reliable recruitment partner.", rating: 5, image: "https://randomuser.me/api/portraits/men/6.jpg" },
-  { name: "Pushpak Viliya", position: "Deputy Manager Warranty -- Indore", review: "A professional and supportive recruitment team. They carefully matched my profile with relevant opportunities and assisted me at every step. Great experience overall.", rating: 5, image: "https://randomuser.me/api/portraits/men/7.jpg" },
-  { name: "Sandip Sureshrao Bonlawar", position: "Assistant Manager -- Pune", review: "Best consultancy, Thank you for your excellent support throughout my job search. Your team was highly professional, communicative, and truly understood my career goals. Because of your dedicated guidance, I secured a great position.", rating: 5, image: "https://randomuser.me/api/portraits/men/8.jpg" },
-  { name: "Vishal Pawar", position: "Sr. Engineer design -- Nasik", review: "Thank you for your support and guidance throughout the recruitment process. I appreciate your timely communication, coordination, and efforts in helping me secure this opportunity. It was a smooth and professional experience working with you.", rating: 5, image: "https://randomuser.me/api/portraits/men/9.jpg" },
-  { name: "Anirudh Sharma", position: "Jobseeker -- Uttar Pradesh", review: "Overall experience was good throughout the onboarding process. The team patiently answered all my queries, handled rescheduling my interview professionally when an urgent meeting conflicted, and provided continuous support.", rating: 5, image: "https://randomuser.me/api/portraits/men/10.jpg" },
-  { name: "Vishvjeet Chaudhary", position: "SQA Officer -- Uttar Pradesh", review: "Rojgari Placements portal is user-friendly and easy to navigate. It provides relevant job opportunities and keeps candidates updated throughout the recruitment process. The support team is responsive and helpful.", rating: 5, image: "https://randomuser.me/api/portraits/men/11.jpg" },
-  { name: "Rahul S. Ingale", position: "Manager RTFE Design -- Pune", review: "I had a very good experience with Rojgari India. They provide quality opportunities and genuinely help candidates. From arranging interviews to coordinating with companies and providing updates, they ensure everything is handled smoothly.", rating: 5, image: "https://randomuser.me/api/portraits/men/12.jpg" },
-  { name: "Akshata Padoshi", position: "Conceptual Jewelry Designer -- Bengaluru", review: "The team was professional, responsive, and helpful throughout the recruitment process. Their communication was timely, and they provided valuable support at every stage.", rating: 5, image: "https://randomuser.me/api/portraits/women/1.jpg" },
-  { name: "Viral H. Sheth", position: "Structural Engineer -- Vadodara", review: "The staff is very cooperative and knowledgeable. They provide excellent guidance and support throughout the recruitment process.", rating: 5, image: "https://randomuser.me/api/portraits/men/14.jpg" },
+  { name: "Shashank Deep Singh", position: "Design Manager -- Indore", review: "Rojgari Placements is one of the best recruitment consultants in India. Their team is very supportive, professional, and helpful throughout the hiring process. They regularly provide job updates and guide candidates at every step.", rating: 5 },
+  { name: "Rishi Kumar", position: "Sr. Quality engineer -- Bangalore", review: "I had a very positive experience with Rojgari Placements. The recruiters understood my profile and shared relevant job openings. Their communication was timely and transparent. They kept me updated at every stage of the recruitment process.", rating: 5 },
+  { name: "Joshi hirji bhai shivram", position: "Warehouse sr. Supervisor -- Mundra", review: "Finding the right job became much easier with Rojgari Placements. The team is knowledgeable, supportive, and genuinely cares about candidates. They provided proper guidance before interviews and followed up regularly.", rating: 5 },
+  { name: "Amit ramesh bhavsar", position: "Senior electrician -- Silvassa", review: "One of the best placement consultants I have come across. The team is friendly, helpful, and quick to respond. They matched my skills with the right opportunity. Very satisfied with their service.", rating: 5 },
+  { name: "Shubham bhatt", position: "Instrument Engineer -- Bhavnagar", review: "I appreciate the efforts of the Rojgari Placements team in helping me find a suitable job. They were attentive, supportive, and professional throughout the process. The recruiters provided valuable guidance and interview preparation tips.", rating: 5 },
+  { name: "Kishan Kumar", position: "Sr. Engineer Technical Publication -- Bangalore", review: "What I liked most about Rojgari Placements was their quick response and genuine effort to help candidates. They understood my experience and connected me with suitable opportunities. A very reliable recruitment partner.", rating: 5 },
+  { name: "Pushpak Viliya", position: "Deputy Manager Warranty -- Indore", review: "A professional and supportive recruitment team. They carefully matched my profile with relevant opportunities and assisted me at every step. Great experience overall.", rating: 5 },
+  { name: "Sandip Sureshrao Bonlawar", position: "Assistant Manager -- Pune", review: "Best consultancy, Thank you for your excellent support throughout my job search. Your team was highly professional, communicative, and truly understood my career goals. Because of your dedicated guidance, I secured a great position.", rating: 5 },
+  { name: "Vishal Pawar", position: "Sr. Engineer design -- Nasik", review: "Thank you for your support and guidance throughout the recruitment process. I appreciate your timely communication, coordination, and efforts in helping me secure this opportunity. It was a smooth and professional experience working with you.", rating: 5 },
+  { name: "Anirudh Sharma", position: "Jobseeker -- Uttar Pradesh", review: "Overall experience was good throughout the onboarding process. The team patiently answered all my queries, handled rescheduling my interview professionally when an urgent meeting conflicted, and provided continuous support.", rating: 5 },
+  { name: "Vishvjeet Chaudhary", position: "SQA Officer -- Uttar Pradesh", review: "Rojgari Placements portal is user-friendly and easy to navigate. It provides relevant job opportunities and keeps candidates updated throughout the recruitment process. The support team is responsive and helpful.", rating: 5 },
+  { name: "Rahul S. Ingale", position: "Manager RTFE Design -- Pune", review: "I had a very good experience with Rojgari India. They provide quality opportunities and genuinely help candidates. From arranging interviews to coordinating with companies and providing updates, they ensure everything is handled smoothly.", rating: 5 },
+  { name: "Akshata Padoshi", position: "Conceptual Jewelry Designer -- Bengaluru", review: "The team was professional, responsive, and helpful throughout the recruitment process. Their communication was timely, and they provided valuable support at every stage.", rating: 5 },
+  { name: "Viral H. Sheth", position: "Structural Engineer -- Vadodara", review: "The staff is very cooperative and knowledgeable. They provide excellent guidance and support throughout the recruitment process.", rating: 5 },
 ];
 
 const renderStars = (rating: number): React.ReactNode[] => {
@@ -576,8 +583,14 @@ const AboutUs = () => {
                   {mode === "login" ? "Login" : "Sign Up"}
                 </h2>
  
-                {/* Candidate / Recruiter buttons */}
-                <div className="relative flex p-1 gap-2 mb-6 justify-center md:justify-start bg-gray-100 rounded-xl w-fit mx-auto md:mx-0">
+                {/* Candidate / Recruiter toggle */}
+                <div className="relative flex p-1 mb-6 bg-gray-100 rounded-xl w-[272px] mx-auto md:mx-0">
+                  {/* Sliding pill */}
+                  <div
+                    className={`absolute top-1 bottom-1 w-[128px] bg-[#72B76A] rounded-lg transition-transform duration-300 ease-in-out ${
+                      userType === "recruiter" ? "translate-x-[132px]" : "translate-x-0"
+                    }`}
+                  />
                   {/* Candidates Button */}
                   <button
                     type="button"
@@ -587,15 +600,7 @@ const AboutUs = () => {
                     }`}
                   >
                     Candidates
-                    {userType === "candidates" && (
-                      <motion.div
-                        layoutId="activeTabAboutUs"
-                        className="absolute inset-0 bg-[#72B76A] rounded-lg -z-10"
-                        transition={{ type: "spring", stiffness: 380, damping: 30 }}
-                      />
-                    )}
                   </button>
- 
                   {/* Recruiters Button */}
                   <button
                     type="button"
@@ -612,13 +617,6 @@ const AboutUs = () => {
                     }`}
                   >
                     Recruiters
-                    {userType === "recruiter" && (
-                      <motion.div
-                        layoutId="activeTabAboutUs"
-                        className="absolute inset-0 bg-[#72B76A] rounded-lg -z-10"
-                        transition={{ type: "spring", stiffness: 380, damping: 30 }}
-                      />
-                    )}
                   </button>
                 </div>
  
@@ -789,7 +787,7 @@ const AboutUs = () => {
         </div>
       )}
       {/* ── All Testimonials Section ─────────────────────────────── */}
-      <section className="py-16 px-5 lg:px-[5%] 2xl:px-[15%]">
+      <section id="testimonials" className="scroll-mt-24 py-16 px-5 lg:px-[5%] 2xl:px-[15%]">
         <div className="text-center mb-12">
           <p className="fontPOP text-[#72B76A] text-xs sm:text-sm tracking-widest mb-3">Reviews</p>
           <h2 className="fontAL font-semibold capitalize text-2xl md:text-3xl lg:text-4xl" style={{ letterSpacing: "1px", lineHeight: 1.2 }}>
@@ -816,13 +814,9 @@ const AboutUs = () => {
               </div>
               <p className="text-gray-600 italic text-sm leading-relaxed flex-1">{t.review}</p>
               <div className="flex items-center gap-3 pt-3 border-t border-gray-100">
-                <Image
-                  src={t.image}
-                  alt={t.name}
-                  width={48}
-                  height={48}
-                  className="rounded-full object-cover"
-                />
+                <div className="w-12 h-12 rounded-full bg-[#72B76A] flex items-center justify-center text-white font-bold text-base shrink-0">
+                  {getInitials(t.name)}
+                </div>
                 <div>
                   <p className="font-bold text-sm text-gray-800">{t.name}</p>
                   <p className="text-xs text-gray-500">{t.position}</p>

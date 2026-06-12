@@ -1,12 +1,18 @@
 "use client";
 import React from "react";
-import Image from "next/image";
 import Link from "next/link";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
 import { FaQuoteLeft, FaStar, FaStarHalfAlt, FaRegStar } from "react-icons/fa";
 
 import "swiper/css";
+
+const getInitials = (name: string) => {
+  const parts = name.trim().split(/\s+/);
+  const first = parts[0]?.[0] ?? "";
+  const last = parts[parts.length - 1]?.[0] ?? "";
+  return (first + (parts.length > 1 ? last : "")).toUpperCase();
+};
 
 type Testimonial = {
   name: string;
@@ -189,7 +195,7 @@ const Testimonials: React.FC = () => {
             >
               {testimonials.map((t) => (
                 <SwiperSlide key={t.name}>
-                  <Link href="/about-us" className="block m-5 cursor-pointer">
+                  <Link href="/about-us#testimonials" className="block m-5 cursor-pointer">
                     <div className="p-6 bg-white rounded-xl shadow-md text-center transition-shadow duration-300 hover:shadow-lg">
                       <div className="flex justify-end mb-4">
                         {renderStars(t.rating)}
@@ -197,13 +203,9 @@ const Testimonials: React.FC = () => {
 
                       <div>
                         <div className="flex gap-5">
-                          <Image
-                            src={t.image}
-                            alt={t.name}
-                            width={70}
-                            height={70}
-                            className="rounded-full mr-auto mb-4"
-                          />
+                          <div className="w-[70px] h-[70px] rounded-full bg-[#72B76A] flex items-center justify-center text-white font-bold text-xl shrink-0 mr-auto mb-4">
+                            {getInitials(t.name)}
+                          </div>
 
                           <div>
                             <FaQuoteLeft className="text-2xl text-green-700" />
