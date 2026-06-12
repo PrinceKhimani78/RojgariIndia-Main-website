@@ -2,7 +2,8 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { FaMapMarkerAlt, FaBriefcase, FaRupeeSign, FaClock } from "react-icons/fa";
+import { FaMapMarkerAlt, FaBriefcase, FaRupeeSign, FaClock, FaBookmark, FaRegBookmark } from "react-icons/fa";
+import { useAuth } from "@/context/AuthContext";
 
 /* =============================
    Types
@@ -102,6 +103,10 @@ const Grid = () => {
   type Crumb = { name: string; href?: string };
   const crumbs: Crumb[] = [{ name: "Home", href: "/" }, { name: "Jobs" }];
 
+  const { isAuthenticated, user, token } = useAuth();
+  const [savedJobIds, setSavedJobIds] = useState<Set<string>>(new Set());
+  const [savingJobId, setSavingJobId] = useState<string | null>(null);
+
   const [jobs, setJobs] = useState<Job[]>([]);
   const [loading, setLoading] = useState(true);
   const [open, setOpen] = useState(false);
@@ -136,6 +141,60 @@ const Grid = () => {
     };
     fetchJobs();
   }, []);
+
+  useEffect(() => {
+    if (isAuthenticated && token && user?.role === "candidate") {
+      fetch(`/api/applications/saved-jobs`, {
+        headers: { Authorization: `Bearer ${token}` }
+      })
+        .then(res => res.json())
+        .then(data => {
+          if (data.success && data.data) {
+            const ids = new Set<string>(data.data.map((sj: any) => sj.job_id));
+            setSavedJobIds(ids);
+          }
+        })
+        .catch(err => console.error("Error fetching saved jobs:", err));
+    }
+  }, [isAuthenticated, token, user]);
+
+  const handleToggleSave = async (jobId: string, e: React.MouseEvent) => {
+    e.preventDefault();
+    if (!isAuthenticated) {
+      window.dispatchEvent(
+        new CustomEvent("openAuthModal", {
+          detail: { mode: "login", userType: "candidates" }
+        })
+      );
+      return;
+    }
+
+    if (user?.role !== "candidate") {
+      alert("Only candidates can save jobs.");
+      return;
+    }
+
+    setSavingJobId(jobId);
+    try {
+      const res = await fetch(`/api/applications/saved-jobs/${jobId}`, {
+        method: "POST",
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      const data = await res.json();
+      if (data.success) {
+        setSavedJobIds(prev => {
+          const newSet = new Set(prev);
+          if (data.saved) newSet.add(jobId);
+          else newSet.delete(jobId);
+          return newSet;
+        });
+      }
+    } catch (err) {
+      console.error("Error toggling save:", err);
+    } finally {
+      setSavingJobId(null);
+    }
+  };
 
   // Filter logic
   const filteredJobs = jobs.filter((job) => {
@@ -479,6 +538,16 @@ const Grid = () => {
                               >
                                 {job.employment_type}
                               </span>
+                              <button
+                                onClick={(e) => handleToggleSave(job.id, e)}
+                                disabled={savingJobId === job.id}
+                                className={`ml-2 p-1.5 rounded-full transition-colors ${
+                                  savedJobIds.has(job.id) ? "text-rose-500 bg-rose-50" : "text-gray-400 bg-gray-50 hover:bg-gray-100 hover:text-gray-600"
+                                }`}
+                                title={savedJobIds.has(job.id) ? "Unsave Job" : "Save Job"}
+                              >
+                                {savedJobIds.has(job.id) ? <FaBookmark size={14} /> : <FaRegBookmark size={14} />}
+                              </button>
                             </div>
                           </div>
 

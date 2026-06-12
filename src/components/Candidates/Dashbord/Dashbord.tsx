@@ -59,20 +59,23 @@ const Dashbord = () => {
   useEffect(() => {
     if (!token) return;
 
-    fetch(`/api/applications/my-applications`, {
-      headers: { "Authorization": `Bearer ${token}` }
-    })
-      .then(res => res.json())
-      .then(data => {
-        if (data.success) {
-          setStats(prev => ({
-            ...prev,
-            totalApplications: data.data.length,
-            recentApplications: data.data
-          }));
-        }
+    Promise.all([
+      fetch(`/api/applications/my-applications`, {
+        headers: { "Authorization": `Bearer ${token}` }
+      }).then(res => res.json()),
+      fetch(`/api/applications/saved-jobs`, {
+        headers: { "Authorization": `Bearer ${token}` }
+      }).then(res => res.json())
+    ])
+      .then(([applicationsData, savedJobsData]) => {
+        setStats(prev => ({
+          ...prev,
+          totalApplications: applicationsData.success ? applicationsData.data.length : prev.totalApplications,
+          recentApplications: applicationsData.success ? applicationsData.data : prev.recentApplications,
+          savedJobs: savedJobsData.success ? savedJobsData.data.length : prev.savedJobs
+        }));
       })
-      .catch(err => console.error("Error fetching applications:", err))
+      .catch(err => console.error("Error fetching dashboard stats:", err))
       .finally(() => setFetching(false));
   }, [token]);
 

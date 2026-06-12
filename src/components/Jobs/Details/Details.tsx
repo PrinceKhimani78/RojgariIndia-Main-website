@@ -24,6 +24,8 @@ import {
   FaPinterest,
   FaCheck,
   FaPlus,
+  FaBookmark,
+  FaRegBookmark,
 } from "react-icons/fa";
 
 type JobData = {
@@ -94,6 +96,8 @@ const JobDetailsContent = () => {
   const [resumeFile, setResumeFile] = useState<File | null>(null);
   const [showSuccess, setShowSuccess] = useState(false);
   const [applyError, setApplyError] = useState<string | null>(null);
+  const [isSaved, setIsSaved] = useState(false);
+  const [saving, setSaving] = useState(false);
   const fileInputRef = React.useRef<HTMLInputElement>(null);
 
   const parsedQuestions: string[] = React.useMemo(() => {
@@ -138,8 +142,54 @@ const JobDetailsContent = () => {
           }
         })
         .catch((err) => console.error("Error checking application status:", err));
+
+      // Check saved status
+      fetch(`/api/applications/saved-jobs/check/${id}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.success) {
+            setIsSaved(data.saved);
+          }
+        })
+        .catch((err) => console.error("Error checking saved status:", err));
     }
   }, [id, isAuthenticated, user, token]);
+
+  const handleSaveJob = async () => {
+    if (!isAuthenticated) {
+      window.dispatchEvent(
+        new CustomEvent("openAuthModal", {
+          detail: { mode: "login", userType: "candidates" }
+        })
+      );
+      return;
+    }
+
+    if (user?.role !== "candidate") {
+      alert("Only candidates can save jobs.");
+      return;
+    }
+
+    setSaving(true);
+    try {
+      const res = await fetch(`/api/applications/saved-jobs/${id}`, {
+        method: "POST",
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      const data = await res.json();
+      if (data.success) {
+        setIsSaved(data.saved);
+      } else {
+        alert(data.message || "Failed to toggle save job.");
+      }
+    } catch (err) {
+      console.error("Error saving job:", err);
+    } finally {
+      setSaving(false);
+    }
+  };
 
   const handleApply = async () => {
     if (!isAuthenticated) {
@@ -426,13 +476,27 @@ const JobDetailsContent = () => {
                       </span>
                     </div>
                   ) : (
-                    <button
-                      onClick={handleApply}
-                      disabled={applying}
-                      className="w-full sm:w-auto px-8 h-11 bg-[#00C9FF] rounded-lg text-white font-bold hover:bg-[#00b4e6] active:scale-95 transition-all shadow-md disabled:opacity-50"
-                    >
-                      {applying ? "Applying..." : "Apply Now"}
-                    </button>
+                    <div className="flex gap-2 w-full sm:w-auto">
+                      <button
+                        onClick={handleSaveJob}
+                        disabled={saving}
+                        className={`flex items-center justify-center w-11 h-11 rounded-lg border-2 transition-all ${
+                          isSaved
+                            ? "border-rose-400 bg-rose-50 text-rose-500"
+                            : "border-slate-200 bg-white text-slate-400 hover:border-slate-300 hover:text-slate-600"
+                        }`}
+                        title={isSaved ? "Unsave Job" : "Save Job"}
+                      >
+                        {isSaved ? <FaBookmark size={18} /> : <FaRegBookmark size={18} />}
+                      </button>
+                      <button
+                        onClick={handleApply}
+                        disabled={applying}
+                        className="flex-1 sm:flex-none sm:px-8 h-11 bg-[#00C9FF] rounded-lg text-white font-bold hover:bg-[#00b4e6] active:scale-95 transition-all shadow-md disabled:opacity-50"
+                      >
+                        {applying ? "Applying..." : "Apply Now"}
+                      </button>
+                    </div>
                   )}
                 </div>
               </div>
