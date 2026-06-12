@@ -15,22 +15,10 @@ const Footer: React.FC = () => {
       <div className="relative overflow-hidden bg-[#00C9FF] text-xs py-3 z-0">
         <div className="animate-marquee whitespace-nowrap flex w-max">
           <span className="pr-10">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim
-            laboriosam recusandae placeat quibusdam eos maxime quo incidunt
-            veritatis, quam dolore commodi ipsum tempore molestiae asperiores
-            architecto facilis perspiciatis repellat, maiores cum illum!
-            Asperiores suscipit dolor aperiam quaerat cum molestias voluptates
-            repudiandae, dolorum dignissimos consequatur sapiente vel possimus,
-            veniam iste dicta!
+            Get hired by top companies in India. Explore daily job opportunities. Log in to start applying! Connect with leading recruiters across multiple industries.
           </span>
           <span className="pr-10">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim
-            laboriosam recusandae placeat quibusdam eos maxime quo incidunt
-            veritatis, quam dolore commodi ipsum tempore molestiae asperiores
-            architecto facilis perspiciatis repellat, maiores cum illum!
-            Asperiores suscipit dolor aperiam quaerat cum molestias voluptates
-            repudiandae, dolorum dignissimos consequatur sapiente vel possimus,
-            veniam iste dicta!
+            Get hired by top companies in India. Explore daily job opportunities. Log in to start applying! Connect with leading recruiters across multiple industries.
           </span>
         </div>
       </div>
@@ -39,9 +27,7 @@ const Footer: React.FC = () => {
         <div className="flex flex-col justify-center w-full">
           <div className="grid grid-cols-1 lg:grid-cols-[35%_60%] justify-between items-center gap-5 my-10">
             <p className="fontAL text-lg">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores,
-              nulla totam. Ut soluta veritatis porro culpa dicta optio, et
-              molestiae.
+              Subscribe to our newsletter to receive the latest job listings, career tips, and placement opportunities directly in your inbox.
             </p>
 
             <div className="flex justify-end w-full">
@@ -71,39 +57,34 @@ const Footer: React.FC = () => {
 
               <div className="space-y-3 mt-5">
                 <p>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni
-                  sint, saepe nostrum placeat cum aut.
+                  Rojgari India is a premier job board platform connecting skilled candidates with top employers across industries in India.
                 </p>
 
                 <p className="group">
                   <b>Email: </b>{" "}
                   <Link
-                    href="/"
+                    href="mailto:support@rojgariindia.com"
                     className="group-hover:underline underline-offset-2"
                   >
-                    abcd@gmail.com
+                    support@rojgariindia.com
                   </Link>
                 </p>
 
                 <p className="group">
                   <b>Call: </b>{" "}
                   <Link
-                    href="/"
+                    href="tel:+912812588660"
                     className="group-hover:underline underline-offset-2"
                   >
-                    +91 98765 43210
+                    0281 258 8660
                   </Link>
                 </p>
 
                 <p className="group">
                   <b>Address: </b>{" "}
-                  <Link
-                    href="/"
-                    className="group-hover:underline underline-offset-2"
-                  >
-                    Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                    Voluptates, dignissimos.
-                  </Link>
+                  <span className="text-gray-300">
+                    Adarsh Plaza, 403 & 404, 150 Feet Ring Rd, Rajkot, Gujarat 360005
+                  </span>
                 </p>
               </div>
             </div>
@@ -116,17 +97,17 @@ const Footer: React.FC = () => {
                 </p>
 
                 <Link
-                  href="/"
+                  href="/jobs"
                   className="text-sm hover:underline underline-offset-2"
                 >
-                  Lorem ipsum
+                  Explore Jobs
                 </Link>
 
                 <Link
-                  href="/"
+                  href="/candidates/profile"
                   className="text-sm hover:underline underline-offset-2"
                 >
-                  Lorem ipsum
+                  Candidate Profile
                 </Link>
               </div>
 
@@ -137,24 +118,24 @@ const Footer: React.FC = () => {
                 </p>
 
                 <Link
-                  href="/"
+                  href="/recruiters/post-job"
                   className="text-sm hover:underline underline-offset-2"
                 >
-                  Lorem ipsum
+                  Post a Job
                 </Link>
 
                 <Link
-                  href="/"
+                  href="/recruiters/candidates-list"
                   className="text-sm hover:underline underline-offset-2"
                 >
-                  Lorem ipsum
+                  Search Candidates
                 </Link>
 
                 <Link
-                  href="/"
+                  href="/recruiters/dashboard"
                   className="text-sm hover:underline underline-offset-2"
                 >
-                  Lorem ipsum
+                  Recruiter Dashboard
                 </Link>
               </div>
             </div>
@@ -167,17 +148,17 @@ const Footer: React.FC = () => {
                 </p>
 
                 <Link
-                  href="/"
+                  href="/pages/aboutus"
                   className="text-sm hover:underline underline-offset-2"
                 >
-                  Lorem ipsum
+                  About Us
                 </Link>
 
                 <Link
-                  href="/"
+                  href="/contactus"
                   className="text-sm hover:underline underline-offset-2"
                 >
-                  Lorem ipsum
+                  Contact Us
                 </Link>
               </div>
 
@@ -188,31 +169,31 @@ const Footer: React.FC = () => {
                 </p>
 
                 <Link
-                  href="/"
+                  href="/candidates/dashboard"
                   className="text-sm hover:underline underline-offset-2"
                 >
-                  Lorem
+                  Dashboard
                 </Link>
 
                 <Link
-                  href="/"
+                  href="/candidates/saved-jobs"
                   className="text-sm hover:underline underline-offset-2"
                 >
-                  Lorem
+                  Saved Jobs
                 </Link>
 
                 <Link
-                  href="/"
+                  href="/candidates/applied-jobs"
                   className="text-sm hover:underline underline-offset-2"
                 >
-                  Lorem
+                  Applied Jobs
                 </Link>
 
                 <Link
-                  href="/"
+                  href="/candidates/job-alerts"
                   className="text-sm hover:underline underline-offset-2"
                 >
-                  Lorem
+                  Job Alerts
                 </Link>
               </div>
             </div>

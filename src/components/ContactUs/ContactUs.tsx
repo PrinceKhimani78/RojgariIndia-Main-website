@@ -6,7 +6,7 @@ import Footer from "../Footer/Footer";
 import { FaMapMarkerAlt } from "react-icons/fa";
 import { Typewriter } from "react-simple-typewriter";
 type Crumb = { name: string; href?: string };
-const ADDRESS = "1363 W Sunset Blvd, Los Angeles, CA 90026, USA";
+const ADDRESS = "Adarsh Plaza, 403 & 404, 150 Feet Ring Rd, opp. GSPC Gas, nr. Raiya Telephone Exchage, Raval Nagar, Rajkot, Gujarat 360005";
 const MAP_EMBED_SRC = `https://www.google.com/maps?q=${encodeURIComponent(
   ADDRESS
 )}&output=embed`;
@@ -191,12 +191,12 @@ const ContactUs = () => {
                     </span>
                     <div>
                       <h3 className="font-semibold text-gray-900">
-                        In the bay area?
+                        Our Rajkot Office
                       </h3>
                       <p className="mt-1 text-xs leading-5 text-gray-900 font-bold">
-                        1363–1385 Lorem ipsum dolor sit.,
+                        Adarsh Plaza, 403 & 404, 150 Feet Ring Rd, opp. GSPC Gas, nr. Raiya Telephone Exchage, Raval Nagar,
                         <br />
-                        Rjkt 360006, IN
+                        Rajkot, Gujarat 360005
                       </p>
                     </div>
                   </div>
@@ -213,9 +213,9 @@ const ContactUs = () => {
                         Feel free to contact us
                       </h3>
                       <p className="mt-1 text-xs leading-5 text-gray-900 font-bold">
-                        +91 9876543210
+                        0281 258 8660
                         <br />
-                        +91 9876543210
+                        +91 281 258 8660
                       </p>
                     </div>
                   </div>
@@ -230,9 +230,9 @@ const ContactUs = () => {
                     <div>
                       <h3 className="font-semibold text-gray-900">Support</h3>
                       <p className="mt-1 text-xs leading-5 text-gray-900 font-bold">
-                        infohelp@gmail.com
+                        support@rojgariindia.com
                         <br />
-                        support12@gmail.com
+                        info@rojgariindia.com
                       </p>
                     </div>
                   </div>

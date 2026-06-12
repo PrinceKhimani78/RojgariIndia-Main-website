@@ -115,32 +115,16 @@ const Details = () => {
                   {/* main content */}
                   <div className="space-y-4  text-sm text-gray-800">
                     <p>
-                      Please make sure you understand what rights you are
-                      claiming before you submit a DMCA takedown notice because
-                      it is a serious legal document. Consider whether you need
-                      legal advice. It&apos;s really important not to make false
-                      claims as this could have serious legal consequences.
+                      Landing your dream job starts with understanding what recruiters are searching for. It goes beyond technical skills. Recruiters look for candidate compatibility, communication skills, and a proactive attitude. Presenting a clean profile and custom CV matching the job description gives you a major advantage.
                     </p>
                     <p>
-                      penatibus et magnis dis parturient montes, nascetur
-                      ridiculus mus. Integer tristique elit lobortis purus
-                      bibendum, quis dictum metus mattis. Phasellus posuere
-                      felis sed eros porttitor mattis. Curabitur massa magna,
-                      tempor in blandit id, porta in ligula. Aliquam laoreet
-                      nisl massa, at interdum mauris sollicitudin et.Harvel is a
-                      copyright protection platform for next-gen creators,
-                      crawling the web on a daily basis in order to find piracy
-                      links and copyright infringement of your content. I
+                      Many applicants make the mistake of using the same generic resume for every application. To truly stand out, analyze the job posting, pick out key requirements and terms, and weave them directly into your experience section. This simple step guarantees your application passes the automatic resume screening filters (ATS) and reaches a real hiring manager.
                     </p>
                     <h2 className="text-lg font-semibold text-neutral-900">
-                      About Business Network
+                      Build a Strong Professional Network
                     </h2>
                     <p>
-                      Phasellus enim magna, varius et commodo ut, ultricies
-                      vitae velit. Ut nulla tellus, eleifend euismod and
-                      pellentesque vel, sagittis vel justo. In libero urna,
-                      venenatis sit amet ornare non, suscipit nec risus. Sed
-                      consequat justo non mauris pretium at tempor justo sodales
+                      Networking is one of the most powerful job search tools available. Reach out to professionals already working in your target industry, participate in local job fairs, and join verified portals like Rojgari India. A single direct referral from a company employee can place your profile at the top of the recruiter's stack.
                     </p>
                     {/* Quote block */}
                     <div className="bg-gray-50 rounded-xl p-6 md:p-8 relative">
@@ -148,24 +132,18 @@ const Details = () => {
                         “
                       </div>
                       <p className="text-gray-800 text-base md:text-lg leading-relaxed pl-6">
-                        A business consulting agency is involved in the
-                        planning, implementation, and education of businesses.
+                        Recruitment isn't just about matching resumes to descriptions. It's about aligning a candidate's long-term career aspirations with a company's vision and core culture.
                       </p>
                       <p className="mt-4 font-bold text-gray-900 tracking-wide pl-6">
-                        RICHARD ANDERSON
+                        ROJGARI PLACEMENTS
                       </p>
                     </div>
                     <h2 className="text-lg font-semibold text-neutral-900">
                       Get Your Resume Done Right
                     </h2>
-
+ 
                     <p>
-                      Phasellus enim magna, varius et commodo ut, ultricies
-                      vitae velit. Ut nulla tellus, eleifend euismod and
-                      pellentesque vel, sagittis vel justo. In libero urna,
-                      venenatis sit amet ornare non, suscipit nec risus. Sed
-                      consequat justo non mauris pretium at tempor justo
-                      sodales.
+                      Keep your CV concise, clear, and focused on achievements rather than just a list of daily responsibilities. Use active verbs and quantify your success with numbers and metrics where possible, showing hiring teams the exact value you will bring.
                     </p>
                     <div>
                       {/* Responsibilities part  */}
@@ -200,9 +178,7 @@ const Details = () => {
                             435 Posts Since 2018
                           </p>
                           <p className="text-sm text-gray-600 mt-1">
-                            Lorem ipsum dolor sit amet, consectetur adipisicing
-                            elit, sed do eiusmod tempor incididunt ut labore et
-                            dolore magna aliqua. Ut enim ad minim veniam,
+                            Rosalina William is a certified career coach and HR consultant with over 8 years of experience helping candidates land their dream roles in top tech companies.
                           </p>
                           <p className="mt-2 font-bold text-gray-900">
                             ROSALINA WILLIAM

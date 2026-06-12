@@ -256,6 +256,7 @@ const Candidates = () => {
               icon: "/images/icon1.webp",
               titleTop: "Register",
               titleBottom: "Your Account",
+              desc: "Register your details, verify your email, and create a strong jobseeker profile.",
               offset: "sm:translate-y-0",
               glow: "shadow-[0_30px_60px_rgba(24,39,75,0.12)]",
               badgeGlow: "shadow-[0_15px_45px_rgba(59,130,246,0.35)]",
@@ -267,6 +268,7 @@ const Candidates = () => {
               icon: "/images/icon2.webp",
               titleTop: "Search",
               titleBottom: "Your Job",
+              desc: "Filter thousands of jobs by location, department, experience, and key skills.",
               offset: "sm:-translate-y-6",
               glow: "shadow-[0_30px_60px_rgba(139,99,0,0.12)]",
               badgeGlow: "shadow-[0_15px_45px_rgba(245,158,11,0.35)]",
@@ -278,6 +280,7 @@ const Candidates = () => {
               icon: "/images/icon3.webp",
               titleTop: "Apply",
               titleBottom: "For Dream Job",
+              desc: "Apply directly to multiple relevant opportunities with a single click.",
               offset: "sm:-translate-y-2",
               glow: "shadow-[0_30px_60px_rgba(86,40,110,0.14)]",
               badgeGlow: "shadow-[0_15px_45px_rgba(168,85,247,0.35)]",
@@ -289,6 +292,7 @@ const Candidates = () => {
               icon: "/images/icon4.webp",
               titleTop: "Upload",
               titleBottom: "Your Resume",
+              desc: "Attach your updated resume to get noticed by recruiters looking for top talent.",
               offset: "sm:translate-y-4",
               glow: "shadow-[0_30px_60px_rgba(10,97,82,0.14)]",
               badgeGlow: "shadow-[0_15px_45px_rgba(45,212,191,0.35)]",
@@ -370,8 +374,7 @@ const Candidates = () => {
            text-black/70
          "
                 >
-                  You need to create an account to find the best and preferred
-                  job.
+                  {c.desc}
                 </p>
               </div>
             );
@@ -499,7 +502,7 @@ const Candidates = () => {
                     lineHeight: 1.3,
                   }}
                 >
-                  Lorem ipsum dolor.
+                  Join Rojgari India
                 </p>
 
                 <p
@@ -576,33 +579,31 @@ const Candidates = () => {
                       ➤ Please Note
                     </p>
                     <ul className="text-xs space-y-2">
-                      <li>
-                        - Lorem ipsum dolor sit amet consectetur adipisicing
-                        elit.
-                      </li>
-                      <li>
-                        - Distinctio, recusandae. Lorem ipsum dolor sit amet.
-                      </li>
-                      <li>
-                        - Lorem ipsum dolor sit amet consectetur adipisicing
-                        elit.
-                      </li>
-                      <li>
-                        - Distinctio, recusandae. Lorem ipsum dolor sit amet.
-                      </li>
-                      <li>
-                        - Distinctio, recusandae. Lorem ipsum dolor sit amet.
-                      </li>
-                      <li>
-                        - Distinctio, recusandae. Lorem ipsum dolor sit amet.
-                      </li>
-                      <li>
-                        - Distinctio, recusandae. Lorem ipsum dolor sit amet.
-                      </li>
-                      <li>
-                        - Distinctio, recusandae. Lorem ipsum dolor sit amet.
-                      </li>
-                    </ul>
+                       <li>
+                         - Verify your email with the secure OTP sent to you.
+                       </li>
+                       <li>
+                         - Complete your profile fully to increase job interview calls.
+                       </li>
+                       <li>
+                         - Upload a recent resume in PDF, DOC, or DOCX formats.
+                       </li>
+                       <li>
+                         - Update your skill list regularly to match new job postings.
+                       </li>
+                       <li>
+                         - Keep your current contact number active for HR coordinators.
+                       </li>
+                       <li>
+                         - Review job requirements and salary details before applying.
+                       </li>
+                       <li>
+                         - We will never ask you to pay any charges for registrations.
+                       </li>
+                       <li>
+                         - Keep your account password secure and do not share it.
+                       </li>
+                     </ul>
                   </div>
                 </div>
               </div>
@@ -640,21 +641,23 @@ const Candidates = () => {
                 </h2>
 
                 {/* Candidate / Recruiter buttons */}
-                <div className="flex gap-3 mb-6 justify-center md:justify-start">
+                <div className="relative flex p-1 gap-2 mb-6 justify-center md:justify-start bg-gray-100 rounded-xl w-fit mx-auto md:mx-0">
                   {/* Candidates Button */}
                   <button
                     type="button"
                     onClick={() => setUserType("candidates")}
-                    className={`relative w-32 h-9 overflow-hidden group rounded-lg active:scale-90 transition-all ease-out duration-700 flex items-center justify-center border
-                     ${userType === "candidates"
-                        ? "bg-[#72B76A] text-white border-[#72B76A]"
-                        : "bg-transparent text-[#72B76A] border-[#72B76A] hover:bg-[#72B76A] hover:text-white"
-                      }`}
+                    className={`relative z-10 w-32 h-9 flex items-center justify-center text-sm font-semibold rounded-lg transition-colors duration-300 ${
+                      userType === "candidates" ? "text-white" : "text-gray-600 hover:text-black"
+                    }`}
                   >
-                    <span className="absolute right-0 w-10 h-full top-0 transition-all duration-1000 transform translate-x-12 bg-white opacity-10 -skew-x-12 group-hover:-translate-x-24 ease"></span>
-                    <span className="relative text-sm font-semibold">
-                      Candidates
-                    </span>
+                    Candidates
+                    {userType === "candidates" && (
+                      <motion.div
+                        layoutId="activeTabCandidate"
+                        className="absolute inset-0 bg-[#72B76A] rounded-lg -z-10"
+                        transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                      />
+                    )}
                   </button>
 
                   {/* Recruiters Button */}
@@ -668,125 +671,135 @@ const Candidates = () => {
                         setUserType("recruiter");
                       }
                     }}
-                    className={`relative w-32 h-9 overflow-hidden group rounded-lg active:scale-90 transition-all ease-out duration-700 flex items-center justify-center border
-                     ${userType === "recruiter"
-                        ? "bg-[#72B76A] text-white border-[#72B76A]"
-                        : "bg-transparent text-[#72B76A] border-[#72B76A] hover:bg-[#72B76A] hover:text-white"
-                      }`}
+                    className={`relative z-10 w-32 h-9 flex items-center justify-center text-sm font-semibold rounded-lg transition-colors duration-300 ${
+                      userType === "recruiter" ? "text-white" : "text-gray-600 hover:text-black"
+                    }`}
                   >
-                    <span className="absolute right-0 w-10 h-full top-0 transition-all duration-1000 transform translate-x-12 bg-white opacity-10 -skew-x-12 group-hover:-translate-x-24 ease"></span>
-                    <span className="relative text-sm font-semibold">
-                      Recruiters
-                    </span>
+                    Recruiters
+                    {userType === "recruiter" && (
+                      <motion.div
+                        layoutId="activeTabCandidate"
+                        className="absolute inset-0 bg-[#72B76A] rounded-lg -z-10"
+                        transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                      />
+                    )}
                   </button>
                 </div>
 
                 {/* Inputs */}
-                {mode === "signup" ? (
-                  <div className="space-y-3">
-                    <input
-                      type="text"
-                      name="fullName"
-                      placeholder="Full Name"
-                      className="w-full p-2 rounded bg-white text-sm placeholder-slate-400 ring-1 focus:bg-white focus:outline-none ring-gray-300 transition focus:ring-2 focus:ring-[#72B76A]"
-                      value={formData.fullName}
-                      onChange={handleChange}
-                    />
-                    <div className="relative">
+                <motion.div
+                  key={`${mode}-${userType}`}
+                  initial={{ x: -30, opacity: 0 }}
+                  animate={{ x: 0, opacity: 1 }}
+                  transition={{ duration: 0.35, ease: "easeOut" }}
+                  className="space-y-3"
+                >
+                  {mode === "signup" ? (
+                    <>
                       <input
-                        type="email"
-                        name="email"
-                        placeholder="Email Address"
-                        className="w-full p-2 rounded bg-white text-sm placeholder-slate-400 ring-1 focus:bg-white focus:outline-none ring-gray-300 transition focus:ring-2 focus:ring-[#72B76A] pr-20"
-                        value={formData.email}
-                        onChange={handleChange}
-                      />
-                      <button
-                        type="button"
-                        onClick={handleSendOtp}
-                        disabled={otpLoading}
-                        className={`absolute right-1 top-1/2 -translate-y-1/2 px-2 py-1 text-[10px] font-bold text-white rounded transition ${otpLoading ? "bg-gray-400" : "bg-[#72B76A] hover:bg-[#5da356]"
-                          }`}
-                      >
-                        {otpLoading ? "Sending..." : "Send OTP"}
-                      </button>
-                    </div>
-                    {/* Password */}
-                    <div className="relative">
-                      <input
-                        type={showPassword ? "text" : "password"}
-                        name="password"
-                        placeholder="Password"
+                        type="text"
+                        name="fullName"
+                        placeholder="Full Name"
                         className="w-full p-2 rounded bg-white text-sm placeholder-slate-400 ring-1 focus:bg-white focus:outline-none ring-gray-300 transition focus:ring-2 focus:ring-[#72B76A]"
-                        value={formData.password}
+                        value={formData.fullName}
                         onChange={handleChange}
                       />
-                      <button
-                        type="button"
-                        onClick={() => setShowPassword((prev) => !prev)}
-                        className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500"
-                      >
-                        {showPassword ? <FaEyeSlash /> : <FaEye />}
-                      </button>
-                    </div>
+                      <div className="relative">
+                        <input
+                          type="email"
+                          name="email"
+                          placeholder="Email Address"
+                          className="w-full p-2 rounded bg-white text-sm placeholder-slate-400 ring-1 focus:bg-white focus:outline-none ring-gray-300 transition focus:ring-2 focus:ring-[#72B76A] pr-20"
+                          value={formData.email}
+                          onChange={handleChange}
+                        />
+                        <button
+                          type="button"
+                          onClick={handleSendOtp}
+                          disabled={otpLoading}
+                          className={`absolute right-1 top-1/2 -translate-y-1/2 px-2 py-1 text-[10px] font-bold text-white rounded transition ${otpLoading ? "bg-gray-400" : "bg-[#72B76A] hover:bg-[#5da356]"
+                            }`}
+                        >
+                          {otpLoading ? "Sending..." : "Send OTP"}
+                        </button>
+                      </div>
+                      {/* Password */}
+                      <div className="relative">
+                        <input
+                          type={showPassword ? "text" : "password"}
+                          name="password"
+                          placeholder="Password"
+                          className="w-full p-2 rounded bg-white text-sm placeholder-slate-400 ring-1 focus:bg-white focus:outline-none ring-gray-300 transition focus:ring-2 focus:ring-[#72B76A]"
+                          value={formData.password}
+                          onChange={handleChange}
+                        />
+                        <button
+                          type="button"
+                          onClick={() => setShowPassword((prev) => !prev)}
+                          className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500"
+                        >
+                          {showPassword ? <FaEyeSlash /> : <FaEye />}
+                        </button>
+                      </div>
 
-                    {/* Confirm Password */}
-                    <div className="relative">
-                      <input
-                        type={showConfirmPassword ? "text" : "password"}
-                        name="confirmPassword"
-                        placeholder="Confirm Password"
-                        className="w-full p-2 rounded bg-white text-sm placeholder-slate-400  focus:bg-white focus:outline-none ring-1 ring-gray-300 transition focus:ring-2 focus:ring-[#72B76A]"
-                        value={formData.confirmPassword}
-                        onChange={handleChange}
-                      />
-                      <button
-                        type="button"
-                        onClick={() => setShowConfirmPassword((prev) => !prev)}
-                        className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500"
-                      >
-                        {showConfirmPassword ? <FaEyeSlash /> : <FaEye />}
-                      </button>
-                    </div>
+                      {/* Confirm Password */}
+                      <div className="relative">
+                        <input
+                          type={showConfirmPassword ? "text" : "password"}
+                          name="confirmPassword"
+                          placeholder="Confirm Password"
+                          className="w-full p-2 rounded bg-white text-sm placeholder-slate-400  focus:bg-white focus:outline-none ring-1 ring-gray-300 transition focus:ring-2 focus:ring-[#72B76A]"
+                          value={formData.confirmPassword}
+                          onChange={handleChange}
+                        />
+                        <button
+                          type="button"
+                          onClick={() => setShowConfirmPassword((prev) => !prev)}
+                          className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500"
+                        >
+                          {showConfirmPassword ? <FaEyeSlash /> : <FaEye />}
+                        </button>
+                      </div>
 
-                    <input
-                      type="text"
-                      name="otp"
-                      placeholder="Enter OTP"
-                      className="w-full p-2 rounded bg-white text-sm placeholder-slate-400 ring-1 focus:bg-white focus:outline-none  ring-gray-300 transition focus:ring-2 focus:ring-[#72B76A]"
-                      value={formData.otp}
-                      onChange={handleChange}
-                    />
-                  </div>
-                ) : (
-                  <div className="space-y-3">
-                    <input
-                      type="text"
-                      name="username"
-                      placeholder="Username"
-                      className="w-full p-2 rounded bg-white text-sm placeholder-slate-400 ring-1 ring-gray-300 focus:bg-white focus:outline-none transition focus:ring-2 focus:ring-[#72B76A]"
-                      value={formData.username}
-                      onChange={handleChange}
-                    />
-                    <div className="relative">
                       <input
-                        type={showPassword ? "text" : "password"}
-                        name="password"
-                        placeholder="Password"
-                        className="w-full p-2 rounded bg-white text-sm focus:bg-white focus:outline-none placeholder-slate-400 ring-1 ring-gray-300 transition focus:ring-2 focus:ring-[#72B76A]"
-                        value={formData.password}
+                        type="text"
+                        name="otp"
+                        placeholder="Enter OTP"
+                        className="w-full p-2 rounded bg-white text-sm placeholder-slate-400 ring-1 focus:bg-white focus:outline-none  ring-gray-300 transition focus:ring-2 focus:ring-[#72B76A]"
+                        value={formData.otp}
                         onChange={handleChange}
                       />
-                      <button
-                        type="button"
-                        onClick={() => setShowPassword((prev) => !prev)}
-                        className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500"
-                      >
-                        {showPassword ? <FaEyeSlash /> : <FaEye />}
-                      </button>
-                    </div>
-                  </div>
-                )}
+                    </>
+                  ) : (
+                    <>
+                      <input
+                        type="text"
+                        name="username"
+                        placeholder="Username"
+                        className="w-full p-2 rounded bg-white text-sm placeholder-slate-400 ring-1 ring-gray-300 focus:bg-white focus:outline-none transition focus:ring-2 focus:ring-[#72B76A]"
+                        value={formData.username}
+                        onChange={handleChange}
+                      />
+                      <div className="relative">
+                        <input
+                          type={showPassword ? "text" : "password"}
+                          name="password"
+                          placeholder="Password"
+                          className="w-full p-2 rounded bg-white text-sm focus:bg-white focus:outline-none placeholder-slate-400 ring-1 ring-gray-300 transition focus:ring-2 focus:ring-[#72B76A]"
+                          value={formData.password}
+                          onChange={handleChange}
+                        />
+                        <button
+                          type="button"
+                          onClick={() => setShowPassword((prev) => !prev)}
+                          className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500"
+                        >
+                          {showPassword ? <FaEyeSlash /> : <FaEye />}
+                        </button>
+                      </div>
+                    </>
+                  )}
+                </motion.div>
 
                 {/* Action Button */}
                 <div className="flex justify-center">

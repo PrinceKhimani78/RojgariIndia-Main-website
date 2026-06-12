@@ -314,7 +314,7 @@ const Recruiters = () => {
           >
             {jobTyperSeen && (
               <Typewriter
-                words={["Follow our steps we will help you."]}
+                words={["Follow our steps to hire talent.", "Connect with Top Professionals"]}
                 typeSpeed={90}
                 deleteSpeed={0}
                 delaySpeed={800}
@@ -326,10 +326,10 @@ const Recruiters = () => {
           <div className="mt-2">
             <FeatureList
               items={[
-                "Trusted & Quality Job",
-                "International Job",
-                "No Extra Charge",
-                "Top Companies",
+                "Post Unlimited Vacancies",
+                "Browse Verified Candidates",
+                "Direct Recruiter Dashboard",
+                "Dedicated Hiring Support",
               ]}
             />
           </div>
@@ -343,8 +343,9 @@ const Recruiters = () => {
               bg: "bg-[#00c9ff]/40",
               num: "text-[#00c9ff]",
               icon: "/images/icon1.webp",
-              titleTop: "Register",
-              titleBottom: "Your Account",
+              titleTop: "Create",
+              titleBottom: "Employer Account",
+              desc: "Register your company profile with verification details.",
               offset: "sm:translate-y-0",
               glow: "shadow-[0_30px_60px_rgba(24,39,75,0.12)]",
               badgeGlow: "shadow-[0_15px_45px_rgba(59,130,246,0.35)]",
@@ -354,8 +355,9 @@ const Recruiters = () => {
               bg: "bg-[#ffcc23]/50",
               num: "text-[#ffcc23]",
               icon: "/images/icon2.webp",
-              titleTop: "Search",
-              titleBottom: "Your Job",
+              titleTop: "Post",
+              titleBottom: "Your Jobs",
+              desc: "Create and publish detailed vacancies to attract the right skillsets.",
               offset: "sm:-translate-y-6",
               glow: "shadow-[0_30px_60px_rgba(139,99,0,0.12)]",
               badgeGlow: "shadow-[0_15px_45px_rgba(245,158,11,0.35)]",
@@ -365,8 +367,9 @@ const Recruiters = () => {
               bg: "bg-[#ae70bb]/60",
               num: "text-[#ae70bb]",
               icon: "/images/icon3.webp",
-              titleTop: "Apply",
-              titleBottom: "For Dream Job",
+              titleTop: "Search",
+              titleBottom: "Candidates",
+              desc: "Browse our database of active, qualified resumes across India.",
               offset: "sm:-translate-y-2",
               glow: "shadow-[0_30px_60px_rgba(86,40,110,0.14)]",
               badgeGlow: "shadow-[0_15px_45px_rgba(168,85,247,0.35)]",
@@ -376,8 +379,9 @@ const Recruiters = () => {
               bg: "bg-[#72b76a]/60",
               num: "text-[#72b76a]",
               icon: "/images/icon4.webp",
-              titleTop: "Upload",
-              titleBottom: "Your Resume",
+              titleTop: "Hire",
+              titleBottom: "Top Talent",
+              desc: "Review matching applicants, coordinate interviews, and extend offers.",
               offset: "sm:translate-y-4",
               glow: "shadow-[0_30px_60px_rgba(10,97,82,0.14)]",
               badgeGlow: "shadow-[0_15px_45px_rgba(45,212,191,0.35)]",
@@ -457,8 +461,7 @@ const Recruiters = () => {
     text-black/70
   "
                 >
-                  You need to create an account to find the best and preferred
-                  job.
+                  {c.desc}
                 </p>
               </div>
             );
@@ -826,7 +829,7 @@ const Recruiters = () => {
                     lineHeight: 1.3,
                   }}
                 >
-                  Lorem ipsum dolor.
+                  Hire Top Talent
                 </p>
 
                 <p
@@ -837,30 +840,24 @@ const Recruiters = () => {
                     lineHeight: 1.2,
                   }}
                 >
-                  Ready To Start Your Career Journey?
+                  Ready to Find Your Next Great Hire?
                 </p>
 
                 <p className="text-sm mt-5">
-                  Create your candidate profile, upload your resume, and apply
-                  to top companies in just a few clicks. Take the first step
-                  towards your dream job today! Create your candidate profile,
-                  upload your resume, and apply to top companies in just a few
-                  clicks. Take the first step towards your dream job today!
-                  Resume, and apply to top companies in just a few clicks. Take
-                  the first step towards your dream job today!
+                  Create an employer profile, post your open vacancies, and browse thousands of qualified candidate profiles. Streamline your hiring process and connect with top talent across India.
                 </p>
 
                 <button
                   onClick={() => {
                     setShowPopup(true);
                     setMode("login");
-                    setUserType("candidates");
+                    setUserType("recruiter");
                   }}
                   className="relative mt-8 px-4 h-9 overflow-hidden group border border-[#AE70BB] bg-[#AE70BB] rounded-lg hover:bg-transparent text-white hover:text-[#AE70BB] active:scale-90 transition-all ease-out duration-700 cursor-pointer"
                 >
                   <span className="absolute right-0 w-10 h-full top-0 transition-all duration-1000 transform translate-x-12 bg-white opacity-10 -skew-x-12 group-hover:-translate-x-24 ease"></span>
                   <span className="relative flex gap-2 items-center text-sm font-semibold">
-                    Candidates Login
+                    Recruiter Login
                   </span>
                 </button>
               </div>
@@ -904,30 +901,28 @@ const Recruiters = () => {
                     </p>
                     <ul className="text-xs space-y-2">
                       <li>
-                        - Lorem ipsum dolor sit amet consectetur adipisicing
-                        elit.
+                        - Verify your email with the secure OTP sent to you.
                       </li>
                       <li>
-                        - Distinctio, recusandae. Lorem ipsum dolor sit amet.
+                        - Complete your profile fully to increase job interview calls.
                       </li>
                       <li>
-                        - Lorem ipsum dolor sit amet consectetur adipisicing
-                        elit.
+                        - Upload a recent resume in PDF, DOC, or DOCX formats.
                       </li>
                       <li>
-                        - Distinctio, recusandae. Lorem ipsum dolor sit amet.
+                        - Update your skill list regularly to match new job postings.
                       </li>
                       <li>
-                        - Distinctio, recusandae. Lorem ipsum dolor sit amet.
+                        - Keep your current contact number active for HR coordinators.
                       </li>
                       <li>
-                        - Distinctio, recusandae. Lorem ipsum dolor sit amet.
+                        - Review job requirements and salary details before applying.
                       </li>
                       <li>
-                        - Distinctio, recusandae. Lorem ipsum dolor sit amet.
+                        - We will never ask you to pay any charges for registrations.
                       </li>
                       <li>
-                        - Distinctio, recusandae. Lorem ipsum dolor sit amet.
+                        - Keep your account password secure and do not share it.
                       </li>
                     </ul>
                   </div>
@@ -967,21 +962,23 @@ const Recruiters = () => {
                 </h2>
 
                 {/* Candidate / Recruiter buttons */}
-                <div className="flex gap-3 mb-6 justify-center md:justify-start">
+                <div className="relative flex p-1 gap-2 mb-6 justify-center md:justify-start bg-gray-100 rounded-xl w-fit mx-auto md:mx-0">
                   {/* Candidates Button */}
                   <button
                     type="button"
                     onClick={() => setUserType("candidates")}
-                    className={`relative w-32 h-9 overflow-hidden group rounded-lg active:scale-90 transition-all ease-out duration-700 flex items-center justify-center border
-                           ${userType === "candidates"
-                        ? "bg-[#72B76A] text-white border-[#72B76A]"
-                        : "bg-transparent text-[#72B76A] border-[#72B76A] hover:bg-[#72B76A] hover:text-white"
-                      }`}
+                    className={`relative z-10 w-32 h-9 flex items-center justify-center text-sm font-semibold rounded-lg transition-colors duration-300 ${
+                      userType === "candidates" ? "text-white" : "text-gray-600 hover:text-black"
+                    }`}
                   >
-                    <span className="absolute right-0 w-10 h-full top-0 transition-all duration-1000 transform translate-x-12 bg-white opacity-10 -skew-x-12 group-hover:-translate-x-24 ease"></span>
-                    <span className="relative text-sm font-semibold">
-                      Candidates
-                    </span>
+                    Candidates
+                    {userType === "candidates" && (
+                      <motion.div
+                        layoutId="activeTabRecruiter"
+                        className="absolute inset-0 bg-[#72B76A] rounded-lg -z-10"
+                        transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                      />
+                    )}
                   </button>
 
                   {/* Recruiters Button */}
@@ -995,160 +992,170 @@ const Recruiters = () => {
                         setUserType("recruiter");
                       }
                     }}
-                    className={`relative w-32 h-9 overflow-hidden group rounded-lg active:scale-90 transition-all ease-out duration-700 flex items-center justify-center border
-                           ${userType === "recruiter"
-                        ? "bg-[#72B76A] text-white border-[#72B76A]"
-                        : "bg-transparent text-[#72B76A] border-[#72B76A] hover:bg-[#72B76A] hover:text-white"
-                      }`}
+                    className={`relative z-10 w-32 h-9 flex items-center justify-center text-sm font-semibold rounded-lg transition-colors duration-300 ${
+                      userType === "recruiter" ? "text-white" : "text-gray-600 hover:text-black"
+                    }`}
                   >
-                    <span className="absolute right-0 w-10 h-full top-0 transition-all duration-1000 transform translate-x-12 bg-white opacity-10 -skew-x-12 group-hover:-translate-x-24 ease"></span>
-                    <span className="relative text-sm font-semibold">
-                      Recruiters
-                    </span>
+                    Recruiters
+                    {userType === "recruiter" && (
+                      <motion.div
+                        layoutId="activeTabRecruiter"
+                        className="absolute inset-0 bg-[#72B76A] rounded-lg -z-10"
+                        transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                      />
+                    )}
                   </button>
                 </div>
 
                 {/* Inputs */}
-                {mode === "signup" ? (
-                  <div className="space-y-3">
-                    <input
-                      type="text"
-                      name="fullName"
-                      placeholder="Full Name"
-                      className="w-full p-2 rounded bg-white text-sm placeholder-slate-400 ring-1 focus:bg-white focus:outline-none ring-gray-300 transition focus:ring-2 focus:ring-[#72B76A]"
-                      value={formData.fullName}
-                      onChange={handleChange}
-                    />
-
-                    {userType === "recruiter" && (
-                      <>
-                        <input
-                          type="text"
-                          name="companyName"
-                          placeholder="Company Name"
-                          className="w-full p-2 rounded bg-white text-sm placeholder-slate-400 ring-1 focus:bg-white focus:outline-none ring-gray-300 transition focus:ring-2 focus:ring-[#72B76A]"
-                          value={formData.companyName}
-                          onChange={handleChange}
-                        />
-                        <input
-                          type="text"
-                          name="mobileNumber"
-                          placeholder="Mobile Number"
-                          className="w-full p-2 rounded bg-white text-sm placeholder-slate-400 ring-1 focus:bg-white focus:outline-none ring-gray-300 transition focus:ring-2 focus:ring-[#72B76A]"
-                          value={formData.mobileNumber}
-                          onChange={handleChange}
-                        />
-                        <select
-                          name="industry"
-                          className="w-full p-2 rounded bg-white text-sm text-slate-700 ring-1 focus:bg-white focus:outline-none ring-gray-300 transition focus:ring-2 focus:ring-[#72B76A]"
-                          value={formData.industry}
-                          onChange={handleChange as any}
-                        >
-                          <option value="">Select Industry</option>
-                          {INDUSTRY_OPTIONS.map((opt) => (
-                            <option key={opt.value} value={opt.value}>
-                              {opt.label}
-                            </option>
-                          ))}
-                        </select>
-                      </>
-                    )}
-
-                    <div className="relative">
+                <motion.div
+                  key={`${mode}-${userType}`}
+                  initial={{ x: -30, opacity: 0 }}
+                  animate={{ x: 0, opacity: 1 }}
+                  transition={{ duration: 0.35, ease: "easeOut" }}
+                  className="space-y-3"
+                >
+                  {mode === "signup" ? (
+                    <>
                       <input
-                        type="email"
-                        name="email"
-                        placeholder="Email Address"
-                        className="w-full p-2 rounded bg-white text-sm placeholder-slate-400 ring-1 focus:bg-white focus:outline-none ring-gray-300 transition focus:ring-2 focus:ring-[#72B76A] pr-20"
-                        value={formData.email}
-                        onChange={handleChange}
-                      />
-                      <button
-                        type="button"
-                        onClick={handleSendOtp}
-                        disabled={otpLoading}
-                        className={`absolute right-1 top-1/2 -translate-y-1/2 px-2 py-1 text-[10px] font-bold text-white rounded transition ${otpLoading ? "bg-gray-400" : "bg-[#72B76A] hover:bg-[#5da356]"
-                          }`}
-                      >
-                        {otpLoading ? "Sending..." : "Send OTP"}
-                      </button>
-                    </div>
-                    {/* Password */}
-                    <div className="relative">
-                      <input
-                        type={showPassword ? "text" : "password"}
-                        name="password"
-                        placeholder="Password"
+                        type="text"
+                        name="fullName"
+                        placeholder="Full Name"
                         className="w-full p-2 rounded bg-white text-sm placeholder-slate-400 ring-1 focus:bg-white focus:outline-none ring-gray-300 transition focus:ring-2 focus:ring-[#72B76A]"
-                        value={formData.password}
+                        value={formData.fullName}
                         onChange={handleChange}
                       />
-                      <button
-                        type="button"
-                        onClick={() => setShowPassword((prev) => !prev)}
-                        className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500"
-                      >
-                        {showPassword ? <FaEyeSlash /> : <FaEye />}
-                      </button>
-                    </div>
 
-                    {/* Confirm Password */}
-                    <div className="relative">
-                      <input
-                        type={showConfirmPassword ? "text" : "password"}
-                        name="confirmPassword"
-                        placeholder="Confirm Password"
-                        className="w-full p-2 rounded bg-white text-sm placeholder-slate-400  focus:bg-white focus:outline-none ring-1 ring-gray-300 transition focus:ring-2 focus:ring-[#72B76A]"
-                        value={formData.confirmPassword}
-                        onChange={handleChange}
-                      />
-                      <button
-                        type="button"
-                        onClick={() => setShowConfirmPassword((prev) => !prev)}
-                        className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500"
-                      >
-                        {showConfirmPassword ? <FaEyeSlash /> : <FaEye />}
-                      </button>
-                    </div>
+                      {userType === "recruiter" && (
+                        <>
+                          <input
+                            type="text"
+                            name="companyName"
+                            placeholder="Company Name"
+                            className="w-full p-2 rounded bg-white text-sm placeholder-slate-400 ring-1 focus:bg-white focus:outline-none ring-gray-300 transition focus:ring-2 focus:ring-[#72B76A]"
+                            value={formData.companyName}
+                            onChange={handleChange}
+                          />
+                          <input
+                            type="text"
+                            name="mobileNumber"
+                            placeholder="Mobile Number"
+                            className="w-full p-2 rounded bg-white text-sm placeholder-slate-400 ring-1 focus:bg-white focus:outline-none ring-gray-300 transition focus:ring-2 focus:ring-[#72B76A]"
+                            value={formData.mobileNumber}
+                            onChange={handleChange}
+                          />
+                          <select
+                            name="industry"
+                            className="w-full p-2 rounded bg-white text-sm text-slate-700 ring-1 focus:bg-white focus:outline-none ring-gray-300 transition focus:ring-2 focus:ring-[#72B76A]"
+                            value={formData.industry}
+                            onChange={handleChange as any}
+                          >
+                            <option value="">Select Industry</option>
+                            {INDUSTRY_OPTIONS.map((opt) => (
+                              <option key={opt.value} value={opt.value}>
+                                {opt.label}
+                              </option>
+                            ))}
+                          </select>
+                        </>
+                      )}
 
-                    <input
-                      type="text"
-                      name="otp"
-                      placeholder="Enter OTP"
-                      className="w-full p-2 rounded bg-white text-sm placeholder-slate-400 ring-1 focus:bg-white focus:outline-none  ring-gray-300 transition focus:ring-2 focus:ring-[#72B76A]"
-                      value={formData.otp}
-                      onChange={handleChange}
-                    />
-                  </div>
-                ) : (
-                  <div className="space-y-3">
-                    <input
-                      type="text"
-                      name="username"
-                      placeholder="Username"
-                      className="w-full p-2 rounded bg-white text-sm placeholder-slate-400 ring-1 ring-gray-300 focus:bg-white focus:outline-none transition focus:ring-2 focus:ring-[#72B76A]"
-                      value={formData.username}
-                      onChange={handleChange}
-                    />
-                    <div className="relative">
+                      <div className="relative">
+                        <input
+                          type="email"
+                          name="email"
+                          placeholder="Email Address"
+                          className="w-full p-2 rounded bg-white text-sm placeholder-slate-400 ring-1 focus:bg-white focus:outline-none ring-gray-300 transition focus:ring-2 focus:ring-[#72B76A] pr-20"
+                          value={formData.email}
+                          onChange={handleChange}
+                        />
+                        <button
+                          type="button"
+                          onClick={handleSendOtp}
+                          disabled={otpLoading}
+                          className={`absolute right-1 top-1/2 -translate-y-1/2 px-2 py-1 text-[10px] font-bold text-white rounded transition ${otpLoading ? "bg-gray-400" : "bg-[#72B76A] hover:bg-[#5da356]"
+                            }`}
+                        >
+                          {otpLoading ? "Sending..." : "Send OTP"}
+                        </button>
+                      </div>
+                      {/* Password */}
+                      <div className="relative">
+                        <input
+                          type={showPassword ? "text" : "password"}
+                          name="password"
+                          placeholder="Password"
+                          className="w-full p-2 rounded bg-white text-sm placeholder-slate-400 ring-1 focus:bg-white focus:outline-none ring-gray-300 transition focus:ring-2 focus:ring-[#72B76A]"
+                          value={formData.password}
+                          onChange={handleChange}
+                        />
+                        <button
+                          type="button"
+                          onClick={() => setShowPassword((prev) => !prev)}
+                          className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500"
+                        >
+                          {showPassword ? <FaEyeSlash /> : <FaEye />}
+                        </button>
+                      </div>
+
+                      {/* Confirm Password */}
+                      <div className="relative">
+                        <input
+                          type={showConfirmPassword ? "text" : "password"}
+                          name="confirmPassword"
+                          placeholder="Confirm Password"
+                          className="w-full p-2 rounded bg-white text-sm placeholder-slate-400  focus:bg-white focus:outline-none ring-1 ring-gray-300 transition focus:ring-2 focus:ring-[#72B76A]"
+                          value={formData.confirmPassword}
+                          onChange={handleChange}
+                        />
+                        <button
+                          type="button"
+                          onClick={() => setShowConfirmPassword((prev) => !prev)}
+                          className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500"
+                        >
+                          {showConfirmPassword ? <FaEyeSlash /> : <FaEye />}
+                        </button>
+                      </div>
+
                       <input
-                        type={showPassword ? "text" : "password"}
-                        name="password"
-                        placeholder="Password"
-                        className="w-full p-2 rounded bg-white text-sm focus:bg-white focus:outline-none placeholder-slate-400 ring-1 ring-gray-300 transition focus:ring-2 focus:ring-[#72B76A]"
-                        value={formData.password}
+                        type="text"
+                        name="otp"
+                        placeholder="Enter OTP"
+                        className="w-full p-2 rounded bg-white text-sm placeholder-slate-400 ring-1 focus:bg-white focus:outline-none  ring-gray-300 transition focus:ring-2 focus:ring-[#72B76A]"
+                        value={formData.otp}
                         onChange={handleChange}
                       />
-                      <button
-                        type="button"
-                        onClick={() => setShowPassword((prev) => !prev)}
-                        className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500"
-                      >
-                        {showPassword ? <FaEyeSlash /> : <FaEye />}
-                      </button>
-                    </div>
-                  </div>
-                )}
+                    </>
+                  ) : (
+                    <>
+                      <input
+                        type="text"
+                        name="username"
+                        placeholder="Username"
+                        className="w-full p-2 rounded bg-white text-sm placeholder-slate-400 ring-1 ring-gray-300 focus:bg-white focus:outline-none transition focus:ring-2 focus:ring-[#72B76A]"
+                        value={formData.username}
+                        onChange={handleChange}
+                      />
+                      <div className="relative">
+                        <input
+                          type={showPassword ? "text" : "password"}
+                          name="password"
+                          placeholder="Password"
+                          className="w-full p-2 rounded bg-white text-sm focus:bg-white focus:outline-none placeholder-slate-400 ring-1 ring-gray-300 transition focus:ring-2 focus:ring-[#72B76A]"
+                          value={formData.password}
+                          onChange={handleChange}
+                        />
+                        <button
+                          type="button"
+                          onClick={() => setShowPassword((prev) => !prev)}
+                          className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500"
+                        >
+                          {showPassword ? <FaEyeSlash /> : <FaEye />}
+                        </button>
+                      </div>
+                    </>
+                  )}
+                </motion.div>
 
                 {/* Action Button */}
                 <div className="flex justify-center">

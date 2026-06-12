@@ -284,66 +284,66 @@ const Home = () => {
       date: "1 day ago",
       btnText: "New",
       btnColor: "#72B76A",
-      title: "Lorem1 ipsum dolor sit amet consectetur1",
-      desc: " Temporibus, explicabo ea. Odio!1",
-      link: "https://lorem ipsum dolor sit amet.1",
-      price: "$23908 /Month",
-      footerLink: "Lorem ipsum1",
+      title: "Software Engineer (React / Node.js)",
+      desc: "Develop modern web applications. Strong React, TypeScript, and Node.js skills required.",
+      link: "/jobs",
+      price: "₹60,000 - ₹90,000 /Month",
+      footerLink: "Software",
     },
     {
       id: 2,
-      date: "8 day ago",
-      btnText: "Lorem1",
+      date: "8 days ago",
+      btnText: "Featured",
       btnColor: "#FFCC23",
-      title: "Lorem ipsum dolor sit amet consectetur2",
-      desc: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Temporibus, explicabo ea. Odio!2",
-      link: "https://lorem ipsum dolor sit amet.2",
-      price: "$23907 /Month",
-      footerLink: "Lorem ipsum2",
+      title: "Digital Marketing Specialist",
+      desc: "Manage SEO, SEM, social media campaigns, and lead generation for various local brands.",
+      link: "/jobs",
+      price: "₹40,000 - ₹60,000 /Month",
+      footerLink: "Marketing",
     },
     {
       id: 3,
-      date: "5 day ago",
-      btnText: "Lorem3",
+      date: "5 days ago",
+      btnText: "Urgent",
       btnColor: "#AE70BB",
-      title: "Lorem ipsum dolor sit amet consectetur3",
-      desc: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Temporibus, explicabo ea. Odio!3",
-      link: "https://lorem ipsum dolor sit amet.3",
-      price: "$23909 /Month",
-      footerLink: "Lorem ipsum3",
+      title: "HR & Operations Executive",
+      desc: "Manage recruitment cycles, candidate onboarding, employee relations, and office coordination.",
+      link: "/jobs",
+      price: "₹30,000 - ₹45,000 /Month",
+      footerLink: "HR & Admin",
     },
     {
       id: 4,
-      date: "5 day ago",
-      btnText: "Lorem4",
+      date: "5 days ago",
+      btnText: "Full-Time",
       btnColor: "#00C9FF",
-      title: "Lorem ipsum dolor sit amet consectetur4",
-      desc: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Temporibus, explicabo ea. Odio!4",
-      link: "https://lorem ipsum dolor sit amet.4",
-      price: "$24909 /Month",
-      footerLink: "Lorem ipsum4",
+      title: "Business Development Manager",
+      desc: "Identify new business opportunities, handle client acquisitions, and achieve sales growth targets.",
+      link: "/jobs",
+      price: "₹50,000 - ₹75,000 /Month",
+      footerLink: "Sales",
     },
     {
       id: 5,
-      date: "5 day ago",
-      btnText: "Lorem5",
+      date: "5 days ago",
+      btnText: "Remote",
       btnColor: "#023052",
-      title: "Lorem ipsum dolor sit amet consectetur5",
-      desc: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Temporibus, explicabo ea. Odio!5",
-      link: "https://lorem ipsum dolor sit amet.5",
-      price: "$25909 /Month",
-      footerLink: "Lorem ipsum5",
+      title: "Content & SEO Copywriter",
+      desc: "Write engaging articles, website copy, and optimize content for Google search rankings.",
+      link: "/jobs",
+      price: "₹25,000 - ₹40,000 /Month",
+      footerLink: "Writing",
     },
     {
       id: 6,
-      date: "6 day ago",
-      btnText: "Lorem6",
+      date: "6 days ago",
+      btnText: "New",
       btnColor: "#881A2D",
-      title: "Lorem ipsum dolor sit amet consectetur6",
-      desc: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Temporibus, explicabo ea. Odio!6",
-      link: "https://lorem ipsum dolor sit amet.6",
-      price: "$26909 /Month",
-      footerLink: "Lorem ipsum6",
+      title: "UI/UX Designer",
+      desc: "Create beautiful user interfaces, wireframes, user flows, and interactive mockups.",
+      link: "/jobs",
+      price: "₹55,000 - ₹80,000 /Month",
+      footerLink: "Design",
     },
   ];
   const images_companies: string[] = [
@@ -424,18 +424,18 @@ const Home = () => {
   const blogs: BlogItem[] = [
     {
       date: "Aug 20, 2025",
-      text: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repudiandae in praesentium optio adipisci? Quidem, sint 1",
-      link: "/blog1",
+      text: "How to convince recruiters and get your dream job: a guide on standout profile updates, resumes, and interview skills.",
+      link: "/blogs/details",
     },
     {
       date: "Sept 05, 2025",
-      text: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repudiandae in praesentium optio adipisci? Quidem, sint 2",
-      link: "/blog2",
+      text: "Top 5 high-demand technical skills to focus on for career growth in the current job market across India.",
+      link: "/blogs/details",
     },
     {
       date: "Sept 25, 2025",
-      text: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repudiandae in praesentium optio adipisci? Quidem, sint 3",
-      link: "/blog3",
+      text: "Writing a professional resume: tips, layouts, and templates recommended by recruiters to pass ATS systems.",
+      link: "/blogs/details",
     },
   ];
 
@@ -529,7 +529,7 @@ const Home = () => {
                     lineHeight: 1.3,
                   }}
                 >
-                  Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                  Your gateway to top career opportunities. Discover local and remote jobs matching your expertise.
                 </p>
 
                 {/* Search Bar */}
@@ -675,7 +675,7 @@ const Home = () => {
                     lineHeight: 1,
                   }}
                 >
-                  5,000+ Lorem Ipsum.
+                  5,000+ Active Jobs Posted.
                 </div>
               </div>
 
@@ -896,7 +896,7 @@ const Home = () => {
                       lineHeight: 1.2,
                     }}
                   >
-                    Lorem ipsum dolor sit amet consectetur elit.
+                    Empowering Job Seekers and Employers Across India.
                   </p>
 
                   <div className="text-sm space-y-4 mt-8">
@@ -904,28 +904,28 @@ const Home = () => {
                       <div className="flex items-center justify-center bg-[#FFCC23] h-6 w-6 rounded-full text-sm text-white">
                         1
                       </div>
-                      <p>Lorem ipsum dolor sit amet consectetur.</p>
+                      <p>Dedicated career guidance and profile building support.</p>
                     </div>
 
                     <div className="flex items-center gap-2">
                       <div className="flex items-center justify-center bg-[#FFCC23] h-6 w-6 rounded-full text-sm text-white">
                         2
                       </div>
-                      <p>Lorem ipsum dolor sit amet consectetur.</p>
+                      <p>Direct connections with verified companies and hiring managers.</p>
                     </div>
 
                     <div className="flex items-center gap-2">
                       <div className="flex items-center justify-center bg-[#FFCC23] h-6 w-6 rounded-full text-sm text-white">
                         3
                       </div>
-                      <p>Lorem ipsum dolor sit amet consectetur.</p>
+                      <p>Access to thousands of active listings across multiple industries.</p>
                     </div>
 
                     <div className="flex items-center gap-2">
                       <div className="flex items-center justify-center bg-[#FFCC23] h-6 w-6 rounded-full text-white">
                         4
                       </div>
-                      <p>Lorem ipsum dolor sit amet consectetur.</p>
+                      <p>No hidden fees or charges for candidate registration.</p>
                     </div>
                   </div>
 
@@ -940,7 +940,7 @@ const Home = () => {
                             <CountUp end={99} suffix="%" duration={7} />
                           )}
                         </p>
-                        <p className="text-xs">Lorem ipsum dolor</p>
+                        <p className="text-xs">Placement Rate</p>
                       </div>
                     </div>
 
@@ -954,7 +954,7 @@ const Home = () => {
                             <CountUp end={300} suffix="+" duration={7} />
                           )}
                         </p>
-                        <p className="text-xs">Lorem ipsum dolor</p>
+                        <p className="text-xs">Partner Companies</p>
                       </div>
                     </div>
 
@@ -968,7 +968,7 @@ const Home = () => {
                             <CountUp end={20} suffix="K+" duration={7} />
                           )}{" "}
                         </p>
-                        <p className="text-xs">Lorem ipsum dolor</p>
+                        <p className="text-xs">Active Candidates</p>
                       </div>
                     </div>
                   </div>
@@ -1038,7 +1038,7 @@ const Home = () => {
                   >
                     {jobTyperSeen && (
                       <Typewriter
-                        words={["Lorem ipsum dolor sit amet consectetur"]}
+                        words={["Find Your Dream Job Today", "Connect with Verified Recruiters"]}
                         typeSpeed={90}
                         deleteSpeed={0}
                         delaySpeed={800}
@@ -1182,10 +1182,10 @@ const Home = () => {
                 </p>
 
                 <ul className="mt-5 space-y-3">
-                  <li>Lorem ipsum lorem ipsum</li>
-                  <li>Lorem ipsum lorem ipsum</li>
-                  <li>Lorem ipsum lorem ipsum</li>
-                  <li>Lorem ipsum lorem ipsum</li>
+                  <li>• Rajkot, Ahmedabad, and Gujarat region</li>
+                  <li>• Mumbai, Pune, and Maharashtra region</li>
+                  <li>• Delhi NCR, Noida, and Gurgaon</li>
+                  <li>• Bangalore, Hyderabad, and South India tech hubs</li>
                 </ul>
               </div>
 
@@ -1243,7 +1243,7 @@ const Home = () => {
                         lineHeight: 1.3,
                       }}
                     >
-                      Lorem ipsum dolor.
+                      Get Noticed by Recruiters
                     </p>
 
                     <p
@@ -1258,11 +1258,7 @@ const Home = () => {
                     </p>
 
                     <p className="text-sm mt-5">
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                      Nihil corrupti deserunt voluptatibus dolorum ducimus?
-                      Eveniet autem voluptatem, delectus nulla reiciendis ab aut
-                      quo accusamus similique vitae molestias. Perspiciatis eum
-                      rem cum delectus!
+                      Upload your resume to make it visible to hundreds of top employers in India. Our partner companies search our resume database daily to find qualified candidates for open positions.
                     </p>
 
                     <button className="relative mt-8 px-4 h-9 overflow-hidden group border border-[#AE70BB] bg-[#AE70BB] rounded-lg from-gray-700/50 to-black hover:bg-transparent text-white hover:text-[#AE70BB] active:scale-90 transition-all ease-out duration-700 cursor-pointer">
@@ -1338,21 +1334,21 @@ const Home = () => {
                 <p className="font-semibold text-2xl md:text-3xl lg:text-4xl text-[#00C9FF]">
                   <CountUp end={5} suffix="M+" duration={3} />
                 </p>
-                <p className="text-sm mt-2">Lorem ipsum dolor.</p>
+                <p className="text-sm mt-2">Active Candidates</p>
               </div>
 
               <div>
                 <p className="font-semibold text-2xl md:text-3xl lg:text-4xl text-[#00C9FF]">
                   <CountUp end={9} suffix="M+" duration={3} />
                 </p>
-                <p className="text-sm mt-2">Lorem ipsum dolor.</p>
+                <p className="text-sm mt-2">Monthly Site Visits</p>
               </div>
 
               <div>
                 <p className="font-semibold text-2xl md:text-3xl lg:text-4xl text-[#00C9FF]">
                   <CountUp end={20} suffix="K+" duration={3} />
                 </p>
-                <p className="text-sm mt-2">Lorem ipsum dolor.</p>
+                <p className="text-sm mt-2">Verified Recruiters</p>
               </div>
             </div>
           </div>
@@ -1488,7 +1484,7 @@ const Home = () => {
             >
               {showTypewriter2 ? (
                 <Typewriter
-                  words={["Lorem ipsum dolor sit amet consectetur"]}
+                  words={["Stay Updated with Career Insights", "Latest News & Job Search Tips"]}
                   typeSpeed={90}
                   deleteSpeed={0}
                   delaySpeed={1000}
@@ -1502,8 +1498,8 @@ const Home = () => {
 
             {/* Blog cards */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mt-10">
-              {blogs.map((blog) => (
-                <article key={blog.link} className="relative">
+              {blogs.map((blog, index) => (
+                <article key={`${blog.link}-${index}`} className="relative">
                   {/* Image container */}
                   <div className="relative overflow-hidden rounded-2xl aspect-[9/11]">
                     <Image

@@ -7,6 +7,7 @@ import React, {
   ChangeEvent,
   FormEvent,
 } from "react";
+import { motion } from "framer-motion";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { FaArrowRightToBracket } from "react-icons/fa6";
@@ -436,6 +437,8 @@ const Header: React.FC = () => {
             ) : (
               <button
                 onClick={() => {
+                  setUserType("candidates");
+                  setMode("login");
                   setShowPopup(true);
                   setMenuOpen(false);
                 }}
@@ -604,7 +607,11 @@ const Header: React.FC = () => {
               </div>
             ) : (
               <button
-                onClick={() => setShowPopup(true)}
+                onClick={() => {
+                  setUserType("candidates");
+                  setMode("login");
+                  setShowPopup(true);
+                }}
                 className="relative px-4 h-9 overflow-hidden group border border-[#72B76A] bg-[#72B76A] rounded-lg hover:bg-transparent text-white hover:text-[#72B76A] active:scale-90 transition-all ease-out duration-700"
               >
                 <span className="absolute right-0 w-10 h-full top-0 transition-all duration-1000 transform translate-x-12 bg-white opacity-10 -skew-x-12 group-hover:-translate-x-24 ease" />
@@ -654,33 +661,31 @@ const Header: React.FC = () => {
                       ➤ Please Note
                     </p>
                     <ul className="text-xs space-y-2">
-                      <li>
-                        - Lorem ipsum dolor sit amet consectetur adipisicing
-                        elit.
-                      </li>
-                      <li>
-                        - Distinctio, recusandae. Lorem ipsum dolor sit amet.
-                      </li>
-                      <li>
-                        - Lorem ipsum dolor sit amet consectetur adipisicing
-                        elit.
-                      </li>
-                      <li>
-                        - Distinctio, recusandae. Lorem ipsum dolor sit amet.
-                      </li>
-                      <li>
-                        - Distinctio, recusandae. Lorem ipsum dolor sit amet.
-                      </li>
-                      <li>
-                        - Distinctio, recusandae. Lorem ipsum dolor sit amet.
-                      </li>
-                      <li>
-                        - Distinctio, recusandae. Lorem ipsum dolor sit amet.
-                      </li>
-                      <li>
-                        - Distinctio, recusandae. Lorem ipsum dolor sit amet.
-                      </li>
-                    </ul>
+                       <li>
+                         - Verify your email with the secure OTP sent to you.
+                       </li>
+                       <li>
+                         - Complete your profile fully to increase job interview calls.
+                       </li>
+                       <li>
+                         - Upload a recent resume in PDF, DOC, or DOCX formats.
+                       </li>
+                       <li>
+                         - Update your skill list regularly to match new job postings.
+                       </li>
+                       <li>
+                         - Keep your current contact number active for HR coordinators.
+                       </li>
+                       <li>
+                         - Review job requirements and salary details before applying.
+                       </li>
+                       <li>
+                         - We will never ask you to pay any charges for registrations.
+                       </li>
+                       <li>
+                         - Keep your account password secure and do not share it.
+                       </li>
+                     </ul>
                   </div>
                 </div>
               </div>
@@ -715,156 +720,166 @@ const Header: React.FC = () => {
                 {/* Title */}
                 <h2 className="fontAL font-semibold capitalize text-xl md:text-2xl lg:text-3xl my-5 text-center md:text-left">
                   {mode === "login" ? "Login" : "Sign Up"}
-                </h2>
-
-                {/* Candidate / Recruiter buttons */}
-                <div className="flex gap-3 mb-6 justify-center md:justify-start">
-                  {/* Candidates Button */}
-                  <button
-                    type="button"
-                    onClick={() => setUserType("candidates")}
-                    className={`relative w-32 h-9 overflow-hidden group rounded-lg active:scale-90 transition-all ease-out duration-700 flex items-center justify-center border
-                ${userType === "candidates"
-                        ? "bg-[#72B76A] text-white border-[#72B76A]"
-                        : "bg-transparent text-[#72B76A] border-[#72B76A] hover:bg-[#72B76A] hover:text-white"
-                      }`}
-                  >
-                    <span className="absolute right-0 w-10 h-full top-0 transition-all duration-1000 transform translate-x-12 bg-white opacity-10 -skew-x-12 group-hover:-translate-x-24 ease"></span>
-                    <span className="relative text-sm font-semibold">
-                      Candidates
-                    </span>
-                  </button>
-
-                  {/* Recruiters Button */}
-                  <button
-                    type="button"
-                    onClick={() => {
-                      if (mode === "signup") {
-                        setShowPopup(false);
-                        router.push("/recruiters/register");
-                      } else {
-                        setUserType("recruiter");
-                      }
-                    }}
-                    className={`relative w-32 h-9 overflow-hidden group rounded-lg active:scale-90 transition-all ease-out duration-700 flex items-center justify-center border
-                ${userType === "recruiter"
-                        ? "bg-[#72B76A] text-white border-[#72B76A]"
-                        : "bg-transparent text-[#72B76A] border-[#72B76A] hover:bg-[#72B76A] hover:text-white"
-                      }`}
-                  >
-                    <span className="absolute right-0 w-10 h-full top-0 transition-all duration-1000 transform translate-x-12 bg-white opacity-10 -skew-x-12 group-hover:-translate-x-24 ease"></span>
-                    <span className="relative text-sm font-semibold">
-                      Recruiters
-                    </span>
-                  </button>
-                </div>
+                </h2>                 {/* Candidate / Recruiter buttons */}
+                 <div className="relative flex p-1 gap-2 mb-6 justify-center md:justify-start bg-gray-100 rounded-xl w-fit mx-auto md:mx-0">
+                   {/* Candidates Button */}
+                   <button
+                     type="button"
+                     onClick={() => setUserType("candidates")}
+                     className={`relative z-10 w-32 h-9 flex items-center justify-center text-sm font-semibold rounded-lg transition-colors duration-300 ${
+                       userType === "candidates" ? "text-white" : "text-gray-600 hover:text-black"
+                     }`}
+                   >
+                     Candidates
+                     {userType === "candidates" && (
+                       <motion.div
+                         layoutId="activeTabHeader"
+                         className="absolute inset-0 bg-[#72B76A] rounded-lg -z-10"
+                         transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                       />
+                     )}
+                   </button>
+ 
+                   {/* Recruiters Button */}
+                   <button
+                     type="button"
+                     onClick={() => {
+                       if (mode === "signup") {
+                         setShowPopup(false);
+                         router.push("/recruiters/register");
+                       } else {
+                         setUserType("recruiter");
+                       }
+                     }}
+                     className={`relative z-10 w-32 h-9 flex items-center justify-center text-sm font-semibold rounded-lg transition-colors duration-300 ${
+                       userType === "recruiter" ? "text-white" : "text-gray-600 hover:text-black"
+                     }`}
+                   >
+                     Recruiters
+                     {userType === "recruiter" && (
+                       <motion.div
+                         layoutId="activeTabHeader"
+                         className="absolute inset-0 bg-[#72B76A] rounded-lg -z-10"
+                         transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                       />
+                     )}
+                   </button>
+                 </div>
 
                 {/* Inputs */}
-                {mode === "signup" ? (
-                  <div className="space-y-3">
-                    <input
-                      type="text"
-                      name="fullName"
-                      placeholder="Full Name"
-                      className="w-full p-2 rounded bg-white text-sm placeholder-slate-400 ring-1 focus:bg-white focus:outline-none ring-gray-300 transition focus:ring-2 focus:ring-[#72B76A]"
-                      value={formData.fullName}
-                      onChange={handleChange}
-                    />
-                    <div className="relative">
+                <motion.div
+                  key={`${mode}-${userType}`}
+                  initial={{ x: -30, opacity: 0 }}
+                  animate={{ x: 0, opacity: 1 }}
+                  transition={{ duration: 0.35, ease: "easeOut" }}
+                  className="space-y-3"
+                >
+                  {mode === "signup" ? (
+                    <>
                       <input
-                        type="email"
-                        name="email"
-                        placeholder="Email Address"
-                        className="w-full p-2 rounded bg-white text-sm placeholder-slate-400 ring-1 focus:bg-white focus:outline-none ring-gray-300 transition focus:ring-2 focus:ring-[#72B76A] pr-20"
-                        value={formData.email}
-                        onChange={handleChange}
-                      />
-                      <button
-                        type="button"
-                        onClick={handleSendOtp}
-                        disabled={otpLoading}
-                        className={`absolute right-1 top-1/2 -translate-y-1/2 px-2 py-1 text-[10px] font-bold text-white rounded transition ${otpLoading ? "bg-gray-400" : "bg-[#72B76A] hover:bg-[#5da356]"
-                          }`}
-                      >
-                        {otpLoading ? "Sending..." : "Send OTP"}
-                      </button>
-                    </div>
-                    {/* Password */}
-                    <div className="relative">
-                      <input
-                        type={showPassword ? "text" : "password"}
-                        name="password"
-                        placeholder="Password"
+                        type="text"
+                        name="fullName"
+                        placeholder="Full Name"
                         className="w-full p-2 rounded bg-white text-sm placeholder-slate-400 ring-1 focus:bg-white focus:outline-none ring-gray-300 transition focus:ring-2 focus:ring-[#72B76A]"
-                        value={formData.password}
+                        value={formData.fullName}
                         onChange={handleChange}
                       />
-                      <button
-                        type="button"
-                        onClick={() => setShowPassword((prev) => !prev)}
-                        className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500"
-                      >
-                        {showPassword ? <FaEyeSlash /> : <FaEye />}
-                      </button>
-                    </div>
+                      <div className="relative">
+                        <input
+                          type="email"
+                          name="email"
+                          placeholder="Email Address"
+                          className="w-full p-2 rounded bg-white text-sm placeholder-slate-400 ring-1 focus:bg-white focus:outline-none ring-gray-300 transition focus:ring-2 focus:ring-[#72B76A] pr-20"
+                          value={formData.email}
+                          onChange={handleChange}
+                        />
+                        <button
+                          type="button"
+                          onClick={handleSendOtp}
+                          disabled={otpLoading}
+                          className={`absolute right-1 top-1/2 -translate-y-1/2 px-2 py-1 text-[10px] font-bold text-white rounded transition ${otpLoading ? "bg-gray-400" : "bg-[#72B76A] hover:bg-[#5da356]"
+                            }`}
+                        >
+                          {otpLoading ? "Sending..." : "Send OTP"}
+                        </button>
+                      </div>
+                      {/* Password */}
+                      <div className="relative">
+                        <input
+                          type={showPassword ? "text" : "password"}
+                          name="password"
+                          placeholder="Password"
+                          className="w-full p-2 rounded bg-white text-sm placeholder-slate-400 ring-1 focus:bg-white focus:outline-none ring-gray-300 transition focus:ring-2 focus:ring-[#72B76A]"
+                          value={formData.password}
+                          onChange={handleChange}
+                        />
+                        <button
+                          type="button"
+                          onClick={() => setShowPassword((prev) => !prev)}
+                          className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500"
+                        >
+                          {showPassword ? <FaEyeSlash /> : <FaEye />}
+                        </button>
+                      </div>
 
-                    {/* Confirm Password */}
-                    <div className="relative">
-                      <input
-                        type={showConfirmPassword ? "text" : "password"}
-                        name="confirmPassword"
-                        placeholder="Confirm Password"
-                        className="w-full p-2 rounded bg-white text-sm placeholder-slate-400  focus:bg-white focus:outline-none ring-1 ring-gray-300 transition focus:ring-2 focus:ring-[#72B76A]"
-                        value={formData.confirmPassword}
-                        onChange={handleChange}
-                      />
-                      <button
-                        type="button"
-                        onClick={() => setShowConfirmPassword((prev) => !prev)}
-                        className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500"
-                      >
-                        {showConfirmPassword ? <FaEyeSlash /> : <FaEye />}
-                      </button>
-                    </div>
+                      {/* Confirm Password */}
+                      <div className="relative">
+                        <input
+                          type={showConfirmPassword ? "text" : "password"}
+                          name="confirmPassword"
+                          placeholder="Confirm Password"
+                          className="w-full p-2 rounded bg-white text-sm placeholder-slate-400  focus:bg-white focus:outline-none ring-1 ring-gray-300 transition focus:ring-2 focus:ring-[#72B76A]"
+                          value={formData.confirmPassword}
+                          onChange={handleChange}
+                        />
+                        <button
+                          type="button"
+                          onClick={() => setShowConfirmPassword((prev) => !prev)}
+                          className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500"
+                        >
+                          {showConfirmPassword ? <FaEyeSlash /> : <FaEye />}
+                        </button>
+                      </div>
 
-                    <input
-                      type="text"
-                      name="otp"
-                      placeholder="Enter OTP"
-                      className="w-full p-2 rounded bg-white text-sm placeholder-slate-400 ring-1 focus:bg-white focus:outline-none  ring-gray-300 transition focus:ring-2 focus:ring-[#72B76A]"
-                      value={formData.otp}
-                      onChange={handleChange}
-                    />
-                  </div>
-                ) : (
-                  <div className="space-y-3">
-                    <input
-                      type="text"
-                      name="username"
-                      placeholder="Username"
-                      className="w-full p-2 rounded bg-white text-sm placeholder-slate-400 ring-1 ring-gray-300 focus:bg-white focus:outline-none transition focus:ring-2 focus:ring-[#72B76A]"
-                      value={formData.username}
-                      onChange={handleChange}
-                    />
-                    <div className="relative">
                       <input
-                        type={showPassword ? "text" : "password"}
-                        name="password"
-                        placeholder="Password"
-                        className="w-full p-2 rounded bg-white text-sm focus:bg-white focus:outline-none placeholder-slate-400 ring-1 ring-gray-300 transition focus:ring-2 focus:ring-[#72B76A]"
-                        value={formData.password}
+                        type="text"
+                        name="otp"
+                        placeholder="Enter OTP"
+                        className="w-full p-2 rounded bg-white text-sm placeholder-slate-400 ring-1 focus:bg-white focus:outline-none  ring-gray-300 transition focus:ring-2 focus:ring-[#72B76A]"
+                        value={formData.otp}
                         onChange={handleChange}
                       />
-                      <button
-                        type="button"
-                        onClick={() => setShowPassword((prev) => !prev)}
-                        className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500"
-                      >
-                        {showPassword ? <FaEyeSlash /> : <FaEye />}
-                      </button>
-                    </div>
-                  </div>
-                )}
+                    </>
+                  ) : (
+                    <>
+                      <input
+                        type="text"
+                        name="username"
+                        placeholder="Username"
+                        className="w-full p-2 rounded bg-white text-sm placeholder-slate-400 ring-1 ring-gray-300 focus:bg-white focus:outline-none transition focus:ring-2 focus:ring-[#72B76A]"
+                        value={formData.username}
+                        onChange={handleChange}
+                      />
+                      <div className="relative">
+                        <input
+                          type={showPassword ? "text" : "password"}
+                          name="password"
+                          placeholder="Password"
+                          className="w-full p-2 rounded bg-white text-sm focus:bg-white focus:outline-none placeholder-slate-400 ring-1 ring-gray-300 transition focus:ring-2 focus:ring-[#72B76A]"
+                          value={formData.password}
+                          onChange={handleChange}
+                        />
+                        <button
+                          type="button"
+                          onClick={() => setShowPassword((prev) => !prev)}
+                          className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500"
+                        >
+                          {showPassword ? <FaEyeSlash /> : <FaEye />}
+                        </button>
+                      </div>
+                    </>
+                  )}
+                </motion.div>
 
                 {/* Action Button */}
                 <div className="flex justify-center">
