@@ -374,7 +374,7 @@ const Grid = () => {
                               />
                               <label htmlFor={id} className="text-[15px] text-gray-800">{label}</label>
                             </div>
-                            <span className="text-[13px] font-semibold text-blue-600">
+                            <span className="text-[13px] font-semibold text-[#023052]">
                               {String(count).padStart(2, "0")}
                             </span>
                           </li>
@@ -402,7 +402,7 @@ const Grid = () => {
                     <h4 className="mb-4 text-[16px] font-semibold text-slate-900">Tags</h4>
                     <div className="flex flex-wrap gap-3">
                       {TAGS.map((tag) => (
-                        <button key={tag} type="button" className="rounded-full bg-blue-50 px-3 py-1.5 text-[13px] font-medium text-blue-700 hover:bg-blue-100">
+                        <button key={tag} type="button" className="rounded-full bg-[#023052]/10 px-3 py-1.5 text-[13px] font-medium text-[#023052] hover:bg-[#023052] hover:text-white transition-colors">
                           {tag}
                         </button>
                       ))}
@@ -410,15 +410,15 @@ const Grid = () => {
                   </div>
 
                   {/* Recruiting CTA */}
-                  <div className="mt-6 overflow-hidden rounded-lg border border-blue-100 shadow-[0_6px_24px_-12px_rgba(59,130,246,0.35)]">
+                  <div className="mt-6 overflow-hidden rounded-lg border border-[#023052]/20 shadow-[0_6px_24px_-12px_rgba(2,48,82,0.35)]">
                     <div className="relative h-48 sm:h-56 md:h-64">
                       <Image src="/images/job-grid.webp" alt="Recruiting" fill className="object-cover" />
-                      <div className="absolute inset-0 bg-gradient-to-tr from-blue-900/70 to-blue-600/60" />
+                      <div className="absolute inset-0 bg-[#023052]/80" />
                       <div className="absolute inset-0 flex flex-col justify-center p-6">
                         <h3 className="mb-2 text-xl font-semibold text-white">Recruiting?</h3>
                         <p className="mb-5 text-sm leading-6 text-white/90">Get Best Matched Jobs On your Email. Add Resume NOW!</p>
                         <Link href="/pages/aboutus">
-                          <button className="relative mt-8 px-4 h-9 overflow-hidden border border-[white] bg-white rounded-lg hover:bg-transparent text-[blue] hover:text-[white] active:scale-90 transition-all ease-out duration-700 cursor-pointer">
+                          <button className="relative mt-8 px-4 h-9 overflow-hidden border border-white bg-white rounded-lg hover:bg-transparent text-[#023052] hover:text-white active:scale-90 transition-all ease-out duration-700 cursor-pointer">
                             <span className="relative flex gap-2 items-center text-sm font-semibold">Know More</span>
                           </button>
                         </Link>

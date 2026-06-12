@@ -519,7 +519,7 @@ const Details = () => {
                     <button
                       key={tag}
                       type="button"
-                      className="rounded-full bg-blue-50 px-4 py-2 text-[14px] font-medium text-sky-600 hover:bg-sky-100 transition"
+                      className="rounded-full bg-[#023052]/10 px-4 py-2 text-[14px] font-medium text-[#023052] hover:bg-[#023052] hover:text-white transition-colors"
                     >
                       {tag}
                     </button>
