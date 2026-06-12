@@ -372,16 +372,16 @@ const Header: React.FC = () => {
           {/* Pages accordion */}
           <div>
             <Link
-              href="/pages/aboutus"
+              href="/about-us"
               onClick={() => setMenuOpen(false)}
-              className={`relative inline-block group font-semibold ${pathname === "/pages/aboutus"
+              className={`relative inline-block group font-semibold ${pathname === "/about-us"
                 ? "text-[#72B76A]"
                 : "text-black hover:text-[#72B76A]"
                 }`}
             >
               About&nbsp;Us
               <span
-                className={`absolute left-0 -bottom-0.5 h-[2px] bg-current transition-all duration-300 ${pathname === "/pages/aboutus"
+                className={`absolute left-0 -bottom-0.5 h-[2px] bg-current transition-all duration-300 ${pathname === "/about-us"
                   ? "w-full text-[#72B76A]"
                   : "w-0 group-hover:w-full"
                   }`}
@@ -543,17 +543,17 @@ const Header: React.FC = () => {
               />
             </Link>
 
-            {/* Pages /aboutus*/}
+            {/* About Us */}
             <Link
-              href="/pages/aboutus"
-              className={`relative inline-block group font-semibold ${pathname === "/pages/aboutus"
+              href="/about-us"
+              className={`relative inline-block group font-semibold ${pathname === "/about-us"
                 ? "text-[#72B76A]"
                 : "text-black hover:text-[#72B76A]"
                 }`}
             >
               About&nbsp;Us
               <span
-                className={`absolute left-0 -bottom-0.5 h-[2px] bg-current transition-all duration-300 ${pathname === "/pages/aboutus"
+                className={`absolute left-0 -bottom-0.5 h-[2px] bg-current transition-all duration-300 ${pathname === "/about-us"
                   ? "w-full text-[#72B76A]"
                   : "w-0 group-hover:w-full"
                   }`}

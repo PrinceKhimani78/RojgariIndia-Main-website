@@ -189,7 +189,7 @@ const Testimonials: React.FC = () => {
             >
               {testimonials.map((t) => (
                 <SwiperSlide key={t.name}>
-                  <Link href="/about" className="block m-5 cursor-pointer">
+                  <Link href="/about-us" className="block m-5 cursor-pointer">
                     <div className="p-6 bg-white rounded-xl shadow-md text-center transition-shadow duration-300 hover:shadow-lg">
                       <div className="flex justify-end mb-4">
                         {renderStars(t.rating)}
