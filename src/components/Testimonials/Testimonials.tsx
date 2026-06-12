@@ -189,7 +189,7 @@ const Testimonials: React.FC = () => {
             >
               {testimonials.map((t) => (
                 <SwiperSlide key={t.name}>
-                  <div className="m-5 p-6 bg-white rounded-xl shadow-md text-center">
+                  <div className="m-5 p-6 bg-white rounded-xl shadow-md text-center group transition-all duration-300">
                     <div className="flex justify-end mb-4">
                       {renderStars(t.rating)}
                     </div>
@@ -211,7 +211,7 @@ const Testimonials: React.FC = () => {
 
                         <div>
                           <FaQuoteLeft className="text-2xl text-green-700" />
-                          <p className="text-left text-gray-700 italic my-4 line-clamp-2">
+                          <p className="text-left text-gray-700 italic my-4 line-clamp-2 group-hover:line-clamp-none transition-all duration-300">
                             {t.review}
                           </p>
                         </div>
