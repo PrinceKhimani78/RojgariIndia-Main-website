@@ -189,17 +189,14 @@ const Testimonials: React.FC = () => {
             >
               {testimonials.map((t) => (
                 <SwiperSlide key={t.name}>
-                  <div className="m-5 p-6 bg-white rounded-xl shadow-md text-center group transition-all duration-300">
-                    <div className="flex justify-end mb-4">
-                      {renderStars(t.rating)}
-                    </div>
+                  <Link href="/about" className="block m-5 cursor-pointer">
+                    <div className="p-6 bg-white rounded-xl shadow-md text-center transition-shadow duration-300 hover:shadow-lg">
+                      <div className="flex justify-end mb-4">
+                        {renderStars(t.rating)}
+                      </div>
 
-                    <div>
-                      <div className="flex gap-5">
-                        <Link
-                          href={`/profile/${encodeURIComponent(t.name)}`}
-                          className="inline-block"
-                        >
+                      <div>
+                        <div className="flex gap-5">
                           <Image
                             src={t.image}
                             alt={t.name}
@@ -207,22 +204,22 @@ const Testimonials: React.FC = () => {
                             height={70}
                             className="rounded-full mr-auto mb-4"
                           />
-                        </Link>
 
-                        <div>
-                          <FaQuoteLeft className="text-2xl text-green-700" />
-                          <p className="text-left text-gray-700 italic my-4 line-clamp-2 group-hover:line-clamp-none transition-all duration-300">
-                            {t.review}
-                          </p>
+                          <div>
+                            <FaQuoteLeft className="text-2xl text-green-700" />
+                            <p className="text-left text-gray-700 italic my-4 line-clamp-2">
+                              {t.review}
+                            </p>
+                          </div>
                         </div>
-                      </div>
 
-                      <p className="font-bold text-left">{t.name}</p>
-                      <p className="text-sm text-left text-gray-500">
-                        {t.position}
-                      </p>
+                        <p className="font-bold text-left">{t.name}</p>
+                        <p className="text-sm text-left text-gray-500">
+                          {t.position}
+                        </p>
+                      </div>
                     </div>
-                  </div>
+                  </Link>
                 </SwiperSlide>
               ))}
             </Swiper>

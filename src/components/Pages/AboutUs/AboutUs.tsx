@@ -5,12 +5,40 @@ import { useInView } from "react-intersection-observer";
 import { Typewriter } from "react-simple-typewriter";
 import "swiper/css";
 import Link from "next/link";
-import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { FaEye, FaEyeSlash, FaQuoteLeft, FaStar, FaStarHalfAlt, FaRegStar } from "react-icons/fa";
 import { motion } from "framer-motion";
 import { RxCross2 } from "react-icons/rx";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/context/AuthContext";
 import { sendOtp } from "@/services/otpService";
+
+const testimonials = [
+  { name: "Shashank Deep Singh", position: "Design Manager -- Indore", review: "Rojgari Placements is one of the best recruitment consultants in India. Their team is very supportive, professional, and helpful throughout the hiring process. They regularly provide job updates and guide candidates at every step.", rating: 5, image: "https://randomuser.me/api/portraits/men/1.jpg" },
+  { name: "Rishi Kumar", position: "Sr. Quality engineer -- Bangalore", review: "I had a very positive experience with Rojgari Placements. The recruiters understood my profile and shared relevant job openings. Their communication was timely and transparent. They kept me updated at every stage of the recruitment process.", rating: 5, image: "https://randomuser.me/api/portraits/men/2.jpg" },
+  { name: "Joshi hirji bhai shivram", position: "Warehouse sr. Supervisor -- Mundra", review: "Finding the right job became much easier with Rojgari Placements. The team is knowledgeable, supportive, and genuinely cares about candidates. They provided proper guidance before interviews and followed up regularly.", rating: 5, image: "https://randomuser.me/api/portraits/men/3.jpg" },
+  { name: "Amit ramesh bhavsar", position: "Senior electrician -- Silvassa", review: "One of the best placement consultants I have come across. The team is friendly, helpful, and quick to respond. They matched my skills with the right opportunity. Very satisfied with their service.", rating: 5, image: "https://randomuser.me/api/portraits/men/4.jpg" },
+  { name: "Shubham bhatt", position: "Instrument Engineer -- Bhavnagar", review: "I appreciate the efforts of the Rojgari Placements team in helping me find a suitable job. They were attentive, supportive, and professional throughout the process. The recruiters provided valuable guidance and interview preparation tips.", rating: 5, image: "https://randomuser.me/api/portraits/men/5.jpg" },
+  { name: "Kishan Kumar", position: "Sr. Engineer Technical Publication -- Bangalore", review: "What I liked most about Rojgari Placements was their quick response and genuine effort to help candidates. They understood my experience and connected me with suitable opportunities. A very reliable recruitment partner.", rating: 5, image: "https://randomuser.me/api/portraits/men/6.jpg" },
+  { name: "Pushpak Viliya", position: "Deputy Manager Warranty -- Indore", review: "A professional and supportive recruitment team. They carefully matched my profile with relevant opportunities and assisted me at every step. Great experience overall.", rating: 5, image: "https://randomuser.me/api/portraits/men/7.jpg" },
+  { name: "Sandip Sureshrao Bonlawar", position: "Assistant Manager -- Pune", review: "Best consultancy, Thank you for your excellent support throughout my job search. Your team was highly professional, communicative, and truly understood my career goals. Because of your dedicated guidance, I secured a great position.", rating: 5, image: "https://randomuser.me/api/portraits/men/8.jpg" },
+  { name: "Vishal Pawar", position: "Sr. Engineer design -- Nasik", review: "Thank you for your support and guidance throughout the recruitment process. I appreciate your timely communication, coordination, and efforts in helping me secure this opportunity. It was a smooth and professional experience working with you.", rating: 5, image: "https://randomuser.me/api/portraits/men/9.jpg" },
+  { name: "Anirudh Sharma", position: "Jobseeker -- Uttar Pradesh", review: "Overall experience was good throughout the onboarding process. The team patiently answered all my queries, handled rescheduling my interview professionally when an urgent meeting conflicted, and provided continuous support.", rating: 5, image: "https://randomuser.me/api/portraits/men/10.jpg" },
+  { name: "Vishvjeet Chaudhary", position: "SQA Officer -- Uttar Pradesh", review: "Rojgari Placements portal is user-friendly and easy to navigate. It provides relevant job opportunities and keeps candidates updated throughout the recruitment process. The support team is responsive and helpful.", rating: 5, image: "https://randomuser.me/api/portraits/men/11.jpg" },
+  { name: "Rahul S. Ingale", position: "Manager RTFE Design -- Pune", review: "I had a very good experience with Rojgari India. They provide quality opportunities and genuinely help candidates. From arranging interviews to coordinating with companies and providing updates, they ensure everything is handled smoothly.", rating: 5, image: "https://randomuser.me/api/portraits/men/12.jpg" },
+  { name: "Akshata Padoshi", position: "Conceptual Jewelry Designer -- Bengaluru", review: "The team was professional, responsive, and helpful throughout the recruitment process. Their communication was timely, and they provided valuable support at every stage.", rating: 5, image: "https://randomuser.me/api/portraits/women/1.jpg" },
+  { name: "Viral H. Sheth", position: "Structural Engineer -- Vadodara", review: "The staff is very cooperative and knowledgeable. They provide excellent guidance and support throughout the recruitment process.", rating: 5, image: "https://randomuser.me/api/portraits/men/14.jpg" },
+];
+
+const renderStars = (rating: number): React.ReactNode[] => {
+  const stars: React.ReactNode[] = [];
+  for (let i = 1; i <= 5; i++) {
+    if (rating >= i) stars.push(<FaStar key={i} className="text-yellow-400" />);
+    else if (rating >= i - 0.5) stars.push(<FaStarHalfAlt key={i} className="text-yellow-400" />);
+    else stars.push(<FaRegStar key={i} className="text-yellow-400" />);
+  }
+  return stars;
+};
+
 type FeatureListProps = {
   items: string[];
   className?: string;
@@ -760,6 +788,50 @@ const AboutUs = () => {
           </div>
         </div>
       )}
+      {/* ── All Testimonials Section ─────────────────────────────── */}
+      <section className="py-16 px-5 lg:px-[5%] 2xl:px-[15%] bg-[#f7faf7]">
+        <div className="text-center mb-12">
+          <p className="fontPOP text-[#72B76A] text-xs sm:text-sm tracking-widest mb-3">Reviews</p>
+          <h2 className="fontAL font-semibold capitalize text-2xl md:text-3xl lg:text-4xl" style={{ letterSpacing: "1px", lineHeight: 1.2 }}>
+            What Our Clients Say About Us
+          </h2>
+          <p className="mt-4 text-gray-500 max-w-xl mx-auto text-sm leading-relaxed">
+            Real feedback from professionals across India who found their dream jobs through Rojgari India.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {testimonials.map((t, idx) => (
+            <motion.div
+              key={t.name}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: idx * 0.05 }}
+              className="bg-white rounded-2xl shadow-md p-6 flex flex-col gap-4 border border-gray-100"
+            >
+              <div className="flex justify-between items-start">
+                <FaQuoteLeft className="text-2xl text-[#72B76A]" />
+                <div className="flex gap-0.5">{renderStars(t.rating)}</div>
+              </div>
+              <p className="text-gray-600 italic text-sm leading-relaxed flex-1">{t.review}</p>
+              <div className="flex items-center gap-3 pt-3 border-t border-gray-100">
+                <Image
+                  src={t.image}
+                  alt={t.name}
+                  width={48}
+                  height={48}
+                  className="rounded-full object-cover"
+                />
+                <div>
+                  <p className="font-bold text-sm text-gray-800">{t.name}</p>
+                  <p className="text-xs text-gray-500">{t.position}</p>
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </section>
     </>
   );
 };
