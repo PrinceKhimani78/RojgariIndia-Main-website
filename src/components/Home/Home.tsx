@@ -161,7 +161,50 @@ export const useOnScreen = (
   return [ref, isIntersecting];
 };
 
+const timeAgo = (dateStr: string): string => {
+  const diff = Date.now() - new Date(dateStr).getTime();
+  const minutes = Math.floor(diff / 60000);
+  if (minutes < 60) return `${minutes}m ago`;
+  const hours = Math.floor(minutes / 60);
+  if (hours < 24) return `${hours}h ago`;
+  const days = Math.floor(hours / 24);
+  if (days < 30) return `${days}d ago`;
+  return `${Math.floor(days / 30)}mo ago`;
+};
+
+const formatSalary = (min?: number, max?: number): string => {
+  if (!min && !max) return "Not disclosed";
+  if (min && max) return `₹${min.toLocaleString('en-IN')} - ₹${max.toLocaleString('en-IN')} /Month`;
+  if (min) return `₹${min.toLocaleString('en-IN')} /Month`;
+  return `₹${max?.toLocaleString('en-IN')} /Month`;
+};
+
+const typeColors: Record<string, string> = {
+  "Full-time": "#72B76A",
+  "Part-time": "#FFCC23",
+  "Contract": "#AE70BB",
+  "Internship": "#00C9FF",
+  "Freelance": "#023052",
+};
+
 const Home = () => {
+  const [realJobs, setRealJobs] = useState<any[]>([]);
+
+  useEffect(() => {
+    const fetchJobs = async () => {
+      try {
+        const res = await fetch("/api/jobs");
+        const data = await res.json();
+        if (data.success && data.data) {
+          setRealJobs(data.data.slice(0, 6));
+        }
+      } catch (err) {
+        console.error("Error fetching jobs for home:", err);
+      }
+    };
+    fetchJobs();
+  }, []);
+
   // const [scrollPosition, setScrollPosition] = useState(0);
   const [openWhat, setOpenWhat] = useState(false);
   const [openType, setOpenType] = useState(false);
@@ -1062,94 +1105,84 @@ const Home = () => {
               </div>
               {/* cards  */}
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 items-start mt-10">
-                {cardData.map((card) => (
-                  <div
-                    key={card.id}
-                    className="bg-white p-4 rounded-lg group shadow-md 
-                  transition-all duration-300 ease-in-out 
-                  hover:-translate-y-2 hover:shadow-xl hover:bg-[#F9FAFB]"
-                  >
-                    <div className="flex justify-between gap-10">
-                      <Link href="/" className="inline-block">
-                        <Image
-                          src="/images/company.webp"
-                          alt="Company logo"
-                          width={64}
-                          height={64}
-                          className="bg-white h-16 w-16 shadow-sm -mt-10 rounded-md"
-                        />
+                {(realJobs.length > 0 ? realJobs : cardData.slice(0, 6)).map((card, idx) => {
+                  const isReal = !!card.created_at;
+                  const dateText = isReal ? timeAgo(card.created_at) : card.date;
+                  const btnText = isReal ? card.employment_type : card.btnText;
+                  const btnColor = isReal ? (typeColors[card.employment_type] || "#72B76A") : card.btnColor;
+                  const titleText = card.title;
+                  const descText = isReal ? card.description : card.desc;
+                  const linkHref = isReal ? `/jobs/details?id=${card.id}` : card.link;
+                  const priceText = isReal ? formatSalary(card.salary_min, card.salary_max) : card.price;
+                  const categoryText = isReal ? (card.job_category || "Jobs") : card.footerLink;
+
+                  return (
+                    <div
+                      key={isReal ? card.id : `static-${idx}`}
+                      className="bg-white p-4 rounded-lg group shadow-md 
+                    transition-all duration-300 ease-in-out 
+                    hover:-translate-y-2 hover:shadow-xl hover:bg-[#F9FAFB]"
+                    >
+                      <div className="flex justify-between gap-10">
+                        <Link href="/" className="inline-block">
+                          <Image
+                            src="/images/company.webp"
+                            alt="Company logo"
+                            width={64}
+                            height={64}
+                            className="bg-white h-16 w-16 shadow-sm -mt-10 rounded-md"
+                          />
+                        </Link>
+
+                        <div className="flex gap-5 items-center">
+                          <p className="text-[#72B76A] text-xs">{dateText}</p>
+                          <button
+                            className="relative px-4 h-8 overflow-hidden border rounded-md text-white active:scale-90 
+                          transition-all ease-out duration-700 group-hover:scale-105"
+                            style={{
+                              backgroundColor: btnColor,
+                              borderColor: btnColor,
+                            }}
+                          >
+                            <span
+                              className="absolute right-0 w-10 h-full top-0 transition-all duration-1000 transform 
+                                  translate-x-12 bg-white opacity-10 -skew-x-12 group-hover:-translate-x-24 ease"
+                            ></span>
+                            <span className="relative flex gap-2 items-center text-xs font-semibold">
+                              {btnText}
+                            </span>
+                          </button>
+                        </div>
+                      </div>
+
+                      <p className="font-semibold mt-5 group-hover:text-[#72B76A] transition-colors line-clamp-1">
+                        {titleText}
+                      </p>
+
+                      <p className="text-sm text-gray-500 mt-2 mb-5 line-clamp-2">
+                        {descText}
+                      </p>
+
+                      <Link
+                        href={linkHref}
+                        className="text-[#72B76A] text-sm hover:underline underline-offset-4"
+                      >
+                        {isReal ? "View Details" : categoryText}
                       </Link>
 
-                      <div className="flex gap-5 items-center">
-                        <p className="text-[#72B76A] text-xs">{card.date}</p>
-                        <button
-                          className="relative px-4 h-8 overflow-hidden border rounded-md text-white active:scale-90 
-                        transition-all ease-out duration-700 group-hover:scale-105"
-                          style={{
-                            backgroundColor: card.btnColor,
-                            borderColor: card.btnColor,
-                          }}
+                      <div className="flex items-center justify-between mt-5">
+                        <p className="font-semibold text-sm">{priceText}</p>
+
+                        <Link
+                          href={linkHref}
+                          className="text-[#72B76A] text-sm hover:underline underline-offset-4 font-semibold"
                         >
-                          <span
-                            className="absolute right-0 w-10 h-full top-0 transition-all duration-1000 transform 
-                                translate-x-12 bg-white opacity-10 -skew-x-12 group-hover:-translate-x-24 ease"
-                          ></span>
-                          <span className="relative flex gap-2 items-center text-xs font-semibold">
-                            {card.btnText}
-                          </span>
-                        </button>
+                          Apply Now →
+                        </Link>
                       </div>
                     </div>
-
-                    <p className="font-semibold mt-5 group-hover:text-[#72B76A] transition-colors">
-                      {card.title}
-                    </p>
-
-                    <p className="text-sm text-gray-500 mt-2 mb-5">
-                      {card.desc}
-                    </p>
-
-                    {card.link.startsWith("http") ? (
-                      <a
-                        href={encodeURI(card.link)}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-[#72B76A] text-sm hover:underline underline-offset-4"
-                      >
-                        {card.link}
-                      </a>
-                    ) : (
-                      <Link
-                        href={card.link}
-                        className="text-[#72B76A] text-sm hover:underline underline-offset-4"
-                      >
-                        {card.link}
-                      </Link>
-                    )}
-
-                    <div className="flex items-center justify-between mt-5">
-                      <p className="font-semibold">{card.price}</p>
-
-                      {card.link.startsWith("http") ? (
-                        <a
-                          href={encodeURI(card.link)}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-[#72B76A] text-sm hover:underline underline-offset-4"
-                        >
-                          {card.link}
-                        </a>
-                      ) : (
-                        <Link
-                          href={card.link}
-                          className="text-[#72B76A] text-sm hover:underline underline-offset-4"
-                        >
-                          {card.link}
-                        </Link>
-                      )}
-                    </div>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
             </div>
           </div>
