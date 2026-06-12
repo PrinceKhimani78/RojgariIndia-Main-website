@@ -25,10 +25,9 @@ const nextConfig: NextConfig = {
   },
 
   async rewrites() {
-    // In local dev, BACKEND_INTERNAL_URL should be http://localhost:4000
-    // In production (on server), BACKEND_INTERNAL_URL should be http://localhost:4000 (if same server)
-    // or https://api.rojgariindia.com (if separate server)
-    const backendBase = process.env.BACKEND_INTERNAL_URL || 'http://localhost:4000';
+    // In local dev, proxy to localhost:4000. In production, proxy to the live backend.
+    const isDev = process.env.NODE_ENV !== 'production';
+    const backendBase = process.env.BACKEND_INTERNAL_URL || (isDev ? 'http://localhost:4000' : 'https://api.rojgariindia.com');
     return [
       {
         source: '/api/:path*',
