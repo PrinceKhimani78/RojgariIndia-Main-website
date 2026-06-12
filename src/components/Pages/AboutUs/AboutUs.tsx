@@ -789,7 +789,7 @@ const AboutUs = () => {
         </div>
       )}
       {/* ── All Testimonials Section ─────────────────────────────── */}
-      <section className="py-16 px-5 lg:px-[5%] 2xl:px-[15%] bg-[#f7faf7]">
+      <section className="py-16 px-5 lg:px-[5%] 2xl:px-[15%]">
         <div className="text-center mb-12">
           <p className="fontPOP text-[#72B76A] text-xs sm:text-sm tracking-widest mb-3">Reviews</p>
           <h2 className="fontAL font-semibold capitalize text-2xl md:text-3xl lg:text-4xl" style={{ letterSpacing: "1px", lineHeight: 1.2 }}>
