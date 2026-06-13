@@ -4,6 +4,7 @@ import { useInView } from "react-intersection-observer";
 import { MapPin, Phone, Mail } from "lucide-react";
 import Footer from "../Footer/Footer";
 import { FaMapMarkerAlt } from "react-icons/fa";
+import Link from "next/link";
 import { Typewriter } from "react-simple-typewriter";
 type Crumb = { name: string; href?: string };
 const ADDRESS = "Adarsh Plaza, 403 & 404, 150 Feet Ring Rd, opp. GSPC Gas, nr. Raiya Telephone Exchage, Raval Nagar, Rajkot, Gujarat 360005";
@@ -24,17 +25,17 @@ const ContactUs = () => {
     <>
       {/* ===== banner ===== */}
       <section className="relative overflow-hidden">
-        <div className="h-[220px] lg:h-[350px] bg-[url('/images/RI_banner_bg.webp')] bg-cover bg-center bg-no-repeat bg-fixed" />
-        <div className="absolute inset-0 flex h-[220px] lg:h-[350px] place-items-end  justify-center px-5 lg:px-[5%] 2xl:px-[10%]">
+        <div className="h-screen bg-[url('/images/RI_banner_bg.webp')] bg-cover bg-center bg-no-repeat bg-fixed" />
+        <div className="absolute inset-0 flex items-center justify-center px-5 lg:px-[5%] 2xl:px-[10%]">
           <div className="max-w-screen-xl w-full text-center">
-            <h1 className="inline-block mb-4 px-4 py-2 text-slate-900  sm:text-xl fontAL font-semibold capitalize text-2xl md:text-3xl lg:text-4xl mt-5">
+            <h1 className="inline-block mb-4 px-4 py-2 text-slate-900 text-2xl sm:text-3xl md:text-4xl lg:text-5xl fontAL font-semibold capitalize mt-5">
               Contact Us
             </h1>
+            <p className="fontPOP text-sm md:text-base text-slate-700 mb-6 max-w-2xl mx-auto">
+              Have questions or need assistance? We're here to help. Reach out to our team and we'll get back to you as soon as possible.
+            </p>
             {/* Breadcrumbs */}
-            <nav
-              aria-label="Breadcrumb"
-              className="mb-6 text-sm text-slate-700"
-            >
+            <nav aria-label="Breadcrumb" className="mb-6 text-sm text-slate-700">
               <ol className="flex items-center justify-center gap-2">
                 {crumbs.map((c, i) => {
                   const isLast = i === crumbs.length - 1;
@@ -186,14 +187,14 @@ const ContactUs = () => {
                 <div className="relative mr-6 rounded-xl bg-white p-6 sm:p-8 ring-1 ring-blue-100/70 shadow-[0_22px_48px_-10px_rgba(29,78,216,0.15)]">
                   {/* block 1 */}
                   <div className="flex items-start gap-4">
-                    <span className="grid h-11 w-11 place-items-center rounded-lg bg-blue-50 text-[#00c9ff] ring-1 ring-blue-100">
+                    <span className="grid h-11 w-11 shrink-0 place-items-center rounded-lg bg-blue-50 text-[#00c9ff] ring-1 ring-blue-100">
                       <MapPin size={20} />
                     </span>
                     <div>
                       <h3 className="font-semibold text-gray-900">
-                        Our Rajkot Office
+                        Our Office
                       </h3>
-                      <p className="mt-1 text-xs leading-5 text-gray-900 font-bold">
+                      <p className="mt-1 text-xs leading-5 text-gray-900 font-medium">
                         Adarsh Plaza, 403 & 404, 150 Feet Ring Rd, opp. GSPC Gas, nr. Raiya Telephone Exchage, Raval Nagar,
                         <br />
                         Rajkot, Gujarat 360005
@@ -205,17 +206,16 @@ const ContactUs = () => {
 
                   {/* block 2 */}
                   <div className="flex items-start gap-4">
-                    <span className="grid h-11 w-11 place-items-center rounded-lg bg-blue-50 text-[#00c9ff] ring-1 ring-blue-100">
+                    <span className="grid h-11 w-11 shrink-0 place-items-center rounded-lg bg-blue-50 text-[#00c9ff] ring-1 ring-blue-100">
                       <Phone size={20} />
                     </span>
                     <div>
                       <h3 className="font-semibold text-gray-900">
                         Feel free to contact us
                       </h3>
-                      <p className="mt-1 text-xs leading-5 text-gray-900 font-bold">
-                        0281 258 8660
-                        <br />
-                        +91 281 258 8660
+                      <p className="mt-1 text-xs leading-5 text-gray-900 font-medium flex flex-col gap-1">
+                        <Link href="tel:+917201080009" target="_blank" rel="noopener noreferrer" className="hover:text-[#00c9ff] transition-colors">+91 72010 80009</Link>
+                        <Link href="tel:+919428506592" target="_blank" rel="noopener noreferrer" className="hover:text-[#00c9ff] transition-colors">+91 94285 06592</Link>
                       </p>
                     </div>
                   </div>
@@ -224,15 +224,14 @@ const ContactUs = () => {
 
                   {/* block 3 */}
                   <div className="flex items-start gap-4">
-                    <span className="grid h-11 w-11 place-items-center rounded-lg bg-blue-50 text-[#00c9ff] ring-1 ring-blue-100">
+                    <span className="grid h-11 w-11 shrink-0 place-items-center rounded-lg bg-blue-50 text-[#00c9ff] ring-1 ring-blue-100">
                       <Mail size={20} />
                     </span>
                     <div>
                       <h3 className="font-semibold text-gray-900">Support</h3>
-                      <p className="mt-1 text-xs leading-5 text-gray-900 font-bold">
-                        support@rojgariindia.com
-                        <br />
-                        info@rojgariindia.com
+                      <p className="mt-1 text-xs leading-5 text-gray-900 font-medium flex flex-col gap-1">
+                        <Link href="mailto:jobs@rojgariindia.com" target="_blank" rel="noopener noreferrer" className="hover:text-[#00c9ff] transition-colors">jobs@rojgariindia.com</Link>
+                        <Link href="mailto:hr@rojgariindia.com" target="_blank" rel="noopener noreferrer" className="hover:text-[#00c9ff] transition-colors">hr@rojgariindia.com</Link>
                       </p>
                     </div>
                   </div>
@@ -271,7 +270,7 @@ const ContactUs = () => {
               src={MAP_EMBED_SRC}
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
-              className="w-full h-[350px] md:h-[500px] grayscale"
+              className="w-full h-[350px] md:h-[500px]"
             />
           </div>
         </div>

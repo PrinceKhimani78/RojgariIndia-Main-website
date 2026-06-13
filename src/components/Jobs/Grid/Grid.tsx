@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { FaMapMarkerAlt, FaBriefcase, FaRupeeSign, FaClock, FaBookmark, FaRegBookmark } from "react-icons/fa";
 import { useAuth } from "@/context/AuthContext";
+import { useSearchParams } from "next/navigation";
 
 /* =============================
    Types
@@ -107,13 +108,15 @@ const Grid = () => {
   const [savedJobIds, setSavedJobIds] = useState<Set<string>>(new Set());
   const [savingJobId, setSavingJobId] = useState<string | null>(null);
 
+  const searchParams = useSearchParams();
   const [jobs, setJobs] = useState<Job[]>([]);
   const [loading, setLoading] = useState(true);
   const [open, setOpen] = useState(false);
-  const [category, setCategory] = useState(categories[0]);
-  const [keyword, setKeyword] = useState("");
-  const [location, setLocation] = useState("");
-  const [selectedJobTypes, setSelectedJobTypes] = useState<string[]>([]);
+  const [category, setCategory] = useState(searchParams.get("category") || categories[0]);
+  const [keyword, setKeyword] = useState(searchParams.get("keyword") || "");
+  const [location, setLocation] = useState(searchParams.get("location") || "");
+  const initialType = searchParams.get("type");
+  const [selectedJobTypes, setSelectedJobTypes] = useState<string[]>(initialType && initialType !== "Job Type" ? [initialType] : []);
   const [datePost, setDatePost] = useState<DatePost>("All");
   const [sortOpen, setSortOpen] = useState(false);
   const [showOpen, setShowOpen] = useState(false);
@@ -250,12 +253,15 @@ const Grid = () => {
     <>
       {/* ===== banner ===== */}
       <section className="relative overflow-hidden">
-        <div className="h-[220px] lg:h-[350px] bg-[url('/images/RI_banner_bg.webp')] bg-cover bg-center bg-no-repeat bg-fixed" />
-        <div className="absolute inset-0 flex h-[220px] lg:h-[350px] place-items-end  justify-center px-5 lg:px-[5%] 2xl:px-[10%]">
+        <div className="h-screen bg-[url('/images/RI_banner_bg.webp')] bg-cover bg-center bg-no-repeat bg-fixed" />
+        <div className="absolute inset-0 flex items-center justify-center px-5 lg:px-[5%] 2xl:px-[10%]">
           <div className="max-w-screen-xl w-full text-center">
-            <h1 className="inline-block mb-4 px-4 py-2 text-slate-900  sm:text-xl fontAL font-semibold capitalize text-2xl md:text-3xl lg:text-4xl mt-5">
+            <h1 className="inline-block mb-4 px-4 py-2 text-slate-900 text-2xl sm:text-3xl md:text-4xl lg:text-5xl fontAL font-semibold capitalize mt-5">
               The Most Exciting Jobs
             </h1>
+            <p className="fontPOP text-sm md:text-base text-slate-700 mb-6 max-w-2xl mx-auto">
+              Explore thousands of verified job listings across top industries. Take the next step in your professional journey and find the perfect role today.
+            </p>
             <nav aria-label="Breadcrumb" className="mb-6 text-sm text-slate-700">
               <ol className="flex items-center justify-center gap-2">
                 {crumbs.map((c, i) => {
@@ -417,7 +423,7 @@ const Grid = () => {
                       <div className="absolute inset-0 flex flex-col justify-center p-6">
                         <h3 className="mb-2 text-xl font-semibold text-white">Recruiting?</h3>
                         <p className="mb-5 text-sm leading-6 text-white/90">Get Best Matched Jobs On your Email. Add Resume NOW!</p>
-                        <Link href="/pages/aboutus">
+                        <Link href="/about-us">
                           <button className="relative mt-8 px-4 h-9 overflow-hidden border border-white bg-white rounded-lg hover:bg-transparent text-[#023052] hover:text-white active:scale-90 transition-all ease-out duration-700 cursor-pointer">
                             <span className="relative flex gap-2 items-center text-sm font-semibold">Know More</span>
                           </button>

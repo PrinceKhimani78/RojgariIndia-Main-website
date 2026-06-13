@@ -191,45 +191,33 @@ const AboutUs = () => {
 
   return (
     <>
-      {/*  banner  */}
+      {/* Immersive Hero */}
       <section className="relative overflow-hidden">
-        <div className="h-[220px] lg:h-[350px] bg-[url('/images/RI_banner_bg.webp')] bg-cover bg-center bg-no-repeat bg-fixed" />
-        <div className="absolute inset-0 flex h-[220px] lg:h-[350px] place-items-end  justify-center px-5 lg:px-[5%] 2xl:px-[10%]">
+        <div className="h-screen bg-[url('/images/RI_banner_bg.webp')] bg-cover bg-center bg-no-repeat bg-fixed" />
+        <div className="absolute inset-0 flex items-center justify-center px-5 lg:px-[5%] 2xl:px-[10%]">
           <div className="max-w-screen-xl w-full text-center">
-            <h1 className="inline-block mb-4 px-4 py-2 text-slate-900  sm:text-xl fontAL font-semibold capitalize text-2xl md:text-3xl lg:text-4xl mt-5">
-              AboutUs
+            <h1 className="inline-block mb-4 px-4 py-2 text-slate-900 text-2xl sm:text-3xl md:text-4xl lg:text-5xl fontAL font-semibold capitalize mt-5">
+              Empowering Careers, Elevating Businesses
             </h1>
+            <p className="fontPOP text-sm md:text-base text-slate-700 mb-6 max-w-2xl mx-auto">
+              We are India's premier employment portal dedicated to bridging the gap between exceptional talent and industry-leading corporate employers.
+            </p>
             {/* Breadcrumbs */}
-            <nav
-              aria-label="Breadcrumb"
-              className="mb-6 text-sm text-slate-700"
-            >
+            <nav aria-label="Breadcrumb" className="mb-6 text-sm text-slate-700">
               <ol className="flex items-center justify-center gap-2">
                 {crumbs.map((c, i) => {
-                  const isLast = i === crumbs.length - 0;
+                  const isLast = i === crumbs.length - 1;
                   return (
                     <li key={c.name} className="flex items-center gap-2">
                       {i > 0 && (
-                        <svg
-                          viewBox="0 0 20 20"
-                          fill="currentColor"
-                          className="w-4 h-4 text-slate-400"
-                          aria-hidden="true"
-                        >
+                        <svg viewBox="0 0 20 20" fill="currentColor" className="w-4 h-4 text-slate-400" aria-hidden="true">
                           <path d="M7.05 4.55a1 1 0 0 1 1.4 0l4 4a1 1 0 0 1 0 1.4l-4 4a1 1 0 1 1-1.4-1.4L9.88 10 7.05 7.15a1 1 0 0 1 0-1.4z" />
                         </svg>
                       )}
                       {isLast || !c.href ? (
-                        <span className=" fontPOP text-xs sm:text-sm">
-                          {c.name}
-                        </span>
+                        <span className="fontPOP text-xs sm:text-sm">{c.name}</span>
                       ) : (
-                        <a
-                          href={c.href}
-                          className="hover:text-slate-900 fontPOP text-xs sm:text-sm"
-                        >
-                          {c.name}
-                        </a>
+                        <Link href={c.href} className="hover:text-slate-900 fontPOP text-xs sm:text-sm">{c.name}</Link>
                       )}
                     </li>
                   );
@@ -239,254 +227,93 @@ const AboutUs = () => {
           </div>
         </div>
       </section>
-      {/* main content  */}
-      {/* How It Works  */}
-      <section className="section-container md:pt-12 2xl:pt-[5%] grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-14">
-        {/* left side */}
-        <div className="flex flex-col gap-4 pr-6 md:pr-10 lg:pr-16 pt-6 md:pt-10 lg:pt-16 pb-6 md:pb-10 lg:pb-16">
-          <p className="fontPOP text-[#AE70BB] text-xs sm:text-sm">
-            How It Works
-          </p>
-          <p
-            className="fontAL font-semibold capitalize text-2xl md:text-3xl lg:text-4xl max-w-[500px] min-h-10"
-            style={{
-              letterSpacing: "1px",
-              wordSpacing: "2px",
-              lineHeight: 1.2,
-            }}
-            ref={jobTyperRef}
-          >
-            {jobTyperSeen && (
-              <Typewriter
-                words={["Follow our steps we will help you."]}
-                typeSpeed={90}
-                deleteSpeed={0}
-                delaySpeed={800}
-                cursor={false}
-                loop={1}
-              />
-            )}
-          </p>
-          <div className="mt-2">
-            <FeatureList
-              items={[
-                "Trusted & Quality Job",
-                "International Job",
-                "No Extra Charge",
-                "Top Companies",
-              ]}
-            />
-          </div>
-        </div>
 
-        {/* ✅ right side */}
-        <div className="grid flex-1 grid-cols-1 sm:grid-cols-1 md:grid-cols-2 gap-10 md:gap-14 lg:gap-16">
-          {[
-            {
-              no: "01",
-              bg: "bg-[#00c9ff]/40",
-              num: "text-[#00c9ff]",
-              icon: "/images/icon1.webp",
-              titleTop: "Create",
-              titleBottom: "Your Profile",
-              desc: "Candidates and Employers set up profiles to start matching on the portal.",
-              offset: "sm:translate-y-0",
-              glow: "shadow-[0_30px_60px_rgba(24,39,75,0.12)]",
-              badgeGlow: "shadow-[0_15px_45px_rgba(59,130,246,0.35)]",
-            },
-            {
-              no: "02",
-              bg: "bg-[#ffcc23]/50",
-              num: "text-[#ffcc23]",
-              icon: "/images/icon2.webp",
-              titleTop: "Find",
-              titleBottom: "Opportunities",
-              desc: "Our intelligent search algorithm connects relevant candidates with open job roles.",
-              offset: "sm:-translate-y-6",
-              glow: "shadow-[0_30px_60px_rgba(139,99,0,0.12)]",
-              badgeGlow: "shadow-[0_15px_45px_rgba(245,158,11,0.35)]",
-            },
-            {
-              no: "03",
-              bg: "bg-[#ae70bb]/60",
-              num: "text-[#ae70bb]",
-              icon: "/images/icon3.webp",
-              titleTop: "Apply &",
-              titleBottom: "Track Status",
-              desc: "Streamline application submissions and interview status updates directly.",
-              offset: "sm:-translate-y-2",
-              glow: "shadow-[0_30px_60px_rgba(86,40,110,0.14)]",
-              badgeGlow: "shadow-[0_15px_45px_rgba(168,85,247,0.35)]",
-            },
-            {
-              no: "04",
-              bg: "bg-[#72b76a]/60",
-              num: "text-[#72b76a]",
-              icon: "/images/icon4.webp",
-              titleTop: "Hired &",
-              titleBottom: "Succeed",
-              desc: "Finalize successful placement matches and build stronger careers.",
-              offset: "sm:translate-y-4",
-              glow: "shadow-[0_30px_60px_rgba(10,97,82,0.14)]",
-              badgeGlow: "shadow-[0_15px_45px_rgba(45,212,191,0.35)]",
-            },
-          ].map((c, i) => {
-            const isLeftCol = i % 2 === 0;
-            return (
-              <div
-                key={c.no}
-                className={`group relative rounded-2xl ${c.bg} p-6 ${c.glow} ${c.offset
-                  }
-                                  transition-all duration-300 ease-out will-change-transform
-                                  hover:-translate-y-1 hover:shadow-xl
-                                  ${isLeftCol ? "md:hover:-translate-x-2" : ""
-                  }`}
-              >
-                {/* floating white badge */}
-                <div
-                  className={`absolute
- -left-2 -top-3           /* base (mobile <640px) */
-  sm:-left-4 sm:-top-4     /* ≥640px */
-  md:-left-6 md:-top-5     /* ≥768px */
-  lg:-left-7 lg:-top-7     /* ≥1024px */
-  xl:-left-8 xl:-top-8     /* ≥1280px */
-  2xl:-left-10 2xl:-top-10 /* ≥1536px */
-    flex 
-    h-16 w-16         /* base (mobile <640px) */
-    sm:h-14 sm:w-14   /* ≥640px */
-    md:h-16 md:w-16   /* ≥768px */
-    lg:h-16 lg:w-16   /* ≥1024px */
-    xl:h-18 xl:w-18   /* ≥1280px */
-    2xl:h-20 2xl:w-20 /* ≥1536px */
-    items-center justify-center
-    rounded-2xl bg-white ${c.badgeGlow}
-    transition-transform duration-300 group-hover:scale-105`}
-                >
-                  <Image
-                    src={c.icon}
-                    alt={`step-${c.no}`}
-                    width={28}
-                    height={28}
-                    className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 lg:w-9 lg:h-9 xl:w-10 xl:h-10 2xl:w-12 2xl:h-12"
-                  />
-                </div>
-                <span
-                  className={`absolute right-3 top-2 select-none
-    text-5xl           /* base (mobile <640px) */
-    sm:text-xl        /* ≥640px */
-    md:text-3xl        /* ≥768px */
-    lg:text-4xl        /* ≥1024px */
-    xl:text-5xl        /* ≥1280px */
-    2xl:text-6xl       /* ≥1536px big screens */
-    font-extrabold ${c.num}
-    transition-opacity duration-300 group-hover:opacity-90`}
-                >
-                  {c.no}
-                </span>
-                <h4
-                  className="mt-8 mb-2  sm:mt-6 
-  text-xl        /* mobile default */
-  sm:text-sm   /* ≥640px */
-  md:text-sm     /* ≥768px */
-  lg:text-lg     /* ≥1024px */
-  xl:text-xl     /* ≥1280px */
-  font-semibold text-[#17171d]"
-                >
-                  {c.titleTop} <br className="hidden sm:block" />{" "}
-                  {c.titleBottom}
-                </h4>
-                <p
-                  className="
-    text-[13px] leading-6        /* base (mobile <640px) */
-    sm:text-xs sm:leading-6      /* small screens ≥640px */
-    md:text-[11px] md:leading-4  /* tablets ≥768px */
-    lg:text-sm lg:leading-5      /* laptops ≥1024px */
-    xl:text-sm xl:leading-6    /* desktops ≥1280px */
-    text-black/70
-  "
-                >
-                  {c.desc}
-                </p>
-              </div>
-            );
-          })}
+      {/* Our Story (Split Layout) */}
+      <section className="section-container md:pt-20 2xl:pt-[5%] pb-10">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+          <motion.div
+            initial={{ opacity: 0, x: -50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="relative order-last lg:order-first"
+          >
+            <div className="absolute -inset-4 bg-gradient-to-br from-[#AE70BB]/20 to-transparent rounded-[3rem] -z-10 blur-2xl"></div>
+            <div className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl">
+              <Image src="/images/our_story_office.png" alt="Our Team" fill className="object-cover" />
+            </div>
+            <div className="absolute -bottom-6 -right-6 bg-white p-6 rounded-xl shadow-xl border border-gray-100 hidden md:block">
+              <p className="text-3xl font-extrabold text-[#AE70BB]">25+</p>
+              <p className="text-sm font-semibold text-gray-600 uppercase tracking-widest mt-1">Years of Excellence</p>
+            </div>
+          </motion.div>
+          <div className="flex flex-col gap-6 order-first lg:order-last">
+            <p className="fontPOP text-[#AE70BB] text-sm tracking-widest uppercase">Our Story</p>
+            <h2 className="fontAL font-semibold capitalize text-2xl md:text-3xl lg:text-4xl mt-5 text-gray-900" style={{ letterSpacing: "1px", wordSpacing: "2px", lineHeight: 1.2 }}>
+              25+ Years of Building Dream Careers
+            </h2>
+            <p className="text-gray-600 leading-relaxed text-sm md:text-base">
+              Rojgari India was founded with a single, powerful mission: to make the job search and recruitment process transparent, efficient, and rewarding for everyone involved. What started as a small consultancy has grown into a nationwide network connecting thousands of ambitious professionals with top-tier organizations.
+            </p>
+            <p className="text-gray-600 leading-relaxed text-sm md:text-base">
+              We believe that talent is everywhere, but opportunity is not. Our platform leverages advanced matching algorithms, a dedicated support team, and a vast network of corporate partners to ensure that every candidate finds their perfect role, and every employer finds their ideal hire.
+            </p>
+            <div className="mt-4 flex gap-4">
+              <FeatureList items={["Verified Corporate Employers", "Dedicated Placement Support", "Nationwide Network", "100% Transparent Process"]} className="grid grid-cols-1 sm:grid-cols-2 gap-y-2 gap-x-6 w-full" />
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* call to action  */}
-      <div className="px-5 lg:px-[5%] 2xl:px-[15%] my-20 sm:my-10">
-        <div className="grid grid-cols-1 lg:grid-cols-[40%_55%] gap-10 items-center justify-between">
-          <div className="">
-            <div className="relative flex items-center justify-center">
-              <div className="animate_outer_rotate absolute bg-[#EFE2F1] rounded-[50px] h-80 w-80 animate-rotate-slow z-0"></div>
-
-              <div className="animate_inner_rotate absolute bg-white rounded-[50px] h-72 w-72 animate-rotate-reverse z-10"></div>
-              <Link href="/" className="inline-block">
-                <Image
-                  src="/images/girl.webp"
-                  alt="Girl-img"
-                  height={400}
-                  width={400}
-                  className="relative z-20 "
-                />
-              </Link>
-            </div>
-          </div>
-
-          <motion.div
-            ref={img2}
-            initial={{ opacity: 0, x: 100 }}
-            animate={img2InView ? { opacity: 1, x: 0 } : { opacity: 0, x: 100 }}
-            transition={{ duration: 2, ease: "easeOut" }}
-            className="mt-14"
-          >
-            <div className="relative inline-block lg:max-w-[600px] mr-5 lg:mr-0">
-              <div className="absolute top-8 left-5 w-full h-full rounded-xl bg-[#DFC6E4]"></div>
-
-              <div className="relative bg-white p-10 rounded-xl border border-[#DFC6E4]">
-                <p
-                  className="fontPOP text-[#AE70BB] text-xs sm:text-sm"
-                  style={{
-                    letterSpacing: "1px",
-                    lineHeight: 1.3,
-                  }}
-                >
-                  Our Vision & Purpose
-                </p>
-
-                <p
-                  className="fontAL font-semibold capitalize text-2xl md:text-3xl lg:text-4xl mt-5"
-                  style={{
-                    letterSpacing: "1px",
-                    wordSpacing: "2px",
-                    lineHeight: 1.2,
-                  }}
-                >
-                  Bridging the Gap Between Talent & Opportunity
-                </p>
-
-                <p className="text-sm mt-5 text-gray-600 leading-relaxed">
-                  Rojgari India is a premier employment portal dedicated to bringing job seekers and top corporate employers together. We strive to simplify the job search process by offering an intuitive platform equipped with modern tools, verified job listings, and custom filters, ensuring that both candidates and recruiters find their perfect matches seamlessly.
-                </p>
-
-                <button
-                  onClick={() => {
-                    setShowPopup(true);
-                    setMode("login");
-                    setUserType("candidates");
-                  }}
-                  className="relative mt-8 px-4 h-9 overflow-hidden group border border-[#AE70BB] bg-[#AE70BB] rounded-lg hover:bg-transparent text-white hover:text-[#AE70BB] active:scale-90 transition-all ease-out duration-700 cursor-pointer"
-                >
-                  <span className="absolute right-0 w-10 h-full top-0 transition-all duration-1000 transform translate-x-12 bg-white opacity-10 -skew-x-12 group-hover:-translate-x-24 ease"></span>
-                  <span className="relative flex gap-2 items-center text-sm font-semibold">
-                    Candidates Login
-                  </span>
-                </button>
-              </div>
-            </div>
-          </motion.div>
+      {/* Mission & Vision Grid */}
+      <section className="py-20 px-5 lg:px-[5%] 2xl:px-[15%]">
+        <div className="text-center max-w-3xl mx-auto mb-16">
+          <p className="fontPOP text-[#00c9ff] text-sm tracking-widest uppercase">Core Values</p>
+          <h2 className="fontAL font-semibold capitalize text-2xl md:text-3xl lg:text-4xl mt-5 text-gray-900" style={{ letterSpacing: "1px", wordSpacing: "2px", lineHeight: 1.2 }}>What Drives Us Forward</h2>
+          <p className="text-gray-500 mt-4">We are guided by a strong set of principles that shape every interaction we have with our candidates and employer partners.</p>
         </div>
-      </div>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {[
+            { title: "Our Mission", icon: "🚀", color: "from-[#00c9ff]/20 to-transparent", text: "To provide a seamless, transparent platform that connects talented individuals with companies where they can truly thrive and make an impact." },
+            { title: "Our Vision", icon: "👁️", color: "from-[#AE70BB]/20 to-transparent", text: "To become India's most trusted and innovative recruitment partner, setting the standard for quality hiring and career advancement across all industries." },
+            { title: "Our Commitment", icon: "🤝", color: "from-[#72B76A]/20 to-transparent", text: "We are committed to excellence, ensuring that every candidate is treated with respect and every employer receives highly qualified, vetted profiles." }
+          ].map((item, idx) => (
+            <motion.div
+              key={idx}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: idx * 0.1 }}
+              className="bg-white rounded-2xl p-8 shadow-sm border border-gray-100 hover:shadow-xl transition-shadow relative overflow-hidden group"
+            >
+              <div className={`absolute -top-20 -right-20 w-40 h-40 bg-gradient-to-bl ${item.color} rounded-full blur-2xl group-hover:scale-150 transition-transform duration-500`}></div>
+              <div className="text-4xl mb-6">{item.icon}</div>
+              <h3 className="text-xl font-bold text-gray-900 mb-4">{item.title}</h3>
+              <p className="text-gray-600 text-sm leading-relaxed">{item.text}</p>
+            </motion.div>
+          ))}
+        </div>
+      </section>
+
+      {/* By The Numbers */}
+      <section className="py-20 px-5 lg:px-[5%] 2xl:px-[15%]">
+        <div className="bg-[#023052] rounded-3xl p-10 md:p-16 text-center text-white relative overflow-hidden">
+          <div className="absolute top-0 left-0 w-full h-full bg-[url('/images/map-img.webp')] opacity-10 bg-cover bg-center"></div>
+          <div className="relative z-10 grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-4">
+            {[
+              { num: "50K+", label: "Registered Candidates" },
+              { num: "2,500+", label: "Partner Companies" },
+              { num: "15K+", label: "Successful Placements" },
+              { num: "50+", label: "Industries Covered" }
+            ].map((stat, idx) => (
+              <div key={idx} className="flex flex-col items-center justify-center border-r border-white/10 last:border-0">
+                <p className="text-4xl md:text-5xl font-extrabold text-[#FFCC23] mb-2">{stat.num}</p>
+                <p className="text-sm md:text-base text-white/80 font-medium uppercase tracking-wider">{stat.label}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
       {showPopup && (
         <div
           className="fixed inset-0 flex items-center justify-center bg-black/60 z-[10000]"
@@ -522,35 +349,35 @@ const AboutUs = () => {
                       ➤ Please Note
                     </p>
                     <ul className="text-xs space-y-2">
-                       <li>
-                         - Verify your email with the secure OTP sent to you.
-                       </li>
-                       <li>
-                         - Complete your profile fully to increase job interview calls.
-                       </li>
-                       <li>
-                         - Upload a recent resume in PDF, DOC, or DOCX formats.
-                       </li>
-                       <li>
-                         - Update your skill list regularly to match new job postings.
-                       </li>
-                       <li>
-                         - Keep your current contact number active for HR coordinators.
-                       </li>
-                       <li>
-                         - Review job requirements and salary details before applying.
-                       </li>
-                       <li>
-                         - We will never ask you to pay any charges for registrations.
-                       </li>
-                       <li>
-                         - Keep your account password secure and do not share it.
-                       </li>
-                     </ul>
+                      <li>
+                        - Verify your email with the secure OTP sent to you.
+                      </li>
+                      <li>
+                        - Complete your profile fully to increase job interview calls.
+                      </li>
+                      <li>
+                        - Upload a recent resume in PDF, DOC, or DOCX formats.
+                      </li>
+                      <li>
+                        - Update your skill list regularly to match new job postings.
+                      </li>
+                      <li>
+                        - Keep your current contact number active for HR coordinators.
+                      </li>
+                      <li>
+                        - Review job requirements and salary details before applying.
+                      </li>
+                      <li>
+                        - We will never ask you to pay any charges for registrations.
+                      </li>
+                      <li>
+                        - Keep your account password secure and do not share it.
+                      </li>
+                    </ul>
                   </div>
                 </div>
               </div>
- 
+
               {/* Right Panel */}
               <form
                 className="col-span-2 sm:col-span-1
@@ -577,27 +404,25 @@ const AboutUs = () => {
                     <RxCross2 size={20} />
                   </button>
                 </div>
- 
+
                 {/* Title */}
                 <h2 className="fontAL font-semibold capitalize text-xl md:text-2xl lg:text-3xl my-5 text-center md:text-left">
                   {mode === "login" ? "Login" : "Sign Up"}
                 </h2>
- 
+
                 {/* Candidate / Recruiter toggle */}
                 <div className="relative flex p-1 mb-6 bg-gray-100 rounded-xl w-[272px] mx-auto md:mx-0">
                   {/* Sliding pill */}
                   <div
-                    className={`absolute top-1 bottom-1 w-[128px] bg-[#72B76A] rounded-lg transition-transform duration-300 ease-in-out ${
-                      userType === "recruiter" ? "translate-x-[132px]" : "translate-x-0"
-                    }`}
+                    className={`absolute top-1 bottom-1 w-[128px] bg-[#72B76A] rounded-lg transition-transform duration-300 ease-in-out ${userType === "recruiter" ? "translate-x-[132px]" : "translate-x-0"
+                      }`}
                   />
                   {/* Candidates Button */}
                   <button
                     type="button"
                     onClick={() => setUserType("candidates")}
-                    className={`relative z-10 w-32 h-9 flex items-center justify-center text-sm font-semibold rounded-lg transition-colors duration-300 ${
-                      userType === "candidates" ? "text-white" : "text-gray-600 hover:text-black"
-                    }`}
+                    className={`relative z-10 w-32 h-9 flex items-center justify-center text-sm font-semibold rounded-lg transition-colors duration-300 ${userType === "candidates" ? "text-white" : "text-gray-600 hover:text-black"
+                      }`}
                   >
                     Candidates
                   </button>
@@ -612,14 +437,13 @@ const AboutUs = () => {
                         setUserType("recruiter");
                       }
                     }}
-                    className={`relative z-10 w-32 h-9 flex items-center justify-center text-sm font-semibold rounded-lg transition-colors duration-300 ${
-                      userType === "recruiter" ? "text-white" : "text-gray-600 hover:text-black"
-                    }`}
+                    className={`relative z-10 w-32 h-9 flex items-center justify-center text-sm font-semibold rounded-lg transition-colors duration-300 ${userType === "recruiter" ? "text-white" : "text-gray-600 hover:text-black"
+                      }`}
                   >
                     Recruiters
                   </button>
                 </div>
- 
+
                 {/* Inputs */}
                 <motion.div
                   key={`${mode}-${userType}`}
@@ -789,11 +613,11 @@ const AboutUs = () => {
       {/* ── All Testimonials Section ─────────────────────────────── */}
       <section id="testimonials" className="scroll-mt-24 py-16 px-5 lg:px-[5%] 2xl:px-[15%]">
         <div className="text-center mb-12">
-          <p className="fontPOP text-[#72B76A] text-xs sm:text-sm tracking-widest mb-3">Reviews</p>
-          <h2 className="fontAL font-semibold capitalize text-2xl md:text-3xl lg:text-4xl" style={{ letterSpacing: "1px", lineHeight: 1.2 }}>
-            What Our Clients Say About Us
+          <p className="fontPOP text-[#72B76A] text-sm tracking-widest uppercase">Reviews</p>
+          <h2 className="fontAL font-semibold capitalize text-2xl md:text-3xl lg:text-4xl mt-3" style={{ letterSpacing: "1px", lineHeight: 1.2 }}>
+            What Our Candidates Say About Us
           </h2>
-          <p className="mt-4 text-gray-500 max-w-xl mx-auto text-sm leading-relaxed">
+          <p className="mt-4 text-gray-500 max-w-xl mx-auto leading-relaxed">
             Real feedback from professionals across India who found their dream jobs through Rojgari India.
           </p>
         </div>

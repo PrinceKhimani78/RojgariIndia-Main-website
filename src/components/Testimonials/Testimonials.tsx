@@ -147,7 +147,7 @@ const Testimonials: React.FC = () => {
           {/* Left copy */}
           <div>
             <p
-              className="fontPOP text-[#72B76A] text-xs sm:text-sm"
+              className="fontPOP text-[#72B76A] text-sm tracking-widest uppercase"
               style={{ letterSpacing: "1px", lineHeight: 1.3 }}
             >
               Reviews
@@ -161,7 +161,7 @@ const Testimonials: React.FC = () => {
                 lineHeight: 1.2,
               }}
             >
-              Know what our clients say about us
+              Know what our candidates say about us
             </p>
 
             <p className="my-10 text-gray-600 leading-relaxed">

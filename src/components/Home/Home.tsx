@@ -4,6 +4,7 @@ import "./Home.css";
 import CountUp from "react-countup";
 import { motion, useAnimationControls } from "framer-motion";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useInView } from "react-intersection-observer";
 import { Typewriter } from "react-simple-typewriter";
 import dynamic from "next/dynamic";
@@ -192,8 +193,9 @@ const Home = () => {
   const [realJobs, setRealJobs] = useState<any[]>([]);
   const [noJobsFound, setNoJobsFound] = useState(false);
   const [isSearched, setIsSearched] = useState(false);
-  const [whatOptions, setWhatOptions] = useState<string[]>(["Job Title", "Designer", "Developer"]);
-  const [typeOptions, setTypeOptions] = useState<string[]>(["All Category", "Designing", "Development", "Marketing"]);
+  const [whatOptions, setWhatOptions] = useState<string[]>(["All Category"]);
+  const [typeOptions, setTypeOptions] = useState<string[]>(["Job Type"]);
+  const router = useRouter();
 
   useEffect(() => {
     const fetchJobs = async () => {
@@ -204,19 +206,7 @@ const Home = () => {
           setAllJobs(data.data);
           setRealJobs(data.data.slice(0, 6));
 
-          // Dynamically extract unique job roles (categories of jobs) for "WHAT" dropdown
-          const uniqueRoles = Array.from(
-            new Set(
-              data.data
-                .map((job: any) => job.job_role)
-                .filter((role: any) => typeof role === "string" && role.trim() !== "")
-            )
-          ) as string[];
-          if (uniqueRoles.length > 0) {
-            setWhatOptions(["Job Title", ...uniqueRoles]);
-          }
-
-          // Dynamically extract unique categories for "TYPE" dropdown
+          // Dynamically extract unique job categories for "WHAT" dropdown
           const uniqueCategories = Array.from(
             new Set(
               data.data
@@ -225,7 +215,19 @@ const Home = () => {
             )
           ) as string[];
           if (uniqueCategories.length > 0) {
-            setTypeOptions(["All Category", ...uniqueCategories]);
+            setWhatOptions(["All Category", ...uniqueCategories]);
+          }
+
+          // Dynamically extract unique employment types for "TYPE" dropdown
+          const uniqueTypes = Array.from(
+            new Set(
+              data.data
+                .map((job: any) => job.employment_type)
+                .filter((type: any) => typeof type === "string" && type.trim() !== "")
+            )
+          ) as string[];
+          if (uniqueTypes.length > 0) {
+            setTypeOptions(["Job Type", ...uniqueTypes]);
           }
         }
       } catch (err) {
@@ -239,74 +241,21 @@ const Home = () => {
   const [openWhat, setOpenWhat] = useState(false);
   const [openType, setOpenType] = useState(false);
 
-  const [what, setWhat] = useState("Job Title");
-  const [type, setType] = useState("All Category");
+  const [what, setWhat] = useState("All Category");
+  const [type, setType] = useState("Job Type");
   const [location, setLocation] = useState("");
 
   const handleSearch = () => {
-    setIsSearched(true);
-    
-    const isWhatFiltered = what !== "Job Title";
-    const isTypeFiltered = type !== "All Category";
-    const isLocationFiltered = location.trim() !== "";
-
-    // If no filters are chosen, reset to default 6 jobs
-    if (!isWhatFiltered && !isTypeFiltered && !isLocationFiltered) {
-      setRealJobs(allJobs.slice(0, 6));
-      setNoJobsFound(false);
-      setIsSearched(false);
-      return;
-    }
-
-    // PRIORITY 1: Exact Match (What/Role + Type/Category + Location)
-    let matched = allJobs.filter((job) => {
-      let isMatch = true;
-      if (isWhatFiltered) {
-        isMatch = isMatch && job.job_role?.toLowerCase() === what.toLowerCase();
-      }
-      if (isTypeFiltered) {
-        isMatch = isMatch && job.job_category?.toLowerCase() === type.toLowerCase();
-      }
-      if (isLocationFiltered) {
-        isMatch = isMatch && job.location?.toLowerCase().includes(location.trim().toLowerCase());
-      }
-      return isMatch;
-    });
-
-    // PRIORITY 2: Match Category + Location (ignore Title/Role match)
-    if (matched.length === 0) {
-      matched = allJobs.filter((job) => {
-        let isMatch = true;
-        if (isTypeFiltered) {
-          isMatch = isMatch && job.job_category?.toLowerCase() === type.toLowerCase();
-        }
-        if (isLocationFiltered) {
-          isMatch = isMatch && job.location?.toLowerCase().includes(location.trim().toLowerCase());
-        }
-        // only keep if matched at least category or location
-        return isMatch && (isTypeFiltered || isLocationFiltered);
-      });
-    }
-
-    // PRIORITY 3: Match just Location
-    if (matched.length === 0 && isLocationFiltered) {
-      matched = allJobs.filter((job) => {
-        return job.location?.toLowerCase().includes(location.trim().toLowerCase());
-      });
-    }
-
-    if (matched.length === 0) {
-      setRealJobs([]);
-      setNoJobsFound(true);
-    } else {
-      setRealJobs(matched); // show all matches
-      setNoJobsFound(false);
-    }
+    const query = new URLSearchParams();
+    if (what && what !== "All Category") query.append("category", what);
+    if (type && type !== "Job Type") query.append("type", type);
+    if (location) query.append("location", location);
+    router.push(`/jobs?${query.toString()}`);
   };
 
   const handleExploreAll = () => {
-    setWhat("Job Title");
-    setType("All Category");
+    setWhat("All Category");
+    setType("Job Type");
     setLocation("");
     setRealJobs(allJobs.slice(0, 6));
     setNoJobsFound(false);
@@ -683,7 +632,7 @@ const Home = () => {
                         <button
                           type="button"
                           onClick={() => setOpenWhat((v) => !v)}
-                          className="flex items-center justify-between w-full px-3 h-12 text-sm text-gray-700 bg-white border border-gray-300 rounded-[10px] hover:bg-gray-50"
+                          className={`flex items-center justify-between w-full px-3 h-12 text-sm text-gray-700 bg-white border border-gray-300 rounded-[10px] hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-[#72B76A] ${openWhat ? "ring-2 ring-[#72B76A]" : ""}`}
                         >
                           <span className="truncate">{what}</span>
                           <svg
@@ -734,7 +683,7 @@ const Home = () => {
                         <button
                           type="button"
                           onClick={() => setOpenType((v) => !v)}
-                          className="flex items-center justify-between w-full px-3 h-12 text-sm text-gray-700 bg-white border border-gray-300 rounded-[10px] hover:bg-gray-50"
+                          className={`flex items-center justify-between w-full px-3 h-12 text-sm text-gray-700 bg-white border border-gray-300 rounded-[10px] hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-[#72B76A] ${openType ? "ring-2 ring-[#72B76A]" : ""}`}
                         >
                           <span className="truncate">{type}</span>
                           <svg
@@ -1018,7 +967,7 @@ const Home = () => {
               >
                 <div className="order-1 lg:order-2">
                   <p
-                    className="fontPOP text-xs sm:text-sm"
+                    className="fontPOP text-[#FFCC23] text-sm tracking-widest uppercase"
                     style={{
                       letterSpacing: "1px",
                       lineHeight: 1.3,
@@ -1112,7 +1061,7 @@ const Home = () => {
                     </div>
                   </div>
 
-                  <Link href="/pages/aboutus">
+                  <Link href="/about-us">
                     <button className="relative mt-8 px-4 h-9 overflow-hidden group border border-[#FFCC23] bg-[#FFCC23] rounded-lg hover:bg-transparent text-white hover:text-[#FFCC23] active:scale-90 transition-all ease-out duration-700 cursor-pointer">
                       <span className="absolute right-0 w-10 h-full top-0 transition-all duration-1000 transform translate-x-12 bg-white opacity-10 -skew-x-12 group-hover:-translate-x-24 ease"></span>
                       <span className="relative flex gap-2 items-center text-sm font-semibold">
@@ -1157,7 +1106,7 @@ const Home = () => {
               <div className="flex flex-col sm:flex-row justify-between sm:items-center gap-5">
                 <div>
                   <p
-                    className="fontPOP text-[#881A2D] text-xs sm:text-sm"
+                    className="fontPOP text-[#881A2D] text-sm tracking-widest uppercase"
                     style={{
                       letterSpacing: "1px",
                       lineHeight: 1.3,
@@ -1384,7 +1333,7 @@ const Home = () => {
 
                   <div className="relative bg-white p-10 rounded-xl border border-[#DFC6E4]">
                     <p
-                      className="fontPOP text-xs sm:text-sm"
+                      className="fontPOP text-[#AE70BB] text-sm tracking-widest uppercase"
                       style={{
                         letterSpacing: "1px",
                         lineHeight: 1.3,
@@ -1423,7 +1372,7 @@ const Home = () => {
           {/* Top Companies */}
           <div className="bg-[#CCF4F3] mt-28 pt-20 pb-40 px-5 lg:px-[5%] 2xl:px-[15%]">
             <p
-              className="fontPOP text-xs sm:text-sm text-center"
+              className="fontPOP text-[#00C9FF] text-sm tracking-widest uppercase text-center"
               style={{
                 letterSpacing: "1px",
                 lineHeight: 1.3,
@@ -1511,7 +1460,7 @@ const Home = () => {
                 {/* Left copy 
                 <div>
                   <p
-                    className="fontPOP text-[#72B76A] text-xs sm:text-sm"
+                    className="fontPOP text-[#72B76A] text-sm tracking-widest uppercase"
                     style={{ letterSpacing: "1px", lineHeight: 1.3 }}
                   >
                     Reviews
@@ -1612,7 +1561,7 @@ const Home = () => {
             ref={typewriter2Ref}
           >
             <p
-              className="fontPOP text-xs sm:text-sm text-center"
+              className="fontPOP text-[#023052] text-sm tracking-widest uppercase text-center"
               style={{
                 letterSpacing: "1px",
                 lineHeight: 1.3,

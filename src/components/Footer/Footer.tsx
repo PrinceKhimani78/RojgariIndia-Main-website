@@ -8,6 +8,7 @@ import "../Home/Home.css";
 import { IoIosCall } from "react-icons/io";
 import { HiOutlineMail } from "react-icons/hi";
 import { SlLocationPin } from "react-icons/sl";
+import { FaInstagram, FaLinkedin, FaFacebook, FaWhatsapp } from "react-icons/fa";
 
 const Footer: React.FC = () => {
   return (
@@ -23,7 +24,7 @@ const Footer: React.FC = () => {
         </div>
       </div>
 
-      <div className="text-slate-400 py-10 px-5 lg:px-[5%] 2xl:px-[10%]" suppressHydrationWarning>
+      <div className="text-slate-400 pt-10 pb-16 px-5 lg:px-[5%] 2xl:px-[10%]" suppressHydrationWarning>
         <div className="flex flex-col justify-center w-full">
           <div className="grid grid-cols-1 lg:grid-cols-[35%_60%] justify-between items-center gap-5 my-10">
             <p className="fontAL text-lg text-slate-300">
@@ -43,54 +44,62 @@ const Footer: React.FC = () => {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 items-center gap-10 mt-10">
+          <div className="grid grid-cols-1 lg:grid-cols-3 items-start gap-10 mt-10">
             <div>
-              <Link href="/">
+              <Link href="/" className="inline-block mb-6">
                 <Image
-                  src="/images/logo.svg"
+                  src="/images/logo.png"
                   alt="Logo"
-                  width={60}
-                  height={60}
-                  className="h-16 w-auto bg-white p-2 rounded-xl"
+                  width={330}
+                  height={80}
+                  unoptimized
+                  className="h-16 md:h-20 w-auto brightness-0 invert"
                 />
               </Link>
 
-              <div className="space-y-3 mt-5">
+              <div className="space-y-5 mt-5">
                 <p>
                   Rojgari India is a premier job board platform connecting skilled candidates with top employers across industries in India.
                 </p>
 
-                <p className="group">
-                  <b className="text-slate-300">Email: </b>{" "}
+                <p className="group flex items-center gap-2">
+                  <HiOutlineMail className="text-[#72B76A] text-xl shrink-0" />
+                  <b className="text-slate-300">Email:</b>{" "}
                   <Link
-                    href="mailto:support@rojgariindia.com"
+                    href="mailto:jobs@rojgariindia.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="group-hover:text-[#72B76A] transition-colors"
                   >
-                    support@rojgariindia.com
+                    jobs@rojgariindia.com
                   </Link>
                 </p>
 
-                <p className="group">
-                  <b className="text-slate-300">Call: </b>{" "}
+                <p className="group flex items-center gap-2">
+                  <IoIosCall className="text-[#72B76A] text-xl shrink-0" />
+                  <b className="text-slate-300">Call:</b>{" "}
                   <Link
-                    href="tel:+912812588660"
+                    href="tel:+917201080009"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="group-hover:text-[#72B76A] transition-colors"
                   >
-                    0281 258 8660
+                    +91 72010 80009
                   </Link>
                 </p>
 
-                <p>
-                  <b className="text-slate-300">Address: </b>{" "}
+                <p className="flex items-start gap-2">
+                  <SlLocationPin className="text-[#72B76A] text-xl shrink-0 mt-0.5" />
                   <span>
+                    <b className="text-slate-300 mr-1">Address:</b>
                     Adarsh Plaza, 403 & 404, 150 Feet Ring Rd, Rajkot, Gujarat 360005
                   </span>
                 </p>
               </div>
             </div>
 
-            <div className="grid grid-cols-2 gap-10 items-stretch">
-              <div className="flex flex-col justify-between h-full">
+            <div className="grid grid-cols-2 gap-10 items-stretch lg:pt-20">
+              <div className="flex flex-col gap-4">
                 <p className="relative text-white font-bold text-xl mb-8">
                   For Candidates
                   <span className="absolute left-0 -bottom-3 w-10 h-0.5 bg-[#72B76A]"></span>
@@ -111,7 +120,7 @@ const Footer: React.FC = () => {
                 </Link>
               </div>
 
-              <div className="flex flex-col justify-between h-full">
+              <div className="flex flex-col gap-4">
                 <p className="relative text-white font-bold text-xl mb-8">
                   For Recruiters
                   <span className="absolute left-0 -bottom-3 w-10 h-0.5 bg-[#72B76A]"></span>
@@ -140,8 +149,8 @@ const Footer: React.FC = () => {
               </div>
             </div>
 
-            <div className="grid grid-cols-2 gap-10 items-stretch">
-              <div className="flex flex-col justify-between h-full">
+            <div className="grid grid-cols-2 gap-10 items-stretch lg:pt-20">
+              <div className="flex flex-col gap-4">
                 <p className="relative text-white font-bold text-xl mb-8">
                   Helpful Resources
                   <span className="absolute left-0 -bottom-3 w-10 h-0.5 bg-[#72B76A]"></span>
@@ -162,41 +171,81 @@ const Footer: React.FC = () => {
                 </Link>
               </div>
 
-              <div className="flex flex-col justify-between h-full">
+              <div className="flex flex-col gap-4">
                 <p className="relative text-white font-bold text-xl mb-8">
                   Quick Links
                   <span className="absolute left-0 -bottom-3 w-10 h-0.5 bg-[#72B76A]"></span>
                 </p>
 
                 <Link
-                  href="/candidates/dashboard"
+                  href="/"
                   className="text-sm hover:text-[#72B76A] transition-colors"
                 >
-                  Dashboard
+                  Home
                 </Link>
 
                 <Link
-                  href="/candidates/saved-jobs"
+                  href="/jobs"
                   className="text-sm hover:text-[#72B76A] transition-colors"
                 >
-                  Saved Jobs
+                  Jobs
                 </Link>
 
                 <Link
-                  href="/candidates/applied-jobs"
+                  href="/candidates"
                   className="text-sm hover:text-[#72B76A] transition-colors"
                 >
-                  Applied Jobs
+                  Candidates
                 </Link>
 
                 <Link
-                  href="/candidates/job-alerts"
+                  href="/recruiters"
                   className="text-sm hover:text-[#72B76A] transition-colors"
                 >
-                  Job Alerts
+                  Recruiters
                 </Link>
               </div>
             </div>
+          </div>
+
+          {/* Social Icons */}
+          <div className="flex justify-center flex-wrap gap-4 sm:gap-6 mt-8 text-2xl pt-6 border-t border-slate-800">
+            <a
+              href="https://www.instagram.com/rojgariindia/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="transition-all hover:-translate-y-1 hover:text-[#E1306C] bg-slate-800/50 hover:bg-slate-800 p-3.5 rounded-full text-slate-300 shadow-lg"
+              aria-label="Instagram"
+            >
+              <FaInstagram />
+            </a>
+            <a
+              href="https://www.linkedin.com/company/rojgariindia/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="transition-all hover:-translate-y-1 hover:text-[#0077B5] bg-slate-800/50 hover:bg-slate-800 p-3.5 rounded-full text-slate-300 shadow-lg"
+              aria-label="LinkedIn"
+            >
+              <FaLinkedin />
+            </a>
+            <a
+              href="https://www.facebook.com/share/1ACWMEKGH8/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="transition-all hover:-translate-y-1 hover:text-[#1877F2] bg-slate-800/50 hover:bg-slate-800 p-3.5 rounded-full text-slate-300 shadow-lg"
+              aria-label="Facebook"
+            >
+              <FaFacebook />
+            </a>
+            <a
+              href="https://wa.me/917201080009?text=Hello,%20I%20would%20like%20to%20know%20more%20about%20your%20services"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="transition-all hover:-translate-y-1 hover:text-[#25D366] bg-slate-800/50 hover:bg-slate-800 p-3.5 rounded-full text-slate-300 shadow-lg"
+              aria-label="WhatsApp"
+            >
+              <FaWhatsapp />
+            </a>
           </div>
         </div>
       </div>
