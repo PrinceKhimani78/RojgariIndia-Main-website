@@ -1009,7 +1009,7 @@ const Home = () => {
             </div>
           </section> */}
 
-        <div className="relative z-10 bg-[#FFFFF0]">
+        <div className="relative z-10 bg-[#FFFFF0] shadow-[0_-15px_30px_rgba(0,0,0,0.025)]">
           {/* About Us */}
           <div className="py-10 px-5 lg:px-[5%] 2xl:px-[15%]">
             <div className={`${AboutUs ? "" : ""}`} ref={sectionRef}>
@@ -1218,8 +1218,19 @@ const Home = () => {
                   </button>
                 </div>
               ) : (
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 items-start mt-10">
-                  {(realJobs.length > 0 ? realJobs : cardData.slice(0, 6)).map((card, idx) => {
+                <Swiper
+                  spaceBetween={40}
+                  breakpoints={{
+                    0: { slidesPerView: 1 },
+                    640: { slidesPerView: 2 },
+                    1024: { slidesPerView: 3 },
+                    1536: { slidesPerView: 4 },
+                  }}
+                  modules={[Autoplay]}
+                  autoplay={{ delay: 3000, disableOnInteraction: false }}
+                  className="mt-4 pt-2 pb-10 px-2"
+                >
+                  {(realJobs.length > 0 ? realJobs : cardData).map((card, idx) => {
                     const isReal = !!card.created_at;
                     const dateText = isReal ? timeAgo(card.created_at) : card.date;
                     const btnText = isReal ? card.employment_type : card.btnText;
@@ -1231,69 +1242,72 @@ const Home = () => {
                     const categoryText = isReal ? (card.job_category || "Jobs") : card.footerLink;
 
                     return (
-                      <div
-                        key={isReal ? card.id : `static-${idx}`}
-                        className="bg-white p-4 rounded-lg group shadow-md 
-                      transition-all duration-300 ease-in-out 
-                      hover:-translate-y-2 hover:shadow-xl hover:bg-[#F9FAFB]"
-                      >
-                        <div className="flex justify-between gap-10">
-                          <Link href="/" className="inline-block">
-                            <div className="bg-white text-[#72B76A] h-14 w-14 flex items-center justify-center shadow-sm -mt-8 rounded-md border border-green-100">
-                              <FaBriefcase className="text-2xl" />
-                            </div>
-                          </Link>
+                      <SwiperSlide key={isReal ? card.id : `static-${idx}`} className="h-auto pt-10 pb-4">
+                        <div
+                          className="bg-white p-4 rounded-lg group shadow-md 
+                        transition-all duration-300 ease-in-out 
+                        hover:-translate-y-2 hover:shadow-xl hover:bg-[#F9FAFB] h-full flex flex-col"
+                        >
+                          <div className="flex justify-between gap-10">
+                            <Link href="/" className="inline-block">
+                              <div className="bg-white text-[#72B76A] h-14 w-14 flex items-center justify-center shadow-sm -mt-8 rounded-md border border-green-100">
+                                <FaBriefcase className="text-2xl" />
+                              </div>
+                            </Link>
 
-                          <div className="flex gap-5 items-center">
-                            <p className="text-[#72B76A] text-xs">{dateText}</p>
-                            <button
-                              className="relative px-4 h-8 overflow-hidden border rounded-md text-white active:scale-90 
-                            transition-all ease-out duration-700 group-hover:scale-105"
-                              style={{
-                                backgroundColor: btnColor,
-                                borderColor: btnColor,
-                              }}
+                            <div className="flex gap-5 items-center">
+                              <p className="text-[#72B76A] text-xs">{dateText}</p>
+                              <button
+                                className="relative px-4 h-8 overflow-hidden border rounded-md text-white active:scale-90 
+                              transition-all ease-out duration-700 group-hover:scale-105"
+                                style={{
+                                  backgroundColor: btnColor,
+                                  borderColor: btnColor,
+                                }}
+                              >
+                                <span
+                                  className="absolute right-0 w-10 h-full top-0 transition-all duration-1000 transform 
+                                      translate-x-12 bg-white opacity-10 -skew-x-12 group-hover:-translate-x-24 ease"
+                                ></span>
+                                <span className="relative flex gap-2 items-center text-xs font-semibold">
+                                  {btnText}
+                                </span>
+                              </button>
+                            </div>
+                          </div>
+
+                          <p className="font-semibold mt-5 group-hover:text-[#72B76A] transition-colors line-clamp-1">
+                            {titleText}
+                          </p>
+
+                          <p className="text-sm text-gray-500 mt-2 mb-5 line-clamp-2">
+                            {descText}
+                          </p>
+
+                          <div className="mt-auto">
+                            <Link
+                              href={linkHref}
+                              className="text-[#72B76A] text-sm hover:underline underline-offset-4"
                             >
-                              <span
-                                className="absolute right-0 w-10 h-full top-0 transition-all duration-1000 transform 
-                                    translate-x-12 bg-white opacity-10 -skew-x-12 group-hover:-translate-x-24 ease"
-                              ></span>
-                              <span className="relative flex gap-2 items-center text-xs font-semibold">
-                                {btnText}
-                              </span>
-                            </button>
+                              {isReal ? "View Details" : categoryText}
+                            </Link>
+
+                            <div className="flex items-center justify-between mt-5">
+                              <p className="font-semibold text-sm">{priceText}</p>
+
+                              <Link
+                                href={linkHref}
+                                className="text-[#72B76A] text-sm hover:underline underline-offset-4 font-semibold"
+                              >
+                                Apply Now →
+                              </Link>
+                            </div>
                           </div>
                         </div>
-
-                        <p className="font-semibold mt-5 group-hover:text-[#72B76A] transition-colors line-clamp-1">
-                          {titleText}
-                        </p>
-
-                        <p className="text-sm text-gray-500 mt-2 mb-5 line-clamp-2">
-                          {descText}
-                        </p>
-
-                        <Link
-                          href={linkHref}
-                          className="text-[#72B76A] text-sm hover:underline underline-offset-4"
-                        >
-                          {isReal ? "View Details" : categoryText}
-                        </Link>
-
-                        <div className="flex items-center justify-between mt-5">
-                          <p className="font-semibold text-sm">{priceText}</p>
-
-                          <Link
-                            href={linkHref}
-                            className="text-[#72B76A] text-sm hover:underline underline-offset-4 font-semibold"
-                          >
-                            Apply Now →
-                          </Link>
-                        </div>
-                      </div>
+                      </SwiperSlide>
                     );
                   })}
-                </div>
+                </Swiper>
               )}
             </div>
           </div>
