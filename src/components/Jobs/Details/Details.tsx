@@ -422,18 +422,12 @@ const JobDetailsContent = () => {
             {/* Main content */}
             <div className="h-full">
               <div className="h-full rounded-2xl bg-white p-5 flex flex-col gap-8 shadow">
-                <div className="relative overflow-hidden rounded-2xl">
-                  <div className="relative h-[220px] xs:h-[260px] md:h-[320px] lg:h-[360px] bg-slate-100 flex items-center justify-center">
-                    <FaBriefcase className="text-6xl text-slate-300" />
-                  </div>
-                  <span className="absolute left-4 top-4 rounded-full bg-[#72b76a] px-3 py-1 text-xs font-semibold text-white shadow">
-                    {job.status}
-                  </span>
-                </div>
-
-                <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between -mt-2">
+                <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
                   <div>
-                    <h1 className="text-xl font-bold text-[#0b0b0b] md:text-2xl mt-2 leading-tight">
+                    <span className="inline-block mb-2 rounded-full bg-[#72b76a] px-3 py-1 text-xs font-semibold text-white shadow">
+                      {job.status}
+                    </span>
+                    <h1 className="text-xl font-bold text-[#0b0b0b] md:text-2xl leading-tight">
                       {job.title}
                     </h1>
 
