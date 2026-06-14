@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import Header from "@/components/Header/Header";
 import Footer from "@/components/Footer/Footer";
 import { AuthProvider } from "@/context/AuthContext";
+import SplashScreen from "@/components/SplashScreen/SplashScreen";
 
 export default function ClientLayoutWrapper({
   children,
@@ -16,6 +17,7 @@ export default function ClientLayoutWrapper({
 
   return (
     <AuthProvider>
+      <SplashScreen />
       {!hideHeaderFooter && <Header />}
       <main>{children}</main>
       {!hideHeaderFooter && <Footer />}

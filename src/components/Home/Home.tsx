@@ -9,7 +9,7 @@ import { useInView } from "react-intersection-observer";
 import { Typewriter } from "react-simple-typewriter";
 import dynamic from "next/dynamic";
 import "react-multi-carousel/lib/styles.css";
-import { FaStar, FaStarHalfAlt, FaRegStar } from "react-icons/fa";
+import { FaStar, FaStarHalfAlt, FaRegStar, FaBriefcase } from "react-icons/fa";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
@@ -684,9 +684,9 @@ const Home = () => {
                       </label>
                       <div className="relative">
                         <button
-                           type="button"
-                           onClick={() => setOpenWhat((v) => !v)}
-                           className={`flex items-center justify-between w-full px-3 h-12 text-sm text-gray-700 bg-white border border-gray-300 rounded-[10px] hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-[#72B76A] ${openWhat ? "ring-2 ring-[#72B76A]" : ""}`}
+                          type="button"
+                          onClick={() => setOpenWhat((v) => !v)}
+                          className={`flex items-center justify-between w-full px-3 h-12 text-sm text-gray-700 bg-white border border-gray-300 rounded-[10px] hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-[#72B76A] ${openWhat ? "ring-2 ring-[#72B76A]" : ""}`}
                         >
                           <span className="truncate">{what}</span>
                           <svg
@@ -734,9 +734,9 @@ const Home = () => {
                       </label>
                       <div className="relative">
                         <button
-                           type="button"
-                           onClick={() => setOpenType((v) => !v)}
-                           className={`flex items-center justify-between w-full px-3 h-12 text-sm text-gray-700 bg-white border border-gray-300 rounded-[10px] hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-[#72B76A] ${openType ? "ring-2 ring-[#72B76A]" : ""}`}
+                          type="button"
+                          onClick={() => setOpenType((v) => !v)}
+                          className={`flex items-center justify-between w-full px-3 h-12 text-sm text-gray-700 bg-white border border-gray-300 rounded-[10px] hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-[#72B76A] ${openType ? "ring-2 ring-[#72B76A]" : ""}`}
                         >
                           <span className="truncate">{type}</span>
                           <svg
@@ -1239,13 +1239,9 @@ const Home = () => {
                       >
                         <div className="flex justify-between gap-10">
                           <Link href="/" className="inline-block">
-                            <Image
-                              src="/images/company.webp"
-                              alt="Company logo"
-                              width={64}
-                              height={64}
-                              className="bg-white h-16 w-16 shadow-sm -mt-10 rounded-md"
-                            />
+                            <div className="bg-white text-[#72B76A] h-14 w-14 flex items-center justify-center shadow-sm -mt-8 rounded-md border border-green-100">
+                              <FaBriefcase className="text-2xl" />
+                            </div>
                           </Link>
 
                           <div className="flex gap-5 items-center">

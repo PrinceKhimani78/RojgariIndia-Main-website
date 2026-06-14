@@ -545,7 +545,7 @@ const Grid = () => {
                      hover:-translate-y-2 hover:shadow-xl hover:bg-[#F9FAFB]"
                         >
                           <div className="flex justify-between gap-4 items-start">
-                            <div className="w-12 h-12 rounded-lg bg-gray-100 flex items-center justify-center text-xl text-gray-400 flex-shrink-0">
+                            <div className="w-14 h-14 bg-white text-[#72B76A] flex items-center justify-center text-2xl flex-shrink-0 shadow-sm rounded-md border border-green-100">
                               <FaBriefcase />
                             </div>
                             <div className="flex gap-3 items-center flex-shrink-0">
