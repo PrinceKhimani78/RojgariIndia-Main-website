@@ -3,7 +3,7 @@ import React from "react";
 import { useInView } from "react-intersection-observer";
 import { MapPin, Phone, Mail } from "lucide-react";
 import Footer from "../Footer/Footer";
-import { FaMapMarkerAlt } from "react-icons/fa";
+import { FaMapMarkerAlt, FaLinkedinIn, FaFacebookF, FaInstagram, FaWhatsapp } from "react-icons/fa";
 import Link from "next/link";
 import { Typewriter } from "react-simple-typewriter";
 type Crumb = { name: string; href?: string };
@@ -24,8 +24,14 @@ const ContactUs = () => {
   return (
     <>
       {/* ===== banner ===== */}
-      <section className="relative overflow-hidden">
-        <div className="h-screen bg-[url('/images/RI_banner_bg.webp')] bg-cover bg-center bg-no-repeat bg-fixed" />
+      <section className="fixed inset-x-0 top-0 h-screen w-full z-0">
+        <div className="h-full w-full bg-[url('/images/RI_banner_bg.webp')] bg-cover bg-center bg-no-repeat" />
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background: "linear-gradient(to bottom, rgba(255, 255, 240, 0.1) 0%, rgba(255, 255, 240, 0.4) 65%, rgba(255, 255, 0, 0.1) 85%, rgba(255, 255, 0, 0.3) 100%)"
+          }}
+        />
         <div className="absolute inset-0 flex items-center justify-center px-5 lg:px-[5%] 2xl:px-[10%]">
           <div className="max-w-screen-xl w-full text-center">
             <h1 className="inline-block mb-4 px-4 py-2 text-slate-900 text-2xl sm:text-3xl md:text-4xl lg:text-5xl fontAL font-semibold capitalize mt-5">
@@ -71,6 +77,12 @@ const ContactUs = () => {
           </div>
         </div>
       </section>
+
+      {/* Spacer to allow scrolling */}
+      <div className="h-screen pointer-events-none" />
+
+      {/* Wrapper to scroll over the fixed hero section */}
+      <div className="relative z-10 bg-[#FFFFF0] shadow-[0_-15px_30px_rgba(0,0,0,0.05)]">
 
       {/* ===== Main ===== */}
       <section className="relative">
@@ -247,6 +259,46 @@ const ContactUs = () => {
           </div>
         </div>
       </section>
+      {/* Social Media CTA Section */}
+      <section className="relative w-full py-16 mb-16 bg-gradient-to-r from-[#2dbcf0] to-[#195b87] overflow-hidden">
+        {/* Background Map Overlay */}
+        <div 
+          className="absolute inset-0 z-0 opacity-[0.07]"
+          style={{
+            backgroundImage: "url('/images/map-img.webp')",
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            backgroundRepeat: "no-repeat"
+          }}
+        />
+        {/* Overlay gradient to match the image */}
+        <div className="absolute inset-0 bg-gradient-to-r from-[#0d9bd2] to-[#113a5a] mix-blend-multiply opacity-30 z-0"></div>
+
+        <div className="relative z-10 section-container px-4 sm:px-6 lg:px-[5%] 2xl:px-[15%] text-center">
+          <h2 className="text-3xl md:text-4xl font-semibold text-white mb-4">
+            Connect With Us
+          </h2>
+          <p className="text-white/90 text-sm md:text-base max-w-2xl mx-auto mb-8">
+            Follow Rojgari India on social media for the latest job openings, career tips, and industry news. Join our growing community of professionals!
+          </p>
+          
+          <div className="flex items-center justify-center gap-6">
+            <a href="https://wa.me/917201080009?text=Hello,%20I%20would%20like%20to%20know%20more%20about%20your%20services" target="_blank" rel="noopener noreferrer" className="w-12 h-12 flex items-center justify-center rounded-full bg-white text-[#25D366] hover:bg-[#25D366] hover:text-white transition-all transform hover:-translate-y-1 shadow-lg">
+              <FaWhatsapp size={22} />
+            </a>
+            <a href="https://www.linkedin.com/company/rojgariindia/" target="_blank" rel="noopener noreferrer" className="w-12 h-12 flex items-center justify-center rounded-full bg-white text-[#007bb5] hover:bg-[#007bb5] hover:text-white transition-all transform hover:-translate-y-1 shadow-lg">
+              <FaLinkedinIn size={22} />
+            </a>
+            <a href="https://www.instagram.com/rojgariindia/" target="_blank" rel="noopener noreferrer" className="w-12 h-12 flex items-center justify-center rounded-full bg-white text-[#E1306C] hover:bg-[#E1306C] hover:text-white transition-all transform hover:-translate-y-1 shadow-lg">
+              <FaInstagram size={22} />
+            </a>
+            <a href="https://www.facebook.com/share/1ACWMEKGH8/" target="_blank" rel="noopener noreferrer" className="w-12 h-12 flex items-center justify-center rounded-full bg-white text-[#3b5998] hover:bg-[#3b5998] hover:text-white transition-all transform hover:-translate-y-1 shadow-lg">
+              <FaFacebookF size={22} />
+            </a>
+          </div>
+        </div>
+      </section>
+
       {/* map  */}
       <section className="relative w-full">
         <div className="section-container px-4 sm:px-6 lg:px-[5%] 2xl:px-[15%] pb-12">
@@ -277,6 +329,7 @@ const ContactUs = () => {
       </section>
 
       {/* <Footer /> */}
+      </div>
     </>
   );
 };

@@ -71,8 +71,14 @@ const Grid = () => {
   return (
     <>
       {/* banner */}
-      <section className="relative overflow-hidden">
-        <div className="h-[220px] lg:h-[350px] bg-[url('/images/RI_banner_bg.webp')] bg-cover bg-center bg-no-repeat bg-fixed" />
+      <section className="fixed inset-x-0 top-0 h-[220px] lg:h-[350px] w-full z-0">
+        <div className="h-full w-full bg-[url('/images/RI_banner_bg.webp')] bg-cover bg-center bg-no-repeat" />
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background: "linear-gradient(to bottom, rgba(255, 255, 240, 0.1) 0%, rgba(255, 255, 240, 0.4) 65%, rgba(255, 255, 0, 0.1) 85%, rgba(255, 255, 0, 0.3) 100%)"
+          }}
+        />
         <div className="absolute inset-0 flex h-[220px] lg:h-[350px] place-items-end  justify-center px-5 lg:px-[5%] 2xl:px-[10%]">
           <div className="max-w-screen-xl w-full text-center">
             <h1 className="inline-block mb-4 px-4 py-2 text-slate-900  sm:text-xl fontAL font-semibold capitalize text-2xl md:text-3xl lg:text-4xl mt-5">
@@ -118,201 +124,208 @@ const Grid = () => {
           </div>
         </div>
       </section>
-      {/* main content */}
-      <div className="">
-        <section className="pb-10 px-1 lg:px-[5%] 2xl:px-[15%]">
-          <div className="max-w-screen-xl px-4 py-10 mx-auto sm:px-6 lg:px-8 md:py-14">
-            <div className="flex flex-col items-start gap-8 lg:flex-row lg:gap-8">
-              {/* Left side */}
-              <div className="w-full lg:flex-1">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-10 mt-10">
-                  {blogs.map((blog) => (
-                    <article key={blog.link} className="relative">
-                      {/* Image container */}
-                      <div className="relative overflow-hidden rounded-2xl aspect-[9/11]">
-                        <Image
-                          src="https://imgcdn.stablediffusionweb.com/2025/2/1/bd370b10-62c0-482b-a06b-63ca5d29ce38.jpg"
-                          alt="Blog image"
-                          fill
-                          sizes="(min-width:1024px) 33vw, (min-width:640px) 50vw, 100vw"
-                          className="object-cover"
-                        />
-                      </div>
 
-                      {/* Blue content box */}
-                      <div className="relative -mt-12 mx-4 rounded-2xl bg-[#023052] text-white p-5 shadow-xl">
-                        {/* Date pill */}
-                        <span className="absolute -top-5 left-1/4 -translate-x-1/2 rounded-full bg-white text-[#023052] px-4 py-1 shadow text-sm font-medium">
-                          {blog.date}
-                        </span>
+      {/* Spacer to allow scrolling */}
+      <div className="h-[220px] lg:h-[350px] pointer-events-none" />
 
-                        <p className="mt-5 mb-3 leading-6">{blog.text}</p>
-                        <Link
-                          href="/blogs/details"
-                          className="italic underline-offset-2 hover:underline text-white/90"
+      {/* Wrapper to scroll over the fixed hero section */}
+      <div className="relative z-10 bg-[#FFFFF0] shadow-[0_-15px_30px_rgba(0,0,0,0.05)]">
+        {/* main content */}
+        <div className="">
+          <section className="pb-10 px-1 lg:px-[5%] 2xl:px-[15%]">
+            <div className="max-w-screen-xl px-4 py-10 mx-auto sm:px-6 lg:px-8 md:py-14">
+              <div className="flex flex-col items-start gap-8 lg:flex-row lg:gap-8">
+                {/* Left side */}
+                <div className="w-full lg:flex-1">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-10 mt-10">
+                    {blogs.map((blog) => (
+                      <article key={blog.link} className="relative">
+                        {/* Image container */}
+                        <div className="relative overflow-hidden rounded-2xl aspect-[9/11]">
+                          <Image
+                            src="https://imgcdn.stablediffusionweb.com/2025/2/1/bd370b10-62c0-482b-a06b-63ca5d29ce38.jpg"
+                            alt="Blog image"
+                            fill
+                            sizes="(min-width:1024px) 33vw, (min-width:640px) 50vw, 100vw"
+                            className="object-cover"
+                          />
+                        </div>
+
+                        {/* Blue content box */}
+                        <div className="relative -mt-12 mx-4 rounded-2xl bg-[#023052] text-white p-5 shadow-xl">
+                          {/* Date pill */}
+                          <span className="absolute -top-5 left-1/4 -translate-x-1/2 rounded-full bg-white text-[#023052] px-4 py-1 shadow text-sm font-medium">
+                            {blog.date}
+                          </span>
+
+                          <p className="mt-5 mb-3 leading-6">{blog.text}</p>
+                          <Link
+                            href="/blogs/details"
+                            className="italic underline-offset-2 hover:underline text-white/90"
+                          >
+                            Read More
+                          </Link>
+                        </div>
+                      </article>
+                    ))}
+                  </div>
+                </div>
+
+                {/* RIGHT SIDE */}
+                <div className="w-full lg:w-[280px] xl:w-[270px] flex-shrink-0 md:sticky md:top-20 lg:top-24 self-start mt-8">
+                  <aside className="space-y-10">
+                    {/* Search */}
+                    <div className="relative">
+                      <input
+                        type="text"
+                        placeholder="Search"
+                        className="w-full h-12 rounded-2xl bg-white pl-4 pr-12 text-sm placeholder-slate-400 shadow-[0_12px_40px_rgba(2,6,23,0.06)] focus:outline-none"
+                      />
+                      <span className="absolute right-2 top-1/2 -translate-y-1/2 inline-flex h-8 w-8 items-center justify-center rounded-full border border-slate-200 text-slate-500">
+                        <svg
+                          viewBox="0 0 20 20"
+                          className="h-4 w-4"
+                          fill="currentColor"
                         >
-                          Read More
-                        </Link>
+                          <path
+                            fillRule="evenodd"
+                            d="M12.9 14.32a7 7 0 1 1 1.414-1.414l3.39 3.39a1 1 0 0 1-1.414 1.414l-3.39-3.39zM14 9a5 5 0 1 1-10 0 5 5 0 0 1 10 0z"
+                            clipRule="evenodd"
+                          />
+                        </svg>
+                      </span>
+                    </div>
+
+                    {/* Categories */}
+                    <section>
+                      <h4 className="relative mb-5 pl-4 text-[20px] font-semibold text-slate-900">
+                        <span className="absolute left-0 top-1 bottom-1 w-[3px] rounded bg-[#00c9ff]" />
+                        Categories
+                      </h4>
+                      <ul className="space-y-4">
+                        {[
+                          { label: "Categories", count: 8 },
+                          { label: "Education", count: 12 },
+                          { label: "Information", count: 15 },
+                          { label: "Jobs", count: 25 },
+                          { label: "Learn", count: 36 },
+                          { label: "Skill", count: 12 },
+                        ].map((c) => (
+                          <li
+                            key={c.label}
+                            className="flex items-center justify-between"
+                          >
+                            <span className="text-[15px] text-slate-700">
+                              {c.label}
+                            </span>
+                            <span className="tabular-nums text-[15px] text-slate-600">
+                              {String(c.count).padStart(2, "0")}
+                            </span>
+                          </li>
+                        ))}
+                      </ul>
+                    </section>
+
+                    {/* Recent Article */}
+                    <section>
+                      <h4 className="relative mb-5 pl-4 text-[20px] font-semibold text-slate-900">
+                        <span className="absolute left-0 top-1 bottom-1 w-[3px] rounded bg-[#00c9ff]" />
+                        Recent Article
+                      </h4>
+                      <ul className="space-y-6">
+                        {[
+                          {
+                            title:
+                              "Equipment you can count on. People you can trust.",
+                            date: "April 08, 2023",
+                            img: "/images/job-grid.webp",
+                            href: "/blog1",
+                          },
+                          {
+                            title: "Advanced Service Functions by Air Transport",
+                            date: "April 12, 2023",
+                            img: "/images/job-grid.webp",
+                            href: "/blog2",
+                          },
+                          {
+                            title: "Advanced Service Functions by Air Transport",
+                            date: "April 12, 2023",
+                            img: "/images/job-grid.webp",
+                            href: "/blog3",
+                          },
+                          {
+                            title: "Advanced Service Functions by Air Transport",
+                            date: "April 12, 2023",
+                            img: "/images/job-grid.webp",
+                            href: "/blog4",
+                          },
+                          {
+                            title: "Advanced Service Functions by Air Transport",
+                            date: "April 12, 2023",
+                            img: "/images/job-grid.webp",
+                            href: "/blog5",
+                          },
+                        ].map((a) => (
+                          <li key={a.href} className="flex gap-3">
+                            <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded-lg">
+                              <Image
+                                src={a.img}
+                                alt={a.title}
+                                fill
+                                className="object-cover"
+                              />
+                            </div>
+                            <div className="min-w-0">
+                              <Link
+                                href={a.href}
+                                className="text-[13px] font-medium text-[#00c9ff] hover:underline"
+                              >
+                                {a.date}
+                              </Link>
+                              <p className="mt-1 text-[14px] leading-5 text-slate-800">
+                                {a.title}
+                              </p>
+                            </div>
+                          </li>
+                        ))}
+                      </ul>
+                    </section>
+
+                    {/* Tags */}
+                    <section>
+                      <h4 className="relative mb-5 pl-4 text-[20px] font-semibold text-slate-900">
+                        <span className="absolute left-0 top-1 bottom-1 w-[3px] rounded bg-[#00c9ff]" />
+                        Tags
+                      </h4>
+
+                      <div className="flex flex-wrap gap-3">
+                        {[
+                          "General",
+                          "Jobs",
+                          "Payment",
+                          "Application",
+                          "Work",
+                          "Recruiting",
+                          "Employer",
+                          "Income",
+                          "Tips",
+                        ].map((tag) => (
+                          <button
+                            key={tag}
+                            type="button"
+                            className="rounded-full bg-[#023052]/10 px-4 py-2 text-[14px] font-medium text-[#023052] hover:bg-[#023052] hover:text-white transition-colors"
+                          >
+                            {tag}
+                          </button>
+                        ))}
                       </div>
-                    </article>
-                  ))}
+                    </section>
+                  </aside>
                 </div>
               </div>
-
-              {/* RIGHT SIDE */}
-              <div className="w-full lg:w-[280px] xl:w-[270px] flex-shrink-0 md:sticky md:top-20 lg:top-24 self-start mt-8">
-                <aside className="space-y-10">
-                  {/* Search */}
-                  <div className="relative">
-                    <input
-                      type="text"
-                      placeholder="Search"
-                      className="w-full h-12 rounded-2xl bg-white pl-4 pr-12 text-sm placeholder-slate-400 shadow-[0_12px_40px_rgba(2,6,23,0.06)] focus:outline-none"
-                    />
-                    <span className="absolute right-2 top-1/2 -translate-y-1/2 inline-flex h-8 w-8 items-center justify-center rounded-full border border-slate-200 text-slate-500">
-                      <svg
-                        viewBox="0 0 20 20"
-                        className="h-4 w-4"
-                        fill="currentColor"
-                      >
-                        <path
-                          fillRule="evenodd"
-                          d="M12.9 14.32a7 7 0 1 1 1.414-1.414l3.39 3.39a1 1 0 0 1-1.414 1.414l-3.39-3.39zM14 9a5 5 0 1 1-10 0 5 5 0 0 1 10 0z"
-                          clipRule="evenodd"
-                        />
-                      </svg>
-                    </span>
-                  </div>
-
-                  {/* Categories */}
-                  <section>
-                    <h4 className="relative mb-5 pl-4 text-[20px] font-semibold text-slate-900">
-                      <span className="absolute left-0 top-1 bottom-1 w-[3px] rounded bg-[#00c9ff]" />
-                      Categories
-                    </h4>
-                    <ul className="space-y-4">
-                      {[
-                        { label: "Categories", count: 8 },
-                        { label: "Education", count: 12 },
-                        { label: "Information", count: 15 },
-                        { label: "Jobs", count: 25 },
-                        { label: "Learn", count: 36 },
-                        { label: "Skill", count: 12 },
-                      ].map((c) => (
-                        <li
-                          key={c.label}
-                          className="flex items-center justify-between"
-                        >
-                          <span className="text-[15px] text-slate-700">
-                            {c.label}
-                          </span>
-                          <span className="tabular-nums text-[15px] text-slate-600">
-                            {String(c.count).padStart(2, "0")}
-                          </span>
-                        </li>
-                      ))}
-                    </ul>
-                  </section>
-
-                  {/* Recent Article */}
-                  <section>
-                    <h4 className="relative mb-5 pl-4 text-[20px] font-semibold text-slate-900">
-                      <span className="absolute left-0 top-1 bottom-1 w-[3px] rounded bg-[#00c9ff]" />
-                      Recent Article
-                    </h4>
-                    <ul className="space-y-6">
-                      {[
-                        {
-                          title:
-                            "Equipment you can count on. People you can trust.",
-                          date: "April 08, 2023",
-                          img: "/images/job-grid.webp",
-                          href: "/blog1",
-                        },
-                        {
-                          title: "Advanced Service Functions by Air Transport",
-                          date: "April 12, 2023",
-                          img: "/images/job-grid.webp",
-                          href: "/blog2",
-                        },
-                        {
-                          title: "Advanced Service Functions by Air Transport",
-                          date: "April 12, 2023",
-                          img: "/images/job-grid.webp",
-                          href: "/blog3",
-                        },
-                        {
-                          title: "Advanced Service Functions by Air Transport",
-                          date: "April 12, 2023",
-                          img: "/images/job-grid.webp",
-                          href: "/blog4",
-                        },
-                        {
-                          title: "Advanced Service Functions by Air Transport",
-                          date: "April 12, 2023",
-                          img: "/images/job-grid.webp",
-                          href: "/blog5",
-                        },
-                      ].map((a) => (
-                        <li key={a.href} className="flex gap-3">
-                          <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded-lg">
-                            <Image
-                              src={a.img}
-                              alt={a.title}
-                              fill
-                              className="object-cover"
-                            />
-                          </div>
-                          <div className="min-w-0">
-                            <Link
-                              href={a.href}
-                              className="text-[13px] font-medium text-[#00c9ff] hover:underline"
-                            >
-                              {a.date}
-                            </Link>
-                            <p className="mt-1 text-[14px] leading-5 text-slate-800">
-                              {a.title}
-                            </p>
-                          </div>
-                        </li>
-                      ))}
-                    </ul>
-                  </section>
-
-                  {/* Tags */}
-                  <section>
-                    <h4 className="relative mb-5 pl-4 text-[20px] font-semibold text-slate-900">
-                      <span className="absolute left-0 top-1 bottom-1 w-[3px] rounded bg-[#00c9ff]" />
-                      Tags
-                    </h4>
-
-                    <div className="flex flex-wrap gap-3">
-                      {[
-                        "General",
-                        "Jobs",
-                        "Payment",
-                        "Application",
-                        "Work",
-                        "Recruiting",
-                        "Employer",
-                        "Income",
-                        "Tips",
-                      ].map((tag) => (
-                        <button
-                          key={tag}
-                          type="button"
-                          className="rounded-full bg-[#023052]/10 px-4 py-2 text-[14px] font-medium text-[#023052] hover:bg-[#023052] hover:text-white transition-colors"
-                        >
-                          {tag}
-                        </button>
-                      ))}
-                    </div>
-                  </section>
-                </aside>
-              </div>
             </div>
-          </div>
-        </section>
+          </section>
+        </div>
       </div>
       {/* <Footer /> */}
     </>

@@ -12,6 +12,7 @@ import Testimonials from "../Testimonials/Testimonials";
 import { motion } from "framer-motion";
 import type { FormEvent } from "react";
 import { useRouter } from "next/navigation";
+import IndustryMarquee from "../IndustryMarquee/IndustryMarquee";
 import { useAuth } from "@/context/AuthContext";
 import { sendOtp } from "@/services/otpService";
 
@@ -160,8 +161,14 @@ const Candidates = () => {
   return (
     <>
       {/* Candidate Hero */}
-      <section className="relative overflow-hidden">
-        <div className="h-screen bg-[url('/images/RI_banner_bg.webp')] bg-cover bg-center bg-no-repeat bg-fixed" />
+      <section className="fixed inset-x-0 top-0 h-screen w-full z-0">
+        <div className="h-full w-full bg-[url('/images/RI_banner_bg.webp')] bg-cover bg-center bg-no-repeat" />
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background: "linear-gradient(to bottom, rgba(255, 255, 240, 0.1) 0%, rgba(255, 255, 240, 0.4) 65%, rgba(255, 255, 0, 0.1) 85%, rgba(255, 255, 0, 0.3) 100%)"
+          }}
+        />
         <div className="absolute inset-0 flex items-center justify-center px-5 lg:px-[5%] 2xl:px-[10%]">
           <div className="max-w-screen-xl w-full text-center">
             <h1 className="inline-block mb-4 px-4 py-2 text-slate-900 text-2xl sm:text-3xl md:text-4xl lg:text-5xl fontAL font-semibold capitalize mt-5">
@@ -196,7 +203,12 @@ const Candidates = () => {
         </div>
       </section>
 
-      {/* Candidate Benefits */}
+      {/* Spacer to allow scrolling */}
+      <div className="h-screen pointer-events-none" />
+
+      {/* Wrapper to scroll over the fixed hero section */}
+      <div className="relative z-10 bg-[#FFFFF0] shadow-[0_-15px_30px_rgba(0,0,0,0.05)]">
+        {/* Candidate Benefits */}
       <section className="py-16 md:py-24 px-5 lg:px-[5%] 2xl:px-[15%]">
         <div className="text-center max-w-3xl mx-auto mb-16">
           <p className="fontPOP text-[#72B76A] text-sm tracking-widest uppercase">Why Choose Us</p>
@@ -278,7 +290,7 @@ const Candidates = () => {
       </section>
 
       {/* Featured Skills / Categories */}
-      <div className="bg-[#CCF4F3] pt-20 pb-40 px-5 lg:px-[5%] 2xl:px-[15%] mt-10">
+      <div className="bg-[#CCF4F3] pt-16 pb-32 px-5 lg:px-[5%] 2xl:px-[15%] mt-10">
         <p
           className="fontPOP text-[#00C9FF] text-sm tracking-widest uppercase text-center"
           style={{ letterSpacing: "1px", lineHeight: 1.3 }}
@@ -297,24 +309,23 @@ const Candidates = () => {
       </div>
 
       {/* Categories Wrapper */}
-      <div className="bg-[#F2FCF1] -mt-20 mx-5 lg:mx-[10%] 2xl:mx-[20%] p-10 rounded-xl shadow-sm mb-20 relative z-10">
-        <div className="flex flex-wrap justify-center gap-4">
-          {["Information Technology", "Healthcare", "Finance & Banking", "Engineering", "Marketing & Sales", "Human Resources", "Education", "Manufacturing", "Customer Support"].map((skill, idx) => (
-            <div key={idx} className="px-6 py-3 rounded-full border border-[#e5e5e5] bg-white shadow-sm hover:shadow-md hover:border-[#00C9FF] hover:text-[#00C9FF] transition-all cursor-pointer text-sm font-medium text-gray-700">
-              {skill}
-            </div>
-          ))}
-        </div>
+      <div className="bg-[#F2FCF1] -mt-20 mx-5 lg:mx-[10%] 2xl:mx-[20%] p-10 py-5 rounded-xl shadow-sm mb-20 relative z-10">
+        <IndustryMarquee />
       </div>
 
       {/* Call to Action */}
       <div className="px-5 lg:px-[5%] 2xl:px-[15%] pb-20 pt-10">
-        <div className="bg-gradient-to-r from-[#00c9ff]/80 to-[#005c99]/90 rounded-3xl p-10 lg:p-16 flex flex-col lg:flex-row items-center justify-between gap-10 relative overflow-hidden">
-          <div className="absolute right-0 top-0 w-1/2 h-full bg-[url('/images/map-img.webp')] opacity-10 bg-cover bg-center"></div>
+        <div className="relative bg-[#00C9FF]/10 rounded-3xl p-10 lg:p-16 flex flex-col lg:flex-row items-center justify-between gap-10 overflow-hidden">
+          <div className="absolute -top-32 -right-28 flex items-center justify-center h-96 w-96 rounded-full bg-[#AE70BB]/10 z-0">
+            <div className="bg-[#E5FAF1] h-60 w-60 rounded-full"></div>
+          </div>
+          <div className="absolute -bottom-48 left-1/2 -translate-x-1/2 flex items-center justify-center h-80 w-80 rounded-full bg-[#72B76A]/20 z-0">
+            <div className="bg-[#E5FAF1] h-48 w-48 rounded-full"></div>
+          </div>
 
           <div className="relative z-10 max-w-xl text-center lg:text-left">
-            <h2 className="fontAL font-bold text-3xl md:text-4xl text-white mb-6 leading-tight">Ready to Take the Next Step in Your Career?</h2>
-            <p className="text-white/80 text-sm md:text-base mb-8 leading-relaxed">
+            <h2 className="fontAL font-bold text-3xl md:text-4xl text-gray-900 mb-6 leading-tight">Ready to Take the Next Step in Your Career?</h2>
+            <p className="text-gray-700 text-sm md:text-base mb-8 leading-relaxed">
               Join over 50,000 professionals who have successfully accelerated their careers through Rojgari India. Create your free profile today and start applying.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
@@ -663,6 +674,7 @@ const Candidates = () => {
       {/* Testimonials */}
       <Testimonials />
       {/* <Footer /> */}
+      </div>
     </>
   );
 };

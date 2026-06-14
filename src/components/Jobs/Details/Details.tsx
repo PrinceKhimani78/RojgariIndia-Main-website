@@ -363,8 +363,14 @@ const JobDetailsContent = () => {
 
   return (
     <>
-      <section className="relative overflow-hidden">
-        <div className="h-[180px] sm:h-[220px] lg:h-[350px] bg-[url('/images/RI_banner_bg.webp')] bg-cover bg-center bg-no-repeat bg-fixed" />
+      <section className="fixed inset-x-0 top-0 h-[180px] sm:h-[220px] lg:h-[350px] w-full z-0">
+        <div className="h-full w-full bg-[url('/images/RI_banner_bg.webp')] bg-cover bg-center bg-no-repeat" />
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background: "linear-gradient(to bottom, rgba(255, 255, 240, 0.1) 0%, rgba(255, 255, 240, 0.4) 65%, rgba(255, 255, 0, 0.1) 85%, rgba(255, 255, 0, 0.3) 100%)"
+          }}
+        />
         <div className="absolute inset-0 flex h-[180px] sm:h-[220px] lg:h-[350px] place-items-end justify-center px-5 lg:px-[5%] 2xl:px-[10%]">
           <div className="max-w-screen-xl w-full text-center">
             <h1 className="inline-block mb-4 px-4 py-2 text-slate-900 sm:text-xl fontAL font-semibold capitalize text-2xl md:text-3xl lg:text-4xl mt-5">
@@ -406,330 +412,336 @@ const JobDetailsContent = () => {
         </div>
       </section>
 
-      <section className="py-10 px-5 lg:px-[5%] 2xl:px-[15%]">
-        <div className="mx-auto max-w-6xl grid gap-10 lg:grid-cols-[2fr_1fr] items-start">
-          {/* Main content */}
-          <div className="h-full">
-            <div className="h-full rounded-2xl bg-white p-5 flex flex-col gap-8 shadow">
-              <div className="relative overflow-hidden rounded-2xl">
-                <div className="relative h-[220px] xs:h-[260px] md:h-[320px] lg:h-[360px] bg-slate-100 flex items-center justify-center">
-                  <FaBriefcase className="text-6xl text-slate-300" />
+      {/* Spacer to allow scrolling */}
+      <div className="h-[180px] sm:h-[220px] lg:h-[350px] pointer-events-none" />
+
+      {/* Wrapper to scroll over the fixed hero section */}
+      <div className="relative z-10 bg-[#FFFFF0] shadow-[0_-15px_30px_rgba(0,0,0,0.05)]">
+        <section className="py-10 px-5 lg:px-[5%] 2xl:px-[15%]">
+          <div className="mx-auto max-w-6xl grid gap-10 lg:grid-cols-[2fr_1fr] items-start">
+            {/* Main content */}
+            <div className="h-full">
+              <div className="h-full rounded-2xl bg-white p-5 flex flex-col gap-8 shadow">
+                <div className="relative overflow-hidden rounded-2xl">
+                  <div className="relative h-[220px] xs:h-[260px] md:h-[320px] lg:h-[360px] bg-slate-100 flex items-center justify-center">
+                    <FaBriefcase className="text-6xl text-slate-300" />
+                  </div>
+                  <span className="absolute left-4 top-4 rounded-full bg-[#72b76a] px-3 py-1 text-xs font-semibold text-white shadow">
+                    {job.status}
+                  </span>
                 </div>
-                <span className="absolute left-4 top-4 rounded-full bg-[#72b76a] px-3 py-1 text-xs font-semibold text-white shadow">
-                  {job.status}
-                </span>
-              </div>
 
-              <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between -mt-2">
-                <div>
-                  <h1 className="text-xl font-bold text-[#0b0b0b] md:text-2xl mt-2 leading-tight">
-                    {job.title}
-                  </h1>
+                <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between -mt-2">
+                  <div>
+                    <h1 className="text-xl font-bold text-[#0b0b0b] md:text-2xl mt-2 leading-tight">
+                      {job.title}
+                    </h1>
 
-                  {job.company_name && (
-                    <div className="mt-2 text-md font-medium text-slate-700">
-                      {job.company_name}
+                    {job.company_name && (
+                      <div className="mt-2 text-md font-medium text-slate-700">
+                        {job.company_name}
+                      </div>
+                    )}
+
+                    <p className="mt-2 flex items-center gap-2 text-sm text-neutral-600 font-medium">
+                      <FaMapMarkerAlt className="text-sky-500" />{" "}
+                      {job.location || "Location not specified"}
+                    </p>
+
+                    <div className="mt-4 flex flex-wrap items-center gap-x-6 gap-y-3 text-sm">
+                      <span className="font-semibold text-emerald-600 bg-emerald-50 px-3 py-1.5 rounded-md">
+                        {formatSalary(job.salary_min, job.salary_max)}
+                      </span>
+                      <span className="font-semibold text-blue-600 bg-blue-50 px-3 py-1.5 rounded-md uppercase tracking-wide text-xs">
+                        {job.employment_type}
+                      </span>
                     </div>
-                  )}
+                  </div>
 
-                  <p className="mt-2 flex items-center gap-2 text-sm text-neutral-600 font-medium">
-                    <FaMapMarkerAlt className="text-sky-500" />{" "}
-                    {job.location || "Location not specified"}
-                  </p>
-
-                  <div className="mt-4 flex flex-wrap items-center gap-x-6 gap-y-3 text-sm">
-                    <span className="font-semibold text-emerald-600 bg-emerald-50 px-3 py-1.5 rounded-md">
-                      {formatSalary(job.salary_min, job.salary_max)}
-                    </span>
-                    <span className="font-semibold text-blue-600 bg-blue-50 px-3 py-1.5 rounded-md uppercase tracking-wide text-xs">
-                      {job.employment_type}
-                    </span>
+                  <div className="flex-shrink-0 mt-2 sm:mt-0 flex flex-col items-end gap-2">
+                    {/* Success banner */}
+                    {showSuccess && (
+                      <div className="flex items-center gap-2 bg-emerald-50 border border-emerald-200 text-emerald-700 text-sm font-medium px-4 py-2 rounded-xl animate-pulse">
+                        <span>🎉</span>
+                        <span>Application submitted successfully!</span>
+                      </div>
+                    )}
+                    {/* Error banner */}
+                    {applyError && (
+                      <div className="flex items-center gap-2 bg-red-50 border border-red-200 text-red-700 text-sm font-medium px-4 py-2 rounded-xl">
+                        <span>⚠️</span>
+                        <span>{applyError}</span>
+                        <button onClick={() => setApplyError(null)} className="ml-1 text-red-400 hover:text-red-600">✕</button>
+                      </div>
+                    )}
+                    {applied ? (
+                      <div className="flex flex-col items-center gap-2">
+                        <button
+                          disabled
+                          className="w-full sm:w-auto px-8 h-11 bg-emerald-500 rounded-lg text-white font-bold opacity-80 cursor-not-allowed shadow-md"
+                        >
+                          ✓ Applied
+                        </button>
+                        <span className="text-xs font-bold text-emerald-600 bg-emerald-50 px-2 py-1 rounded">
+                          Status: {applicationStatus}
+                        </span>
+                      </div>
+                    ) : (
+                      <div className="flex gap-2 w-full sm:w-auto">
+                        <button
+                          onClick={handleSaveJob}
+                          disabled={saving}
+                          className={`flex items-center justify-center w-11 h-11 rounded-lg border-2 transition-all ${
+                            isSaved
+                              ? "border-rose-400 bg-rose-50 text-rose-500"
+                              : "border-slate-200 bg-white text-slate-400 hover:border-slate-300 hover:text-slate-600"
+                          }`}
+                          title={isSaved ? "Unsave Job" : "Save Job"}
+                        >
+                          {isSaved ? <FaBookmark size={18} /> : <FaRegBookmark size={18} />}
+                        </button>
+                        <button
+                          onClick={handleApply}
+                          disabled={applying}
+                          className="flex-1 sm:flex-none sm:px-8 h-11 bg-[#00C9FF] rounded-lg text-white font-bold hover:bg-[#00b4e6] active:scale-95 transition-all shadow-md disabled:opacity-50"
+                        >
+                          {applying ? "Applying..." : "Apply Now"}
+                        </button>
+                      </div>
+                    )}
                   </div>
                 </div>
 
-                <div className="flex-shrink-0 mt-2 sm:mt-0 flex flex-col items-end gap-2">
-                  {/* Success banner */}
-                  {showSuccess && (
-                    <div className="flex items-center gap-2 bg-emerald-50 border border-emerald-200 text-emerald-700 text-sm font-medium px-4 py-2 rounded-xl animate-pulse">
-                      <span>🎉</span>
-                      <span>Application submitted successfully!</span>
-                    </div>
-                  )}
-                  {/* Error banner */}
-                  {applyError && (
-                    <div className="flex items-center gap-2 bg-red-50 border border-red-200 text-red-700 text-sm font-medium px-4 py-2 rounded-xl">
-                      <span>⚠️</span>
-                      <span>{applyError}</span>
-                      <button onClick={() => setApplyError(null)} className="ml-1 text-red-400 hover:text-red-600">✕</button>
-                    </div>
-                  )}
-                  {applied ? (
-                    <div className="flex flex-col items-center gap-2">
-                      <button
-                        disabled
-                        className="w-full sm:w-auto px-8 h-11 bg-emerald-500 rounded-lg text-white font-bold opacity-80 cursor-not-allowed shadow-md"
-                      >
-                        ✓ Applied
-                      </button>
-                      <span className="text-xs font-bold text-emerald-600 bg-emerald-50 px-2 py-1 rounded">
-                        Status: {applicationStatus}
-                      </span>
-                    </div>
-                  ) : (
-                    <div className="flex gap-2 w-full sm:w-auto">
-                      <button
-                        onClick={handleSaveJob}
-                        disabled={saving}
-                        className={`flex items-center justify-center w-11 h-11 rounded-lg border-2 transition-all ${
-                          isSaved
-                            ? "border-rose-400 bg-rose-50 text-rose-500"
-                            : "border-slate-200 bg-white text-slate-400 hover:border-slate-300 hover:text-slate-600"
-                        }`}
-                        title={isSaved ? "Unsave Job" : "Save Job"}
-                      >
-                        {isSaved ? <FaBookmark size={18} /> : <FaRegBookmark size={18} />}
-                      </button>
-                      <button
-                        onClick={handleApply}
-                        disabled={applying}
-                        className="flex-1 sm:flex-none sm:px-8 h-11 bg-[#00C9FF] rounded-lg text-white font-bold hover:bg-[#00b4e6] active:scale-95 transition-all shadow-md disabled:opacity-50"
-                      >
-                        {applying ? "Applying..." : "Apply Now"}
-                      </button>
-                    </div>
-                  )}
-                </div>
-              </div>
+                <hr className="border-gray-100" />
 
-              <hr className="border-gray-100" />
-
-              <div>
-                <h2 className="text-lg font-bold text-neutral-900 mb-3 border-l-4 border-[#00c9ff] pl-3">
-                  Job Description
-                </h2>
-                <div className="prose prose-neutral max-w-none text-sm text-gray-700 whitespace-pre-wrap leading-relaxed">
-                  {job.description || "No description provided."}
-                </div>
-              </div>
-
-              {requirementsList.length > 0 && (
                 <div>
-                  <h2 className="text-lg font-bold text-neutral-900 mb-4 border-l-4 border-emerald-400 pl-3">
-                    Requirements & Responsibilities
+                  <h2 className="text-lg font-bold text-neutral-900 mb-3 border-l-4 border-[#00c9ff] pl-3">
+                    Job Description
                   </h2>
-                  <ul className="space-y-3">
-                    {requirementsList.map((item, i) => (
-                      <li
-                        key={i}
-                        className="flex gap-3 text-sm text-gray-700 items-start"
-                      >
-                        <Check />
-                        <span className="leading-relaxed">{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              )}
-
-              {perksList.length > 0 && (
-                <div>
-                  <h2 className="text-lg font-bold text-neutral-900 mb-4 border-l-4 border-purple-400 pl-3">
-                    Perks & Benefits
-                  </h2>
-                  <div className="flex flex-wrap gap-2">
-                    {perksList.map((item, i) => (
-                      <span
-                        key={i}
-                        className="text-sm px-4 py-2 bg-purple-50 text-purple-700 rounded-lg font-medium"
-                      >
-                        {item.trim()}
-                      </span>
-                    ))}
+                  <div className="prose prose-neutral max-w-none text-sm text-gray-700 whitespace-pre-wrap leading-relaxed">
+                    {job.description || "No description provided."}
                   </div>
                 </div>
-              )}
 
-              <div>
-                <h2 className="text-lg font-bold text-neutral-900 mb-4">
-                  Share this job
-                </h2>
-                <div className="flex flex-wrap gap-3">
-                  {SHARE_LINKS.map(({ name, href, Icon, cls }) => (
-                    <a
-                      key={name}
-                      href={href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className={`inline-flex items-center gap-2 rounded-lg px-4 py-2.5 text-white text-sm font-medium transition-all ${cls}`}
-                    >
-                      <Icon className="text-lg" />
-                    </a>
-                  ))}
+                {requirementsList.length > 0 && (
+                  <div>
+                    <h2 className="text-lg font-bold text-neutral-900 mb-4 border-l-4 border-emerald-400 pl-3">
+                      Requirements & Responsibilities
+                    </h2>
+                    <ul className="space-y-3">
+                      {requirementsList.map((item, i) => (
+                        <li
+                          key={i}
+                          className="flex gap-3 text-sm text-gray-700 items-start"
+                        >
+                          <Check />
+                          <span className="leading-relaxed">{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+
+                {perksList.length > 0 && (
+                  <div>
+                    <h2 className="text-lg font-bold text-neutral-900 mb-4 border-l-4 border-purple-400 pl-3">
+                      Perks & Benefits
+                    </h2>
+                    <div className="flex flex-wrap gap-2">
+                      {perksList.map((item, i) => (
+                        <span
+                          key={i}
+                          className="text-sm px-4 py-2 bg-purple-50 text-purple-700 rounded-lg font-medium"
+                        >
+                          {item.trim()}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                <div>
+                  <h2 className="text-lg font-bold text-neutral-900 mb-4">
+                    Share this job
+                  </h2>
+                  <div className="flex flex-wrap gap-3">
+                    {SHARE_LINKS.map(({ name, href, Icon, cls }) => (
+                      <a
+                        key={name}
+                        href={href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={`inline-flex items-center gap-2 rounded-lg px-4 py-2.5 text-white text-sm font-medium transition-all ${cls}`}
+                      >
+                        <Icon className="text-lg" />
+                      </a>
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
 
-          {/* Sidebar */}
-          <aside className="h-full flex flex-col gap-6">
-            <div className="rounded-2xl bg-white p-6 shadow border border-slate-50">
-              <h3 className="mb-6 font-bold text-lg text-neutral-900">
-                Job Information
-              </h3>
-
-              <ul className="space-y-5 text-sm">
-                <li className="flex items-start gap-4">
-                  <div className="p-2 bg-blue-50 text-[#00c9ff] rounded-lg">
-                    <FaCalendarAlt className="text-lg" />
-                  </div>
-                  <div>
-                    <p className="text-neutral-500 text-xs font-semibold tracking-wider uppercase mb-1">
-                      Date Posted
-                    </p>
-                    <p className="font-medium text-slate-800">
-                      {formatDate(job.created_at)}
-                    </p>
-                  </div>
-                </li>
-
-                <li className="flex items-start gap-4">
-                  <div className="p-2 bg-emerald-50 text-emerald-500 rounded-lg">
-                    <FaMapMarkerAlt className="text-lg" />
-                  </div>
-                  <div>
-                    <p className="text-neutral-500 text-xs font-semibold tracking-wider uppercase mb-1">
-                      Location
-                    </p>
-                    <p className="font-medium text-slate-800">
-                      {job.location || "Not specified"}
-                    </p>
-                  </div>
-                </li>
-
-                <li className="flex items-start gap-4">
-                  <div className="p-2 bg-purple-50 text-purple-500 rounded-lg">
-                    <FaBriefcase className="text-lg" />
-                  </div>
-                  <div>
-                    <p className="text-neutral-500 text-xs font-semibold tracking-wider uppercase mb-1">
-                      Job Role
-                    </p>
-                    <p className="font-medium text-slate-800">
-                      {job.job_role || job.title}
-                    </p>
-                  </div>
-                </li>
-
-                <li className="flex items-start gap-4">
-                  <div className="p-2 bg-amber-50 text-amber-500 rounded-lg">
-                    <FaHourglassHalf className="text-lg" />
-                  </div>
-                  <div>
-                    <p className="text-neutral-500 text-xs font-semibold tracking-wider uppercase mb-1">
-                      Experience
-                    </p>
-                    <p className="font-medium text-slate-800">
-                      {formatExp(job.exp_min, job.exp_max)}
-                    </p>
-                  </div>
-                </li>
-
-                <li className="flex items-start gap-4">
-                  <div className="p-2 bg-rose-50 text-rose-500 rounded-lg">
-                    <FaGraduationCap className="text-lg" />
-                  </div>
-                  <div>
-                    <p className="text-neutral-500 text-xs font-semibold tracking-wider uppercase mb-1">
-                      Qualification
-                    </p>
-                    <p className="font-medium text-slate-800">
-                      {job.qualifications || "Any"}
-                    </p>
-                  </div>
-                </li>
-
-                <li className="flex items-start gap-4">
-                  <div className="p-2 bg-indigo-50 text-indigo-500 rounded-lg">
-                    <FaVenusMars className="text-lg" />
-                  </div>
-                  <div>
-                    <p className="text-neutral-500 text-xs font-semibold tracking-wider uppercase mb-1">
-                      Gender
-                    </p>
-                    <p className="font-medium text-slate-800">
-                      {job.gender || "Any"}
-                    </p>
-                  </div>
-                </li>
-              </ul>
-            </div>
-
-            {skillsList.length > 0 && (
+            {/* Sidebar */}
+            <aside className="h-full flex flex-col gap-6">
               <div className="rounded-2xl bg-white p-6 shadow border border-slate-50">
-                <h4 className="mb-4 font-bold text-lg text-neutral-900">
-                  Required Skills
-                </h4>
-                <div className="flex flex-wrap gap-2">
-                  {skillsList.map((skill, index) => (
-                    <span
-                      key={index}
-                      className="rounded-md bg-slate-100 px-3 py-1.5 text-xs font-bold text-slate-600"
-                    >
-                      {skill}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {(job.company_name || job.contact_name) && (
-              <div className="rounded-2xl bg-white p-6 shadow border border-slate-50">
-                <h3 className="mb-5 text-lg font-bold text-neutral-900">
-                  Contact / Company
+                <h3 className="mb-6 font-bold text-lg text-neutral-900">
+                  Job Information
                 </h3>
-                <div className="space-y-4 text-sm">
-                  {job.company_name && (
-                    <div className="flex items-start gap-3">
-                      <FaBriefcase className="text-[#00C9FF] mt-1" />
-                      <div>
-                        <p className="font-medium text-gray-800">
-                          {job.company_name}
-                        </p>
-                      </div>
-                    </div>
-                  )}
 
-                  {job.contact_name && (
-                    <div className="flex items-start gap-3">
-                      <FaUserFriends className="text-[#00C9FF] mt-1" />
-                      <div>
-                        <p className="text-neutral-500 text-xs">
-                          Recruiter Name
-                        </p>
-                        <p className="font-medium text-gray-800">
-                          {job.contact_name}
-                        </p>
-                      </div>
+                <ul className="space-y-5 text-sm">
+                  <li className="flex items-start gap-4">
+                    <div className="p-2 bg-blue-50 text-[#00c9ff] rounded-lg">
+                      <FaCalendarAlt className="text-lg" />
                     </div>
-                  )}
+                    <div>
+                      <p className="text-neutral-500 text-xs font-semibold tracking-wider uppercase mb-1">
+                        Date Posted
+                      </p>
+                      <p className="font-medium text-slate-800">
+                        {formatDate(job.created_at)}
+                      </p>
+                    </div>
+                  </li>
 
-                  {job.allow_calls && job.contact_number && (
-                    <div className="flex items-start gap-3">
-                      <FaPhoneAlt className="text-[#00C9FF] mt-1" />
-                      <div>
-                        <p className="text-neutral-500 text-xs">Phone</p>
-                        <p className="font-medium text-gray-800">
-                          {job.contact_number}
-                        </p>
-                      </div>
+                  <li className="flex items-start gap-4">
+                    <div className="p-2 bg-emerald-50 text-emerald-500 rounded-lg">
+                      <FaMapMarkerAlt className="text-lg" />
                     </div>
-                  )}
-                </div>
+                    <div>
+                      <p className="text-neutral-500 text-xs font-semibold tracking-wider uppercase mb-1">
+                        Location
+                      </p>
+                      <p className="font-medium text-slate-800">
+                        {job.location || "Not specified"}
+                      </p>
+                    </div>
+                  </li>
+
+                  <li className="flex items-start gap-4">
+                    <div className="p-2 bg-purple-50 text-purple-500 rounded-lg">
+                      <FaBriefcase className="text-lg" />
+                    </div>
+                    <div>
+                      <p className="text-neutral-500 text-xs font-semibold tracking-wider uppercase mb-1">
+                        Job Role
+                      </p>
+                      <p className="font-medium text-slate-800">
+                        {job.job_role || job.title}
+                      </p>
+                    </div>
+                  </li>
+
+                  <li className="flex items-start gap-4">
+                    <div className="p-2 bg-amber-50 text-amber-500 rounded-lg">
+                      <FaHourglassHalf className="text-lg" />
+                    </div>
+                    <div>
+                      <p className="text-neutral-500 text-xs font-semibold tracking-wider uppercase mb-1">
+                        Experience
+                      </p>
+                      <p className="font-medium text-slate-800">
+                        {formatExp(job.exp_min, job.exp_max)}
+                      </p>
+                    </div>
+                  </li>
+
+                  <li className="flex items-start gap-4">
+                    <div className="p-2 bg-rose-50 text-rose-500 rounded-lg">
+                      <FaGraduationCap className="text-lg" />
+                    </div>
+                    <div>
+                      <p className="text-neutral-500 text-xs font-semibold tracking-wider uppercase mb-1">
+                        Qualification
+                      </p>
+                      <p className="font-medium text-slate-800">
+                        {job.qualifications || "Any"}
+                      </p>
+                    </div>
+                  </li>
+
+                  <li className="flex items-start gap-4">
+                    <div className="p-2 bg-indigo-50 text-indigo-500 rounded-lg">
+                      <FaVenusMars className="text-lg" />
+                    </div>
+                    <div>
+                      <p className="text-neutral-500 text-xs font-semibold tracking-wider uppercase mb-1">
+                        Gender
+                      </p>
+                      <p className="font-medium text-slate-800">
+                        {job.gender || "Any"}
+                      </p>
+                    </div>
+                  </li>
+                </ul>
               </div>
-            )}
-          </aside>
-        </div>
-      </section>
+
+              {skillsList.length > 0 && (
+                <div className="rounded-2xl bg-white p-6 shadow border border-slate-50">
+                  <h4 className="mb-4 font-bold text-lg text-neutral-900">
+                    Required Skills
+                  </h4>
+                  <div className="flex flex-wrap gap-2">
+                    {skillsList.map((skill, index) => (
+                      <span
+                        key={index}
+                        className="rounded-md bg-slate-100 px-3 py-1.5 text-xs font-bold text-slate-600"
+                      >
+                        {skill}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {(job.company_name || job.contact_name) && (
+                <div className="rounded-2xl bg-white p-6 shadow border border-slate-50">
+                  <h3 className="mb-5 text-lg font-bold text-neutral-900">
+                    Contact / Company
+                  </h3>
+                  <div className="space-y-4 text-sm">
+                    {job.company_name && (
+                      <div className="flex items-start gap-3">
+                        <FaBriefcase className="text-[#00C9FF] mt-1" />
+                        <div>
+                          <p className="font-medium text-gray-800">
+                            {job.company_name}
+                          </p>
+                        </div>
+                      </div>
+                    )}
+
+                    {job.contact_name && (
+                      <div className="flex items-start gap-3">
+                        <FaUserFriends className="text-[#00C9FF] mt-1" />
+                        <div>
+                          <p className="text-neutral-500 text-xs">
+                            Recruiter Name
+                          </p>
+                          <p className="font-medium text-gray-800">
+                            {job.contact_name}
+                          </p>
+                        </div>
+                      </div>
+                    )}
+
+                    {job.allow_calls && job.contact_number && (
+                      <div className="flex items-start gap-3">
+                        <FaPhoneAlt className="text-[#00C9FF] mt-1" />
+                        <div>
+                          <p className="text-neutral-500 text-xs">Phone</p>
+                          <p className="font-medium text-gray-800">
+                            {job.contact_number}
+                          </p>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              )}
+            </aside>
+          </div>
+        </section>
+      </div>
 
       {/* Screening Questions Modal */}
       {showQuestionModal && (

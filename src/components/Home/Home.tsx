@@ -15,9 +15,11 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
 import Image from "next/image";
 import "swiper/css";
-import { FaInstagram, FaPinterest, FaFacebook, FaYahoo } from "react-icons/fa";
+import { FaLaptopCode, FaHeartbeat, FaLandmark, FaIndustry, FaGraduationCap, FaShoppingCart, FaTruck, FaBuilding, FaCar, FaFilm, FaBolt, FaLeaf, FaBalanceScale, FaMicrochip, FaFlask } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import Testimonials from "../Testimonials/Testimonials";
+import { industries } from "@/constants/industries";
+import IndustryMarquee from "../IndustryMarquee/IndustryMarquee";
 
 const Carousel = dynamic(() => import("react-multi-carousel"), { ssr: false });
 
@@ -96,7 +98,7 @@ export function FloatingCardsAuto({
           <motion.ul
             ref={listRef}
             animate={controls}
-            className="relative flex flex-col items-center gap-5 lg:gap-8 will-change-transform transform-gpu"
+            className="relative flex flex-col items-center gap-5 lg:gap-8 pb-5 lg:pb-8 will-change-transform transform-gpu"
           >
             {doubled.map((c, i) => {
               // zig-zag only from lg screens
@@ -188,14 +190,265 @@ const typeColors: Record<string, string> = {
   "Freelance": "#023052",
 };
 
+const defaultCategories = ["Design", "Development", "Marketing", "Sales", "Operations"];
+const defaultTypes = ["Full-time", "Part-time", "Contract", "Internship", "Freelance"];
+
+const cardData = [
+  {
+    id: 1,
+    date: "1 day ago",
+    btnText: "New",
+    btnColor: "#72B76A",
+    title: "Software Engineer (React / Node.js)",
+    desc: "Develop modern web applications. Strong React, TypeScript, and Node.js skills required.",
+    link: "/jobs",
+    price: "₹60,000 - ₹90,000 /Month",
+    footerLink: "Software",
+  },
+  {
+    id: 2,
+    date: "8 days ago",
+    btnText: "Featured",
+    btnColor: "#FFCC23",
+    title: "Digital Marketing Specialist",
+    desc: "Manage SEO, SEM, social media campaigns, and lead generation for various local brands.",
+    link: "/jobs",
+    price: "₹40,000 - ₹60,000 /Month",
+    footerLink: "Marketing",
+  },
+  {
+    id: 3,
+    date: "5 days ago",
+    btnText: "Urgent",
+    btnColor: "#AE70BB",
+    title: "HR & Operations Executive",
+    desc: "Manage recruitment cycles, candidate onboarding, employee relations, and office coordination.",
+    link: "/jobs",
+    price: "₹30,000 - ₹45,000 /Month",
+    footerLink: "HR & Admin",
+  },
+  {
+    id: 4,
+    date: "5 days ago",
+    btnText: "Full-Time",
+    btnColor: "#00C9FF",
+    title: "Business Development Manager",
+    desc: "Identify new business opportunities, handle client acquisitions, and achieve sales growth targets.",
+    link: "/jobs",
+    price: "₹50,000 - ₹75,000 /Month",
+    footerLink: "Sales",
+  },
+  {
+    id: 5,
+    date: "5 days ago",
+    btnText: "Remote",
+    btnColor: "#023052",
+    title: "Content & SEO Copywriter",
+    desc: "Write engaging articles, website copy, and optimize content for Google search rankings.",
+    link: "/jobs",
+    price: "₹25,000 - ₹40,000 /Month",
+    footerLink: "Writing",
+  },
+  {
+    id: 6,
+    date: "6 days ago",
+    btnText: "New",
+    btnColor: "#881A2D",
+    title: "UI/UX Designer",
+    desc: "Create beautiful user interfaces, wireframes, user flows, and interactive mockups.",
+    link: "/jobs",
+    price: "₹55,000 - ₹80,000 /Month",
+    footerLink: "Design",
+  },
+];
+const images_companies: string[] = [
+  "https://logos-world.net/wp-content/uploads/2024/07/Woolworths-Logo.png",
+  "https://1000logos.net/wp-content/uploads/2021/05/SUGAR-Cosmetics-logo.png",
+  "https://logos-world.net/wp-content/uploads/2024/07/Woolworths-Logo.png",
+  "https://1000logos.net/wp-content/uploads/2021/05/SUGAR-Cosmetics-logo.png",
+  "https://logos-world.net/wp-content/uploads/2024/07/Woolworths-Logo.png",
+  "https://1000logos.net/wp-content/uploads/2021/05/SUGAR-Cosmetics-logo.png",
+  "https://logos-world.net/wp-content/uploads/2024/07/Woolworths-Logo.png",
+];
+
+const responsive_companies: ResponsiveMap = {
+  "2xl": {
+    breakpoint: { max: 4000, min: 1536 },
+    items: 6,
+  },
+  xl: {
+    breakpoint: { max: 1535, min: 1280 },
+    items: 5,
+  },
+  lg: {
+    breakpoint: { max: 1279, min: 1024 },
+    items: 4,
+  },
+  md: {
+    breakpoint: { max: 1023, min: 768 },
+    items: 4,
+  },
+  sm: {
+    breakpoint: { max: 767, min: 640 },
+    items: 3,
+  },
+  xs: {
+    breakpoint: { max: 639, min: 0 },
+    items: 2,
+  },
+};
+
+type Testimonial = {
+  name: string;
+  position: string;
+  review: string;
+  rating: number; // 0..5, half steps ok
+  image: string; // remote URL
+};
+
+const testimonials: Testimonial[] = [
+  {
+    name: "John Doe",
+    position: "CEO, TechCorp",
+    review:
+      "Visionary Crafts transformed our idea into a reality. The process was smooth and the final product was amazing!",
+    rating: 4.5,
+    image: "https://randomuser.me/api/portraits/men/32.jpg",
+  },
+  {
+    name: "Sarah Lee",
+    position: "Founder, BeautyCare",
+    review:
+      "Their design quality and attention to detail exceeded our expectations. Highly recommend them!",
+    rating: 5,
+    image: "https://randomuser.me/api/portraits/women/44.jpg",
+  },
+  {
+    name: "Amit Patel",
+    position: "CTO, FinTechX",
+    review:
+      "One of the best teams we’ve worked with. They really understand what the client needs.",
+    rating: 4,
+    image: "https://randomuser.me/api/portraits/men/75.jpg",
+  },
+];
+
+const blogs: BlogItem[] = [
+  {
+    date: "Aug 20, 2025",
+    text: "How to convince recruiters and get your dream job: a guide on standout profile updates, resumes, and interview skills.",
+    link: "/blogs/details",
+  },
+  {
+    date: "Sept 05, 2025",
+    text: "Top 5 high-demand technical skills to focus on for career growth in the current job market across India.",
+    link: "/blogs/details",
+  },
+  {
+    date: "Sept 25, 2025",
+    text: "Writing a professional resume: tips, layouts, and templates recommended by recruiters to pass ATS systems.",
+    link: "/blogs/details",
+  },
+];
+
+const popularIndustriesCards: SocialCard[] = [
+  {
+    name: "Popular Category",
+    role: "IT & Software",
+    border: "border-blue-500",
+    icon: <FaLaptopCode className="text-blue-500 text-[35px]" aria-hidden="true" />,
+  },
+  {
+    name: "Top Industry",
+    role: "Healthcare",
+    border: "border-red-500",
+    icon: <FaHeartbeat className="text-red-500 text-[35px]" aria-hidden="true" />,
+  },
+  {
+    name: "Growing Sector",
+    role: "Finance & Banking",
+    border: "border-emerald-500",
+    icon: <FaLandmark className="text-emerald-500 text-[35px]" aria-hidden="true" />,
+  },
+  {
+    name: "Core Industry",
+    role: "Manufacturing",
+    border: "border-orange-500",
+    icon: <FaIndustry className="text-orange-500 text-[35px]" aria-hidden="true" />,
+  },
+  {
+    name: "Trending",
+    role: "Education & EdTech",
+    border: "border-purple-500",
+    icon: <FaGraduationCap className="text-purple-500 text-[35px]" aria-hidden="true" />,
+  },
+  {
+    name: "High Demand",
+    role: "Retail & E-Commerce",
+    border: "border-pink-500",
+    icon: <FaShoppingCart className="text-pink-500 text-[35px]" aria-hidden="true" />,
+  },
+  {
+    name: "Fast Growing",
+    role: "Logistics & Supply",
+    border: "border-teal-500",
+    icon: <FaTruck className="text-teal-500 text-[35px]" aria-hidden="true" />,
+  },
+  {
+    name: "Popular Choice",
+    role: "Real Estate",
+    border: "border-indigo-500",
+    icon: <FaBuilding className="text-indigo-500 text-[35px]" aria-hidden="true" />,
+  },
+  {
+    name: "Evergreen",
+    role: "Automobile",
+    border: "border-amber-500",
+    icon: <FaCar className="text-amber-500 text-[35px]" aria-hidden="true" />,
+  },
+  {
+    name: "Creative Sector",
+    role: "Media & Entertainment",
+    border: "border-rose-500",
+    icon: <FaFilm className="text-rose-500 text-[35px]" aria-hidden="true" />,
+  },
+  {
+    name: "Essential Service",
+    role: "Energy & Power",
+    border: "border-yellow-500",
+    icon: <FaBolt className="text-yellow-500 text-[35px]" aria-hidden="true" />,
+  },
+  {
+    name: "Primary Sector",
+    role: "Agriculture & Farming",
+    border: "border-green-600",
+    icon: <FaLeaf className="text-green-600 text-[35px]" aria-hidden="true" />,
+  },
+  {
+    name: "Professional Service",
+    role: "Legal Services",
+    border: "border-slate-700",
+    icon: <FaBalanceScale className="text-slate-700 text-[35px]" aria-hidden="true" />,
+  },
+  {
+    name: "Tech Infrastructure",
+    role: "Telecommunications",
+    border: "border-cyan-500",
+    icon: <FaMicrochip className="text-cyan-500 text-[35px]" aria-hidden="true" />,
+  },
+  {
+    name: "Life Sciences",
+    role: "Pharmaceuticals",
+    border: "border-fuchsia-500",
+    icon: <FaFlask className="text-fuchsia-500 text-[35px]" aria-hidden="true" />,
+  },
+];
+
 const Home = () => {
   const [allJobs, setAllJobs] = useState<any[]>([]);
   const [realJobs, setRealJobs] = useState<any[]>([]);
   const [noJobsFound, setNoJobsFound] = useState(false);
   const [isSearched, setIsSearched] = useState(false);
-  const defaultCategories = ["Design", "Development", "Marketing", "Sales", "Operations"];
-  const defaultTypes = ["Full-time", "Part-time", "Contract", "Internship", "Freelance"];
-
   const [whatOptions, setWhatOptions] = useState<string[]>(["All Category", ...defaultCategories]);
   const [typeOptions, setTypeOptions] = useState<string[]>(["Job Type", ...defaultTypes]);
   const router = useRouter();
@@ -367,216 +620,16 @@ const Home = () => {
     return () => observer2.disconnect();
   }, []);
 
-  const cardData = [
-    {
-      id: 1,
-      date: "1 day ago",
-      btnText: "New",
-      btnColor: "#72B76A",
-      title: "Software Engineer (React / Node.js)",
-      desc: "Develop modern web applications. Strong React, TypeScript, and Node.js skills required.",
-      link: "/jobs",
-      price: "₹60,000 - ₹90,000 /Month",
-      footerLink: "Software",
-    },
-    {
-      id: 2,
-      date: "8 days ago",
-      btnText: "Featured",
-      btnColor: "#FFCC23",
-      title: "Digital Marketing Specialist",
-      desc: "Manage SEO, SEM, social media campaigns, and lead generation for various local brands.",
-      link: "/jobs",
-      price: "₹40,000 - ₹60,000 /Month",
-      footerLink: "Marketing",
-    },
-    {
-      id: 3,
-      date: "5 days ago",
-      btnText: "Urgent",
-      btnColor: "#AE70BB",
-      title: "HR & Operations Executive",
-      desc: "Manage recruitment cycles, candidate onboarding, employee relations, and office coordination.",
-      link: "/jobs",
-      price: "₹30,000 - ₹45,000 /Month",
-      footerLink: "HR & Admin",
-    },
-    {
-      id: 4,
-      date: "5 days ago",
-      btnText: "Full-Time",
-      btnColor: "#00C9FF",
-      title: "Business Development Manager",
-      desc: "Identify new business opportunities, handle client acquisitions, and achieve sales growth targets.",
-      link: "/jobs",
-      price: "₹50,000 - ₹75,000 /Month",
-      footerLink: "Sales",
-    },
-    {
-      id: 5,
-      date: "5 days ago",
-      btnText: "Remote",
-      btnColor: "#023052",
-      title: "Content & SEO Copywriter",
-      desc: "Write engaging articles, website copy, and optimize content for Google search rankings.",
-      link: "/jobs",
-      price: "₹25,000 - ₹40,000 /Month",
-      footerLink: "Writing",
-    },
-    {
-      id: 6,
-      date: "6 days ago",
-      btnText: "New",
-      btnColor: "#881A2D",
-      title: "UI/UX Designer",
-      desc: "Create beautiful user interfaces, wireframes, user flows, and interactive mockups.",
-      link: "/jobs",
-      price: "₹55,000 - ₹80,000 /Month",
-      footerLink: "Design",
-    },
-  ];
-  const images_companies: string[] = [
-    "https://logos-world.net/wp-content/uploads/2024/07/Woolworths-Logo.png",
-    "https://1000logos.net/wp-content/uploads/2021/05/SUGAR-Cosmetics-logo.png",
-    "https://logos-world.net/wp-content/uploads/2024/07/Woolworths-Logo.png",
-    "https://1000logos.net/wp-content/uploads/2021/05/SUGAR-Cosmetics-logo.png",
-    "https://logos-world.net/wp-content/uploads/2024/07/Woolworths-Logo.png",
-    "https://1000logos.net/wp-content/uploads/2021/05/SUGAR-Cosmetics-logo.png",
-    "https://logos-world.net/wp-content/uploads/2024/07/Woolworths-Logo.png",
-  ];
-  void images_companies;
-
-  const responsive_companies: ResponsiveMap = {
-    "2xl": {
-      breakpoint: { max: 4000, min: 1536 },
-      items: 6,
-    },
-    xl: {
-      breakpoint: { max: 1535, min: 1280 },
-      items: 5,
-    },
-    lg: {
-      breakpoint: { max: 1279, min: 1024 },
-      items: 4,
-    },
-    md: {
-      breakpoint: { max: 1023, min: 768 },
-      items: 4,
-    },
-    sm: {
-      breakpoint: { max: 767, min: 640 },
-      items: 3,
-    },
-    xs: {
-      breakpoint: { max: 639, min: 0 },
-      items: 2,
-    },
-  };
-
-  void responsive_companies;
-
-  type Testimonial = {
-    name: string;
-    position: string;
-    review: string;
-    rating: number; // 0..5, half steps ok
-    image: string; // remote URL
-  };
-
-  const testimonials: Testimonial[] = [
-    {
-      name: "John Doe",
-      position: "CEO, TechCorp",
-      review:
-        "Visionary Crafts transformed our idea into a reality. The process was smooth and the final product was amazing!",
-      rating: 4.5,
-      image: "https://randomuser.me/api/portraits/men/32.jpg",
-    },
-    {
-      name: "Sarah Lee",
-      position: "Founder, BeautyCare",
-      review:
-        "Their design quality and attention to detail exceeded our expectations. Highly recommend them!",
-      rating: 5,
-      image: "https://randomuser.me/api/portraits/women/44.jpg",
-    },
-    {
-      name: "Amit Patel",
-      position: "CTO, FinTechX",
-      review:
-        "One of the best teams we’ve worked with. They really understand what the client needs.",
-      rating: 4,
-      image: "https://randomuser.me/api/portraits/men/75.jpg",
-    },
-  ];
-
-  const blogs: BlogItem[] = [
-    {
-      date: "Aug 20, 2025",
-      text: "How to convince recruiters and get your dream job: a guide on standout profile updates, resumes, and interview skills.",
-      link: "/blogs/details",
-    },
-    {
-      date: "Sept 05, 2025",
-      text: "Top 5 high-demand technical skills to focus on for career growth in the current job market across India.",
-      link: "/blogs/details",
-    },
-    {
-      date: "Sept 25, 2025",
-      text: "Writing a professional resume: tips, layouts, and templates recommended by recruiters to pass ATS systems.",
-      link: "/blogs/details",
-    },
-  ];
-
-  const socialCards: SocialCard[] = [
-    {
-      name: "Instagram",
-      role: "Video Editor",
-      border: "border-pink-600",
-      icon: (
-        <FaInstagram className="text-pink-600 text-[40px]" aria-hidden="true" />
-      ),
-    },
-    {
-      name: "Facebook",
-      role: "Product Manager",
-      border: "border-blue-700",
-      icon: (
-        <FaFacebook className="text-blue-700 text-[40px]" aria-hidden="true" />
-      ),
-    },
-    {
-      name: "Pinterest",
-      role: "Graphic Designer",
-      border: "border-red-500",
-      icon: (
-        <FaPinterest className="text-red-500 text-[40px]" aria-hidden="true" />
-      ),
-    },
-    {
-      name: "Google",
-      role: "Full-Stack Developer",
-      border: "border-green-600",
-      icon: <FcGoogle className="text-[40px]" aria-hidden="true" />,
-    },
-    {
-      name: "Yahoo",
-      role: "Full-Stack Developer",
-      border: "border-purple-600",
-      icon: (
-        <FaYahoo className="text-[#6001D2] text-[40px]" aria-hidden="true" />
-      ),
-    },
-  ];
+  // Static arrays are declared outside to prevent re-creation on re-render.
 
   return (
     <div>
       <div className="relative min-h-screen overflow-x-hidden z-0">
         {/* HERO (Banner + content) */}
 
-        <section className="relative overflow-hidden">
+        <section className="fixed inset-x-0 top-0 h-[155vh] lg:h-[100vh] w-full z-0">
           <div
-            className="h-[155vh] lg:h-[100vh]  w-full bg-[url('/images/RI_banner_bgHome.webp')] bg-cover bg-center bg-no-repeat bg-fixed"
+            className="h-full w-full bg-[url('/images/RI_banner_bgHome.webp')] bg-cover bg-center bg-no-repeat"
             ref={typewriter1Ref}
           />
 
@@ -611,7 +664,7 @@ const Home = () => {
                 </div>
 
                 <p
-                  className="fontPOP text-gray-500 font-semibold text-sm"
+                  className="fontPOP text-gray-500 font-semibold text-sm mt-2"
                   style={{
                     letterSpacing: "2px",
                     wordSpacing: "4px",
@@ -631,9 +684,9 @@ const Home = () => {
                       </label>
                       <div className="relative">
                         <button
-                          type="button"
-                          onClick={() => setOpenWhat((v) => !v)}
-                          className={`flex items-center justify-between w-full px-3 h-12 text-sm text-gray-700 bg-white border border-gray-300 rounded-[10px] hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-[#72B76A] ${openWhat ? "ring-2 ring-[#72B76A]" : ""}`}
+                           type="button"
+                           onClick={() => setOpenWhat((v) => !v)}
+                           className={`flex items-center justify-between w-full px-3 h-12 text-sm text-gray-700 bg-white border border-gray-300 rounded-[10px] hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-[#72B76A] ${openWhat ? "ring-2 ring-[#72B76A]" : ""}`}
                         >
                           <span className="truncate">{what}</span>
                           <svg
@@ -662,9 +715,8 @@ const Home = () => {
                                     setWhat(opt);
                                     setOpenWhat(false);
                                   }}
-                                  className={`w-full px-4 py-2 text-left text-sm hover:bg-gray-50 ${
-                                    what === opt ? "bg-gray-50 font-medium" : ""
-                                  }`}
+                                  className={`w-full px-4 py-2 text-left text-sm hover:bg-gray-50 ${what === opt ? "bg-gray-50 font-medium" : ""
+                                    }`}
                                 >
                                   {opt}
                                 </button>
@@ -682,9 +734,9 @@ const Home = () => {
                       </label>
                       <div className="relative">
                         <button
-                          type="button"
-                          onClick={() => setOpenType((v) => !v)}
-                          className={`flex items-center justify-between w-full px-3 h-12 text-sm text-gray-700 bg-white border border-gray-300 rounded-[10px] hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-[#72B76A] ${openType ? "ring-2 ring-[#72B76A]" : ""}`}
+                           type="button"
+                           onClick={() => setOpenType((v) => !v)}
+                           className={`flex items-center justify-between w-full px-3 h-12 text-sm text-gray-700 bg-white border border-gray-300 rounded-[10px] hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-[#72B76A] ${openType ? "ring-2 ring-[#72B76A]" : ""}`}
                         >
                           <span className="truncate">{type}</span>
                           <svg
@@ -713,9 +765,8 @@ const Home = () => {
                                     setType(opt);
                                     setOpenType(false);
                                   }}
-                                  className={`w-full px-4 py-2 text-left text-sm hover:bg-gray-50 ${
-                                    type === opt ? "bg-gray-50 font-medium" : ""
-                                  }`}
+                                  className={`w-full px-4 py-2 text-left text-sm hover:bg-gray-50 ${type === opt ? "bg-gray-50 font-medium" : ""
+                                    }`}
                                 >
                                   {opt}
                                 </button>
@@ -744,9 +795,6 @@ const Home = () => {
 
                 {/* CTA */}
                 <div className="col-span-1 md:col-span-3 mt-4">
-                  {/* <button className="relative px-4 h-9 overflow-hidden group border border-[#72B76A] bg-[#72B76A] rounded-lg hover:bg-transparent text-white hover:text-[#72B76A] active:scale-90 transition-all ease-out duration-700">
-                      Find Job
-                    </button> */}
                   <button onClick={handleSearch} className="relative px-4 h-9 overflow-hidden group border border-[#72B76A] bg-[#72B76A] rounded-lg from-gray-700/50 to-black hover:bg-transparent text-white hover:text-[#72B76A] active:scale-90 transition-all ease-out duration-700 cursor-pointer">
                     <span className="absolute right-0 w-10 h-full top-0 transition-all duration-1000 transform translate-x-12 bg-white opacity-10 -skew-x-12 group-hover:-translate-x-24 ease"></span>
                     <span className="relative flex gap-2 items-center text-sm font-semibold">
@@ -764,19 +812,22 @@ const Home = () => {
                     lineHeight: 1,
                   }}
                 >
-                  5,000+ Active Jobs Posted.
+                  Active Jobs Posted
                 </div>
               </div>
 
               {/* RIGHT: floating cards column */}
               <FloatingCardsAuto
-                cards={socialCards}
+                cards={popularIndustriesCards}
                 sideImageUrl="https://static.vecteezy.com/system/resources/previews/048/415/844/non_2x/3d-icon-simple-female-character-working-on-laptop-while-sitting-in-chair-free-png.webp"
-                duration={18}
+                duration={60}
               />
             </div>
           </div>
         </section>
+
+        {/* Spacer to allow scrolling */}
+        <div className="h-[155vh] lg:h-[100vh] pointer-events-none" />
 
         {/* <section className="relative [--hh:72px] lg:[--hh:125px] min-h-[calc(100svh-var(--hh))] pt-[calc(var(--hh)+25px)]"> */}
         {/* <section className="relative h-[200vh] lg:h-[100vh] w-full">
@@ -1021,43 +1072,43 @@ const Home = () => {
                   <div className="flex flex-wrap items-center gap-5 mt-5">
                     <div className="flex items-center gap-2 bg-white p-3 rounded-lg shadow-sm">
                       <div className="flex items-center justify-center bg-[#FFCC23] h-10 w-10 rounded-full text-white">
-                        4
+                        5
                       </div>
                       <div>
                         <p className="font-semibold text-[#FFCC23] text-lg">
                           {isVisible && (
-                            <CountUp end={99} suffix="%" duration={7} />
+                            <CountUp end={25} suffix="+" duration={7} />
                           )}
                         </p>
-                        <p className="text-xs">Placement Rate</p>
+                        <p className="text-xs">Years Experience</p>
                       </div>
                     </div>
 
                     <div className="flex items-center gap-2 bg-white p-3 rounded-lg shadow-sm">
                       <div className="flex items-center justify-center bg-[#FFCC23] h-10 w-10 rounded-full text-white">
-                        4
+                        6
                       </div>
                       <div>
                         <p className="font-semibold text-[#FFCC23] text-lg">
                           {isVisible && (
-                            <CountUp end={300} suffix="+" duration={7} />
+                            <CountUp end={400} suffix="+" duration={7} />
                           )}
                         </p>
-                        <p className="text-xs">Partner Companies</p>
+                        <p className="text-xs">Verified Recruiters</p>
                       </div>
                     </div>
 
                     <div className="flex items-center gap-2 bg-white p-3 rounded-lg shadow-sm">
                       <div className="flex items-center justify-center bg-[#FFCC23] h-10 w-10 rounded-full text-white">
-                        4
+                        7
                       </div>
                       <div>
                         <p className="font-semibold text-[#FFCC23] text-lg">
                           {isVisible && (
-                            <CountUp end={20} suffix="K+" duration={7} />
+                            <CountUp end={10} suffix="K+" duration={7} />
                           )}{" "}
                         </p>
-                        <p className="text-xs">Active Candidates</p>
+                        <p className="text-xs">Skilled Candidates</p>
                       </div>
                     </div>
                   </div>
@@ -1420,54 +1471,29 @@ const Home = () => {
 
           {/* Companies Carousel */}
           <div className="bg-[#F2FCF1] -mt-20 mx-10 lg:mx-[15%] 2xl:mx-[25%] p-5 rounded-xl">
-            <div>
-              <Carousel
-                responsive={responsive_companies}
-                infinite
-                arrows={false}
-                autoPlay
-                autoPlaySpeed={2000}
-                itemClass="p-5"
-              >
-                {images_companies.map((img, index) => (
-                  <div
-                    key={index}
-                    className="border border-[#F9F9F9] w-full h-[90px] overflow-hidden rounded"
-                  >
-                    <Link href={`/company/${index}`} className="block">
-                      <Image
-                        src={img}
-                        alt={`Slide ${index}`}
-                        width={200}
-                        height={90}
-                        className="w-full h-full object-contain object-center transition-transform duration-300 ease-in-out hover:scale-110"
-                      />
-                    </Link>
-                  </div>
-                ))}
-              </Carousel>
-            </div>
+            <IndustryMarquee />
 
-            <div className="flex justify-center gap-5 sm:gap-10 lg:gap-20 text-center mx-5 mb-5">
+            <div className="flex justify-center gap-5 sm:gap-10 lg:gap-20 text-center mx-5 mb-5 mt-5">
               <div className="">
                 <p className="font-semibold text-2xl md:text-3xl lg:text-4xl text-[#00C9FF]">
-                  <CountUp end={5} suffix="M+" duration={3} />
+                  <CountUp end={100} suffix="+" duration={3} />
                 </p>
-                <p className="text-sm mt-2">Active Candidates</p>
+                <p className="text-sm mt-2">Industries</p>
               </div>
 
               <div>
                 <p className="font-semibold text-2xl md:text-3xl lg:text-4xl text-[#00C9FF]">
-                  <CountUp end={9} suffix="M+" duration={3} />
+                  Locations
+                  {/* <CountUp end={9} suffix="M+" duration={3} /> */}
                 </p>
-                <p className="text-sm mt-2">Monthly Site Visits</p>
+                <p className="text-sm mt-2">All Over India</p>
               </div>
 
               <div>
                 <p className="font-semibold text-2xl md:text-3xl lg:text-4xl text-[#00C9FF]">
-                  <CountUp end={20} suffix="K+" duration={3} />
+                  <CountUp end={99} suffix="%" duration={3} />
                 </p>
-                <p className="text-sm mt-2">Verified Recruiters</p>
+                <p className="text-sm mt-2">Placement Rate</p>
               </div>
             </div>
           </div>

@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import "../Header/Header.css";
 import Image from "next/image";
@@ -11,16 +11,53 @@ import { SlLocationPin } from "react-icons/sl";
 import { FaInstagram, FaLinkedin, FaFacebook, FaWhatsapp } from "react-icons/fa";
 
 const Footer: React.FC = () => {
+  const [email, setEmail] = useState("");
+  const [status, setStatus] = useState<"idle" | "success" | "error">("idle");
+
+  const handleSubscribe = () => {
+    if (!email || !email.includes("@")) {
+      setStatus("error");
+      return;
+    }
+    // Simulate successful subscription
+    setStatus("success");
+    setEmail("");
+    setTimeout(() => setStatus("idle"), 4000);
+  };
+
   return (
-    <div suppressHydrationWarning className="bg-[#0F172A]">
-      <div className="relative overflow-hidden bg-[#72B76A] text-white font-medium text-xs py-3 z-0">
-        <div className="animate-marquee whitespace-nowrap flex w-max">
-          <span className="pr-10">
-            Get hired by top companies in India. Explore daily job opportunities. Log in to start applying! Connect with leading recruiters across multiple industries.
-          </span>
-          <span className="pr-10">
-            Get hired by top companies in India. Explore daily job opportunities. Log in to start applying! Connect with leading recruiters across multiple industries.
-          </span>
+    <div suppressHydrationWarning className="relative z-10 bg-[#0F172A]">
+      <style>{`
+        @keyframes scrollFooterMarquee {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(-50%); }
+        }
+        .footer-marquee-container {
+          display: flex;
+          width: max-content;
+          animation: scrollFooterMarquee 45s linear infinite;
+        }
+      `}</style>
+      <div className="relative overflow-hidden bg-[#72B76A] text-white font-medium text-xs py-2 z-0">
+        <div className="footer-marquee-container">
+          {/* Half 1 */}
+          <div className="flex shrink-0">
+            <span className="px-10 uppercase tracking-wide">
+              Rojgari India has no other branches. Beware of fraudulent job offers. We NEVER ask candidates for any registration fees or charges!
+            </span>
+            <span className="px-10 uppercase tracking-wide border-l border-white/30">
+              Rojgari India has no other branches. Beware of fraudulent job offers. We NEVER ask candidates for any registration fees or charges!
+            </span>
+          </div>
+          {/* Half 2 */}
+          <div className="flex shrink-0">
+            <span className="px-10 uppercase tracking-wide border-l border-white/30">
+              Rojgari India has no other branches. Beware of fraudulent job offers. We NEVER ask candidates for any registration fees or charges!
+            </span>
+            <span className="px-10 uppercase tracking-wide border-l border-white/30">
+              Rojgari India has no other branches. Beware of fraudulent job offers. We NEVER ask candidates for any registration fees or charges!
+            </span>
+          </div>
         </div>
       </div>
 
@@ -31,16 +68,27 @@ const Footer: React.FC = () => {
               Subscribe to our newsletter to receive the latest job listings, career tips, and placement opportunities directly in your inbox.
             </p>
 
-            <div className="flex justify-end w-full">
-              <input
-                type="text"
-                className="px-5 w-[90%] lg:w-[70%] text-white bg-slate-800 border border-transparent rounded-l-lg focus:border-[#72B76A] focus-within:border-2 focus:outline-none focus:ring-0 focus-visible:outline-none placeholder:text-slate-500"
-                placeholder="Your email"
-                suppressHydrationWarning
-              />
-              <button className="px-6 py-2 bg-[#72B76A] text-white rounded-r-lg hover:bg-[#61a35a] transition-colors font-semibold tracking-wide" suppressHydrationWarning>
-                <span className="text-sm" suppressHydrationWarning>Subscribe</span>
-              </button>
+            <div className="flex flex-col items-end w-full">
+              <div className="flex justify-end w-full">
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => {
+                    setEmail(e.target.value);
+                    if (status === "error") setStatus("idle");
+                  }}
+                  className="px-5 w-[90%] lg:w-[70%] text-white bg-slate-800 border border-transparent rounded-l-lg focus:border-[#72B76A] focus-within:border-2 focus:outline-none focus:ring-0 focus-visible:outline-none placeholder:text-slate-500"
+                  placeholder="Your email"
+                  suppressHydrationWarning
+                />
+                <button onClick={handleSubscribe} className="px-6 py-2 bg-[#72B76A] text-white rounded-r-lg hover:bg-[#61a35a] transition-colors font-semibold tracking-wide" suppressHydrationWarning>
+                  <span className="text-sm" suppressHydrationWarning>Subscribe</span>
+                </button>
+              </div>
+              <div className="h-4 mt-2">
+                {status === "error" && <p className="text-red-400 text-xs">Please enter a valid email address.</p>}
+                {status === "success" && <p className="text-[#72B76A] text-xs">Thank you for subscribing!</p>}
+              </div>
             </div>
           </div>
 
@@ -211,13 +259,13 @@ const Footer: React.FC = () => {
           {/* Social Icons */}
           <div className="flex justify-center flex-wrap gap-4 sm:gap-6 mt-8 text-2xl pt-6 border-t border-slate-800">
             <a
-              href="https://www.instagram.com/rojgariindia/"
+              href="https://wa.me/917201080009?text=Hello,%20I%20would%20like%20to%20know%20more%20about%20your%20services"
               target="_blank"
               rel="noopener noreferrer"
-              className="transition-all hover:-translate-y-1 hover:text-[#E1306C] bg-slate-800/50 hover:bg-slate-800 p-3.5 rounded-full text-slate-300 shadow-lg"
-              aria-label="Instagram"
+              className="transition-all hover:-translate-y-1 hover:text-[#25D366] bg-slate-800/50 hover:bg-slate-800 p-3.5 rounded-full text-slate-300 shadow-lg"
+              aria-label="WhatsApp"
             >
-              <FaInstagram />
+              <FaWhatsapp />
             </a>
             <a
               href="https://www.linkedin.com/company/rojgariindia/"
@@ -229,6 +277,15 @@ const Footer: React.FC = () => {
               <FaLinkedin />
             </a>
             <a
+              href="https://www.instagram.com/rojgariindia/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="transition-all hover:-translate-y-1 hover:text-[#E1306C] bg-slate-800/50 hover:bg-slate-800 p-3.5 rounded-full text-slate-300 shadow-lg"
+              aria-label="Instagram"
+            >
+              <FaInstagram />
+            </a>
+            <a
               href="https://www.facebook.com/share/1ACWMEKGH8/"
               target="_blank"
               rel="noopener noreferrer"
@@ -236,15 +293,6 @@ const Footer: React.FC = () => {
               aria-label="Facebook"
             >
               <FaFacebook />
-            </a>
-            <a
-              href="https://wa.me/917201080009?text=Hello,%20I%20would%20like%20to%20know%20more%20about%20your%20services"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="transition-all hover:-translate-y-1 hover:text-[#25D366] bg-slate-800/50 hover:bg-slate-800 p-3.5 rounded-full text-slate-300 shadow-lg"
-              aria-label="WhatsApp"
-            >
-              <FaWhatsapp />
             </a>
           </div>
         </div>

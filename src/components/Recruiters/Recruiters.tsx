@@ -248,8 +248,14 @@ const Recruiters = () => {
   return (
     <>
       {/* B2B Hero */}
-      <section className="relative overflow-hidden">
-        <div className="h-screen bg-[url('/images/RI_banner_bg.webp')] bg-cover bg-center bg-no-repeat bg-fixed" />
+      <section className="fixed inset-x-0 top-0 h-screen w-full z-0">
+        <div className="h-full w-full bg-[url('/images/RI_banner_bg.webp')] bg-cover bg-center bg-no-repeat" />
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background: "linear-gradient(to bottom, rgba(255, 255, 240, 0.1) 0%, rgba(255, 255, 240, 0.4) 65%, rgba(255, 255, 0, 0.1) 85%, rgba(255, 255, 0, 0.3) 100%)"
+          }}
+        />
         <div className="absolute inset-0 flex items-center justify-center px-5 lg:px-[5%] 2xl:px-[10%]">
           <div className="max-w-screen-xl w-full text-center">
             <p className="fontPOP text-slate-500 font-semibold tracking-widest uppercase mb-2 text-xs md:text-sm mt-5">
@@ -287,6 +293,12 @@ const Recruiters = () => {
         </div>
       </section>
 
+      {/* Spacer to allow scrolling */}
+      <div className="h-screen pointer-events-none" />
+
+      {/* Wrapper to scroll over the fixed hero section */}
+      <div className="relative z-10 bg-[#FFFFF0] shadow-[0_-15px_30px_rgba(0,0,0,0.05)]">
+
       {/* Why Partner With Us (Grid) */}
       <section className="py-20 px-5 lg:px-[5%] 2xl:px-[15%]">
         <div className="text-center max-w-3xl mx-auto mb-16">
@@ -297,7 +309,7 @@ const Recruiters = () => {
           {[
             { icon: "🔍", title: "Pre-Screened Talent", desc: "Every profile undergoes a preliminary screening to ensure quality and authenticity." },
             { icon: "⚡", title: "Faster Hiring", desc: "Reduce your average time-to-hire by up to 40% with our advanced matching algorithms." },
-            { icon: "👨‍💼", title: "Dedicated Manager", desc: "Get personalized support from an Account Manager dedicated to your company's success." },
+            { icon: "🤝", title: "Expert Support", desc: "Get timely assistance and guidance from our team of specialists to ensure a smooth hiring experience." },
             { icon: "🎯", title: "Targeted Outreach", desc: "Access passive candidates who aren't actively looking but are open to the right offer." }
           ].map((item, idx) => (
             <motion.div
@@ -391,12 +403,17 @@ const Recruiters = () => {
 
       {/* Call to Action (Login/Register) */}
       <div className="px-5 lg:px-[5%] 2xl:px-[15%] pb-20 pt-10">
-        <div className="bg-gradient-to-r from-[#00c9ff]/80 to-[#005c99]/90 rounded-3xl p-10 lg:p-16 flex flex-col items-center text-center relative overflow-hidden">
-          <div className="absolute top-0 left-0 w-full h-full bg-[url('/images/map-img.webp')] opacity-10 bg-cover bg-center"></div>
+        <div className="relative bg-[#00C9FF]/10 rounded-3xl p-10 lg:p-16 flex flex-col items-center text-center overflow-hidden">
+          <div className="absolute -top-32 -right-28 flex items-center justify-center h-96 w-96 rounded-full bg-[#AE70BB]/10 z-0">
+            <div className="bg-[#E5FAF1] h-60 w-60 rounded-full"></div>
+          </div>
+          <div className="absolute -bottom-28 -left-28 flex items-center justify-center h-80 w-80 rounded-full bg-[#72B76A]/20 z-0">
+            <div className="bg-[#E5FAF1] h-48 w-48 rounded-full"></div>
+          </div>
 
           <div className="relative z-10 max-w-2xl mx-auto">
-            <h2 className="fontAL font-bold text-3xl md:text-4xl text-white mb-6 leading-tight">Ready to Find Your Next Great Hire?</h2>
-            <p className="text-white/80 text-sm md:text-base mb-8 leading-relaxed">
+            <h2 className="fontAL font-bold text-3xl md:text-4xl text-gray-900 mb-6 leading-tight">Ready to Find Your Next Great Hire?</h2>
+            <p className="text-gray-700 text-sm md:text-base mb-8 leading-relaxed">
               Join thousands of employers who trust Rojgari India to build their dream teams. Create your employer account today and post your first job.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -766,6 +783,7 @@ const Recruiters = () => {
         <Testimonials />
       </div>
       {/* <Footer /> */}
+      </div>
     </>
   );
 };
