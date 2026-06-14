@@ -513,7 +513,34 @@ const JobDetailsContent = () => {
                     Job Description
                   </h2>
                   <div className="prose prose-neutral max-w-none text-sm text-gray-700 whitespace-pre-wrap leading-relaxed">
-                    {job.description || "No description provided."}
+                    {(() => {
+                      if (!job.description) return "No description provided.";
+                      let formatted = job.description;
+                      
+                      // Format bullets
+                      formatted = formatted.replace(/\s*•\s*/g, '\n• ');
+                      
+                      // Format numbered lists (1. 2. 3.)
+                      formatted = formatted.replace(/([a-z\.])\s+(\d+\.\s+[A-Z])/g, '$1\n\n$2');
+                      
+                      // Format common headings
+                      const headings = [
+                        "Job Title:", "Experience:", "Education:", "Job Summary:", 
+                        "Key Responsibilities:", "Requirements:", "Qualifications:",
+                        "Responsibilities:"
+                      ];
+                      headings.forEach(heading => {
+                        const escapedHeading = heading.replace(/([:])/g, '\\$1');
+                        const regex = new RegExp(`([a-z\\.])\\s+(${escapedHeading})`, 'gi');
+                        formatted = formatted.replace(regex, '$1\n\n$2\n');
+                      });
+                      
+                      // Clean up extra newlines
+                      formatted = formatted.replace(/\n{3,}/g, '\n\n');
+                      formatted = formatted.replace(/^\n+/, '');
+                      
+                      return formatted.trim();
+                    })()}
                   </div>
                 </div>
 
