@@ -140,7 +140,7 @@ const Footer: React.FC = () => {
                   <SlLocationPin className="text-[#72B76A] text-xl shrink-0 mt-0.5" />
                   <span>
                     <b className="text-slate-300 mr-1">Address:</b>
-                    Adarsh Plaza, 403 & 404, 150 Feet Ring Rd, Rajkot, Gujarat 360005
+                    403 & 404, Adarsh Plaza, Opp. Gujarat Gas, Nr. Raiya Telephone Exchage, 150 Ft.Ring Road, Rajkot, Gujarat 360005
                   </span>
                 </p>
               </div>

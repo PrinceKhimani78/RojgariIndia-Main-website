@@ -7,7 +7,7 @@ import { FaMapMarkerAlt, FaLinkedinIn, FaFacebookF, FaInstagram, FaWhatsapp } fr
 import Link from "next/link";
 import { Typewriter } from "react-simple-typewriter";
 type Crumb = { name: string; href?: string };
-const ADDRESS = "Adarsh Plaza, 403 & 404, 150 Feet Ring Rd, opp. GSPC Gas, nr. Raiya Telephone Exchage, Raval Nagar, Rajkot, Gujarat 360005";
+const ADDRESS = "403 & 404, Adarsh Plaza, Opp. Gujarat Gas, Nr. Raiya Telephone Exchage, 150 Ft.Ring Road, Rajkot, Gujarat 360005";
 const MAP_EMBED_SRC = `https://www.google.com/maps?q=${encodeURIComponent(
   ADDRESS
 )}&output=embed`;
@@ -207,9 +207,9 @@ const ContactUs = () => {
                         Our Office
                       </h3>
                       <p className="mt-1 text-xs leading-5 text-gray-900 font-medium">
-                        Adarsh Plaza, 403 & 404, 150 Feet Ring Rd, opp. GSPC Gas, nr. Raiya Telephone Exchage, Raval Nagar,
+                        403 & 404, Adarsh Plaza, Opp. Gujarat Gas, Nr. Raiya Telephone Exchage,
                         <br />
-                        Rajkot, Gujarat 360005
+                        150 Ft.Ring Road, Rajkot, Gujarat 360005
                       </p>
                     </div>
                   </div>

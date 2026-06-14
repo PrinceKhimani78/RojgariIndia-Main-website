@@ -19,6 +19,13 @@ const getInitials = (name: string) => {
   return (first + (parts.length > 1 ? last : "")).toUpperCase();
 };
 
+const teamMembers = [
+  { name: "Mr. Hitesh Desai", role: "Founder", image: "/images/team/hitesh_desai.png", objectPosition: "top center" },
+  { name: "Ms. Akshi Patel", role: "Co-Founder", image: "/images/team/akshi_patel.png", objectPosition: "center" },
+  { name: "Mr. Kanchan Sarkhel", role: "Business Development Manager", image: "/images/team/kanchan_sarkhel.png", objectPosition: "top center" },
+  { name: "Ms. Swara Patel", role: "Talent Acquisition Manager", image: "/images/team/swara_patel.jpg", objectPosition: "top center" },
+];
+
 const testimonials = [
   { name: "Shashank Deep Singh", position: "Design Manager (Indore)", review: "Rojgari India is one of the best recruitment consultants in India. Their team is very supportive, professional, and helpful throughout the hiring process. They regularly provide job updates and guide candidates at every step.", rating: 5 },
   { name: "Rishi Kumar", position: "Sr. Quality engineer (Bangalore)", review: "I had a very positive experience with Rojgari India. The recruiters understood my profile and shared relevant job openings. Their communication was timely and transparent. They kept me updated at every stage of the recruitment process.", rating: 5 },
@@ -193,7 +200,7 @@ const AboutUs = () => {
     <>
       <section className="fixed inset-x-0 top-0 h-screen w-full z-0">
         <div className="h-full w-full bg-[url('/images/RI_banner_bg.webp')] bg-cover bg-center bg-no-repeat" />
-        {/* Yellow gradient overlay: top translucent to bottom opaque */}
+        {/* Green gradient overlay: top translucent to bottom green */}
         <div
           className="absolute inset-0 pointer-events-none"
           style={{
@@ -626,6 +633,35 @@ const AboutUs = () => {
             </div>
           </div>
         )}
+
+        {/* ── Team Members Section ─────────────────────────────── */}
+        <section className="py-16 px-5 lg:px-[5%] 2xl:px-[15%]">
+          <div className="text-center mb-12">
+            <p className="fontPOP text-[#881A2D] text-sm tracking-widest uppercase">Our Team</p>
+            <h2 className="fontAL font-semibold capitalize text-2xl md:text-3xl lg:text-4xl mt-3" style={{ letterSpacing: "1px", lineHeight: 1.2 }}>
+              Meet The Experts Behind Rojgari India
+            </h2>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            {teamMembers.map((member, idx) => (
+              <motion.div
+                key={member.name}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 0.6, delay: idx * 0.1 }}
+                className="bg-white rounded-xl shadow-md p-6 flex flex-col items-center text-center border border-gray-100 hover:shadow-lg transition-shadow"
+              >
+                <div className="w-32 h-32 rounded-full overflow-hidden mb-4 border-4 border-[#881A2D]/10 shadow-sm">
+                  <Image src={member.image} alt={member.name} width={128} height={128} className="object-cover w-full h-full" style={{ objectPosition: member.objectPosition }} unoptimized />
+                </div>
+                <h3 className="fontPOP font-semibold text-lg text-slate-800">{member.name}</h3>
+                <p className="fontPOP text-sm text-[#881A2D] mt-1">{member.role}</p>
+              </motion.div>
+            ))}
+          </div>
+        </section>
+
         {/* ── All Testimonials Section ─────────────────────────────── */}
         <section id="testimonials" className="scroll-mt-24 py-16 px-5 lg:px-[5%] 2xl:px-[15%]">
           <div className="text-center mb-12">
