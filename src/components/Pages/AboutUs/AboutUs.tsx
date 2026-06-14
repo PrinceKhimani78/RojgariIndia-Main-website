@@ -20,10 +20,10 @@ const getInitials = (name: string) => {
 };
 
 const teamMembers = [
-  { name: "Mr. Hitesh Desai", role: "Founder", image: "/images/team/hitesh_desai.png", objectPosition: "top center" },
-  { name: "Ms. Akshi Patel", role: "Co-Founder", image: "/images/team/akshi_patel.png", objectPosition: "center" },
-  { name: "Mr. Kanchan Sarkhel", role: "Business Development Manager", image: "/images/team/kanchan_sarkhel.png", objectPosition: "top center" },
-  { name: "Ms. Swara Patel", role: "Talent Acquisition Manager", image: "/images/team/swara_patel.jpg", objectPosition: "top center" },
+  { name: "Mr. Hitesh Desai", role: "Founder", image: "/images/team/hitesh_desai_v2.png" },
+  { name: "Ms. Akshi Patel", role: "Co-Founder", image: "/images/team/akshi_patel_v2.png" },
+  { name: "Mr. Kanchan Sarkhel", role: "Business Development Manager", image: "/images/team/kanchan_sarkhel_v2.png" },
+  { name: "Ms. Swara Patel", role: "Talent Acquisition Manager", image: "/images/team/swara_patel_v2.jpg" },
 ];
 
 const testimonials = [
@@ -653,7 +653,7 @@ const AboutUs = () => {
                 className="bg-white rounded-xl shadow-md p-6 flex flex-col items-center text-center border border-gray-100 hover:shadow-lg transition-shadow"
               >
                 <div className="w-32 h-32 rounded-full overflow-hidden mb-4 border-4 border-[#881A2D]/10 shadow-sm">
-                  <Image src={member.image} alt={member.name} width={128} height={128} className="object-cover w-full h-full" style={{ objectPosition: member.objectPosition }} unoptimized />
+                  <Image src={member.image} alt={member.name} width={128} height={128} className="object-cover w-full h-full" unoptimized />
                 </div>
                 <h3 className="fontPOP font-semibold text-lg text-slate-800">{member.name}</h3>
                 <p className="fontPOP text-sm text-[#881A2D] mt-1">{member.role}</p>
