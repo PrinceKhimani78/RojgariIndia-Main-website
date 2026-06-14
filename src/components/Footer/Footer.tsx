@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
+import { useAuth } from "@/context/AuthContext";
 import "../Header/Header.css";
 import Image from "next/image";
 import "../Home/Home.css";
@@ -11,8 +12,20 @@ import { SlLocationPin } from "react-icons/sl";
 import { FaInstagram, FaLinkedin, FaFacebook, FaWhatsapp } from "react-icons/fa";
 
 const Footer: React.FC = () => {
+  const { isAuthenticated } = useAuth();
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<"idle" | "success" | "error">("idle");
+
+  const handleProtectedLink = (e: React.MouseEvent, userType: "candidates" | "recruiter") => {
+    if (!isAuthenticated) {
+      e.preventDefault();
+      window.dispatchEvent(
+        new CustomEvent("openAuthModal", {
+          detail: { mode: "login", userType }
+        })
+      );
+    }
+  };
 
   const handleSubscribe = () => {
     if (!email || !email.includes("@")) {
@@ -61,7 +74,7 @@ const Footer: React.FC = () => {
         </div>
       </div>
 
-      <div className="text-slate-400 pt-10 pb-16 px-5 lg:px-[5%] 2xl:px-[10%]" suppressHydrationWarning>
+      <div className="text-slate-400 pt-10 pb-6 px-5 lg:px-[5%] 2xl:px-[10%]" suppressHydrationWarning>
         <div className="flex flex-col justify-center w-full">
           <div className="grid grid-cols-1 lg:grid-cols-[35%_60%] justify-between items-center gap-5 my-10">
             <p className="fontAL text-lg text-slate-300">
@@ -162,6 +175,7 @@ const Footer: React.FC = () => {
 
                 <Link
                   href="/candidates/profile"
+                  onClick={(e) => handleProtectedLink(e, "candidates")}
                   className="text-sm hover:text-[#72B76A] transition-colors"
                 >
                   Candidate Profile
@@ -176,6 +190,7 @@ const Footer: React.FC = () => {
 
                 <Link
                   href="/recruiters/post-job"
+                  onClick={(e) => handleProtectedLink(e, "recruiter")}
                   className="text-sm hover:text-[#72B76A] transition-colors"
                 >
                   Post a Job
@@ -183,6 +198,7 @@ const Footer: React.FC = () => {
 
                 <Link
                   href="/recruiters/candidates-list"
+                  onClick={(e) => handleProtectedLink(e, "recruiter")}
                   className="text-sm hover:text-[#72B76A] transition-colors"
                 >
                   Search Candidates
@@ -190,6 +206,7 @@ const Footer: React.FC = () => {
 
                 <Link
                   href="/recruiters/dashboard"
+                  onClick={(e) => handleProtectedLink(e, "recruiter")}
                   className="text-sm hover:text-[#72B76A] transition-colors"
                 >
                   Recruiter Dashboard
@@ -257,7 +274,7 @@ const Footer: React.FC = () => {
           </div>
 
           {/* Social Icons */}
-          <div className="flex justify-center flex-wrap gap-4 sm:gap-6 mt-8 text-2xl pt-6 border-t border-slate-800">
+          <div className="flex justify-center flex-wrap gap-4 sm:gap-6 mt-12 text-2xl">
             <a
               href="https://wa.me/917201080009?text=Hello,%20I%20would%20like%20to%20know%20more%20about%20your%20services"
               target="_blank"
@@ -294,6 +311,13 @@ const Footer: React.FC = () => {
             >
               <FaFacebook />
             </a>
+          </div>
+
+          {/* Disclaimer */}
+          <div className="mt-8 pt-6 border-t border-slate-800 text-center px-4">
+            <p className="text-xs italic text-slate-400/70 max-w-3xl mx-auto tracking-wide leading-relaxed">
+              Rojgari Placements Pvt. Ltd. All Rights Reserved. RojgariIndia.com is owned and operated by Rojgari Placements Pvt. Ltd. Any disputes shall be subject to the jurisdiction of Rajkot, Gujarat, India.
+            </p>
           </div>
         </div>
       </div>
