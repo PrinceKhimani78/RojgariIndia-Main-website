@@ -12,9 +12,10 @@ import "react-multi-carousel/lib/styles.css";
 import { FaStar, FaStarHalfAlt, FaRegStar, FaBriefcase } from "react-icons/fa";
 
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay } from "swiper/modules";
+import { Autoplay, Navigation } from "swiper/modules";
 import Image from "next/image";
 import "swiper/css";
+import "swiper/css/navigation";
 import { FaLaptopCode, FaHeartbeat, FaLandmark, FaIndustry, FaGraduationCap, FaShoppingCart, FaTruck, FaBuilding, FaCar, FaFilm, FaBolt, FaLeaf, FaBalanceScale, FaMicrochip, FaFlask } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import Testimonials from "../Testimonials/Testimonials";
@@ -1218,18 +1219,50 @@ const Home = () => {
                   </button>
                 </div>
               ) : (
-                <Swiper
-                  spaceBetween={40}
-                  breakpoints={{
-                    0: { slidesPerView: 1 },
-                    640: { slidesPerView: 2 },
-                    1024: { slidesPerView: 3 },
-                    1536: { slidesPerView: 4 },
-                  }}
-                  modules={[Autoplay]}
-                  autoplay={{ delay: 3000, disableOnInteraction: false }}
-                  className="mt-4 pt-2 pb-10 px-2"
-                >
+                <>
+                  <style dangerouslySetInnerHTML={{ __html: `
+                    .job-carousel .swiper-button-next,
+                    .job-carousel .swiper-button-prev {
+                      background-color: white;
+                      border: 1px solid #72B76A;
+                      border-radius: 50%;
+                      width: 32px !important;
+                      height: 32px !important;
+                      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+                      transition: all 0.3s ease;
+                    }
+                    .job-carousel .swiper-button-next::after,
+                    .job-carousel .swiper-button-prev::after {
+                      font-size: 12px !important;
+                      font-weight: 900;
+                      transition: color 0.3s ease;
+                    }
+                    .job-carousel .swiper-button-next:hover,
+                    .job-carousel .swiper-button-prev:hover {
+                      background-color: #72B76A;
+                    }
+                    .job-carousel .swiper-button-next:hover::after,
+                    .job-carousel .swiper-button-prev:hover::after {
+                      color: white;
+                    }
+                  `}} />
+                  <Swiper
+                    spaceBetween={40}
+                    breakpoints={{
+                      0: { slidesPerView: 1 },
+                      640: { slidesPerView: 2 },
+                      1024: { slidesPerView: 3 },
+                      1536: { slidesPerView: 4 },
+                    }}
+                    modules={[Autoplay, Navigation]}
+                    autoplay={{ delay: 3000, disableOnInteraction: false }}
+                    loop={true}
+                    navigation={true}
+                    style={{
+                      "--swiper-navigation-color": "#72B76A",
+                    } as React.CSSProperties}
+                    className="job-carousel mt-4 pt-2 pb-10 px-4 md:px-10"
+                  >
                   {(realJobs.length > 0 ? realJobs : cardData).map((card, idx) => {
                     const isReal = !!card.created_at;
                     const dateText = isReal ? timeAgo(card.created_at) : card.date;
@@ -1308,6 +1341,7 @@ const Home = () => {
                     );
                   })}
                 </Swiper>
+              </>
               )}
             </div>
           </div>
