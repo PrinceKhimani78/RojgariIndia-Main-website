@@ -14,7 +14,7 @@ import { FaInstagram, FaLinkedin, FaFacebook, FaWhatsapp } from "react-icons/fa"
 const Footer: React.FC = () => {
   const { isAuthenticated } = useAuth();
   const [email, setEmail] = useState("");
-  const [status, setStatus] = useState<"idle" | "success" | "invalid_email" | "server_error">("idle");
+  const [status, setStatus] = useState<"idle" | "success" | "error">("idle");
 
   const handleProtectedLink = (e: React.MouseEvent, userType: "candidates" | "recruiter") => {
     if (!isAuthenticated) {
@@ -27,31 +27,15 @@ const Footer: React.FC = () => {
     }
   };
 
-  const handleSubscribe = async () => {
+  const handleSubscribe = () => {
     if (!email || !email.includes("@")) {
-      setStatus("invalid_email");
+      setStatus("error");
       return;
     }
-    try {
-      // Use local backend for dev, or api.rojgariindia.com in production
-      const baseUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
-      const response = await fetch(`${baseUrl}/newsletter`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email }),
-      });
-      const data = await response.json();
-      if (data.success) {
-        setStatus("success");
-        setEmail("");
-        setTimeout(() => setStatus("idle"), 4000);
-      } else {
-        setStatus("server_error");
-      }
-    } catch (err) {
-      console.error("Newsletter subscription error:", err);
-      setStatus("server_error");
-    }
+    // Simulate successful subscription
+    setStatus("success");
+    setEmail("");
+    setTimeout(() => setStatus("idle"), 4000);
   };
 
   return (
@@ -104,7 +88,7 @@ const Footer: React.FC = () => {
                   value={email}
                   onChange={(e) => {
                     setEmail(e.target.value);
-                    if (status === "invalid_email" || status === "server_error") setStatus("idle");
+                    if (status === "error") setStatus("idle");
                   }}
                   className="px-5 w-[90%] lg:w-[70%] text-white bg-slate-800 border border-transparent rounded-l-lg focus:border-[#72B76A] focus-within:border-2 focus:outline-none focus:ring-0 focus-visible:outline-none placeholder:text-slate-500"
                   placeholder="Your email"
@@ -115,8 +99,7 @@ const Footer: React.FC = () => {
                 </button>
               </div>
               <div className="h-4 mt-2">
-                {status === "invalid_email" && <p className="text-red-400 text-xs">Please enter a valid email address.</p>}
-                {status === "server_error" && <p className="text-red-400 text-xs">Server connection failed. Please try again later.</p>}
+                {status === "error" && <p className="text-red-400 text-xs">Please enter a valid email address.</p>}
                 {status === "success" && <p className="text-[#72B76A] text-xs">Thank you for subscribing!</p>}
               </div>
             </div>
