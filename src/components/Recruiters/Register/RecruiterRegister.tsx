@@ -5,7 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { FaEye, FaEyeSlash } from "react-icons/fa6";
-import { INDUSTRY_OPTIONS } from "@/constants/industryData";
+import { INDUSTRY_OPTIONS, MAIN_INDUSTRY_OPTIONS } from "@/constants/industryData";
 import { useAuth } from "@/context/AuthContext";
 import Footer from "@/components/Footer/Footer";
 
@@ -239,7 +239,7 @@ export default function RecruiterRegister() {
                                 className="w-full p-2.5 rounded-lg bg-white text-sm placeholder-slate-400 ring-1 ring-gray-300 focus:outline-none focus:ring-2 focus:ring-[#72B76A] transition"
                             >
                                 <option value="">Select Industry</option>
-                                {INDUSTRY_OPTIONS.map((opt) => (
+                                {MAIN_INDUSTRY_OPTIONS.map((opt) => (
                                     <option key={opt.value} value={opt.value}>{opt.label}</option>
                                 ))}
                             </select>

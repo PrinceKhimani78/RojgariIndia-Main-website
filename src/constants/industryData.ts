@@ -112,12 +112,30 @@ export const INDUSTRY_JOB_MAP: Record<string, string[]> = {
     "Robotics & Automation": ["Robotics Engineer", "Automation Engineer", "PLC Programmer", "Systems Integrator"],
     "Green Technology & Waste Management": ["Environmental Engineer", "Sustainability Manager", "Waste Management Executive"],
 
-    "Government & Public Sector": ["Clerk", "Officer", "Administrative Executive", "IAS/IPS Aspirant", "PSU Engineer"],
-    "Security Services": ["Security Guard", "Security Supervisor", "Security Manager", "Trainer"],
-    "NGO & Social Sector": ["Program Manager", "Field Coordinator", "Social Worker", "Fundraising Executive"],
-    "Freelancer / Self-Employed": ["Freelancer", "Consultant", "Self-Employed Professional"],
-    "Other": ["Other"],
+    "Government & Public Sector": ["Government Officer", "Clerk", "Administrative Officer"],
+    "Security Services": ["Security Guard", "Security Officer", "Bouncer", "Security Supervisor"],
+    "NGO & Social Sector": ["Social Worker", "Project Coordinator", "Fundraiser", "Counselor"],
+    "Freelancer / Self-Employed": ["Freelance Writer", "Consultant", "Photographer", "Independent Contractor"],
+    "Other": ["Other"]
 };
+
+export const MAIN_INDUSTRY_OPTIONS: SelectOption[] = [
+    { label: "Primary Sector", value: "Primary Sector" },
+    { label: "Manufacturing", value: "Manufacturing" },
+    { label: "Construction & Real Estate", value: "Construction & Real Estate" },
+    { label: "IT & Technology", value: "IT & Technology" },
+    { label: "Banking & Finance", value: "Banking & Finance" },
+    { label: "Retail & FMCG", value: "Retail & FMCG" },
+    { label: "Logistics", value: "Logistics" },
+    { label: "Hospitality", value: "Hospitality" },
+    { label: "Healthcare", value: "Healthcare" },
+    { label: "Education", value: "Education" },
+    { label: "Media & Creative", value: "Media & Creative" },
+    { label: "Professional Services", value: "Professional Services" },
+    { label: "Energy", value: "Energy" },
+    { label: "Emerging Tech", value: "Emerging Tech" },
+    { label: "Government & Others", value: "Government & Others" },
+];
 
 export const INDUSTRY_OPTIONS: SelectOption[] = [
     // PRIMARY SECTOR
