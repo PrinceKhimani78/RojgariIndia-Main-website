@@ -18,6 +18,7 @@ import Image from "next/image";
 import { RxCross2 } from "react-icons/rx";
 import { useAuth } from "@/context/AuthContext";
 import { sendOtp } from "@/services/otpService";
+import { MAIN_INDUSTRY_OPTIONS } from "@/constants/industryData";
 
 type Mode = "login" | "signup";
 
@@ -835,13 +836,9 @@ const Header: React.FC = () => {
                             onChange={handleChange}
                           >
                             <option value="">Select Industry</option>
-                            <option value="IT Services">IT Services</option>
-                            <option value="Manufacturing">Manufacturing</option>
-                            <option value="Finance">Finance</option>
-                            <option value="Healthcare">Healthcare</option>
-                            <option value="Education">Education</option>
-                            <option value="Retail">Retail</option>
-                            <option value="Other">Other</option>
+                            {MAIN_INDUSTRY_OPTIONS.map((opt) => (
+                                <option key={opt.value} value={opt.value}>{opt.label}</option>
+                            ))}
                           </select>
                         </>
                       )}
