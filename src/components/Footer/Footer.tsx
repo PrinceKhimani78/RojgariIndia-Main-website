@@ -14,7 +14,7 @@ import { FaInstagram, FaLinkedin, FaFacebook, FaWhatsapp } from "react-icons/fa"
 const Footer: React.FC = () => {
   const { isAuthenticated } = useAuth();
   const [email, setEmail] = useState("");
-  const [status, setStatus] = useState<"idle" | "success" | "error">("idle");
+  const [status, setStatus] = useState<"idle" | "success" | "invalid_email" | "server_error">("idle");
 
   const handleProtectedLink = (e: React.MouseEvent, userType: "candidates" | "recruiter") => {
     if (!isAuthenticated) {
@@ -29,7 +29,7 @@ const Footer: React.FC = () => {
 
   const handleSubscribe = async () => {
     if (!email || !email.includes("@")) {
-      setStatus("error");
+      setStatus("invalid_email");
       return;
     }
     try {
@@ -46,11 +46,11 @@ const Footer: React.FC = () => {
         setEmail("");
         setTimeout(() => setStatus("idle"), 4000);
       } else {
-        setStatus("error");
+        setStatus("server_error");
       }
     } catch (err) {
       console.error("Newsletter subscription error:", err);
-      setStatus("error");
+      setStatus("server_error");
     }
   };
 
@@ -104,7 +104,7 @@ const Footer: React.FC = () => {
                   value={email}
                   onChange={(e) => {
                     setEmail(e.target.value);
-                    if (status === "error") setStatus("idle");
+                    if (status === "invalid_email" || status === "server_error") setStatus("idle");
                   }}
                   className="px-5 w-[90%] lg:w-[70%] text-white bg-slate-800 border border-transparent rounded-l-lg focus:border-[#72B76A] focus-within:border-2 focus:outline-none focus:ring-0 focus-visible:outline-none placeholder:text-slate-500"
                   placeholder="Your email"
@@ -115,7 +115,8 @@ const Footer: React.FC = () => {
                 </button>
               </div>
               <div className="h-4 mt-2">
-                {status === "error" && <p className="text-red-400 text-xs">Please enter a valid email address.</p>}
+                {status === "invalid_email" && <p className="text-red-400 text-xs">Please enter a valid email address.</p>}
+                {status === "server_error" && <p className="text-red-400 text-xs">Server connection failed. Please try again later.</p>}
                 {status === "success" && <p className="text-[#72B76A] text-xs">Thank you for subscribing!</p>}
               </div>
             </div>
