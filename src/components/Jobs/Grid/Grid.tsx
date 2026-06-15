@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { FaMapMarkerAlt, FaBriefcase, FaRupeeSign, FaClock, FaBookmark, FaRegBookmark } from "react-icons/fa";
 import { useAuth } from "@/context/AuthContext";
+import { useSearchParams } from "next/navigation";
 
 /* =============================
    Types
@@ -107,13 +108,15 @@ const Grid = () => {
   const [savedJobIds, setSavedJobIds] = useState<Set<string>>(new Set());
   const [savingJobId, setSavingJobId] = useState<string | null>(null);
 
+  const searchParams = useSearchParams();
   const [jobs, setJobs] = useState<Job[]>([]);
   const [loading, setLoading] = useState(true);
   const [open, setOpen] = useState(false);
-  const [category, setCategory] = useState(categories[0]);
-  const [keyword, setKeyword] = useState("");
-  const [location, setLocation] = useState("");
-  const [selectedJobTypes, setSelectedJobTypes] = useState<string[]>([]);
+  const [category, setCategory] = useState(searchParams.get("category") || categories[0]);
+  const [keyword, setKeyword] = useState(searchParams.get("keyword") || "");
+  const [location, setLocation] = useState(searchParams.get("location") || "");
+  const initialType = searchParams.get("type");
+  const [selectedJobTypes, setSelectedJobTypes] = useState<string[]>(initialType && initialType !== "Job Type" ? [initialType] : []);
   const [datePost, setDatePost] = useState<DatePost>("All");
   const [sortOpen, setSortOpen] = useState(false);
   const [showOpen, setShowOpen] = useState(false);
@@ -249,13 +252,22 @@ const Grid = () => {
   return (
     <>
       {/* ===== banner ===== */}
-      <section className="relative overflow-hidden">
-        <div className="h-[220px] lg:h-[350px] bg-[url('/images/RI_banner_bg.webp')] bg-cover bg-center bg-no-repeat bg-fixed" />
-        <div className="absolute inset-0 flex h-[220px] lg:h-[350px] place-items-end  justify-center px-5 lg:px-[5%] 2xl:px-[10%]">
+      <section className="fixed inset-x-0 top-0 h-screen w-full z-0">
+        <div className="h-full w-full bg-[url('/images/RI_banner_bg.webp')] bg-cover bg-center bg-no-repeat" />
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background: "linear-gradient(to bottom, rgba(255, 255, 240, 0.1) 0%, rgba(255, 255, 240, 0.4) 65%, rgba(255, 255, 0, 0.1) 85%, rgba(255, 255, 0, 0.3) 100%)"
+          }}
+        />
+        <div className="absolute inset-0 flex items-center justify-center px-5 lg:px-[5%] 2xl:px-[10%]">
           <div className="max-w-screen-xl w-full text-center">
-            <h1 className="inline-block mb-4 px-4 py-2 text-slate-900  sm:text-xl fontAL font-semibold capitalize text-2xl md:text-3xl lg:text-4xl mt-5">
+            <h1 className="inline-block mb-4 px-4 py-2 text-slate-900 text-2xl sm:text-3xl md:text-4xl lg:text-5xl fontAL font-semibold capitalize mt-5">
               The Most Exciting Jobs
             </h1>
+            <p className="fontPOP text-sm md:text-base text-slate-700 mb-6 max-w-2xl mx-auto">
+              Explore thousands of verified job listings across top industries. Take the next step in your professional journey and find the perfect role today.
+            </p>
             <nav aria-label="Breadcrumb" className="mb-6 text-sm text-slate-700">
               <ol className="flex items-center justify-center gap-2">
                 {crumbs.map((c, i) => {
@@ -280,6 +292,12 @@ const Grid = () => {
           </div>
         </div>
       </section>
+
+      {/* Spacer to allow scrolling */}
+      <div className="h-screen pointer-events-none" />
+
+      {/* Wrapper to scroll over the fixed hero section */}
+      <div className="relative z-10 bg-[#FFFFF0] shadow-[0_-15px_30px_rgba(0,0,0,0.05)]">
 
       {/* ===== main content ===== */}
       <div className="">
@@ -374,7 +392,7 @@ const Grid = () => {
                               />
                               <label htmlFor={id} className="text-[15px] text-gray-800">{label}</label>
                             </div>
-                            <span className="text-[13px] font-semibold text-blue-600">
+                            <span className="text-[13px] font-semibold text-[#023052]">
                               {String(count).padStart(2, "0")}
                             </span>
                           </li>
@@ -402,7 +420,7 @@ const Grid = () => {
                     <h4 className="mb-4 text-[16px] font-semibold text-slate-900">Tags</h4>
                     <div className="flex flex-wrap gap-3">
                       {TAGS.map((tag) => (
-                        <button key={tag} type="button" className="rounded-full bg-blue-50 px-3 py-1.5 text-[13px] font-medium text-blue-700 hover:bg-blue-100">
+                        <button key={tag} type="button" className="rounded-full bg-[#023052]/10 px-3 py-1.5 text-[13px] font-medium text-[#023052] hover:bg-[#023052] hover:text-white transition-colors">
                           {tag}
                         </button>
                       ))}
@@ -410,15 +428,15 @@ const Grid = () => {
                   </div>
 
                   {/* Recruiting CTA */}
-                  <div className="mt-6 overflow-hidden rounded-lg border border-blue-100 shadow-[0_6px_24px_-12px_rgba(59,130,246,0.35)]">
+                  <div className="mt-6 overflow-hidden rounded-lg border border-[#023052]/20 shadow-[0_6px_24px_-12px_rgba(2,48,82,0.35)]">
                     <div className="relative h-48 sm:h-56 md:h-64">
                       <Image src="/images/job-grid.webp" alt="Recruiting" fill className="object-cover" />
-                      <div className="absolute inset-0 bg-gradient-to-tr from-blue-900/70 to-blue-600/60" />
+                      <div className="absolute inset-0 bg-[#023052]/80" />
                       <div className="absolute inset-0 flex flex-col justify-center p-6">
                         <h3 className="mb-2 text-xl font-semibold text-white">Recruiting?</h3>
                         <p className="mb-5 text-sm leading-6 text-white/90">Get Best Matched Jobs On your Email. Add Resume NOW!</p>
-                        <Link href="/pages/aboutus">
-                          <button className="relative mt-8 px-4 h-9 overflow-hidden border border-[white] bg-white rounded-lg hover:bg-transparent text-[blue] hover:text-[white] active:scale-90 transition-all ease-out duration-700 cursor-pointer">
+                        <Link href="/about-us">
+                          <button className="relative mt-8 px-4 h-9 overflow-hidden border border-white bg-white rounded-lg hover:bg-transparent text-[#023052] hover:text-white active:scale-90 transition-all ease-out duration-700 cursor-pointer">
                             <span className="relative flex gap-2 items-center text-sm font-semibold">Know More</span>
                           </button>
                         </Link>
@@ -527,7 +545,7 @@ const Grid = () => {
                      hover:-translate-y-2 hover:shadow-xl hover:bg-[#F9FAFB]"
                         >
                           <div className="flex justify-between gap-4 items-start">
-                            <div className="w-12 h-12 rounded-lg bg-gray-100 flex items-center justify-center text-xl text-gray-400 flex-shrink-0">
+                            <div className="w-14 h-14 bg-white text-[#72B76A] flex items-center justify-center text-2xl flex-shrink-0 shadow-sm rounded-md border border-green-100">
                               <FaBriefcase />
                             </div>
                             <div className="flex gap-3 items-center flex-shrink-0">
@@ -597,6 +615,7 @@ const Grid = () => {
             </div>
           </div>
         </section>
+      </div>
       </div>
     </>
   );

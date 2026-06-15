@@ -29,6 +29,9 @@ interface FormState {
   email: string;
   confirmPassword: string;
   otp: string;
+  companyName?: string;
+  mobileNumber?: string;
+  industry?: string;
 }
 
 // type JobsMenuItem = { label: string; href: string };
@@ -58,10 +61,13 @@ const Header: React.FC = () => {
   const [formData, setFormData] = useState<FormState>({
     username: "",
     password: "",
+    confirmPassword: "",
     fullName: "",
     email: "",
-    confirmPassword: "",
     otp: "",
+    companyName: "",
+    mobileNumber: "",
+    industry: "",
   });
   const [otpLoading, setOtpLoading] = useState(false);
   useEffect(() => {
@@ -81,7 +87,7 @@ const Header: React.FC = () => {
     };
   }, [showPopup]);
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
@@ -114,12 +120,29 @@ const Header: React.FC = () => {
         alert("Passwords do not match!");
         return;
       }
-      const res = await register({
-        email: formData.email,
-        password: formData.password,
-        fullName: formData.fullName,
-        otp: formData.otp,
-      });
+      let res;
+      if (userType === "recruiter") {
+        if (!formData.companyName || !formData.fullName || !formData.email || !formData.mobileNumber || !formData.industry) {
+          alert("Please fill in all required fields for recruiter signup.");
+          return;
+        }
+        res = await register({
+          companyName: formData.companyName,
+          fullName: formData.fullName,
+          email: formData.email,
+          mobileNumber: formData.mobileNumber,
+          industry: formData.industry,
+          password: formData.password,
+        }, "recruiter");
+      } else {
+        res = await register({
+          email: formData.email,
+          password: formData.password,
+          fullName: formData.fullName,
+          otp: formData.otp,
+        }, "candidate");
+      }
+
       if (res.success) {
         setShowPopup(false);
         setMenuOpen(false);
@@ -372,16 +395,16 @@ const Header: React.FC = () => {
           {/* Pages accordion */}
           <div>
             <Link
-              href="/pages/aboutus"
+              href="/about-us"
               onClick={() => setMenuOpen(false)}
-              className={`relative inline-block group font-semibold ${pathname === "/pages/aboutus"
+              className={`relative inline-block group font-semibold ${pathname === "/about-us"
                 ? "text-[#72B76A]"
                 : "text-black hover:text-[#72B76A]"
                 }`}
             >
               About&nbsp;Us
               <span
-                className={`absolute left-0 -bottom-0.5 h-[2px] bg-current transition-all duration-300 ${pathname === "/pages/aboutus"
+                className={`absolute left-0 -bottom-0.5 h-[2px] bg-current transition-all duration-300 ${pathname === "/about-us"
                   ? "w-full text-[#72B76A]"
                   : "w-0 group-hover:w-full"
                   }`}
@@ -389,6 +412,7 @@ const Header: React.FC = () => {
             </Link>
           </div>
 
+          {/* Blogs link — hidden for now
           <div>
             <Link
               href="/blogs"
@@ -403,6 +427,7 @@ const Header: React.FC = () => {
               />
             </Link>
           </div>
+          */}
 
           <div>
             <Link
@@ -543,23 +568,24 @@ const Header: React.FC = () => {
               />
             </Link>
 
-            {/* Pages /aboutus*/}
+            {/* About Us */}
             <Link
-              href="/pages/aboutus"
-              className={`relative inline-block group font-semibold ${pathname === "/pages/aboutus"
+              href="/about-us"
+              className={`relative inline-block group font-semibold ${pathname === "/about-us"
                 ? "text-[#72B76A]"
                 : "text-black hover:text-[#72B76A]"
                 }`}
             >
               About&nbsp;Us
               <span
-                className={`absolute left-0 -bottom-0.5 h-[2px] bg-current transition-all duration-300 ${pathname === "/pages/aboutus"
+                className={`absolute left-0 -bottom-0.5 h-[2px] bg-current transition-all duration-300 ${pathname === "/about-us"
                   ? "w-full text-[#72B76A]"
                   : "w-0 group-hover:w-full"
                   }`}
               />
             </Link>
 
+            {/* Blogs link — hidden for now
             <Link
               href="/blogs"
               className={`relative inline-block group font-semibold ${isBlogs ? "text-[#72B76A]" : "text-black hover:text-[#72B76A]"
@@ -571,6 +597,7 @@ const Header: React.FC = () => {
                   }`}
               />
             </Link>
+            */}
           </div>
 
           {/* Contact / Auth */}
@@ -632,32 +659,32 @@ const Header: React.FC = () => {
           onClick={() => setShowPopup(false)}
         >
           <div
-            className="popupContent bg-white shadow-xl max-w-[1000px] h-auto  sm:-[50vh] mx-5  rounded-lg relative z-10 "
+            className="popupContent bg-white shadow-xl w-[90%] sm:w-auto max-w-[1000px] max-h-[80vh] overflow-y-auto rounded-lg relative z-10 mx-4 sm:mx-8"
             onClick={(e) => e.stopPropagation()}
           >
-            {/* Desktop Close Button */}
+            {/* Close Button */}
             <button
               onClick={() => setShowPopup(false)}
               aria-label="Close sign in"
-              className="absolute top-4 right-4 z-20 text-3xl font-bold text-gray-400 hover:text-black hidden md:block"
+              className="absolute top-4 right-4 z-20 text-2xl sm:text-3xl font-bold text-gray-400 hover:text-black"
             >
               <RxCross2 size={20} />
             </button>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 items-center justify-center bg-[#FFFFF0] rounded-lg max-h-[80vh] ">
+            <div className="grid grid-cols-1 md:grid-cols-2 items-center justify-center bg-[#FFFFF0] rounded-lg min-h-full">
               {/* Left Panel */}
-              <div className="relative w-full h-full rounded-b-lg sm:rounded-b-none sm:rounded-l-lg order-2 sm:order-1 border-r border-gray-300">
+              <div className="hidden md:block relative w-full h-full sm:rounded-l-lg border-r border-gray-300">
                 <div className="flex flex-col items-center justify-center text-gray-900 p-5 h-full">
                   {/* Logo visible only on md+ */}
                   <Image
                     src="/images/logo.svg"
                     alt="Rojgari Logo"
-                    width={220}
+                    width={260}
                     height={180}
-                    className="mb-6 hidden md:block"
+                    className="mb-4 sm:w-48 md:w-[260px] h-auto"
                   />
-                  <div className="overflow-y-auto max-h-20 md:overflow-visible md:max-h-none ">
-                    <p className="font-bold uppercase mb-4 text-center">
+                  <div className="overflow-y-auto sm:overflow-visible sm:max-h-none">
+                    <p className="text-sm font-bold uppercase mb-4 text-center">
                       ➤ Please Note
                     </p>
                     <ul className="text-xs space-y-2">
@@ -692,36 +719,36 @@ const Header: React.FC = () => {
 
               {/* Right Panel */}
               <form
-                className="col-span-2 sm:col-span-1
+                className="col-span-1
              flex flex-col justify-center
              px-4 sm:px-6 lg:px-8
              py-6 sm:py-10
-             order-1 sm:order-2"
+             order-1 md:order-2"
                 onSubmit={handleSubmit}
               >
-                {/* Mobile Top Row (Logo + Close Button) */}
-                <div className="  flex items-start sm:items-center justify-between top-2 mb-6 md:hidden ">
+                {/* Mobile Top Row (Logo only, centered) */}
+                <div className="flex justify-center mb-6 md:hidden">
                   <Image
                     src="/images/logo.svg"
                     alt="Rojgari Logo"
-                    width={170}
-                    height={150}
-                    className="h-16 "
+                    width={180}
+                    height={120}
+                    className="h-14 sm:h-16 w-auto"
                   />
-                  <button
-                    onClick={() => setShowPopup(false)}
-                    aria-label="Close sign in"
-                    className="text-3xl mt-2 font-bold text-gray-400 hover:text-black"
-                  >
-                    <RxCross2 size={20} />
-                  </button>
                 </div>
 
                 {/* Title */}
                 <h2 className="fontAL font-semibold capitalize text-xl md:text-2xl lg:text-3xl my-5 text-center md:text-left">
                   {mode === "login" ? "Login" : "Sign Up"}
-                </h2>                 {/* Candidate / Recruiter buttons */}
-                 <div className="relative flex p-1 gap-2 mb-6 justify-center md:justify-start bg-gray-100 rounded-xl w-fit mx-auto md:mx-0">
+                </h2>
+                {/* Candidate / Recruiter toggle */}
+                 <div className="relative flex p-1 mb-6 bg-gray-100 rounded-xl w-[272px] mx-auto md:mx-0">
+                   {/* Sliding pill */}
+                   <div
+                     className={`absolute top-1 bottom-1 w-[128px] bg-[#72B76A] rounded-lg transition-transform duration-300 ease-in-out ${
+                       userType === "recruiter" ? "translate-x-[132px]" : "translate-x-0"
+                     }`}
+                   />
                    {/* Candidates Button */}
                    <button
                      type="button"
@@ -731,38 +758,16 @@ const Header: React.FC = () => {
                      }`}
                    >
                      Candidates
-                     {userType === "candidates" && (
-                       <motion.div
-                         layoutId="activeTabHeader"
-                         className="absolute inset-0 bg-[#72B76A] rounded-lg -z-10"
-                         transition={{ type: "spring", stiffness: 380, damping: 30 }}
-                       />
-                     )}
                    </button>
- 
                    {/* Recruiters Button */}
                    <button
                      type="button"
-                     onClick={() => {
-                       if (mode === "signup") {
-                         setShowPopup(false);
-                         router.push("/recruiters/register");
-                       } else {
-                         setUserType("recruiter");
-                       }
-                     }}
+                     onClick={() => setUserType("recruiter")}
                      className={`relative z-10 w-32 h-9 flex items-center justify-center text-sm font-semibold rounded-lg transition-colors duration-300 ${
                        userType === "recruiter" ? "text-white" : "text-gray-600 hover:text-black"
                      }`}
                    >
                      Recruiters
-                     {userType === "recruiter" && (
-                       <motion.div
-                         layoutId="activeTabHeader"
-                         className="absolute inset-0 bg-[#72B76A] rounded-lg -z-10"
-                         transition={{ type: "spring", stiffness: 380, damping: 30 }}
-                       />
-                     )}
                    </button>
                  </div>
 
@@ -772,7 +777,7 @@ const Header: React.FC = () => {
                   initial={{ x: -30, opacity: 0 }}
                   animate={{ x: 0, opacity: 1 }}
                   transition={{ duration: 0.35, ease: "easeOut" }}
-                  className="space-y-3"
+                  className={mode === "signup" && userType === "recruiter" ? "grid grid-cols-2 gap-3" : "space-y-3"}
                 >
                   {mode === "signup" ? (
                     <>
@@ -789,20 +794,57 @@ const Header: React.FC = () => {
                           type="email"
                           name="email"
                           placeholder="Email Address"
-                          className="w-full p-2 rounded bg-white text-sm placeholder-slate-400 ring-1 focus:bg-white focus:outline-none ring-gray-300 transition focus:ring-2 focus:ring-[#72B76A] pr-20"
+                          className={`w-full p-2 rounded bg-white text-sm placeholder-slate-400 ring-1 focus:bg-white focus:outline-none ring-gray-300 transition focus:ring-2 focus:ring-[#72B76A] ${userType === "candidates" ? "pr-20" : ""}`}
                           value={formData.email}
                           onChange={handleChange}
                         />
-                        <button
-                          type="button"
-                          onClick={handleSendOtp}
-                          disabled={otpLoading}
-                          className={`absolute right-1 top-1/2 -translate-y-1/2 px-2 py-1 text-[10px] font-bold text-white rounded transition ${otpLoading ? "bg-gray-400" : "bg-[#72B76A] hover:bg-[#5da356]"
-                            }`}
-                        >
-                          {otpLoading ? "Sending..." : "Send OTP"}
-                        </button>
+                        {userType === "candidates" && (
+                          <button
+                            type="button"
+                            onClick={handleSendOtp}
+                            disabled={otpLoading}
+                            className={`absolute right-1 top-1/2 -translate-y-1/2 px-2 py-1 text-[10px] font-bold text-white rounded transition ${otpLoading ? "bg-gray-400" : "bg-[#72B76A] hover:bg-[#5da356]"}`}
+                          >
+                            {otpLoading ? "Sending..." : "Send OTP"}
+                          </button>
+                        )}
                       </div>
+
+                      {userType === "recruiter" && (
+                        <>
+                          <input
+                            type="text"
+                            name="companyName"
+                            placeholder="Company Name"
+                            className="w-full p-2 rounded bg-white text-sm placeholder-slate-400 ring-1 focus:bg-white focus:outline-none ring-gray-300 transition focus:ring-2 focus:ring-[#72B76A]"
+                            value={formData.companyName}
+                            onChange={handleChange}
+                          />
+                          <input
+                            type="tel"
+                            name="mobileNumber"
+                            placeholder="Mobile Number"
+                            className="w-full p-2 rounded bg-white text-sm placeholder-slate-400 ring-1 focus:bg-white focus:outline-none ring-gray-300 transition focus:ring-2 focus:ring-[#72B76A]"
+                            value={formData.mobileNumber}
+                            onChange={handleChange}
+                          />
+                          <select
+                            name="industry"
+                            className="col-span-2 w-full p-2 rounded bg-white text-sm text-gray-500 ring-1 focus:bg-white focus:outline-none ring-gray-300 transition focus:ring-2 focus:ring-[#72B76A]"
+                            value={formData.industry}
+                            onChange={handleChange}
+                          >
+                            <option value="">Select Industry</option>
+                            <option value="IT Services">IT Services</option>
+                            <option value="Manufacturing">Manufacturing</option>
+                            <option value="Finance">Finance</option>
+                            <option value="Healthcare">Healthcare</option>
+                            <option value="Education">Education</option>
+                            <option value="Retail">Retail</option>
+                            <option value="Other">Other</option>
+                          </select>
+                        </>
+                      )}
                       {/* Password */}
                       <div className="relative">
                         <input
@@ -841,14 +883,16 @@ const Header: React.FC = () => {
                         </button>
                       </div>
 
-                      <input
-                        type="text"
-                        name="otp"
-                        placeholder="Enter OTP"
-                        className="w-full p-2 rounded bg-white text-sm placeholder-slate-400 ring-1 focus:bg-white focus:outline-none  ring-gray-300 transition focus:ring-2 focus:ring-[#72B76A]"
-                        value={formData.otp}
-                        onChange={handleChange}
-                      />
+                      {userType === "candidates" && (
+                        <input
+                          type="text"
+                          name="otp"
+                          placeholder="Enter OTP"
+                          className="w-full p-2 rounded bg-white text-sm placeholder-slate-400 ring-1 focus:bg-white focus:outline-none  ring-gray-300 transition focus:ring-2 focus:ring-[#72B76A]"
+                          value={formData.otp}
+                          onChange={handleChange}
+                        />
+                      )}
                     </>
                   ) : (
                     <>
@@ -903,12 +947,7 @@ const Header: React.FC = () => {
                         type="button"
                         className="text-[#72B76A] font-bold underline"
                         onClick={() => {
-                          if (userType === "recruiter") {
-                            setShowPopup(false);
-                            router.push("/recruiters/register");
-                          } else {
-                            setMode("signup");
-                          }
+                          setMode("signup");
                         }}
                       >
                         Sign up

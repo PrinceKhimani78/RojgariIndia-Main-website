@@ -111,6 +111,7 @@ body {
 /* 🚫 Hide global scrollbars (page only) */
 html {
   scrollbar-width: none; /* Firefox */
+  scroll-behavior: smooth;
 }
 html::-webkit-scrollbar {
   width: 0;

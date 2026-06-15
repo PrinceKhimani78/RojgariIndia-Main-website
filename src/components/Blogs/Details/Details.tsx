@@ -32,8 +32,14 @@ const Details = () => {
   return (
     <>
       {/* ===== banner ===== */}
-      <section className="relative overflow-hidden">
-        <div className="h-[180px] sm:h-[220px] lg:h-[350px] bg-[url('/images/RI_banner_bg.webp')] bg-cover bg-center bg-no-repeat bg-fixed" />
+      <section className="fixed inset-x-0 top-0 h-[180px] sm:h-[220px] lg:h-[350px] w-full z-0">
+        <div className="h-full w-full bg-[url('/images/RI_banner_bg.webp')] bg-cover bg-center bg-no-repeat" />
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background: "linear-gradient(to bottom, rgba(255, 255, 240, 0.1) 0%, rgba(255, 255, 240, 0.4) 65%, rgba(255, 255, 0, 0.1) 85%, rgba(255, 255, 0, 0.3) 100%)"
+          }}
+        />
         <div className="absolute inset-0 flex h-[180px] sm:h-[220px] lg:h-[350px] place-items-end  justify-center px-5 lg:px-[5%] 2xl:px-[10%]">
           <div className="max-w-screen-xl w-full text-center">
             <h1 className="inline-block mb-4 px-4 py-2 text-slate-900  sm:text-xl fontAL font-semibold capitalize text-2xl md:text-3xl lg:text-4xl mt-5">
@@ -80,456 +86,461 @@ const Details = () => {
         </div>
       </section>
 
-      {/* main content  */}
+      {/* Spacer to allow scrolling */}
+      <div className="h-[180px] sm:h-[220px] lg:h-[350px] pointer-events-none" />
 
-      <section className="py-10 px-5 lg:px-[5%] 2xl:px-[15%]">
-        <div className="mx-auto max-w-6xl grid gap-10 lg:grid-cols-[2fr_1fr] items-stretch">
-          {/* left side  */}
-          <div className="h-full">
-            <div className="h-full rounded-2xl bg-white flex flex-col gap-8 shadow">
-              <div className="relative overflow-hidden rounded-2xl">
-                {/* hero Image  */}
-                <div className="relative h-[250px] xs:h-[260px] md:h-[320px] lg:h-[420px]">
-                  <Image
-                    src="/images/blogdetail.webp"
-                    alt="Job cover"
-                    fill
-                    className="absolute inset-0 h-full w-full object-cover"
-                  />
-                </div>
-                {/* description part  */}
+      {/* Wrapper to scroll over the fixed hero section */}
+      <div className="relative z-10 bg-[#FFFFF0] shadow-[0_-15px_30px_rgba(0,0,0,0.05)]">
+        {/* main content  */}
+        <section className="py-10 px-5 lg:px-[5%] 2xl:px-[15%]">
+          <div className="mx-auto max-w-6xl grid gap-10 lg:grid-cols-[2fr_1fr] items-stretch">
+            {/* left side  */}
+            <div className="h-full">
+              <div className="h-full rounded-2xl bg-white flex flex-col gap-8 shadow">
+                <div className="relative overflow-hidden rounded-2xl">
+                  {/* hero Image  */}
+                  <div className="relative h-[250px] xs:h-[260px] md:h-[320px] lg:h-[420px]">
+                    <Image
+                      src="/images/blogdetail.webp"
+                      alt="Job cover"
+                      fill
+                      className="absolute inset-0 h-full w-full object-cover"
+                    />
+                  </div>
+                  {/* description part  */}
 
-                <div className="p-6 md:p-10 space-y-5">
-                  <p className="font-bold text-slate-900">
-                    April 05, 2023 &nbsp;{" "}
-                    <span className="font-bold text-slate-900">
-                      By Mark Petter
-                    </span>
-                  </p>
-
-                  {/* title */}
-                  <h2 className="fontAL font-semibold capitalize text-2xl md:text-3xl lg:text-4xl mt-5 max-w-[500px] min-h-24">
-                    How to convince recruiters and get your dream job
-                  </h2>
-
-                  {/* main content */}
-                  <div className="space-y-4  text-sm text-gray-800">
-                    <p>
-                      Landing your dream job starts with understanding what recruiters are searching for. It goes beyond technical skills. Recruiters look for candidate compatibility, communication skills, and a proactive attitude. Presenting a clean profile and custom CV matching the job description gives you a major advantage.
+                  <div className="p-6 md:p-10 space-y-5">
+                    <p className="font-bold text-slate-900">
+                      April 05, 2023 &nbsp;{" "}
+                      <span className="font-bold text-slate-900">
+                        By Mark Petter
+                      </span>
                     </p>
-                    <p>
-                      Many applicants make the mistake of using the same generic resume for every application. To truly stand out, analyze the job posting, pick out key requirements and terms, and weave them directly into your experience section. This simple step guarantees your application passes the automatic resume screening filters (ATS) and reaches a real hiring manager.
-                    </p>
-                    <h2 className="text-lg font-semibold text-neutral-900">
-                      Build a Strong Professional Network
+
+                    {/* title */}
+                    <h2 className="fontAL font-semibold capitalize text-2xl md:text-3xl lg:text-4xl mt-5 max-w-[500px] min-h-24">
+                      How to convince recruiters and get your dream job
                     </h2>
-                    <p>
-                      Networking is one of the most powerful job search tools available. Reach out to professionals already working in your target industry, participate in local job fairs, and join verified portals like Rojgari India. A single direct referral from a company employee can place your profile at the top of the recruiter's stack.
-                    </p>
-                    {/* Quote block */}
-                    <div className="bg-gray-50 rounded-xl p-6 md:p-8 relative">
-                      <div className="absolute top-4 left-6 text-4xl text-gray-400 font-serif">
-                        “
-                      </div>
-                      <p className="text-gray-800 text-base md:text-lg leading-relaxed pl-6">
-                        Recruitment isn't just about matching resumes to descriptions. It's about aligning a candidate's long-term career aspirations with a company's vision and core culture.
+
+                    {/* main content */}
+                    <div className="space-y-4  text-sm text-gray-800">
+                      <p>
+                        Landing your dream job starts with understanding what recruiters are searching for. It goes beyond technical skills. Recruiters look for candidate compatibility, communication skills, and a proactive attitude. Presenting a clean profile and custom CV matching the job description gives you a major advantage.
                       </p>
-                      <p className="mt-4 font-bold text-gray-900 tracking-wide pl-6">
-                        ROJGARI PLACEMENTS
+                      <p>
+                        Many applicants make the mistake of using the same generic resume for every application. To truly stand out, analyze the job posting, pick out key requirements and terms, and weave them directly into your experience section. This simple step guarantees your application passes the automatic resume screening filters (ATS) and reaches a real hiring manager.
                       </p>
-                    </div>
-                    <h2 className="text-lg font-semibold text-neutral-900">
-                      Get Your Resume Done Right
-                    </h2>
- 
-                    <p>
-                      Keep your CV concise, clear, and focused on achievements rather than just a list of daily responsibilities. Use active verbs and quantify your success with numbers and metrics where possible, showing hiring teams the exact value you will bring.
-                    </p>
-                    <div>
-                      {/* Responsibilities part  */}
-                      <ul className="mt-4 space-y-1">
-                        {RESPONSIBILITIES.map((item, i) => (
-                          <li
-                            key={i}
-                            className="flex gap-3 text-sm text-gray-800"
-                          >
-                            <span className="mt-0.5">
-                              <Check />
-                            </span>
-                            <span>{item}</span>
-                          </li>
-                        ))}
-                      </ul>
-                      {/* Author Card */}
-                      <div className="mt-10 rounded-xl bg-gray-50 p-6 flex flex-col gap-6 sm:flex-row sm:items-center">
-                        {/* Author image */}
-                        <div className="relative h-24 w-24 shrink-0 overflow-hidden rounded-xl mx-auto sm:mx-0">
-                          <Image
-                            src="/images/author.webp"
-                            alt="Rosalina William"
-                            fill
-                            className="object-cover"
-                          />
+                      <h2 className="text-lg font-semibold text-neutral-900">
+                        Build a Strong Professional Network
+                      </h2>
+                      <p>
+                        Networking is one of the most powerful job search tools available. Reach out to professionals already working in your target industry, participate in local job fairs, and join verified portals like Rojgari India. A single direct referral from a company employee can place your profile at the top of the recruiter's stack.
+                      </p>
+                      {/* Quote block */}
+                      <div className="bg-gray-50 rounded-xl p-6 md:p-8 relative">
+                        <div className="absolute top-4 left-6 text-4xl text-gray-400 font-serif">
+                          “
                         </div>
-
-                        {/* Author details */}
-                        <div className="text-center sm:text-left">
-                          <p className="text-blue-600 font-medium">
-                            435 Posts Since 2018
-                          </p>
-                          <p className="text-sm text-gray-600 mt-1">
-                            Rosalina William is a certified career coach and HR consultant with over 8 years of experience helping candidates land their dream roles in top tech companies.
-                          </p>
-                          <p className="mt-2 font-bold text-gray-900">
-                            ROSALINA WILLIAM
-                          </p>
-                        </div>
+                        <p className="text-gray-800 text-base md:text-lg leading-relaxed pl-6">
+                          Recruitment isn't just about matching resumes to descriptions. It's about aligning a candidate's long-term career aspirations with a company's vision and core culture.
+                        </p>
+                        <p className="mt-4 font-bold text-gray-900 tracking-wide pl-6">
+                          ROJGARI INDIA
+                        </p>
                       </div>
+                      <h2 className="text-lg font-semibold text-neutral-900">
+                        Get Your Resume Done Right
+                      </h2>
 
-                      {/* Share icons */}
-                      <div className="text-center mt-10">
-                        <p className="font-medium text-gray-700">Share</p>
-                        <div className="flex justify-center gap-6 mt-4 text-gray-500">
-                          <Link
-                            href="https://facebook.com"
-                            target="_blank"
-                            aria-label="Share on Facebook"
-                          >
-                            <FaFacebookF className="h-5 w-5 hover:text-blue-600 transition" />
-                          </Link>
-                          <Link
-                            href="https://twitter.com"
-                            target="_blank"
-                            aria-label="Share on Twitter"
-                          >
-                            <FaTwitter className="h-5 w-5 hover:text-sky-500 transition" />
-                          </Link>
-                          <Link
-                            href="https://linkedin.com"
-                            target="_blank"
-                            aria-label="Share on LinkedIn"
-                          >
-                            <FaLinkedinIn className="h-5 w-5 hover:text-blue-700 transition" />
-                          </Link>
-                          <Link
-                            href="https://google.com"
-                            target="_blank"
-                            aria-label="Share on Google"
-                          >
-                            <FaGoogle className="h-5 w-5 hover:text-red-600 transition" />
-                          </Link>
-                        </div>
-                      </div>
-
-                      {/* Next/Prev navigation */}
-                      <div className="flex justify-between items-center border-t border-gray-200 mt-10 pt-6">
-                        <div className="flex items-center gap-2 text-blue-600 cursor-pointer">
-                          <svg
-                            className="h-25 w-12"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            strokeWidth="5"
-                          >
-                            <path d="M15 18l-6-6 6-6" />
-                          </svg>
-                          <p className="text-sm font-medium text-gray-800">
-                            The wise man therefore always holds in these matters
-                            to this principle
-                          </p>
-                        </div>
-
-                        <div className="flex items-center gap-2 text-blue-600 cursor-pointer text-right">
-                          <p className="text-sm font-medium text-gray-800">
-                            Rejects pleasures to secure other greater pleasures
-                          </p>
-                          <svg
-                            className="h-25 w-12"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            strokeWidth="5"
-                          >
-                            <path d="M9 18l6-6-6-6" />
-                          </svg>
-                        </div>
-                      </div>
-                      {/* Comments Section */}
-                      <section className="mt-12">
-                        <h2 className="text-lg font-semibold text-neutral-900">
-                          Comments
-                        </h2>
-
-                        <div className="space-y-8 mt-7">
-                          {/* Comment 1 */}
-                          <div className="flex gap-4">
-                            {/* Avatar */}
-                            <div className="relative h-20 w-20 shrink-0 overflow-hidden rounded-xl">
-                              <Image
-                                src="/images/comment.webp"
-                                alt="Richard Anderson"
-                                fill
-                                className="object-cover"
-                              />
-                            </div>
-
-                            <div className="flex-1">
-                              <div className="flex justify-between items-center">
-                                <h4 className="font-semibold text-gray-900">
-                                  Richard Anderson
-                                </h4>
-                                <Link
-                                  href="#"
-                                  className="text-sm text-blue-600 hover:underline"
-                                >
-                                  Reply
-                                </Link>
-                              </div>
-                              <p className="text-sm text-gray-700 mt-1">
-                                No one rejects, dislikes, or avoids pleasure
-                                itself, because pleasure, but because those who
-                                do not know how to pursue.
-                              </p>
-                              <p className="text-xs text-gray-500 mt-2">
-                                Apr 05, 2023
-                              </p>
-                            </div>
-                          </div>
-
-                          {/* Comment 2 */}
-                          <div className="flex gap-4">
-                            <div className="relative h-20 w-20 shrink-0 overflow-hidden rounded-xl">
-                              <Image
-                                src="/images/comment.webp"
-                                alt="Devid Abraham"
-                                fill
-                                className="object-cover"
-                              />
-                            </div>
-
-                            <div className="flex-1">
-                              <div className="flex justify-between items-center">
-                                <h4 className="font-semibold text-gray-900">
-                                  Devid Abraham
-                                </h4>
-                                <Link
-                                  href="#"
-                                  className="text-sm text-blue-600 hover:underline"
-                                >
-                                  Reply
-                                </Link>
-                              </div>
-                              <p className="text-sm text-gray-700 mt-1">
-                                No one rejects, dislikes, or avoids pleasure
-                                itself, because pleasure, but because those who
-                                do not know how to pursue.
-                              </p>
-                              <p className="text-xs text-gray-500 mt-2">
-                                Apr 08, 2023
-                              </p>
-                            </div>
-                          </div>
-                        </div>
-                      </section>
-                      {/* Leave a Reply Section */}
-                      <section className="mt-12">
-                        <h2 className="text-lg font-semibold text-neutral-900">
-                          Leave a reply
-                        </h2>
-
-                        <form className="bg-gray-50 rounded-xl p-6 space-y-5 shadow-sm mt-10">
-                          {/* Name + Email */}
-                          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <input
-                              type="text"
-                              placeholder="Your Name"
-                              required
-                              className="h-12 w-full rounded bg-white px-4 text-sm placeholder-slate-400 ring-1 ring-blue-100 transition focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#00c9ff]"
-                            />
-                            <input
-                              type="email"
-                              placeholder="Your Email"
-                              required
-                              className="h-12 w-full rounded bg-white px-4 text-sm placeholder-slate-400 ring-1 ring-blue-100 transition focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#00c9ff]"
+                      <p>
+                        Keep your CV concise, clear, and focused on achievements rather than just a list of daily responsibilities. Use active verbs and quantify your success with numbers and metrics where possible, showing hiring teams the exact value you will bring.
+                      </p>
+                      <div>
+                        {/* Responsibilities part  */}
+                        <ul className="mt-4 space-y-1">
+                          {RESPONSIBILITIES.map((item, i) => (
+                            <li
+                              key={i}
+                              className="flex gap-3 text-sm text-gray-800"
+                            >
+                              <span className="mt-0.5">
+                                <Check />
+                              </span>
+                              <span>{item}</span>
+                            </li>
+                          ))}
+                        </ul>
+                        {/* Author Card */}
+                        <div className="mt-10 rounded-xl bg-gray-50 p-6 flex flex-col gap-6 sm:flex-row sm:items-center">
+                          {/* Author image */}
+                          <div className="relative h-24 w-24 shrink-0 overflow-hidden rounded-xl mx-auto sm:mx-0">
+                            <Image
+                              src="/images/author.webp"
+                              alt="Rosalina William"
+                              fill
+                              className="object-cover"
                             />
                           </div>
 
-                          {/* Message */}
-                          <textarea
-                            placeholder="Message"
-                            required
-                            rows={4}
-                            className="w-full resize-y rounded bg-white px-4 py-3 text-sm placeholder-slate-400 ring-1 ring-blue-100 transition focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#00c9ff]"
-                          ></textarea>
+                          {/* Author details */}
+                          <div className="text-center sm:text-left">
+                            <p className="text-blue-600 font-medium">
+                              435 Posts Since 2018
+                            </p>
+                            <p className="text-sm text-gray-600 mt-1">
+                              Rosalina William is a certified career coach and HR consultant with over 8 years of experience helping candidates land their dream roles in top tech companies.
+                            </p>
+                            <p className="mt-2 font-bold text-gray-900">
+                              ROSALINA WILLIAM
+                            </p>
+                          </div>
+                        </div>
 
-                          {/* Submit Button */}
-                          <button
-                            type="submit"
-                            className="px-6 py-3 rounded-lg bg-[#00c9ff] text-white font-semibold hover:bg-[#009ec7] transition"
-                          >
-                            Submit Now
-                          </button>
-                        </form>
-                      </section>
+                        {/* Share icons */}
+                        <div className="text-center mt-10">
+                          <p className="font-medium text-gray-700">Share</p>
+                          <div className="flex justify-center gap-6 mt-4 text-gray-500">
+                            <Link
+                              href="https://facebook.com"
+                              target="_blank"
+                              aria-label="Share on Facebook"
+                            >
+                              <FaFacebookF className="h-5 w-5 hover:text-blue-600 transition" />
+                            </Link>
+                            <Link
+                              href="https://twitter.com"
+                              target="_blank"
+                              aria-label="Share on Twitter"
+                            >
+                              <FaTwitter className="h-5 w-5 hover:text-sky-500 transition" />
+                            </Link>
+                            <Link
+                              href="https://linkedin.com"
+                              target="_blank"
+                              aria-label="Share on LinkedIn"
+                            >
+                              <FaLinkedinIn className="h-5 w-5 hover:text-blue-700 transition" />
+                            </Link>
+                            <Link
+                              href="https://google.com"
+                              target="_blank"
+                              aria-label="Share on Google"
+                            >
+                              <FaGoogle className="h-5 w-5 hover:text-red-600 transition" />
+                            </Link>
+                          </div>
+                        </div>
+
+                        {/* Next/Prev navigation */}
+                        <div className="flex justify-between items-center border-t border-gray-200 mt-10 pt-6">
+                          <div className="flex items-center gap-2 text-blue-600 cursor-pointer">
+                            <svg
+                              className="h-25 w-12"
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              stroke="currentColor"
+                              strokeWidth="5"
+                            >
+                              <path d="M15 18l-6-6 6-6" />
+                            </svg>
+                            <p className="text-sm font-medium text-gray-800">
+                              The wise man therefore always holds in these matters
+                              to this principle
+                            </p>
+                          </div>
+
+                          <div className="flex items-center gap-2 text-blue-600 cursor-pointer text-right">
+                            <p className="text-sm font-medium text-gray-800">
+                              Rejects pleasures to secure other greater pleasures
+                            </p>
+                            <svg
+                              className="h-25 w-12"
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              stroke="currentColor"
+                              strokeWidth="5"
+                            >
+                              <path d="M9 18l6-6-6-6" />
+                            </svg>
+                          </div>
+                        </div>
+                        {/* Comments Section */}
+                        <section className="mt-12">
+                          <h2 className="text-lg font-semibold text-neutral-900">
+                            Comments
+                          </h2>
+
+                          <div className="space-y-8 mt-7">
+                            {/* Comment 1 */}
+                            <div className="flex gap-4">
+                              {/* Avatar */}
+                              <div className="relative h-20 w-20 shrink-0 overflow-hidden rounded-xl">
+                                <Image
+                                  src="/images/comment.webp"
+                                  alt="Richard Anderson"
+                                  fill
+                                  className="object-cover"
+                                />
+                              </div>
+
+                              <div className="flex-1">
+                                <div className="flex justify-between items-center">
+                                  <h4 className="font-semibold text-gray-900">
+                                    Richard Anderson
+                                  </h4>
+                                  <Link
+                                    href="#"
+                                    className="text-sm text-blue-600 hover:underline"
+                                  >
+                                    Reply
+                                  </Link>
+                                </div>
+                                <p className="text-sm text-gray-700 mt-1">
+                                  No one rejects, dislikes, or avoids pleasure
+                                  itself, because pleasure, but because those who
+                                  do not know how to pursue.
+                                </p>
+                                <p className="text-xs text-gray-500 mt-2">
+                                  Apr 05, 2023
+                                </p>
+                              </div>
+                            </div>
+
+                            {/* Comment 2 */}
+                            <div className="flex gap-4">
+                              <div className="relative h-20 w-20 shrink-0 overflow-hidden rounded-xl">
+                                <Image
+                                  src="/images/comment.webp"
+                                  alt="Devid Abraham"
+                                  fill
+                                  className="object-cover"
+                                />
+                              </div>
+
+                              <div className="flex-1">
+                                <div className="flex justify-between items-center">
+                                  <h4 className="font-semibold text-gray-900">
+                                    Devid Abraham
+                                  </h4>
+                                  <Link
+                                    href="#"
+                                    className="text-sm text-blue-600 hover:underline"
+                                  >
+                                    Reply
+                                  </Link>
+                                </div>
+                                <p className="text-sm text-gray-700 mt-1">
+                                  No one rejects, dislikes, or avoids pleasure
+                                  itself, because pleasure, but because those who
+                                  do not know how to pursue.
+                                </p>
+                                <p className="text-xs text-gray-500 mt-2">
+                                  Apr 08, 2023
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </section>
+                        {/* Leave a Reply Section */}
+                        <section className="mt-12">
+                          <h2 className="text-lg font-semibold text-neutral-900">
+                            Leave a reply
+                          </h2>
+
+                          <form className="bg-gray-50 rounded-xl p-6 space-y-5 shadow-sm mt-10">
+                            {/* Name + Email */}
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                              <input
+                                type="text"
+                                placeholder="Your Name"
+                                required
+                                className="h-12 w-full rounded bg-white px-4 text-sm placeholder-slate-400 ring-1 ring-blue-100 transition focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#00c9ff]"
+                              />
+                              <input
+                                type="email"
+                                placeholder="Your Email"
+                                required
+                                className="h-12 w-full rounded bg-white px-4 text-sm placeholder-slate-400 ring-1 ring-blue-100 transition focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#00c9ff]"
+                              />
+                            </div>
+
+                            {/* Message */}
+                            <textarea
+                              placeholder="Message"
+                              required
+                              rows={4}
+                              className="w-full resize-y rounded bg-white px-4 py-3 text-sm placeholder-slate-400 ring-1 ring-blue-100 transition focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#00c9ff]"
+                            ></textarea>
+
+                            {/* Submit Button */}
+                            <button
+                              type="submit"
+                              className="px-6 py-3 rounded-lg bg-[#00c9ff] text-white font-semibold hover:bg-[#009ec7] transition"
+                            >
+                              Submit Now
+                            </button>
+                          </form>
+                        </section>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-          {/* right side  */}
-          <div className="w-full lg:w-[280px] xl:w-[270px] flex-shrink-0 md:sticky md:top-20 lg:top-24 self-start mt-8">
-            <aside className="space-y-10">
-              {/* Search */}
-              <div className="relative">
-                <input
-                  type="text"
-                  placeholder="Search"
-                  className="w-full h-12 rounded-2xl bg-white pl-4 pr-12 text-sm placeholder-slate-400 shadow-[0_12px_40px_rgba(2,6,23,0.06)] focus:outline-none"
-                />
-                <span className="absolute right-2 top-1/2 -translate-y-1/2 inline-flex h-8 w-8 items-center justify-center rounded-full border border-slate-200 text-slate-500">
-                  <svg
-                    viewBox="0 0 20 20"
-                    className="h-4 w-4"
-                    fill="currentColor"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M12.9 14.32a7 7 0 1 1 1.414-1.414l3.39 3.39a1 1 0 0 1-1.414 1.414l-3.39-3.39zM14 9a5 5 0 1 1-10 0 5 5 0 0 1 10 0z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                </span>
-              </div>
-
-              {/* Categories */}
-              <section>
-                <h4 className="relative mb-5 pl-4 text-[20px] font-semibold text-slate-900">
-                  <span className="absolute left-0 top-1 bottom-1 w-[3px] rounded bg-[#00c9ff]" />
-                  Categories
-                </h4>
-                <ul className="space-y-4">
-                  {[
-                    { label: "Categories", count: 8 },
-                    { label: "Education", count: 12 },
-                    { label: "Information", count: 15 },
-                    { label: "Jobs", count: 25 },
-                    { label: "Learn", count: 36 },
-                    { label: "Skill", count: 12 },
-                  ].map((c) => (
-                    <li
-                      key={c.label}
-                      className="flex items-center justify-between"
+            {/* right side  */}
+            <div className="w-full lg:w-[280px] xl:w-[270px] flex-shrink-0 md:sticky md:top-20 lg:top-24 self-start mt-8">
+              <aside className="space-y-10">
+                {/* Search */}
+                <div className="relative">
+                  <input
+                    type="text"
+                    placeholder="Search"
+                    className="w-full h-12 rounded-2xl bg-white pl-4 pr-12 text-sm placeholder-slate-400 shadow-[0_12px_40px_rgba(2,6,23,0.06)] focus:outline-none"
+                  />
+                  <span className="absolute right-2 top-1/2 -translate-y-1/2 inline-flex h-8 w-8 items-center justify-center rounded-full border border-slate-200 text-slate-500">
+                    <svg
+                      viewBox="0 0 20 20"
+                      className="h-4 w-4"
+                      fill="currentColor"
                     >
-                      <span className="text-[15px] text-slate-700">
-                        {c.label}
-                      </span>
-                      <span className="tabular-nums text-[15px] text-slate-600">
-                        {String(c.count).padStart(2, "0")}
-                      </span>
-                    </li>
-                  ))}
-                </ul>
-              </section>
-
-              {/* Recent Article */}
-              <section>
-                <h4 className="relative mb-5 pl-4 text-[20px] font-semibold text-slate-900">
-                  <span className="absolute left-0 top-1 bottom-1 w-[3px] rounded bg-[#00c9ff]" />
-                  Recent Article
-                </h4>
-                <ul className="space-y-6">
-                  {[
-                    {
-                      title:
-                        "Equipment you can count on. People you can trust.",
-                      date: "April 08, 2023",
-                      img: "/images/job-grid.webp",
-                      href: "/blog1",
-                    },
-                    {
-                      title: "Advanced Service Functions by Air Transport",
-                      date: "April 12, 2023",
-                      img: "/images/job-grid.webp",
-                      href: "/blog2",
-                    },
-                    {
-                      title: "Advanced Service Functions by Air Transport",
-                      date: "April 12, 2023",
-                      img: "/images/job-grid.webp",
-                      href: "/blog3",
-                    },
-                    {
-                      title: "Advanced Service Functions by Air Transport",
-                      date: "April 12, 2023",
-                      img: "/images/job-grid.webp",
-                      href: "/blog4",
-                    },
-                    {
-                      title: "Advanced Service Functions by Air Transport",
-                      date: "April 12, 2023",
-                      img: "/images/job-grid.webp",
-                      href: "/blog5",
-                    },
-                  ].map((a) => (
-                    <li key={a.href} className="flex gap-3">
-                      <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded-lg">
-                        <Image
-                          src={a.img}
-                          alt={a.title}
-                          fill
-                          className="object-cover"
-                        />
-                      </div>
-                      <div className="min-w-0">
-                        <Link
-                          href={a.href}
-                          className="text-[13px] font-medium text-[#00c9ff] hover:underline"
-                        >
-                          {a.date}
-                        </Link>
-                        <p className="mt-1 text-[14px] leading-5 text-slate-800">
-                          {a.title}
-                        </p>
-                      </div>
-                    </li>
-                  ))}
-                </ul>
-              </section>
-
-              {/* Tags */}
-              <section>
-                <h4 className="relative mb-5 pl-4 text-[20px] font-semibold text-slate-900">
-                  <span className="absolute left-0 top-1 bottom-1 w-[3px] rounded bg-[#00c9ff]" />
-                  Tags
-                </h4>
-
-                <div className="flex flex-wrap gap-3">
-                  {[
-                    "General",
-                    "Jobs",
-                    "Payment",
-                    "Application",
-                    "Work",
-                    "Recruiting",
-                    "Employer",
-                    "Income",
-                    "Tips",
-                  ].map((tag) => (
-                    <button
-                      key={tag}
-                      type="button"
-                      className="rounded-full bg-blue-50 px-4 py-2 text-[14px] font-medium text-sky-600 hover:bg-sky-100 transition"
-                    >
-                      {tag}
-                    </button>
-                  ))}
+                      <path
+                        fillRule="evenodd"
+                        d="M12.9 14.32a7 7 0 1 1 1.414-1.414l3.39 3.39a1 1 0 0 1-1.414 1.414l-3.39-3.39zM14 9a5 5 0 1 1-10 0 5 5 0 0 1 10 0z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                  </span>
                 </div>
-              </section>
-            </aside>
+
+                {/* Categories */}
+                <section>
+                  <h4 className="relative mb-5 pl-4 text-[20px] font-semibold text-slate-900">
+                    <span className="absolute left-0 top-1 bottom-1 w-[3px] rounded bg-[#00c9ff]" />
+                    Categories
+                  </h4>
+                  <ul className="space-y-4">
+                    {[
+                      { label: "Categories", count: 8 },
+                      { label: "Education", count: 12 },
+                      { label: "Information", count: 15 },
+                      { label: "Jobs", count: 25 },
+                      { label: "Learn", count: 36 },
+                      { label: "Skill", count: 12 },
+                    ].map((c) => (
+                      <li
+                        key={c.label}
+                        className="flex items-center justify-between"
+                      >
+                        <span className="text-[15px] text-slate-700">
+                          {c.label}
+                        </span>
+                        <span className="tabular-nums text-[15px] text-slate-600">
+                          {String(c.count).padStart(2, "0")}
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+                </section>
+
+                {/* Recent Article */}
+                <section>
+                  <h4 className="relative mb-5 pl-4 text-[20px] font-semibold text-slate-900">
+                    <span className="absolute left-0 top-1 bottom-1 w-[3px] rounded bg-[#00c9ff]" />
+                    Recent Article
+                  </h4>
+                  <ul className="space-y-6">
+                    {[
+                      {
+                        title:
+                          "Equipment you can count on. People you can trust.",
+                        date: "April 08, 2023",
+                        img: "/images/job-grid.webp",
+                        href: "/blog1",
+                      },
+                      {
+                        title: "Advanced Service Functions by Air Transport",
+                        date: "April 12, 2023",
+                        img: "/images/job-grid.webp",
+                        href: "/blog2",
+                      },
+                      {
+                        title: "Advanced Service Functions by Air Transport",
+                        date: "April 12, 2023",
+                        img: "/images/job-grid.webp",
+                        href: "/blog3",
+                      },
+                      {
+                        title: "Advanced Service Functions by Air Transport",
+                        date: "April 12, 2023",
+                        img: "/images/job-grid.webp",
+                        href: "/blog4",
+                      },
+                      {
+                        title: "Advanced Service Functions by Air Transport",
+                        date: "April 12, 2023",
+                        img: "/images/job-grid.webp",
+                        href: "/blog5",
+                      },
+                    ].map((a) => (
+                      <li key={a.href} className="flex gap-3">
+                        <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded-lg">
+                          <Image
+                            src={a.img}
+                            alt={a.title}
+                            fill
+                            className="object-cover"
+                          />
+                        </div>
+                        <div className="min-w-0">
+                          <Link
+                            href={a.href}
+                            className="text-[13px] font-medium text-[#00c9ff] hover:underline"
+                          >
+                            {a.date}
+                          </Link>
+                          <p className="mt-1 text-[14px] leading-5 text-slate-800">
+                            {a.title}
+                          </p>
+                        </div>
+                      </li>
+                    ))}
+                  </ul>
+                </section>
+
+                {/* Tags */}
+                <section>
+                  <h4 className="relative mb-5 pl-4 text-[20px] font-semibold text-slate-900">
+                    <span className="absolute left-0 top-1 bottom-1 w-[3px] rounded bg-[#00c9ff]" />
+                    Tags
+                  </h4>
+
+                  <div className="flex flex-wrap gap-3">
+                    {[
+                      "General",
+                      "Jobs",
+                      "Payment",
+                      "Application",
+                      "Work",
+                      "Recruiting",
+                      "Employer",
+                      "Income",
+                      "Tips",
+                    ].map((tag) => (
+                      <button
+                        key={tag}
+                        type="button"
+                        className="rounded-full bg-[#023052]/10 px-4 py-2 text-[14px] font-medium text-[#023052] hover:bg-[#023052] hover:text-white transition-colors"
+                      >
+                        {tag}
+                      </button>
+                    ))}
+                  </div>
+                </section>
+              </aside>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </div>
       {/* <Footer /> */}
     </>
   );

@@ -132,8 +132,14 @@ export default function RecruiterRegister() {
     return (
         <>
             {/* Banner */}
-            <section className="relative overflow-hidden">
-                <div className="h-[220px] lg:h-[350px] bg-[url('/images/RI_banner_bg.webp')] bg-cover bg-center bg-no-repeat bg-fixed" />
+            <section className="fixed inset-x-0 top-0 h-[220px] lg:h-[350px] w-full z-0">
+                <div className="h-full w-full bg-[url('/images/RI_banner_bg.webp')] bg-cover bg-center bg-no-repeat" />
+                <div
+                  className="absolute inset-0 pointer-events-none"
+                  style={{
+                    background: "linear-gradient(to bottom, rgba(255, 255, 240, 0.1) 0%, rgba(255, 255, 240, 0.4) 65%, rgba(255, 255, 0, 0.1) 85%, rgba(255, 255, 0, 0.3) 100%)"
+                  }}
+                />
                 <div className="absolute inset-0 flex h-[220px] lg:h-[350px] place-items-end justify-center px-5 lg:px-[5%] 2xl:px-[10%]">
                     <div className="max-w-screen-xl w-full text-center">
                         <h1 className="inline-block mb-4 px-4 py-2 text-slate-900 fontAL font-semibold capitalize text-2xl md:text-3xl lg:text-4xl mt-5">
@@ -161,159 +167,165 @@ export default function RecruiterRegister() {
                 </div>
             </section>
 
-            {/* Form */}
-            <div className="min-h-[60vh] flex items-center justify-center px-4 py-14 bg-[#FFFFF0]">
-                <div className="w-full max-w-md bg-white rounded-2xl shadow-md p-8">
-                    <div className="flex justify-center mb-6">
-                        <Image src="/images/logo.svg" alt="Rojgari India" width={160} height={55} style={{ height: "auto", width: "auto" }} />
-                    </div>
+            {/* Spacer to allow scrolling */}
+            <div className="h-[220px] lg:h-[350px] pointer-events-none" />
 
-                    <h2 className="fontAL font-semibold text-2xl text-center text-slate-800 mb-2">
-                        Register as Recruiter
-                    </h2>
-                    <p className="text-center text-sm text-slate-500 mb-6">
-                        Your account will be reviewed and approved by our admin team.
-                    </p>
-
-                    <form onSubmit={handleSubmit} className="space-y-4">
-                        {/* Company Name */}
-                        <div>
-                            <label className="block text-sm text-slate-600 mb-1">Company Name <span className="text-red-400">*</span></label>
-                            <input
-                                type="text"
-                                name="companyName"
-                                value={form.companyName}
-                                onChange={handleChange}
-                                placeholder="Enter company name"
-                                className="w-full p-2.5 rounded-lg bg-white text-sm placeholder-slate-400 ring-1 ring-gray-300 focus:outline-none focus:ring-2 focus:ring-[#72B76A] transition"
-                            />
+            {/* Wrapper to scroll over the fixed hero section */}
+            <div className="relative z-10 bg-[#FFFFF0] shadow-[0_-15px_30px_rgba(0,0,0,0.05)]">
+                {/* Form */}
+                <div className="min-h-[60vh] flex items-center justify-center px-4 py-14 bg-[#FFFFF0]">
+                    <div className="w-full max-w-md bg-white rounded-2xl shadow-md p-8">
+                        <div className="flex justify-center mb-6">
+                            <Image src="/images/logo.svg" alt="Rojgari India" width={160} height={55} style={{ height: "auto", width: "auto" }} />
                         </div>
 
-                        {/* Full Name */}
-                        <div>
-                            <label className="block text-sm text-slate-600 mb-1">Your Full Name <span className="text-red-400">*</span></label>
-                            <input
-                                type="text"
-                                name="fullName"
-                                value={form.fullName}
-                                onChange={handleChange}
-                                placeholder="Enter your full name"
-                                className="w-full p-2.5 rounded-lg bg-white text-sm placeholder-slate-400 ring-1 ring-gray-300 focus:outline-none focus:ring-2 focus:ring-[#72B76A] transition"
-                            />
-                        </div>
+                        <h2 className="fontAL font-semibold text-2xl text-center text-slate-800 mb-2">
+                            Register as Recruiter
+                        </h2>
+                        <p className="text-center text-sm text-slate-500 mb-6">
+                            Your account will be reviewed and approved by our admin team.
+                        </p>
 
-                        {/* Email */}
-                        <div>
-                            <label className="block text-sm text-slate-600 mb-1">Email <span className="text-red-400">*</span></label>
-                            <input
-                                type="email"
-                                name="email"
-                                value={form.email}
-                                onChange={handleChange}
-                                placeholder="Enter your email"
-                                autoComplete="email"
-                                className="w-full p-2.5 rounded-lg bg-white text-sm placeholder-slate-400 ring-1 ring-gray-300 focus:outline-none focus:ring-2 focus:ring-[#72B76A] transition"
-                            />
-                        </div>
-
-                        {/* Mobile Number */}
-                        <div>
-                            <label className="block text-sm text-slate-600 mb-1">Mobile Number <span className="text-red-400">*</span></label>
-                            <input
-                                type="text"
-                                name="mobileNumber"
-                                value={form.mobileNumber}
-                                onChange={handleChange}
-                                placeholder="Enter mobile number"
-                                className="w-full p-2.5 rounded-lg bg-white text-sm placeholder-slate-400 ring-1 ring-gray-300 focus:outline-none focus:ring-2 focus:ring-[#72B76A] transition"
-                            />
-                        </div>
-
-                        {/* Industry */}
-                        <div>
-                            <label className="block text-sm text-slate-600 mb-1">Primary Industry <span className="text-red-400">*</span></label>
-                            <select
-                                name="industry"
-                                value={form.industry}
-                                onChange={handleChange}
-                                className="w-full p-2.5 rounded-lg bg-white text-sm placeholder-slate-400 ring-1 ring-gray-300 focus:outline-none focus:ring-2 focus:ring-[#72B76A] transition"
-                            >
-                                <option value="">Select Industry</option>
-                                {MAIN_INDUSTRY_OPTIONS.map((opt) => (
-                                    <option key={opt.value} value={opt.value}>{opt.label}</option>
-                                ))}
-                            </select>
-                            <p className="text-[10px] text-slate-400 mt-1 italic">You will only see candidates from your approved industries.</p>
-                        </div>
-
-
-                        {/* Password */}
-                        <div>
-                            <label className="block text-sm text-slate-600 mb-1">Password <span className="text-red-400">*</span></label>
-                            <div className="relative">
+                        <form onSubmit={handleSubmit} className="space-y-4">
+                            {/* Company Name */}
+                            <div>
+                                <label className="block text-sm text-slate-600 mb-1">Company Name <span className="text-red-400">*</span></label>
                                 <input
-                                    type={showPassword ? "text" : "password"}
-                                    name="password"
-                                    value={form.password}
+                                    type="text"
+                                    name="companyName"
+                                    value={form.companyName}
                                     onChange={handleChange}
-                                    placeholder="Min. 8 characters"
-                                    autoComplete="new-password"
-                                    className="w-full p-2.5 pr-10 rounded-lg bg-white text-sm placeholder-slate-400 ring-1 ring-gray-300 focus:outline-none focus:ring-2 focus:ring-[#72B76A] transition"
+                                    placeholder="Enter company name"
+                                    className="w-full p-2.5 rounded-lg bg-white text-sm placeholder-slate-400 ring-1 ring-gray-300 focus:outline-none focus:ring-2 focus:ring-[#72B76A] transition"
                                 />
-                                <button type="button" onClick={() => setShowPassword((p) => !p)}
-                                    className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600">
-                                    {showPassword ? <FaEyeSlash /> : <FaEye />}
-                                </button>
                             </div>
-                        </div>
 
-                        {/* Confirm Password */}
-                        <div>
-                            <label className="block text-sm text-slate-600 mb-1">Confirm Password <span className="text-red-400">*</span></label>
-                            <div className="relative">
+                            {/* Full Name */}
+                            <div>
+                                <label className="block text-sm text-slate-600 mb-1">Your Full Name <span className="text-red-400">*</span></label>
                                 <input
-                                    type={showConfirmPassword ? "text" : "password"}
-                                    name="confirmPassword"
-                                    value={form.confirmPassword}
+                                    type="text"
+                                    name="fullName"
+                                    value={form.fullName}
                                     onChange={handleChange}
-                                    placeholder="Re-enter your password"
-                                    autoComplete="new-password"
-                                    className="w-full p-2.5 pr-10 rounded-lg bg-white text-sm placeholder-slate-400 ring-1 ring-gray-300 focus:outline-none focus:ring-2 focus:ring-[#72B76A] transition"
+                                    placeholder="Enter your full name"
+                                    className="w-full p-2.5 rounded-lg bg-white text-sm placeholder-slate-400 ring-1 ring-gray-300 focus:outline-none focus:ring-2 focus:ring-[#72B76A] transition"
                                 />
-                                <button type="button" onClick={() => setShowConfirmPassword((p) => !p)}
-                                    className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600">
-                                    {showConfirmPassword ? <FaEyeSlash /> : <FaEye />}
-                                </button>
                             </div>
-                        </div>
 
-                        {/* Error */}
-                        {error && (
-                            <p className="text-red-500 text-sm text-center bg-red-50 border border-red-200 rounded-lg p-2">
-                                {error}
-                            </p>
-                        )}
+                            {/* Email */}
+                            <div>
+                                <label className="block text-sm text-slate-600 mb-1">Email <span className="text-red-400">*</span></label>
+                                <input
+                                    type="email"
+                                    name="email"
+                                    value={form.email}
+                                    onChange={handleChange}
+                                    placeholder="Enter your email"
+                                    autoComplete="email"
+                                    className="w-full p-2.5 rounded-lg bg-white text-sm placeholder-slate-400 ring-1 ring-gray-300 focus:outline-none focus:ring-2 focus:ring-[#72B76A] transition"
+                                />
+                            </div>
 
-                        {/* Submit */}
-                        <button
-                            type="submit"
-                            disabled={loading}
-                            className="w-full h-11 mt-2 flex items-center justify-center gap-2 bg-[#72B76A] text-white rounded-lg font-semibold hover:bg-[#5e9b55] transition active:scale-95 disabled:opacity-60 disabled:cursor-not-allowed"
-                        >
-                            {loading ? (
-                                <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                            ) : (
-                                "Register"
+                            {/* Mobile Number */}
+                            <div>
+                                <label className="block text-sm text-slate-600 mb-1">Mobile Number <span className="text-red-400">*</span></label>
+                                <input
+                                    type="text"
+                                    name="mobileNumber"
+                                    value={form.mobileNumber}
+                                    onChange={handleChange}
+                                    placeholder="Enter mobile number"
+                                    className="w-full p-2.5 rounded-lg bg-white text-sm placeholder-slate-400 ring-1 ring-gray-300 focus:outline-none focus:ring-2 focus:ring-[#72B76A] transition"
+                                />
+                            </div>
+
+                            {/* Industry */}
+                            <div>
+                                <label className="block text-sm text-slate-600 mb-1">Primary Industry <span className="text-red-400">*</span></label>
+                                <select
+                                    name="industry"
+                                    value={form.industry}
+                                    onChange={handleChange}
+                                    className="w-full p-2.5 rounded-lg bg-white text-sm placeholder-slate-400 ring-1 ring-gray-300 focus:outline-none focus:ring-2 focus:ring-[#72B76A] transition"
+                                >
+                                    <option value="">Select Industry</option>
+                                    {MAIN_INDUSTRY_OPTIONS.map((opt) => (
+                                        <option key={opt.value} value={opt.value}>{opt.label}</option>
+                                    ))}
+                                </select>
+                                <p className="text-[10px] text-slate-400 mt-1 italic">You will only see candidates from your approved industries.</p>
+                            </div>
+
+
+                            {/* Password */}
+                            <div>
+                                <label className="block text-sm text-slate-600 mb-1">Password <span className="text-red-400">*</span></label>
+                                <div className="relative">
+                                    <input
+                                        type={showPassword ? "text" : "password"}
+                                        name="password"
+                                        value={form.password}
+                                        onChange={handleChange}
+                                        placeholder="Min. 8 characters"
+                                        autoComplete="new-password"
+                                        className="w-full p-2.5 pr-10 rounded-lg bg-white text-sm placeholder-slate-400 ring-1 ring-gray-300 focus:outline-none focus:ring-2 focus:ring-[#72B76A] transition"
+                                    />
+                                    <button type="button" onClick={() => setShowPassword((p) => !p)}
+                                        className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600">
+                                        {showPassword ? <FaEyeSlash /> : <FaEye />}
+                                    </button>
+                                </div>
+                            </div>
+
+                            {/* Confirm Password */}
+                            <div>
+                                <label className="block text-sm text-slate-600 mb-1">Confirm Password <span className="text-red-400">*</span></label>
+                                <div className="relative">
+                                    <input
+                                        type={showConfirmPassword ? "text" : "password"}
+                                        name="confirmPassword"
+                                        value={form.confirmPassword}
+                                        onChange={handleChange}
+                                        placeholder="Re-enter your password"
+                                        autoComplete="new-password"
+                                        className="w-full p-2.5 pr-10 rounded-lg bg-white text-sm placeholder-slate-400 ring-1 ring-gray-300 focus:outline-none focus:ring-2 focus:ring-[#72B76A] transition"
+                                    />
+                                    <button type="button" onClick={() => setShowConfirmPassword((p) => !p)}
+                                        className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600">
+                                        {showConfirmPassword ? <FaEyeSlash /> : <FaEye />}
+                                    </button>
+                                </div>
+                            </div>
+
+                            {/* Error */}
+                            {error && (
+                                <p className="text-red-500 text-sm text-center bg-red-50 border border-red-200 rounded-lg p-2">
+                                    {error}
+                                </p>
                             )}
-                        </button>
-                    </form>
 
-                    <p className="mt-6 text-center text-sm text-slate-600">
-                        Already have an account?{" "}
-                        <Link href="/recruiters" className="text-[#72B76A] font-semibold hover:underline">
-                            Sign In
-                        </Link>
-                    </p>
+                            {/* Submit */}
+                            <button
+                                type="submit"
+                                disabled={loading}
+                                className="w-full h-11 mt-2 flex items-center justify-center gap-2 bg-[#72B76A] text-white rounded-lg font-semibold hover:bg-[#5e9b55] transition active:scale-95 disabled:opacity-60 disabled:cursor-not-allowed"
+                            >
+                                {loading ? (
+                                    <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                                ) : (
+                                    "Register"
+                                )}
+                            </button>
+                        </form>
+
+                        <p className="mt-6 text-center text-sm text-slate-600">
+                            Already have an account?{" "}
+                            <Link href="/recruiters" className="text-[#72B76A] font-semibold hover:underline">
+                                Sign In
+                            </Link>
+                        </p>
+                    </div>
                 </div>
             </div>
             <Footer />
