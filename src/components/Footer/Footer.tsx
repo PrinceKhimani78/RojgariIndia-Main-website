@@ -27,15 +27,31 @@ const Footer: React.FC = () => {
     }
   };
 
-  const handleSubscribe = () => {
+  const handleSubscribe = async () => {
     if (!email || !email.includes("@")) {
       setStatus("error");
       return;
     }
-    // Simulate successful subscription
-    setStatus("success");
-    setEmail("");
-    setTimeout(() => setStatus("idle"), 4000);
+    try {
+      // Use local backend for dev, or api.rojgariindia.com in production
+      const baseUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
+      const response = await fetch(`${baseUrl}/newsletter`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      });
+      const data = await response.json();
+      if (data.success) {
+        setStatus("success");
+        setEmail("");
+        setTimeout(() => setStatus("idle"), 4000);
+      } else {
+        setStatus("error");
+      }
+    } catch (err) {
+      console.error("Newsletter subscription error:", err);
+      setStatus("error");
+    }
   };
 
   return (
