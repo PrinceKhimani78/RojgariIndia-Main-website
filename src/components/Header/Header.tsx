@@ -274,10 +274,11 @@ const Header: React.FC = () => {
           <div className="flex justify-start">
             <Link href="/" className="flex items-center">
               <Image
-                src="/images/logo.svg"
+                src="/images/logo.png"
                 alt="Logo"
-                width={48}
-                height={48}
+                width={330}
+                height={80}
+                unoptimized
                 className="h-14 w-auto"
               />
             </Link>
@@ -488,10 +489,11 @@ const Header: React.FC = () => {
           <div className="flex">
             <Link href="/" className="flex items-center">
               <Image
-                src="/images/logo.svg"
+                src="/images/logo.png"
                 alt="Logo"
-                width={48}
-                height={48}
+                width={330}
+                height={80}
+                unoptimized
                 className="h-16 w-auto"
               />
             </Link>
@@ -678,10 +680,11 @@ const Header: React.FC = () => {
                 <div className="flex flex-col items-center justify-center text-gray-900 p-5 h-full">
                   {/* Logo visible only on md+ */}
                   <Image
-                    src="/images/logo.svg"
+                    src="/images/logo.png"
                     alt="Rojgari Logo"
-                    width={260}
-                    height={180}
+                    width={330}
+                    height={80}
+                    unoptimized
                     className="mb-4 sm:w-48 md:w-[260px] h-auto"
                   />
                   <div className="overflow-y-auto sm:overflow-visible sm:max-h-none">
@@ -730,10 +733,11 @@ const Header: React.FC = () => {
                 {/* Mobile Top Row (Logo only, centered) */}
                 <div className="flex justify-center mb-6 md:hidden">
                   <Image
-                    src="/images/logo.svg"
+                    src="/images/logo.png"
                     alt="Rojgari Logo"
-                    width={180}
-                    height={120}
+                    width={330}
+                    height={80}
+                    unoptimized
                     className="h-14 sm:h-16 w-auto"
                   />
                 </div>

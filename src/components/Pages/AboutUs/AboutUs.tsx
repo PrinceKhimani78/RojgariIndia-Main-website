@@ -24,6 +24,14 @@ const teamMembers = [
   { name: "Ms. Akshi Patel", role: "Co-Founder", image: "/images/team/akshi_patel_v2.png" },
   { name: "Mr. Kanchan Sarkhel", role: "Business Development Manager", image: "/images/team/kanchan_sarkhel_v2.png" },
   { name: "Ms. Swara Patel", role: "Talent Acquisition Manager", image: "/images/team/swara_patel_v2.jpg" },
+  { name: "Kavya Oza", role: "Sr. HR Executive", image: "/images/team/kavya_oza.jpg" },
+  { name: "Kajal Modhavadiya", role: "Sr. HR Executive", image: "/images/team/khushali_chauhan.jpg" },
+  { name: "Khushali Chauhan", role: "Sr. HR Executive", image: "/images/team/kajal_modhavadiya.jpg" },
+  { name: "Meera Patel", role: "Sr. HR Executive", image: "/images/team/krisha_kothari.png" },
+  { name: "Krisha Kothari", role: "HR Executive", image: "/images/team/diya_modhavadiya.png" },
+  { name: "Kiara Patel", role: "HR Executive", image: "/images/team/meera_patel.jpg" },
+  { name: "Siya Odedara", role: "HR Executive", image: "/images/team/siya_odedara.png" },
+  { name: "Diya Modhavadiya", role: "HR Executive", image: "/images/team/kiara_patel.png" },
 ];
 
 const testimonials = [

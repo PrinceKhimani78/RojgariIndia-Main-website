@@ -11,10 +11,10 @@ export default function SplashScreen() {
   useEffect(() => {
     // Check session storage to only show once per browser session
     const hasSeenSplash = sessionStorage.getItem("splashShown");
-    
+
     if (!hasSeenSplash) {
       setShow(true);
-      
+
       // Trigger festive confetti from both sides
       const duration = 4500;
       const end = Date.now() + duration;
@@ -61,7 +61,7 @@ export default function SplashScreen() {
   useEffect(() => {
     if (show) {
       document.body.style.overflow = "hidden";
-      
+
       // The real splash screen is now in the DOM. Safely remove the temp white cover.
       const tempSplash = document.getElementById('temp-splash-cover');
       if (tempSplash) {
@@ -71,7 +71,7 @@ export default function SplashScreen() {
     } else {
       document.body.style.overflow = "auto";
     }
-    
+
     return () => {
       document.body.style.overflow = "auto";
     };
@@ -105,7 +105,7 @@ export default function SplashScreen() {
             className="mb-10"
           >
             <Image
-              src="/images/logo.svg"
+              src="/images/logo.png"
               alt="Rojgari India Logo"
               width={450}
               height={140}
@@ -141,7 +141,7 @@ export default function SplashScreen() {
             className="text-lg md:text-2xl fontPOP text-slate-800 mb-2 font-medium max-w-2xl"
 
           >
-            Today, that belief becomes something bigger.
+            Now, that belief becomes something bigger.
           </motion.p>
 
           <motion.div
