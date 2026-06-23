@@ -121,7 +121,7 @@ export default function SplashScreen() {
             transition={{ duration: 0.6, delay: 0.5 }}
             className="text-4xl md:text-5xl fontAL font-bold text-[#72B76A] mb-4 mt-10 tracking-wider"
           >
-            26<sup>th</sup> ANNIVERSARY
+            26<sup>th</sup> ANNIVERSARY CELEBRATION MONTH
           </motion.h1>
 
           <motion.p

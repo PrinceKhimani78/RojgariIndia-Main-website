@@ -371,7 +371,6 @@ const Recruiters = () => {
             </div>
           </div>
           <div className="relative">
-            <div className="absolute inset-0 bg-gradient-to-tr from-[#00c9ff]/20 to-transparent rounded-[3rem] -z-10 blur-3xl"></div>
             <Image
               src="/images/recruitment_widgets_matte.png"
               alt="Recruitment Software Dashboard"
