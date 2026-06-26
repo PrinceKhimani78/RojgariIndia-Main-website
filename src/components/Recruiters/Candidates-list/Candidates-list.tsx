@@ -72,7 +72,7 @@ const getStatusClasses = (status: string) => {
 
 const Candidateslist = () => {
   const { user, token } = useAuth();
-  const BACKEND = process.env.NEXT_PUBLIC_BACKEND_API_URL || "https://api.rojgariindia.com/api";
+  const BACKEND = process.env.NEXT_PUBLIC_BACKEND_API_URL || "/api";
 
   const [showPopup, setShowPopup] = useState(false);
   const [candidates, setCandidates] = useState<any[]>([]);

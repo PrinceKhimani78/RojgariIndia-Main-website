@@ -15,7 +15,7 @@ interface ApplicantsProps {
 
 const Applicants = ({ jobId }: ApplicantsProps) => {
   const { user, token } = useAuth();
-  const BACKEND = process.env.NEXT_PUBLIC_BACKEND_API_URL || "https://api.rojgariindia.com/api";
+  const BACKEND = process.env.NEXT_PUBLIC_BACKEND_API_URL || "/api";
 
   const [applicants, setApplicants] = useState<any[]>([]);
   const [jobDetails, setJobDetails] = useState<any>(null);

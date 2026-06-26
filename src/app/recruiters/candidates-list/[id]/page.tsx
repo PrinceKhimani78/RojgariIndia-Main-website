@@ -15,7 +15,7 @@ const CandidateProfilePage = () => {
     const { user, token } = useAuth();
     const [profile, setProfile] = useState<any>(null);
     const [loading, setLoading] = useState(true);
-    const BACKEND = process.env.NEXT_PUBLIC_BACKEND_API_URL || "https://api.rojgariindia.com/api";
+    const BACKEND = process.env.NEXT_PUBLIC_BACKEND_API_URL || "/api";
 
     useEffect(() => {
         const fetchProfile = async () => {

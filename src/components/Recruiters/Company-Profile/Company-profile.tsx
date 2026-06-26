@@ -107,7 +107,7 @@ const Companyprofile = () => {
     description: "",
   });
 
-  const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_API_URL || "https://api.rojgariindia.com/api";
+  const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_API_URL || "/api";
 
   useEffect(() => {
     const fetchProfile = async () => {

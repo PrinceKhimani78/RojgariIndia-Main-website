@@ -16,7 +16,7 @@ interface RecruiterData {
 
 const ManageIndustries = () => {
     const { user, token } = useAuth();
-    const BACKEND = process.env.NEXT_PUBLIC_BACKEND_API_URL || "https://api.rojgariindia.com/api";
+    const BACKEND = process.env.NEXT_PUBLIC_BACKEND_API_URL || "/api";
 
     const [mobileOpen, setMobileOpen] = useState(false);
     const [recruiterData, setRecruiterData] = useState<RecruiterData | null>(null);
