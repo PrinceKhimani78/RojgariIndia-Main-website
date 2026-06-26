@@ -168,13 +168,14 @@ const Profile = () => {
                 village: data.village || "",
                 address: data.address || "",
                 pincode: data.pincode || "",
-                languagesKnown: Array.isArray(data.languages_known) ? data.languages_known : [],
+                languagesKnown: Array.isArray(data.languages_known) ? data.languages_known : (typeof data.languages_known === 'string' && data.languages_known.startsWith('[') ? JSON.parse(data.languages_known) : []),
                 availabilityCategory: data.interview_availability || "",
                 availabilityIndustry: data.preferred_industry || "",
                 availabilityJobCategory: data.job_category || "",
                 availabilityState: data.pref_state ? data.pref_state.split(', ') : [],
                 availabilityCity: data.pref_city ? data.pref_city.split(', ') : [],
                 expectedSalary: data.expected_salary ? String(data.expected_salary) : "",
+                summary: data.summary || "",
               });
 
               if (data.work_experience && Array.isArray(data.work_experience)) {
