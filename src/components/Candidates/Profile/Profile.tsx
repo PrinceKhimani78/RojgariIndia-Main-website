@@ -186,6 +186,8 @@ const Profile = () => {
                   endDate: exp.end_date ? exp.end_date.split('T')[0] : "",
                   currentWages: exp.current_wages ? String(exp.current_wages) : "",
                   noticePeriod: exp.salary_period || "",
+                  currentState: exp.current_state || "",
+                  currentCity: exp.current_city || "",
                 })));
               }
 
@@ -380,6 +382,7 @@ const Profile = () => {
       work_experience: (workType === "experienced" ? experiences : [])
         .filter(exp => exp.position.trim() || exp.company.trim())
         .map(exp => ({
+          industry: exp.industry,
           position: exp.position,
           company: exp.company,
           start_date: exp.startDate || null,
@@ -419,7 +422,12 @@ const Profile = () => {
       });
 
       if (res.ok) {
-        message.success("Profile updated successfully!");
+        import("antd").then(({ Modal }) => {
+          Modal.success({
+            content: "Profile saves successfully now you can apply for the job posts",
+            okText: "Okay",
+          });
+        });
         updateUserInfo({
           full_name: form.firstName,
         });
