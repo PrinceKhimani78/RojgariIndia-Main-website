@@ -954,7 +954,6 @@ const Header: React.FC = () => {
                         />
                       )}
                     </>
-                    </>
                   ) : mode === "login" ? (
                     <>
                       <input
