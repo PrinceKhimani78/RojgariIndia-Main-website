@@ -20,7 +20,7 @@ import { useAuth } from "@/context/AuthContext";
 import { sendOtp } from "@/services/otpService";
 import { MAIN_INDUSTRY_OPTIONS } from "@/constants/industryData";
 
-type Mode = "login" | "signup";
+type Mode = "login" | "signup" | "forgot-password";
 
 
 interface FormState {
@@ -96,18 +96,41 @@ const Header: React.FC = () => {
     "candidates"
   );
   const handleSendOtp = async () => {
-    if (!formData.email) {
+    const emailToUse = formData.email || formData.username;
+    if (!emailToUse) {
       alert("Please enter your email address first.");
       return;
     }
     setOtpLoading(true);
     const backendUrl = process.env.NEXT_PUBLIC_BACKEND_API_URL || "/api";
-    console.log("DEBUG: backendUrl from env:", backendUrl);
-    const res = await sendOtp(backendUrl, formData.email);
+
+    if (mode === "forgot-password") {
+      try {
+        const prefix = userType === "recruiter" ? "/recruiter/auth" : "/auth";
+        const response = await fetch(`${backendUrl}${prefix}/forgot-password`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email: emailToUse }),
+        });
+        const data = await response.json();
+        setOtpLoading(false);
+        if (data.success) {
+          alert("OTP sent to " + emailToUse);
+        } else {
+          alert(data.message || "Failed to send OTP.");
+        }
+      } catch (err) {
+        setOtpLoading(false);
+        alert("Network error.");
+      }
+      return;
+    }
+
+    const res = await sendOtp(backendUrl, emailToUse);
     setOtpLoading(false);
 
     if (res.success) {
-      alert("OTP sent to " + formData.email);
+      alert("OTP sent to " + emailToUse);
     } else {
       alert(res.message || "Failed to send OTP. Please try again.");
     }
@@ -115,6 +138,42 @@ const Header: React.FC = () => {
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    if (mode === "forgot-password") {
+      if (formData.password !== formData.confirmPassword) {
+        alert("Passwords do not match!");
+        return;
+      }
+      if (!formData.otp || !formData.password || !formData.username) {
+        alert("Please fill all fields.");
+        return;
+      }
+      const backendUrl = process.env.NEXT_PUBLIC_BACKEND_API_URL || "/api";
+      const prefix = userType === "recruiter" ? "/recruiter/auth" : "/auth";
+      
+      try {
+        const response = await fetch(`${backendUrl}${prefix}/reset-password`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            email: formData.username,
+            otp: formData.otp,
+            newPassword: formData.password
+          }),
+        });
+        const data = await response.json();
+        if (data.success) {
+          alert("Password reset successfully! Please login with your new password.");
+          setMode("login");
+          setFormData({ ...formData, password: "", confirmPassword: "", otp: "" });
+        } else {
+          alert(data.message || "Failed to reset password.");
+        }
+      } catch (err) {
+        alert("Network error.");
+      }
+      return;
+    }
 
     if (mode === "signup") {
       if (formData.password !== formData.confirmPassword) {
@@ -744,7 +803,7 @@ const Header: React.FC = () => {
 
                 {/* Title */}
                 <h2 className="fontAL font-semibold capitalize text-xl md:text-2xl lg:text-3xl my-5 text-center md:text-left">
-                  {mode === "login" ? "Login" : "Sign Up"}
+                  {mode === "login" ? "Login" : mode === "signup" ? "Sign Up" : "Reset Password"}
                 </h2>
                 {/* Candidate / Recruiter toggle */}
                  <div className="relative flex p-1 mb-6 bg-gray-100 rounded-xl w-[272px] mx-auto md:mx-0">
@@ -895,7 +954,8 @@ const Header: React.FC = () => {
                         />
                       )}
                     </>
-                  ) : (
+                    </>
+                  ) : mode === "login" ? (
                     <>
                       <input
                         type="text"
@@ -922,6 +982,78 @@ const Header: React.FC = () => {
                           {showPassword ? <FaEyeSlash /> : <FaEye />}
                         </button>
                       </div>
+                      <div className="flex justify-end mt-1">
+                        <button
+                          type="button"
+                          onClick={() => setMode("forgot-password")}
+                          className="text-xs text-[#72B76A] hover:underline"
+                        >
+                          Forgot Password?
+                        </button>
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                      <div className="relative">
+                        <input
+                          type="text"
+                          name="username"
+                          placeholder="Email Address"
+                          className="w-full p-2 rounded bg-white text-sm placeholder-slate-400 ring-1 focus:bg-white focus:outline-none ring-gray-300 transition focus:ring-2 focus:ring-[#72B76A] pr-20"
+                          value={formData.username}
+                          onChange={handleChange}
+                        />
+                        <button
+                          type="button"
+                          onClick={handleSendOtp}
+                          disabled={otpLoading}
+                          className={`absolute right-1 top-1/2 -translate-y-1/2 px-2 py-1 text-[10px] font-bold text-white rounded transition ${otpLoading ? "bg-gray-400" : "bg-[#72B76A] hover:bg-[#5da356]"}`}
+                        >
+                          {otpLoading ? "Sending..." : "Send OTP"}
+                        </button>
+                      </div>
+                      <input
+                        type="text"
+                        name="otp"
+                        placeholder="Enter OTP"
+                        className="w-full p-2 rounded bg-white text-sm placeholder-slate-400 ring-1 focus:bg-white focus:outline-none  ring-gray-300 transition focus:ring-2 focus:ring-[#72B76A]"
+                        value={formData.otp}
+                        onChange={handleChange}
+                      />
+                      <div className="relative">
+                        <input
+                          type={showPassword ? "text" : "password"}
+                          name="password"
+                          placeholder="New Password"
+                          className="w-full p-2 rounded bg-white text-sm placeholder-slate-400 ring-1 focus:bg-white focus:outline-none ring-gray-300 transition focus:ring-2 focus:ring-[#72B76A]"
+                          value={formData.password}
+                          onChange={handleChange}
+                        />
+                        <button
+                          type="button"
+                          onClick={() => setShowPassword((prev) => !prev)}
+                          className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500"
+                        >
+                          {showPassword ? <FaEyeSlash /> : <FaEye />}
+                        </button>
+                      </div>
+                      <div className="relative">
+                        <input
+                          type={showConfirmPassword ? "text" : "password"}
+                          name="confirmPassword"
+                          placeholder="Confirm New Password"
+                          className="w-full p-2 rounded bg-white text-sm placeholder-slate-400  focus:bg-white focus:outline-none ring-1 ring-gray-300 transition focus:ring-2 focus:ring-[#72B76A]"
+                          value={formData.confirmPassword}
+                          onChange={handleChange}
+                        />
+                        <button
+                          type="button"
+                          onClick={() => setShowConfirmPassword((prev) => !prev)}
+                          className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500"
+                        >
+                          {showConfirmPassword ? <FaEyeSlash /> : <FaEye />}
+                        </button>
+                      </div>
                     </>
                   )}
                 </motion.div>
@@ -934,14 +1066,14 @@ const Header: React.FC = () => {
                   >
                     <span className="absolute right-0 w-10 h-full top-0 transition-all duration-1000 transform translate-x-12 bg-white opacity-10 -skew-x-12 group-hover:-translate-x-24 ease"></span>
                     <span className="relative flex gap-2 items-center text-sm font-semibold">
-                      {mode === "login" ? "Login" : "Sign Up"}
+                      {mode === "login" ? "Login" : mode === "signup" ? "Sign Up" : "Reset"}
                     </span>
                   </button>
                 </div>
 
                 {/* Toggle SignUp / Login */}
                 <p className="mt-5 text-center text-sm text-gray-600">
-                  {mode === "login" ? (
+                  {mode === "login" || mode === "forgot-password" ? (
                     <>
                       Don’t have an account?{" "}
                       <button
@@ -949,10 +1081,36 @@ const Header: React.FC = () => {
                         className="text-[#72B76A] font-bold underline"
                         onClick={() => {
                           setMode("signup");
+                          setFormData({
+                            username: "",
+                            password: "",
+                            confirmPassword: "",
+                            fullName: "",
+                            email: "",
+                            otp: "",
+                            companyName: "",
+                            mobileNumber: "",
+                            industry: "",
+                          });
                         }}
                       >
                         Sign up
                       </button>
+                      {mode === "forgot-password" && (
+                        <>
+                          <br />
+                          Remember your password?{" "}
+                          <button
+                            type="button"
+                            className="text-[#72B76A] font-bold underline mt-2"
+                            onClick={() => {
+                              setMode("login");
+                            }}
+                          >
+                            Login
+                          </button>
+                        </>
+                      )}
                     </>
                   ) : (
                     <>
