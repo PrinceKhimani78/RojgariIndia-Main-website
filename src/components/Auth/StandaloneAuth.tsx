@@ -22,7 +22,7 @@ interface FormState {
 }
 
 interface StandaloneAuthProps {
-  initialMode: "login" | "signup";
+  initialMode: "login" | "signup" | "forgot-password";
   initialUserType: "candidates" | "recruiter";
 }
 
@@ -30,7 +30,7 @@ export default function StandaloneAuth({ initialMode, initialUserType }: Standal
   const router = useRouter();
   const { login, register } = useAuth();
   
-  const [mode, setMode] = useState<"login" | "signup">(initialMode);
+  const [mode, setMode] = useState<"login" | "signup" | "forgot-password">(initialMode);
   const [userType, setUserType] = useState<"candidates" | "recruiter">(initialUserType);
   
   const [showPassword, setShowPassword] = useState(false);
@@ -55,19 +55,80 @@ export default function StandaloneAuth({ initialMode, initialUserType }: Standal
   };
 
   const handleSendOtp = async () => {
-    if (!formData.email) {
+    if (!formData.email && !formData.username) {
       alert("Please enter your email address first.");
       return;
     }
+    const emailToUse = formData.email || formData.username;
     setOtpLoading(true);
     const backendUrl = process.env.NEXT_PUBLIC_BACKEND_API_URL || "/api";
-    const res = await sendOtp(backendUrl, formData.email);
+    
+    // If we're in forgot-password mode, call the new endpoint
+    if (mode === "forgot-password") {
+      try {
+        const prefix = userType === "recruiter" ? "/recruiter/auth" : "/auth";
+        const response = await fetch(`${backendUrl}${prefix}/forgot-password`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email: emailToUse }),
+        });
+        const data = await response.json();
+        setOtpLoading(false);
+        if (data.success) {
+          alert("OTP sent to " + emailToUse);
+        } else {
+          alert(data.message || "Failed to send OTP.");
+        }
+      } catch (err) {
+        setOtpLoading(false);
+        alert("Network error.");
+      }
+      return;
+    }
+
+    const res = await sendOtp(backendUrl, emailToUse);
     setOtpLoading(false);
 
     if (res.success) {
-      alert("OTP sent to " + formData.email);
+      alert("OTP sent to " + emailToUse);
     } else {
       alert(res.message || "Failed to send OTP. Please try again.");
+    }
+  };
+
+  const handleResetPassword = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (formData.password !== formData.confirmPassword) {
+      alert("Passwords do not match!");
+      return;
+    }
+    if (!formData.otp || !formData.password || !formData.username) {
+      alert("Please fill all fields.");
+      return;
+    }
+    const backendUrl = process.env.NEXT_PUBLIC_BACKEND_API_URL || "/api";
+    const prefix = userType === "recruiter" ? "/recruiter/auth" : "/auth";
+    
+    try {
+      const response = await fetch(`${backendUrl}${prefix}/reset-password`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email: formData.username,
+          otp: formData.otp,
+          newPassword: formData.password
+        }),
+      });
+      const data = await response.json();
+      if (data.success) {
+        alert("Password reset successfully! Please login with your new password.");
+        setMode("login");
+        setFormData({ ...formData, password: "", confirmPassword: "", otp: "" });
+      } else {
+        alert(data.message || "Failed to reset password.");
+      }
+    } catch (err) {
+      alert("Network error.");
     }
   };
 
@@ -168,7 +229,7 @@ export default function StandaloneAuth({ initialMode, initialUserType }: Standal
           {/* Right Panel */}
           <form
             className="col-span-1 flex flex-col justify-center px-6 sm:px-10 py-10 order-1 md:order-2"
-            onSubmit={handleSubmit}
+            onSubmit={mode === "forgot-password" ? handleResetPassword : handleSubmit}
           >
             {/* Mobile Top Row (Logo only, centered) */}
             <div className="flex justify-center mb-6 md:hidden">
@@ -184,7 +245,7 @@ export default function StandaloneAuth({ initialMode, initialUserType }: Standal
 
             {/* Title */}
             <h2 className="font-semibold capitalize text-2xl lg:text-3xl my-5 text-center md:text-left text-slate-800">
-              {mode === "login" ? "Login" : "Sign Up"}
+              {mode === "login" ? "Login" : mode === "signup" ? "Sign Up" : "Reset Password"}
             </h2>
             
             {/* Candidate / Recruiter toggle */}
@@ -336,6 +397,72 @@ export default function StandaloneAuth({ initialMode, initialUserType }: Standal
                     />
                   )}
                 </>
+              ) : mode === "forgot-password" ? (
+                <>
+                  <div className="relative">
+                    <input
+                      type="email"
+                      name="username"
+                      placeholder="Email Address"
+                      className="w-full p-2.5 rounded-lg bg-white text-sm placeholder-slate-400 ring-1 focus:bg-white focus:outline-none ring-gray-300 transition focus:ring-2 focus:ring-[#72B76A] pr-24"
+                      value={formData.username}
+                      onChange={handleChange}
+                    />
+                    <button
+                      type="button"
+                      onClick={handleSendOtp}
+                      disabled={otpLoading}
+                      className={`absolute right-1.5 top-1/2 -translate-y-1/2 px-3 py-1.5 text-xs font-bold text-white rounded-md transition ${otpLoading ? "bg-gray-400" : "bg-[#72B76A] hover:bg-[#5da356]"}`}
+                    >
+                      {otpLoading ? "Sending..." : "Send OTP"}
+                    </button>
+                  </div>
+                  
+                  <input
+                    type="text"
+                    name="otp"
+                    placeholder="Enter OTP"
+                    className="w-full p-2.5 rounded-lg bg-white text-sm placeholder-slate-400 ring-1 focus:bg-white focus:outline-none ring-gray-300 transition focus:ring-2 focus:ring-[#72B76A]"
+                    value={formData.otp}
+                    onChange={handleChange}
+                  />
+
+                  <div className="relative">
+                    <input
+                      type={showPassword ? "text" : "password"}
+                      name="password"
+                      placeholder="New Password"
+                      className="w-full p-2.5 rounded-lg bg-white text-sm placeholder-slate-400 ring-1 focus:bg-white focus:outline-none ring-gray-300 transition focus:ring-2 focus:ring-[#72B76A]"
+                      value={formData.password}
+                      onChange={handleChange}
+                    />
+                    <button
+                      type="button"
+                      onClick={() => setShowPassword((prev) => !prev)}
+                      className="absolute right-3.5 top-1/2 -translate-y-1/2 text-gray-500"
+                    >
+                      {showPassword ? <FaEyeSlash /> : <FaEye />}
+                    </button>
+                  </div>
+
+                  <div className="relative">
+                    <input
+                      type={showConfirmPassword ? "text" : "password"}
+                      name="confirmPassword"
+                      placeholder="Confirm New Password"
+                      className="w-full p-2.5 rounded-lg bg-white text-sm placeholder-slate-400 focus:bg-white focus:outline-none ring-1 ring-gray-300 transition focus:ring-2 focus:ring-[#72B76A]"
+                      value={formData.confirmPassword}
+                      onChange={handleChange}
+                    />
+                    <button
+                      type="button"
+                      onClick={() => setShowConfirmPassword((prev) => !prev)}
+                      className="absolute right-3.5 top-1/2 -translate-y-1/2 text-gray-500"
+                    >
+                      {showConfirmPassword ? <FaEyeSlash /> : <FaEye />}
+                    </button>
+                  </div>
+                </>
               ) : (
                 <>
                   <input
@@ -363,6 +490,15 @@ export default function StandaloneAuth({ initialMode, initialUserType }: Standal
                       {showPassword ? <FaEyeSlash /> : <FaEye />}
                     </button>
                   </div>
+                  <div className="flex justify-end mt-2">
+                    <button
+                      type="button"
+                      className="text-sm text-[#72B76A] hover:underline font-medium"
+                      onClick={() => setMode("forgot-password")}
+                    >
+                      Forgot Password?
+                    </button>
+                  </div>
                 </>
               )}
 
@@ -371,7 +507,7 @@ export default function StandaloneAuth({ initialMode, initialUserType }: Standal
                 type="submit"
                 className={`w-full mt-6 py-2.5 bg-[#72B76A] hover:bg-[#61a35a] text-white font-semibold rounded-lg transition-transform hover:scale-[1.02] shadow-md ${mode === "signup" && userType === "recruiter" ? "col-span-2" : ""}`}
               >
-                {mode === "login" ? "Login" : "Sign Up"}
+                {mode === "login" ? "Login" : mode === "signup" ? "Sign Up" : "Reset Password"}
               </button>
             </motion.div>
 
@@ -379,6 +515,8 @@ export default function StandaloneAuth({ initialMode, initialUserType }: Standal
             <p className="text-center text-sm text-gray-600 mt-6 font-medium">
               {mode === "login"
                 ? "Don't have an account? "
+                : mode === "forgot-password"
+                ? "Remember your password? "
                 : "Already have an account? "}
               <button
                 type="button"

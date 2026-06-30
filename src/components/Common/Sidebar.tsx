@@ -115,6 +115,11 @@ const Sidebar: React.FC<SidebarProps> = ({
             href: "/recruiters/resume-alerts",
           },
           {
+            icon: <FaCog />,
+            label: "Change Password",
+            href: "/recruiters/change-password",
+          },
+          {
             icon: <FaTrash />,
             label: "Delete Profile",
             href: "#delete",

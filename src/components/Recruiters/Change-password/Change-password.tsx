@@ -1,8 +1,6 @@
 "use client";
 import React from "react";
 import Sidebar from "@/components/Common/Sidebar";
-import CandidateProfileHeader from "@/components/Candidates/Common/CandidateProfileHeader";
-import Image from "next/image";
 import Link from "next/link";
 import { FaLock } from "react-icons/fa";
 
@@ -46,7 +44,7 @@ const InputField = ({
   </div>
 );
 
-const Changepassword = () => {
+const RecruiterChangePassword = () => {
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const [oldPassword, setOldPassword] = React.useState("");
   const [newPassword, setNewPassword] = React.useState("");
@@ -69,7 +67,7 @@ const Changepassword = () => {
     const backendUrl = process.env.NEXT_PUBLIC_BACKEND_API_URL || "/api";
     
     try {
-      const response = await fetch(`${backendUrl}/auth/change-password`, {
+      const response = await fetch(`${backendUrl}/recruiter/auth/change-password`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -97,7 +95,7 @@ const Changepassword = () => {
     <>
       <div className="pl-2 pr-4 sm:px-2 py-2 flex gap-3 sm:gap-4 my-30 relative">
         <Sidebar
-          type="candidate"
+          type="recruiter"
           mobileOpen={mobileOpen}
           setMobileOpen={setMobileOpen}
         />
@@ -137,10 +135,10 @@ const Changepassword = () => {
                   </li>
                   <li className="flex items-center gap-2">
                     <Link
-                      href="/candidates"
+                      href="/recruiters"
                       className="hover:text-gray-700 transition"
                     >
-                      Candidates
+                      Recruiters
                     </Link>
                     <FiChevronRight />
                   </li>
@@ -153,8 +151,6 @@ const Changepassword = () => {
               </nav>
             </div>
           </div>
-          {/* Profile */}
-          <CandidateProfileHeader />
 
           {/* change password  */}
           <div className="space-y-6">
@@ -206,9 +202,8 @@ const Changepassword = () => {
           </div>
         </main>
       </div>
-      {/* <Footer /> */}
     </>
   );
 };
 
-export default Changepassword;
+export default RecruiterChangePassword;
