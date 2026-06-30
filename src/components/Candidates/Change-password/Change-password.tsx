@@ -65,7 +65,7 @@ const Changepassword = () => {
     }
 
     setLoading(true);
-    const token = typeof window !== "undefined" ? localStorage.getItem("token") || document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1") : "";
+    const token = typeof window !== "undefined" ? localStorage.getItem("rj_token") || document.cookie.replace(/(?:(?:^|.*;\s*)rj_token\s*\=\s*([^;]*).*$)|^.*$/, "$1") : "";
     const backendUrl = process.env.NEXT_PUBLIC_BACKEND_API_URL || "/api";
     
     try {
