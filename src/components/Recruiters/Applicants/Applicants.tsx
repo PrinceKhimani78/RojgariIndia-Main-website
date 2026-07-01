@@ -7,6 +7,7 @@ import { FaEye, FaEnvelope, FaMapMarkerAlt, FaCheck, FaTimes, FaClock, FaListAlt
 import { IoChevronForward } from "react-icons/io5";
 import { FiChevronRight, FiChevronLeft } from "react-icons/fi";
 import RecruiterProfileHeader from "@/components/Recruiters/Common/RecruiterProfileHeader";
+import { getUploadUrl } from "@/utils/fileUrl";
 import { useAuth } from "@/context/AuthContext";
 
 interface ApplicantsProps {
@@ -178,7 +179,7 @@ const Applicants = ({ jobId }: ApplicantsProps) => {
                                             <div className="w-10 h-10 rounded-full bg-slate-200 flex items-center justify-center text-slate-600 font-bold overflow-hidden">
                                                 {app.Candidate?.profile_photo ? (
                                                      <Image 
-                                                        src={app.Candidate.profile_photo.startsWith('http') ? app.Candidate.profile_photo : `https://api.rojgariindia.com/uploads/${app.Candidate.profile_photo}`} 
+                                                        src={getUploadUrl(app.Candidate.profile_photo)} 
                                                         alt={app.Candidate.full_name} 
                                                         width={40} 
                                                         height={40} 
@@ -212,7 +213,7 @@ const Applicants = ({ jobId }: ApplicantsProps) => {
                                             )}
                                             {app.resume && (
                                                 <a 
-                                                    href={`https://api.rojgariindia.com/uploads/resume/${app.candidate_id}/${app.resume}`} 
+                                                    href={getUploadUrl(`resume/${app.candidate_id}/${app.resume}`)} 
                                                     target="_blank" 
                                                     rel="noopener noreferrer" 
                                                     className="p-2 text-blue-600 hover:bg-blue-100 rounded-full transition-colors" 

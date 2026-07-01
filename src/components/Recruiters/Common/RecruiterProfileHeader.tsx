@@ -3,16 +3,12 @@
 import React from "react";
 import Image from "next/image";
 import { useAuth } from "@/context/AuthContext";
+import { getUploadUrl } from "@/utils/fileUrl";
 
 const RecruiterProfileHeader = () => {
     const { user } = useAuth();
-    const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_API_URL || "/api";
 
-    const photoSrc = user?.profile_photo
-        ? (user.profile_photo.startsWith('http')
-            ? user.profile_photo
-            : `https://api.rojgariindia.com/uploads/${user.profile_photo}`)
-        : "/images/profile1.webp";
+    const photoSrc = getUploadUrl(user?.profile_photo);
 
     return (
         <div className="flex items-center gap-4">

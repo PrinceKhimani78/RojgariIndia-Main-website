@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useAuth } from "@/context/AuthContext";
 import { message, Spin } from "antd";
 import { FiCamera } from "react-icons/fi";
+import { getUploadUrl } from "@/utils/fileUrl";
 
 interface CandidateProfileHeaderProps {
     editable?: boolean;
@@ -64,7 +65,7 @@ const CandidateProfileHeader: React.FC<CandidateProfileHeaderProps> = ({ editabl
         }
     };
 
-    const photoSrc = previewUrl || (user?.profile_photo ? (user.profile_photo.startsWith('http') ? user.profile_photo : `https://api.rojgariindia.com/uploads/${user.profile_photo}`) : "/images/profile1.webp");
+    const photoSrc = previewUrl || getUploadUrl(user?.profile_photo);
 
     return (
         <div className="flex items-center gap-4">

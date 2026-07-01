@@ -5,6 +5,8 @@ import Link from "next/link";
 import Sidebar from "@/components/Common/Sidebar";
 import { FaEye, FaEnvelope, FaMapMarkerAlt, FaSearch } from "react-icons/fa";
 import { IoChevronForward } from "react-icons/io5";
+import { FiSearch, FiFilter, FiMapPin, FiBriefcase, FiDollarSign, FiStar, FiClock, FiDownload, FiCheckCircle, FiXCircle } from "react-icons/fi";
+import { getUploadUrl } from "@/utils/fileUrl";
 import { RxCross2 } from "react-icons/rx";
 import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
 import RecruiterProfileHeader from "@/components/Recruiters/Common/RecruiterProfileHeader";
@@ -301,7 +303,7 @@ const Candidateslist = () => {
                   <div className="flex items-center gap-3 px-3 py-3">
                     {c.profile_photo ? (
                         <Image
-                            src={c.profile_photo.startsWith('http') ? c.profile_photo : `https://api.rojgariindia.com/uploads/${c.profile_photo}`}
+                            src={getUploadUrl(c.profile_photo)}
                             alt={c.full_name}
                             width={40}
                             height={40}
@@ -342,7 +344,7 @@ const Candidateslist = () => {
                   <div className="flex items-center gap-3 px-3 py-3">
                     {c.profile_photo ? (
                         <Image
-                            src={c.profile_photo.startsWith('http') ? c.profile_photo : `https://api.rojgariindia.com/uploads/${c.profile_photo}`}
+                            src={getUploadUrl(c.profile_photo)}
                             alt={c.full_name}
                             width={40}
                             height={40}

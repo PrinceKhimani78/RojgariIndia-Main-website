@@ -32,6 +32,7 @@ import {
 import { FiChevronRight } from "react-icons/fi";
 import { IoChevronForward } from "react-icons/io5";
 import RecruiterProfileHeader from "@/components/Recruiters/Common/RecruiterProfileHeader";
+import { getUploadUrl } from "@/utils/fileUrl";
 const profileViewsData = [
   { month: "January", viewers: 200 },
   { month: "February", viewers: 250 },
@@ -465,9 +466,7 @@ const Dashboard = () => {
                 recentApplicants.map((app, i) => {
                   const candidate = app.CandidateProfile;
                   const photoSrc = candidate?.profile_photo
-                      ? (candidate.profile_photo.startsWith('http')
-                          ? candidate.profile_photo
-                          : `https://api.rojgariindia.com/uploads/${candidate.profile_photo}`)
+                      ? getUploadUrl(candidate.profile_photo)
                       : "/images/profile1.webp";
 
                   return (
