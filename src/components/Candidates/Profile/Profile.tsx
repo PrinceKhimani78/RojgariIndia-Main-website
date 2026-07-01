@@ -160,8 +160,8 @@ const Profile = () => {
               if (data.resume) setResumeUrl(data.resume);
               setForm({
                 ...initialForm,
-                firstName: data.full_name || "",
-                surName: data.surname || "",
+                firstName: data.full_name ? data.full_name.split(' ')[0] : "",
+                surName: data.surname || (data.full_name && data.full_name.includes(' ') ? data.full_name.substring(data.full_name.indexOf(' ') + 1) : ""),
                 email: data?.email || user?.email || "",
                 phone: data.mobile_number || "",
                 alternateMobile: data.alternate_mobile_number || "",

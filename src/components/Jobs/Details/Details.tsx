@@ -98,6 +98,7 @@ const JobDetailsContent = () => {
   const [applyError, setApplyError] = useState<string | null>(null);
   const [isSaved, setIsSaved] = useState(false);
   const [saving, setSaving] = useState(false);
+  const [profileCompletion, setProfileCompletion] = useState<number | null>(null);
   const fileInputRef = React.useRef<HTMLInputElement>(null);
 
   const parsedQuestions: string[] = React.useMemo(() => {
@@ -154,6 +155,22 @@ const JobDetailsContent = () => {
           }
         })
         .catch((err) => console.error("Error checking saved status:", err));
+
+      // Fetch candidate profile for completion percentage
+      fetch(`/api/candidate-profile/${user.id}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.success && data.data) {
+            const completion = data.data.profile_completion_percentage || 0;
+            setProfileCompletion(completion);
+            if (completion < 100) {
+              setApplyError(`Your profile must be 100% complete to apply for jobs. Current completion: ${completion}%`);
+            }
+          }
+        })
+        .catch((err) => console.error("Error fetching candidate profile:", err));
     }
   }, [id, isAuthenticated, user, token]);
 
@@ -505,10 +522,14 @@ const JobDetailsContent = () => {
                         </button>
                         <button
                           onClick={handleApply}
-                          disabled={applying}
-                          className="flex-1 sm:flex-none sm:px-8 h-11 bg-[#00C9FF] rounded-lg text-white font-bold hover:bg-[#00b4e6] active:scale-95 transition-all shadow-md disabled:opacity-50"
+                          disabled={applying || (profileCompletion !== null && profileCompletion < 100)}
+                          className={`flex-1 sm:flex-none sm:px-8 h-11 rounded-lg text-white font-bold transition-all shadow-md ${
+                            profileCompletion !== null && profileCompletion < 100
+                              ? "bg-slate-400 cursor-not-allowed opacity-70"
+                              : "bg-[#00C9FF] hover:bg-[#00b4e6] active:scale-95 disabled:opacity-50"
+                          }`}
                         >
-                          {applying ? "Applying..." : "Apply Now"}
+                          {applying ? "Applying..." : (profileCompletion !== null && profileCompletion < 100 ? "Profile Incomplete" : "Apply Now")}
                         </button>
                       </div>
                     )}
