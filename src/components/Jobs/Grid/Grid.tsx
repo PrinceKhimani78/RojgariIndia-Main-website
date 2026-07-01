@@ -84,9 +84,9 @@ const timeAgo = (dateStr: string): string => {
 
 const formatSalary = (min?: number, max?: number): string => {
   if (!min && !max) return "Not disclosed";
-  if (min && max) return `₹${min.toLocaleString('en-IN')} - ₹${max.toLocaleString('en-IN')} /Month`;
-  if (min) return `₹${min.toLocaleString('en-IN')} /Month`;
-  return `₹${max?.toLocaleString('en-IN')} /Month`;
+  if (min && max) return `₹${min.toLocaleString('en-IN')} - ₹${max.toLocaleString('en-IN')} LPA`;
+  if (min) return `₹${min.toLocaleString('en-IN')} LPA`;
+  return `₹${max?.toLocaleString('en-IN')} LPA`;
 };
 
 const typeColors: Record<string, string> = {

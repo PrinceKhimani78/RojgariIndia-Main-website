@@ -178,9 +178,9 @@ const timeAgo = (dateStr: string): string => {
 
 const formatSalary = (min?: number, max?: number): string => {
   if (!min && !max) return "Not disclosed";
-  if (min && max) return `₹${min.toLocaleString('en-IN')} - ₹${max.toLocaleString('en-IN')} /Month`;
-  if (min) return `₹${min.toLocaleString('en-IN')} /Month`;
-  return `₹${max?.toLocaleString('en-IN')} /Month`;
+  if (min && max) return `₹${min.toLocaleString('en-IN')} - ₹${max.toLocaleString('en-IN')} LPA`;
+  if (min) return `₹${min.toLocaleString('en-IN')} LPA`;
+  return `₹${max?.toLocaleString('en-IN')} LPA`;
 };
 
 const typeColors: Record<string, string> = {
@@ -203,7 +203,7 @@ const cardData = [
     title: "Software Engineer (React / Node.js)",
     desc: "Develop modern web applications. Strong React, TypeScript, and Node.js skills required.",
     link: "/jobs",
-    price: "₹60,000 - ₹90,000 /Month",
+    price: "₹60,000 - ₹90,000 LPA",
     footerLink: "Software",
   },
   {
@@ -214,7 +214,7 @@ const cardData = [
     title: "Digital Marketing Specialist",
     desc: "Manage SEO, SEM, social media campaigns, and lead generation for various local brands.",
     link: "/jobs",
-    price: "₹40,000 - ₹60,000 /Month",
+    price: "₹40,000 - ₹60,000 LPA",
     footerLink: "Marketing",
   },
   {
@@ -225,7 +225,7 @@ const cardData = [
     title: "HR & Operations Executive",
     desc: "Manage recruitment cycles, candidate onboarding, employee relations, and office coordination.",
     link: "/jobs",
-    price: "₹30,000 - ₹45,000 /Month",
+    price: "₹30,000 - ₹45,000 LPA",
     footerLink: "HR & Admin",
   },
   {
@@ -236,7 +236,7 @@ const cardData = [
     title: "Business Development Manager",
     desc: "Identify new business opportunities, handle client acquisitions, and achieve sales growth targets.",
     link: "/jobs",
-    price: "₹50,000 - ₹75,000 /Month",
+    price: "₹50,000 - ₹75,000 LPA",
     footerLink: "Sales",
   },
   {
@@ -247,7 +247,7 @@ const cardData = [
     title: "Content & SEO Copywriter",
     desc: "Write engaging articles, website copy, and optimize content for Google search rankings.",
     link: "/jobs",
-    price: "₹25,000 - ₹40,000 /Month",
+    price: "₹25,000 - ₹40,000 LPA",
     footerLink: "Writing",
   },
   {
@@ -258,7 +258,7 @@ const cardData = [
     title: "UI/UX Designer",
     desc: "Create beautiful user interfaces, wireframes, user flows, and interactive mockups.",
     link: "/jobs",
-    price: "₹55,000 - ₹80,000 /Month",
+    price: "₹55,000 - ₹80,000 LPA",
     footerLink: "Design",
   },
 ];

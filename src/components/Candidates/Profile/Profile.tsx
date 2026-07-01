@@ -536,7 +536,7 @@ const Profile = () => {
                       <InputBox label="Company" name={`company-${idx}`} value={exp.company} onChange={handleChange} error={errors[`company-${idx}`]} required />
                       <DatePicker label="Start Date" name={`startDate-${idx}`} value={exp.startDate} onChange={handleChange} error={errors[`startDate-${idx}`]} required />
                       <DatePicker label="End Date" name={`endDate-${idx}`} value={exp.endDate} onChange={handleChange} error={errors[`endDate-${idx}`]} />
-                      <InputBox label="Salary (Monthly)" name={`currentWages-${idx}`} value={exp.currentWages || ""} onChange={handleChange} error={errors[`currentWages-${idx}`]} />
+                      <InputBox label="Salary (LPA)" name={`currentWages-${idx}`} value={exp.currentWages || ""} onChange={handleChange} error={errors[`currentWages-${idx}`]} />
                       <SearchableSelectBox label="Work State" name={`currentState-${idx}`} value={exp.currentState || ""} options={stateOptions} onChange={handleChange} error={errors[`currentState-${idx}`]} required />
                       <SearchableSelectBox label="Work City" name={`currentCity-${idx}`} value={exp.currentCity || ""} options={getExpCityOptions(exp.currentState || "")} onChange={handleChange} error={errors[`currentCity-${idx}`]} required />
                     </div>

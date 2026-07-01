@@ -60,9 +60,9 @@ type JobData = {
 
 const formatSalary = (min?: string | number, max?: string | number) => {
   if (!min && !max) return "Not disclosed";
-  if (min && max) return `₹${Number(min).toLocaleString()} - ₹${Number(max).toLocaleString()} /Month`;
-  if (min) return `₹${Number(min).toLocaleString()} /Month`;
-  return `₹${Number(max).toLocaleString()} /Month`;
+  if (min && max) return `₹${Number(min).toLocaleString()} - ₹${Number(max).toLocaleString()} LPA`;
+  if (min) return `₹${Number(min).toLocaleString()} LPA`;
+  return `₹${Number(max).toLocaleString()} LPA`;
 };
 
 const formatExp = (min?: string | number, max?: string | number) => {
@@ -672,7 +672,7 @@ const JobDetailsContent = () => {
                     </div>
                     <div>
                       <p className="text-neutral-500 text-xs font-semibold tracking-wider uppercase mb-1">
-                        Qualification
+                        Required Education Qualification
                       </p>
                       <p className="font-medium text-slate-800">
                         {job.qualifications || "Any"}
