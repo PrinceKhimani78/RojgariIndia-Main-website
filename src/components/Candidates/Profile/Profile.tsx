@@ -522,7 +522,7 @@ const Profile = () => {
              {profileCompletion < 100 && (
                <p className="text-sm text-green-700 mt-2">
                  <FaInfoCircle className="inline mr-1" />
-                 Complete your profile to 100% to start applying for jobs. Add missing details like Resume, Photo, Education, and Skills.
+                 Complete your profile to 100% to start applying for jobs. Add missing details like Resume, Education, and Skills.
                </p>
              )}
           </div>
