@@ -72,14 +72,14 @@ const baseSchema = {
     .string()
     .optional()
     .refine(
-      (val) => !val || /^(\+91)\s?[6-9]\d{9}$/.test(val),
-      "Enter a valid Indian mobile number",
+      (val) => !val || /^(?:\+91[\-\s]?)?[6-9]\d{9}$/.test(val.replace(/\s+/g, '')),
+      "Enter a valid Indian mobile number"
     ),
   phone: z
     .string()
     .refine(
-      (val) => /^(\+91)\s?[6-9]\d{9}$/.test(val),
-      "Enter a valid Indian mobile number",
+      (val) => /^(?:\+91[\-\s]?)?[6-9]\d{9}$/.test(val.replace(/\s+/g, '')),
+      "Enter a valid Indian mobile number"
     ),
   skillsList: z.array(skillSchema).min(1, "Add at least one skill"),
   languagesKnown: z.array(z.string()).default([]),

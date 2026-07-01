@@ -99,14 +99,14 @@ export function validateField(
       phone: z
         .string()
         .refine(
-          (val) => /^(\+91)\s?[6-9]\d{9}$/.test(val),
+          (val) => /^(?:\+91[\-\s]?)?[6-9]\d{9}$/.test(val.replace(/\s+/g, '')),
           "Enter a valid Indian mobile number",
         ),
       alternateMobile: z
         .string()
         .optional()
         .refine(
-          (val) => !val || /^(\+91)\s?[6-9]\d{9}$/.test(val),
+          (val) => !val || /^(?:\+91[\-\s]?)?[6-9]\d{9}$/.test(val.replace(/\s+/g, '')),
           "Enter a valid Indian mobile number",
         ),
       dob: z.string().min(1, "Date of birth required"),
