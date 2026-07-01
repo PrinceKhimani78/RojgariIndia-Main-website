@@ -17,6 +17,7 @@ import {
   FaMapPin,
   FaRegAddressCard,
   FaInfoCircle,
+  FaFileAlt,
 } from "react-icons/fa";
 import { FiChevronRight, FiPlus, FiMinus } from "react-icons/fi";
 import { IoChevronForward } from "react-icons/io5";
@@ -128,6 +129,9 @@ const Profile = () => {
 
   const [photoPreview, setPhotoPreview] = useState<string | null>(null);
   const [photoFile, setPhotoFile] = useState<File | null>(null);
+  const [resumeFile, setResumeFile] = useState<File | null>(null);
+  const [resumeUrl, setResumeUrl] = useState<string | null>(null);
+  const [profileCompletion, setProfileCompletion] = useState(0);
 
   const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_API_URL || "/api";
 
@@ -152,6 +156,8 @@ const Profile = () => {
             const data = result.data || result;
 
             if (data) {
+              setProfileCompletion(data.profile_completion_percentage || 0);
+              if (data.resume) setResumeUrl(data.resume);
               setForm({
                 ...initialForm,
                 firstName: data.full_name || "",
@@ -347,9 +353,18 @@ const Profile = () => {
 
     console.log("Submit Payload:", payload);
     const vf = validateFormUtil(payload);
-    if (!vf.isValid) {
-      console.log("Validation Errors:", vf.errors);
-      setErrors(vf.errors);
+    
+    let hasError = false;
+    const newErrors = { ...vf.errors };
+
+    if (!resumeUrl && !resumeFile) {
+      newErrors.resume = "Resume is mandatory. Please upload your resume.";
+      hasError = true;
+    }
+
+    if (!vf.isValid || hasError) {
+      console.log("Validation Errors:", newErrors);
+      setErrors(newErrors);
       message.error("Please fill all required fields correctly.");
       window.scrollTo({ top: 0, behavior: "smooth" });
       return;
@@ -423,6 +438,22 @@ const Profile = () => {
       });
 
       if (res.ok) {
+        if (resumeFile) {
+          const formData = new FormData();
+          formData.append("resume", resumeFile);
+          try {
+            await fetch(`${BACKEND_URL}/candidate-profile/${user?.id}/upload`, {
+              method: "POST",
+              headers: { Authorization: `Bearer ${token}` },
+              body: formData
+            });
+            setResumeUrl("uploaded");
+            setResumeFile(null);
+          } catch (e) {
+            console.error("Resume upload failed", e);
+          }
+        }
+
         import("antd").then(({ Modal }) => {
           Modal.success({
             content: "Profile saves successfully now you can apply for the job posts",
@@ -478,6 +509,23 @@ const Profile = () => {
 
           {/* Profile */}
           <CandidateProfileHeader editable />
+
+          {/* Profile Completion Progress */}
+          <div className="bg-green-50 border border-green-200 p-4 rounded-lg mt-4">
+             <div className="flex justify-between items-center mb-2">
+               <h3 className="font-semibold text-green-800">Profile Completion</h3>
+               <span className="font-bold text-green-700">{profileCompletion}%</span>
+             </div>
+             <div className="w-full bg-green-200 rounded-full h-2.5">
+               <div className="bg-green-600 h-2.5 rounded-full transition-all duration-500" style={{ width: `${profileCompletion}%` }}></div>
+             </div>
+             {profileCompletion < 100 && (
+               <p className="text-sm text-green-700 mt-2">
+                 <FaInfoCircle className="inline mr-1" />
+                 Complete your profile to 100% to start applying for jobs. Add missing details like Resume, Photo, Education, and Skills.
+               </p>
+             )}
+          </div>
 
 
           <form onSubmit={handleSubmit} className="space-y-10">
@@ -617,6 +665,41 @@ const Profile = () => {
                   />
                 </div>
               </div>
+            </div>
+
+            {/* Resume Upload */}
+            <div className="bg-gray-50 border border-gray-200 rounded-xl p-6 relative group overflow-hidden mt-10">
+              <div className="absolute top-0 left-0 w-1 h-full bg-[#72B76A]" />
+              <h3 className="text-lg font-bold text-gray-800 mb-6 flex items-center gap-2">
+                <FaFileAlt className="text-[#72B76A]" /> RESUME UPLOAD <span className="text-red-500">*</span>
+              </h3>
+              <div className="flex flex-col md:flex-row items-center gap-6">
+                 <div className={`border-2 border-dashed rounded-xl p-6 transition-all cursor-pointer flex-1 w-full text-center ${resumeFile ? "border-green-400 bg-green-50" : "border-slate-200 hover:border-[#72B76A] bg-white"}`}>
+                    <label className="cursor-pointer w-full h-full flex flex-col items-center justify-center gap-2">
+                       <input type="file" className="hidden" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png,.webp" onChange={(e) => setResumeFile(e.target.files?.[0] || null)} />
+                       {resumeFile ? (
+                           <>
+                             <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center text-green-600 font-bold">✓</div>
+                             <p className="text-sm font-bold text-green-700">{resumeFile.name}</p>
+                             <button onClick={(e) => { e.preventDefault(); setResumeFile(null); }} className="text-xs text-red-500 hover:underline">Remove</button>
+                           </>
+                       ) : resumeUrl ? (
+                           <>
+                             <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 text-xl">📄</div>
+                             <p className="text-sm font-bold text-blue-700">Resume Uploaded</p>
+                             <p className="text-xs text-slate-500">Click to upload a new resume (PDF/DOC/Image)</p>
+                           </>
+                       ) : (
+                           <>
+                             <div className="w-12 h-12 bg-slate-100 rounded-full flex items-center justify-center text-slate-400 text-xl">📄</div>
+                             <p className="text-sm font-bold text-slate-700">Upload your Resume</p>
+                             <p className="text-xs text-slate-500">PDF, DOC, DOCX, or Images up to 5MB</p>
+                           </>
+                       )}
+                    </label>
+                 </div>
+              </div>
+              {errors.resume && <p className="text-red-500 text-xs mt-2 flex items-center gap-1"><FaInfoCircle /> {errors.resume}</p>}
             </div>
 
             {/* Declaration */}

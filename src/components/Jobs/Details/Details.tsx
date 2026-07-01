@@ -462,10 +462,19 @@ const JobDetailsContent = () => {
                     )}
                     {/* Error banner */}
                     {applyError && (
-                      <div className="flex items-center gap-2 bg-red-50 border border-red-200 text-red-700 text-sm font-medium px-4 py-2 rounded-xl">
-                        <span>⚠️</span>
-                        <span>{applyError}</span>
-                        <button onClick={() => setApplyError(null)} className="ml-1 text-red-400 hover:text-red-600">✕</button>
+                      <div className="flex flex-col items-start gap-1 bg-red-50 border border-red-200 text-red-700 text-sm font-medium px-4 py-2 rounded-xl">
+                        <div className="flex items-center justify-between w-full">
+                           <div className="flex items-center gap-2">
+                             <span>⚠️</span>
+                             <span>{applyError}</span>
+                           </div>
+                           <button onClick={() => setApplyError(null)} className="ml-2 text-red-400 hover:text-red-600">✕</button>
+                        </div>
+                        {applyError.includes("100% complete") && (
+                           <Link href="/candidates/profile" className="text-blue-600 hover:underline mt-1 text-xs font-bold self-end pr-2">
+                             Complete Profile →
+                           </Link>
+                        )}
                       </div>
                     )}
                     {applied ? (
