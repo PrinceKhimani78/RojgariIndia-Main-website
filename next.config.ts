@@ -25,10 +25,17 @@ const nextConfig: NextConfig = {
   },
 
   async rewrites() {
+    // For local development, this proxies /api and /uploads to the local backend
+    // If BACKEND_INTERNAL_URL is set, use it; otherwise fallback to live API
+    const backendUrl = process.env.BACKEND_INTERNAL_URL || 'https://api.rojgariindia.com';
     return [
       {
         source: '/api/:path*',
-        destination: 'https://api.rojgariindia.com/api/:path*',
+        destination: `${backendUrl}/api/:path*`,
+      },
+      {
+        source: '/uploads/:path*',
+        destination: `${backendUrl}/uploads/:path*`,
       },
     ];
   },
