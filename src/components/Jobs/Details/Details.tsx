@@ -438,7 +438,32 @@ const JobDetailsContent = () => {
           <div className="mx-auto max-w-6xl grid gap-10 lg:grid-cols-[2fr_1fr] items-start">
             {/* Main content */}
             <div className="h-full">
-              <div className="h-full rounded-2xl bg-white p-5 flex flex-col gap-8 shadow">
+              <div className="h-full rounded-2xl bg-white p-5 flex flex-col gap-6 shadow">
+                {/* Success banner */}
+                {showSuccess && (
+                  <div className="flex items-center gap-2 bg-emerald-50 border border-emerald-200 text-emerald-700 text-sm font-medium px-4 py-3 rounded-xl animate-pulse">
+                    <span>🎉</span>
+                    <span>Application submitted successfully!</span>
+                  </div>
+                )}
+                {/* Error banner */}
+                {applyError && (
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 bg-red-50 border border-red-200 text-red-700 text-sm font-medium px-4 py-3 rounded-xl">
+                    <div className="flex items-center gap-2">
+                      <span>⚠️</span>
+                      <span>{applyError}</span>
+                    </div>
+                    <div className="flex items-center gap-3">
+                      {applyError.includes("100% complete") && (
+                        <Link href="/candidates/profile" className="text-blue-600 hover:underline text-xs font-bold whitespace-nowrap">
+                          Complete Profile →
+                        </Link>
+                      )}
+                      <button onClick={() => setApplyError(null)} className="text-red-400 hover:text-red-600 text-lg">✕</button>
+                    </div>
+                  </div>
+                )}
+
                 <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
                   <div>
                     <span className="inline-block mb-2 rounded-full bg-[#72b76a] px-3 py-1 text-xs font-semibold text-white shadow">
@@ -470,30 +495,6 @@ const JobDetailsContent = () => {
                   </div>
 
                   <div className="flex-shrink-0 mt-2 sm:mt-0 flex flex-col items-end gap-2">
-                    {/* Success banner */}
-                    {showSuccess && (
-                      <div className="flex items-center gap-2 bg-emerald-50 border border-emerald-200 text-emerald-700 text-sm font-medium px-4 py-2 rounded-xl animate-pulse">
-                        <span>🎉</span>
-                        <span>Application submitted successfully!</span>
-                      </div>
-                    )}
-                    {/* Error banner */}
-                    {applyError && (
-                      <div className="flex flex-col items-start gap-1 bg-red-50 border border-red-200 text-red-700 text-sm font-medium px-4 py-2 rounded-xl">
-                        <div className="flex items-center justify-between w-full">
-                           <div className="flex items-center gap-2">
-                             <span>⚠️</span>
-                             <span>{applyError}</span>
-                           </div>
-                           <button onClick={() => setApplyError(null)} className="ml-2 text-red-400 hover:text-red-600">✕</button>
-                        </div>
-                        {applyError.includes("100% complete") && (
-                           <Link href="/candidates/profile" className="text-blue-600 hover:underline mt-1 text-xs font-bold self-end pr-2">
-                             Complete Profile →
-                           </Link>
-                        )}
-                      </div>
-                    )}
                     {applied ? (
                       <div className="flex flex-col items-center gap-2">
                         <button
