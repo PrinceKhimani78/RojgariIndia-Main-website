@@ -127,12 +127,12 @@ const Recruiters = () => {
         password: formData.password,
         fullName: formData.fullName,
         otp: formData.otp,
+        mobileNumber: formData.mobileNumber,
       };
 
       if (userType === "recruiter") {
         registerPayload.companyName = formData.companyName;
         registerPayload.industry = formData.industry;
-        registerPayload.mobileNumber = formData.mobileNumber;
       }
 
       const res = await register(registerPayload, userType === "candidates" ? "candidate" : "recruiter");
@@ -590,6 +590,15 @@ const Recruiters = () => {
                         value={formData.fullName}
                         onChange={handleChange}
                       />
+                      
+                      <input
+                        type="tel"
+                        name="mobileNumber"
+                        placeholder="Mobile Number"
+                        className="w-full p-2 rounded bg-white text-sm placeholder-slate-400 ring-1 focus:bg-white focus:outline-none ring-gray-300 transition focus:ring-2 focus:ring-[#72B76A]"
+                        value={formData.mobileNumber}
+                        onChange={handleChange}
+                      />
 
                       {userType === "recruiter" && (
                         <>
@@ -599,14 +608,6 @@ const Recruiters = () => {
                             placeholder="Company Name"
                             className="w-full p-2 rounded bg-white text-sm placeholder-slate-400 ring-1 focus:bg-white focus:outline-none ring-gray-300 transition focus:ring-2 focus:ring-[#72B76A]"
                             value={formData.companyName}
-                            onChange={handleChange}
-                          />
-                          <input
-                            type="text"
-                            name="mobileNumber"
-                            placeholder="Mobile Number"
-                            className="w-full p-2 rounded bg-white text-sm placeholder-slate-400 ring-1 focus:bg-white focus:outline-none ring-gray-300 transition focus:ring-2 focus:ring-[#72B76A]"
-                            value={formData.mobileNumber}
                             onChange={handleChange}
                           />
                           <select

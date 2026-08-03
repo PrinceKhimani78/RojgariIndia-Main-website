@@ -160,6 +160,7 @@ export default function StandaloneAuth({ initialMode, initialUserType }: Standal
           password: formData.password,
           fullName: formData.fullName,
           otp: formData.otp,
+          mobileNumber: formData.mobileNumber,
         }, "candidate");
       }
 
@@ -317,6 +318,15 @@ export default function StandaloneAuth({ initialMode, initialUserType }: Standal
                     )}
                   </div>
 
+                  <input
+                    type="tel"
+                    name="mobileNumber"
+                    placeholder="Mobile Number"
+                    className="w-full p-2.5 rounded-lg bg-white text-sm placeholder-slate-400 ring-1 focus:bg-white focus:outline-none ring-gray-300 transition focus:ring-2 focus:ring-[#72B76A]"
+                    value={formData.mobileNumber}
+                    onChange={handleChange}
+                  />
+
                   {userType === "recruiter" && (
                     <>
                       <input
@@ -325,14 +335,6 @@ export default function StandaloneAuth({ initialMode, initialUserType }: Standal
                         placeholder="Company Name"
                         className="w-full p-2.5 rounded-lg bg-white text-sm placeholder-slate-400 ring-1 focus:bg-white focus:outline-none ring-gray-300 transition focus:ring-2 focus:ring-[#72B76A]"
                         value={formData.companyName}
-                        onChange={handleChange}
-                      />
-                      <input
-                        type="tel"
-                        name="mobileNumber"
-                        placeholder="Mobile Number"
-                        className="w-full p-2.5 rounded-lg bg-white text-sm placeholder-slate-400 ring-1 focus:bg-white focus:outline-none ring-gray-300 transition focus:ring-2 focus:ring-[#72B76A]"
-                        value={formData.mobileNumber}
                         onChange={handleChange}
                       />
                       <select

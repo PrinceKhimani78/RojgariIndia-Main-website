@@ -136,6 +136,7 @@ const Candidates = () => {
         password: formData.password,
         fullName: formData.fullName,
         otp: formData.otp,
+        mobileNumber: formData.mobileNumber,
       });
       if (res.success) {
         alert("Registration successful! You can now log in.");
@@ -542,6 +543,14 @@ const Candidates = () => {
                           {otpLoading ? "Sending..." : "Send OTP"}
                         </button>
                       </div>
+                      <input
+                        type="tel"
+                        name="mobileNumber"
+                        placeholder="Mobile Number"
+                        className="w-full p-2 rounded bg-white text-sm placeholder-slate-400 ring-1 focus:bg-white focus:outline-none ring-gray-300 transition focus:ring-2 focus:ring-[#72B76A]"
+                        value={formData.mobileNumber || ""}
+                        onChange={handleChange}
+                      />
                       {/* Password */}
                       <div className="relative">
                         <input
