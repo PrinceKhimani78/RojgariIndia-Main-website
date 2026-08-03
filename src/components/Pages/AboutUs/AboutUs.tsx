@@ -80,6 +80,7 @@ interface FormState {
   email: string;
   confirmPassword: string;
   otp: string;
+  mobileNumber?: string;
 }
 const CheckIcon: React.FC<{ className?: string }> = ({ className }) => (
   <svg
@@ -130,6 +131,7 @@ const AboutUs = () => {
     email: "",
     confirmPassword: "",
     otp: "",
+    mobileNumber: "",
   });
   const [otpLoading, setOtpLoading] = useState(false);
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {

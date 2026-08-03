@@ -35,6 +35,7 @@ interface FormState {
   email: string;
   confirmPassword: string;
   otp: string;
+  mobileNumber?: string;
 }
 
 const CheckIcon: React.FC<{ className?: string }> = ({ className }) => (
@@ -87,6 +88,7 @@ const Candidates = () => {
     email: "",
     confirmPassword: "",
     otp: "",
+    mobileNumber: "",
   });
   const [otpLoading, setOtpLoading] = useState(false);
   const [img2, img2InView] = useInView({ triggerOnce: true, threshold: 0.1 });
